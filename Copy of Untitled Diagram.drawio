@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-04-28T09:51:58.777Z" agent="5.0 (Windows)" etag="tCfW375wtU1SMljw9g29" version="13.0.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-28T09:56:30.332Z" agent="5.0 (Windows)" etag="_vqeH0gV6HaWYsoGtV-N" version="13.0.2" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1342" dy="611" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1369" dy="605" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -133,6 +133,14 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="GLN300QRYESgEG5njMZF-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.575;entryY=-0.05;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-15" target="GLN300QRYESgEG5njMZF-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GLN300QRYESgEG5njMZF-11" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GLN300QRYESgEG5njMZF-10">
+          <mxGeometry x="-0.1701" relative="1" as="geometry">
+            <mxPoint x="-63" y="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-15" value="로그인 여부" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="215" y="360" width="90" height="40" as="geometry" />
         </mxCell>
@@ -225,6 +233,9 @@
         </mxCell>
         <mxCell id="GLN300QRYESgEG5njMZF-4" value="회원여부" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="395" y="490" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GLN300QRYESgEG5njMZF-9" value="글쓰기 화면" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-20" y="490" width="100" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
