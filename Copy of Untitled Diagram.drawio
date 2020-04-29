@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-04-29T01:46:00.514Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="hT-ZDfuLcmKGVNAFZdIM" version="13.0.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-29T01:48:36.303Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="97r84ptrrNSg5MHdM5BQ" version="13.0.2" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2310" dy="829" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -116,12 +116,6 @@
             <mxPoint x="440" y="270" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="vV5yDEq1qWFIrJlT6Lfv-14" value="" style="endArrow=classic;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="260" y="320" as="sourcePoint" />
-            <mxPoint x="260" y="360" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-15" target="vV5yDEq1qWFIrJlT6Lfv-17" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -140,10 +134,10 @@
         </mxCell>
         <mxCell id="GLN300QRYESgEG5njMZF-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-15" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="30" y="488" as="targetPoint" />
+            <mxPoint x="-120" y="608" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="30" y="380" />
-              <mxPoint x="30" y="488" />
+              <mxPoint x="-120" y="500" />
+              <mxPoint x="-120" y="608" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -153,22 +147,22 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-15" value="로그인 여부" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="215" y="360" width="90" height="40" as="geometry" />
+          <mxGeometry x="65" y="480" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-16" target="vV5yDEq1qWFIrJlT6Lfv-22" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="145" y="570" as="targetPoint" />
+            <mxPoint x="-5" y="690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-16" value="글 상세 보기" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="100" y="490" width="90" height="40" as="geometry" />
+          <mxGeometry x="-50" y="610" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-17" target="GLN300QRYESgEG5njMZF-4" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="440" y="485" as="targetPoint" />
+            <mxPoint x="290" y="605" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="440" y="450" />
-              <mxPoint x="440" y="450" />
+              <mxPoint x="290" y="570" />
+              <mxPoint x="290" y="570" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -178,14 +172,14 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-17" value="로그인 페이지" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="390" y="400" width="100" height="40" as="geometry" />
+          <mxGeometry x="240" y="520" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-22" value="댓글 쓰기" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="107.5" y="590" width="75" height="30" as="geometry" />
+          <mxGeometry x="-42.5" y="710" width="75" height="30" as="geometry" />
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="vV5yDEq1qWFIrJlT6Lfv-16" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="400" y="510" as="sourcePoint" />
+            <mxPoint x="250" y="630" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-28" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="vV5yDEq1qWFIrJlT6Lfv-27" vertex="1" connectable="0">
@@ -195,7 +189,7 @@
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="vV5yDEq1qWFIrJlT6Lfv-29" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="440" y="535" as="sourcePoint" />
+            <mxPoint x="290" y="655" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="waT6Qo9IjC3C06BuvGMC-2" value="No" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#ffffff;" parent="vV5yDEq1qWFIrJlT6Lfv-30" vertex="1" connectable="0">
@@ -206,8 +200,8 @@
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-29" target="vV5yDEq1qWFIrJlT6Lfv-32" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="440" y="650" />
-              <mxPoint x="440" y="650" />
+              <mxPoint x="290" y="770" />
+              <mxPoint x="290" y="770" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -217,19 +211,19 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-29" value="회원가입 희망" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="385" y="580" width="110" height="50" as="geometry" />
+          <mxGeometry x="235" y="700" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-31" target="vV5yDEq1qWFIrJlT6Lfv-17" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="560" as="targetPoint" />
+            <mxPoint x="460" y="680" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="540" y="778" />
-              <mxPoint x="540" y="420" />
+              <mxPoint x="390" y="898" />
+              <mxPoint x="390" y="540" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-31" value="회원가입 완료&lt;br&gt;페이지" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="380" y="760" width="120" height="35" as="geometry" />
+          <mxGeometry x="230" y="880" width="120" height="35" as="geometry" />
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vV5yDEq1qWFIrJlT6Lfv-32" target="vV5yDEq1qWFIrJlT6Lfv-31" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -240,13 +234,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="vV5yDEq1qWFIrJlT6Lfv-32" value="회원가입 페이지" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="380" y="680" width="120" height="30" as="geometry" />
+          <mxGeometry x="230" y="800" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="GLN300QRYESgEG5njMZF-4" value="회원여부" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="395" y="490" width="90" height="40" as="geometry" />
+          <mxGeometry x="245" y="610" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="GLN300QRYESgEG5njMZF-9" value="글쓰기 화면" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-20" y="490" width="100" height="40" as="geometry" />
+          <mxGeometry x="-170" y="610" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="PnvdCqdYNB6AvmVGDZQ4-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="PnvdCqdYNB6AvmVGDZQ4-0" target="PnvdCqdYNB6AvmVGDZQ4-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -258,7 +252,7 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="-60" y="320" />
-              <mxPoint x="260" y="320" />
+              <mxPoint x="110" y="320" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -309,7 +303,7 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="780" y="360" />
-              <mxPoint x="640" y="360" />
+              <mxPoint x="560" y="360" />
             </Array>
             <mxPoint x="640" y="380" as="targetPoint" />
           </mxGeometry>
@@ -321,10 +315,15 @@
           <mxGeometry x="1220" y="90" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9_98LAGcsNJI7AEIF0RN-9" target="aLojjY9KPLIzhAx5LPAh-1" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="440" />
+              <mxPoint x="560" y="440" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-9" value="정보수정" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="580" y="390" width="120" height="30" as="geometry" />
+          <mxGeometry x="500" y="390" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-12" value="내가 쓴 글, 댓글" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="970" y="390" width="120" height="30" as="geometry" />
@@ -340,50 +339,50 @@
             <mxPoint y="11.55" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="aLojjY9KPLIzhAx5LPAh-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-1" target="9_98LAGcsNJI7AEIF0RN-6" edge="1">
+        <mxCell id="aLojjY9KPLIzhAx5LPAh-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-1" target="9_98LAGcsNJI7AEIF0RN-6" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="560" y="470" />
-              <mxPoint x="560" y="320" />
+              <mxPoint x="480" y="480" />
+              <mxPoint x="480" y="320" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-20" value="&lt;div&gt;No&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="aLojjY9KPLIzhAx5LPAh-19" vertex="1" connectable="0">
           <mxGeometry x="0.0044" relative="1" as="geometry">
-            <mxPoint y="48.93" as="offset" />
+            <mxPoint x="-34.56" y="85" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-1" value="&lt;div&gt;비밀번호&lt;/div&gt;&lt;div&gt;확인&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="572.5" y="450" width="135" height="40" as="geometry" />
+          <mxGeometry x="492.5" y="460" width="135" height="40" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-5" target="aLojjY9KPLIzhAx5LPAh-7" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="595" y="590" />
-              <mxPoint x="595" y="590" />
+              <mxPoint x="515" y="660" />
+              <mxPoint x="515" y="660" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-5" target="aLojjY9KPLIzhAx5LPAh-8" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="700" y="558" />
-              <mxPoint x="693" y="558" />
-              <mxPoint x="693" y="610" />
+              <mxPoint x="620" y="628" />
+              <mxPoint x="613" y="628" />
+              <mxPoint x="613" y="680" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-5" value="정보수정페이지" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="580" y="530" width="120" height="40" as="geometry" />
+          <mxGeometry x="500" y="600" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-7" value="정보수정완료" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="550" y="620" width="90" height="30" as="geometry" />
+          <mxGeometry x="470" y="690" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-8" target="aLojjY9KPLIzhAx5LPAh-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-8" value="회원탈퇴" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="650" y="620" width="85" height="30" as="geometry" />
+          <mxGeometry x="570" y="690" width="85" height="30" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-9" target="aLojjY9KPLIzhAx5LPAh-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -396,10 +395,10 @@
         <mxCell id="aLojjY9KPLIzhAx5LPAh-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="aLojjY9KPLIzhAx5LPAh-9" target="aLojjY9KPLIzhAx5LPAh-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="760" y="710" />
-              <mxPoint x="760" y="550" />
+              <mxPoint x="680" y="780" />
+              <mxPoint x="680" y="620" />
             </Array>
-            <mxPoint x="750" y="540" as="targetPoint" />
+            <mxPoint x="670" y="610" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-18" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="aLojjY9KPLIzhAx5LPAh-17" vertex="1" connectable="0">
@@ -408,10 +407,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-9" value="회원탈퇴여부" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="642.5" y="690" width="100" height="40" as="geometry" />
+          <mxGeometry x="562.5" y="760" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="aLojjY9KPLIzhAx5LPAh-10" value="회원탈퇴완료" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="632.5" y="780" width="120" height="30" as="geometry" />
+          <mxGeometry x="552.5" y="850" width="120" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
