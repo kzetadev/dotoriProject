@@ -1,5 +1,5 @@
 package com.example.demo.controller;
 
-public class Member_infoController {
+public class Member_InfoController {
 
 }
