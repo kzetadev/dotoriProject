@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-04-29T01:19:51.720Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="yjn-8TjG9PtG0shkI9dT" version="13.0.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-29T01:22:55.117Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="aU0PFyoxtEEtxetEEWzp" version="13.0.2" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2048" dy="682" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2310" dy="829" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -288,14 +288,6 @@
             <mxPoint x="780" y="300" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9_98LAGcsNJI7AEIF0RN-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9_98LAGcsNJI7AEIF0RN-6" target="9_98LAGcsNJI7AEIF0RN-9">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="780" y="360" />
-              <mxPoint x="680" y="360" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9_98LAGcsNJI7AEIF0RN-6" target="9_98LAGcsNJI7AEIF0RN-13">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -313,6 +305,14 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="9_98LAGcsNJI7AEIF0RN-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9_98LAGcsNJI7AEIF0RN-6" target="9_98LAGcsNJI7AEIF0RN-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="360" />
+              <mxPoint x="680" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-6" value="마이페이지" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="720" y="300" width="120" height="40" as="geometry" />
         </mxCell>
@@ -320,13 +320,24 @@
           <mxGeometry x="1220" y="90" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-9" value="정보수정" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="620" y="390" width="120" height="30" as="geometry" />
+          <mxGeometry x="620" y="510" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-12" value="내가 쓴 글, 댓글" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="970" y="390" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9_98LAGcsNJI7AEIF0RN-13" value="찜 목록" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="810" y="390" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9_98LAGcsNJI7AEIF0RN-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9_98LAGcsNJI7AEIF0RN-18" target="9_98LAGcsNJI7AEIF0RN-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_98LAGcsNJI7AEIF0RN-22" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="9_98LAGcsNJI7AEIF0RN-21">
+          <mxGeometry x="-0.3573" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9_98LAGcsNJI7AEIF0RN-18" value="비밀번호 확인" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="630" y="400" width="100" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
