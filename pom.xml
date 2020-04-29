@@ -20,17 +20,14 @@
 	</properties>
 
 	<dependencies>
-<<<<<<< HEAD
+
 <!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
  -->
-=======
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
-			</dependency> -->
->>>>>>> refs/remotes/origin/수지
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -62,7 +59,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<<<<<<< HEAD
 <!-- 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -70,10 +66,7 @@
 			<scope>test</scope>
 		</dependency>
  -->		
-=======
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-test</artifactId> 
-			<scope>test</scope> </dependency> -->
->>>>>>> refs/remotes/origin/수지
+
 		<!-- jsp를 사용하기 위한 메이븐 설정 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
