@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-04-29T06:16:18.259Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="1JiDp5pgFP4NgxUddlqL" version="13.0.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-04-29T06:16:37.431Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" etag="gGepyKz9a1lHtBP2tQFG" version="13.0.2" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2069" dy="232" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2370" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -179,8 +179,8 @@
         <mxCell id="8mFY73cAcnLO3QTP2yf9-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.717;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="u47urkldK8aq3LsHA-pJ-0" target="8mFY73cAcnLO3QTP2yf9-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-585" y="790" />
-              <mxPoint x="-657" y="790" />
+              <mxPoint x="-585" y="800" />
+              <mxPoint x="-657" y="800" />
             </Array>
             <mxPoint x="-657" y="840" as="targetPoint" />
           </mxGeometry>
@@ -760,6 +760,14 @@
         </mxCell>
         <mxCell id="8mFY73cAcnLO3QTP2yf9-14" value="글 다시작성" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-800" y="800" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KW4hLwJ1W2SFZyVnlu_u-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="u47urkldK8aq3LsHA-pJ-0" target="8mFY73cAcnLO3QTP2yf9-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-585" y="800" />
+              <mxPoint x="-601" y="800" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="u47urkldK8aq3LsHA-pJ-0" value="글쓴이일경우" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-630" y="740" width="90" height="40" as="geometry" />
