@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mem_info"> 
+	<select id="select" resultType="Member_InfoVo"> <!-- 로그인 -->
+		select #{mem_id},#{mem_pwd} from member_info
+	</select> 
+	
+	<insert id="insert"> <!-- 회원가입 -->
+		insert into member_info values(seq_no.nextval, #{mem_name},#{mem_nickname},#{mem_id},#{mem_pwd},#{mem_email})
+	</insert>
+	
+	<update id="update"><!-- 회원수정 -->
+		update member_info set mem_nickname=#{mem_nickname}, mem_pwd=#{mem_pwd} where mem_id = #{mem_id}
+	</update>
+	
+	<delete id="delte"><!-- 회원 탈퇴 -->
+		delete from member_info where mem_no=#{mem_no}
+	</delete>
+</mapper>
