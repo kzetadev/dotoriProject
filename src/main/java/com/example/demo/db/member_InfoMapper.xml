@@ -8,7 +8,7 @@
 	</select> 
 	
 	<insert id="insert"> <!-- 회원가입 -->
-		insert into member_info values(seq_no.nextval, #{mem_name},#{mem_nickname},#{mem_id},#{mem_pwd},#{mem_email})
+		insert into member_info values(seq_mem_no.nextval, #{mem_name},#{mem_nickname},#{mem_id},#{mem_pwd},#{mem_email})
 	</insert>
 	
 	<update id="update"><!-- 회원수정 -->
