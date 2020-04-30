@@ -7,6 +7,7 @@
 <typeAliases>
 	<typeAlias type="com.example.demo.vo.Board_PostVo" alias="Board_PostVo"/>
 	<typeAlias type="com.example.demo.vo.Member_InfoVo" alias="Member_InfoVo"/>
+	<typeAlias type="com.example.demo.vo.Place_InfoVo" alias="Place_InfoVo"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -22,5 +23,6 @@
   <mappers>
     <mapper resource="com/example/demo/db/Board_PostMapper.xml"/>
     <mapper resource="com/example/demo/db/member_InfoMapper.xml"/>
+    <mapper resource="com/example/demo/db/Place_InfoMapper.xml"/>
   </mappers>
 </configuration>
