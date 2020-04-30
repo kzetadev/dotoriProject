@@ -14,7 +14,7 @@ public class Member_InfoManager {
 	private static SqlSessionFactory factory;
 	static {
 		try {
-			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlConfig.xml");
+			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
 		} catch (Exception e) {
