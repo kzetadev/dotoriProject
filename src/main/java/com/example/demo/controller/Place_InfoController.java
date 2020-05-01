@@ -14,12 +14,20 @@ public class Place_InfoController {
 	public void setP_dao(Place_InfoDao p_dao) {
 		this.p_dao = p_dao;
 	}
+	// 여행 장소 목록
 	@RequestMapping("/listPlace_Info")
 	public ModelAndView listPlace_Info() {
 		System.out.println("컨트롤러 동작함");
 		ModelAndView m = new ModelAndView();
-		m.setViewName("listPlace_Info");
+		// m.setViewName("listPlace_Info");
 		m.addObject("list", p_dao.listPlace_Info());
+		return m;
+	}
+	// 여행 장소 상세
+	@RequestMapping("/detailPlace_Info")
+	public ModelAndView detailPlace_Info(int place_no) {
+		ModelAndView m = new ModelAndView();
+		m.addObject("p", p_dao.detailPlace_Info(place_no));
 		return m;
 	}
 }

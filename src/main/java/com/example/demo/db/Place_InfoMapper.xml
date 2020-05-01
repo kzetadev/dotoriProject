@@ -3,7 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="place_info">
+	<!-- place_type이 0이면 명소, 1이면 음식점, 2이면 숙소의 데이터 모두 출력 (순서대로)  -->
   <select id="selectAll" resultType="Place_InfoVo">
-    select * from place_info order by place_no
+  	select * from place_info order by place_no
+    <!-- select * from place_info where place_type = #{place_type} order by place_no -->
+  </select>
+  
+  	<!-- 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동  -->
+  <select id="detail" resultType="Place_InfoVo">
+  	select * from place_info where place_no = #{place_no}
   </select>
 </mapper>
