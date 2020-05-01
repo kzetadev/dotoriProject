@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.Board_PostDao;
+import com.example.demo.dao.Member_InfoDao;
 import com.example.demo.vo.Board_PostVo;
 
 @RestController
@@ -13,13 +14,20 @@ public class Board_PostController {
 	
 	@Autowired
 	private Board_PostDao b_dao;
+	
+	@Autowired
+	private Member_InfoDao m_dao;
 
 	public void setB_dao(Board_PostDao b_dao) {
 		this.b_dao = b_dao;
 	}
 	
+	public void setM_dao(Member_InfoDao m_dao) {
+		this.m_dao = m_dao;
+	}
+
 	//커뮤니티 글 목록
-	@RequestMapping("/listBoard_Post")
+	@RequestMapping("/listBoard_Post.do")
 	public ModelAndView listBoard_Post() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("listBoard_Post");
@@ -28,7 +36,7 @@ public class Board_PostController {
 	}
 	
 	//커뮤니티 글 등록
-	@RequestMapping("/insertBoard_Post")
+	@RequestMapping("/insertBoard_Post.do")
 	public ModelAndView insertBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("insertBoard_Post");
@@ -37,7 +45,7 @@ public class Board_PostController {
 	}
 	
 	//커뮤니티 글 수정
-	@RequestMapping("/updateBoard_Post")
+	@RequestMapping("/updateBoard_Post.do")
 	public ModelAndView updateBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("updateBoard_Post");
@@ -46,7 +54,7 @@ public class Board_PostController {
 	}
 	
 	//커뮤니티 글 삭제
-	@RequestMapping("/deleteBoard_Post")
+	@RequestMapping("/deleteBoard_Post.do")
 	public ModelAndView deleteBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deleteBoard_Post");
