@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.example.demo.vo.Board_PostVo;
 import com.example.demo.vo.Place_InfoVo;
 
 public class DBManager {
@@ -25,6 +26,14 @@ public class DBManager {
 		SqlSession session = factory.openSession();
 		List<Place_InfoVo> list = session.selectList("place_info.selectAll");
 		session.close();
+		return list;
+	}
+	
+	//게시판 리스트
+	public static List<Board_PostVo> listBoard_Post(){
+		SqlSession session = factory.openSession();
+		List<Board_PostVo> list = session.selectList("board_post.selectAll");
+		session.close();		
 		return list;
 	}
 }
