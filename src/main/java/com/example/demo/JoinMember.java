@@ -11,13 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class JoinMember { //회원가입 처리
 	//패스워드 암호화를 위한 객체 생성
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		System.out.println("----------패스워드 인코딩 객체 생성----------");
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		
-	
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		System.out.println("----------패스워드 인코딩 객체 생성----------");
+//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//		
+//	
+//	}
 	public static void main(String[] args) {
 		SpringApplication.run(JoinMember.class, args);
 	}
