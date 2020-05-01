@@ -3,7 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_post">
+
+  	<!-- 리스트 -->
   <select id="selectAll" resultType="Board_PostVo">
-    select * from board_post order by board_no
+    select board_no,m.mem_name,board_kinds,board_title,board_date,board_hit,board_content,board_head 
+	from board_post b, member_info m
+	where b.mem_no = m.mem_no
+	order by board_no
   </select>
+  
+ 	 <!-- 등록 -->
+ 	 <!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->
+  <insert id="insert">
+  	insert into board_post values(seq_board_no.nextval,#{mem_no},#{board_kinds},#{board_title},#{board_date},#{board_hit},#{board_content},#{board_copy},#{board_head})
+  </insert>
+  
+ 	 <!-- 수정 -->
+  <update id="update">
+  	update board_post set board_kinds=#{}, board_title=#{}, board_content=#{}, board_copy=#{}, board_head=#{} where board_no=#{}
+  </update>
+  
+ 	 <!-- 삭제 -->
+  <delete id="delete">
+  	delete from board_post where board_no=#{}
+  </delete>
 </mapper>
