@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member_favorite">
+	<!-- 마이페이지 찜 리스트를 보여줌  -->
+  <select id="selectAll" resultType="Member_FavoriteVo">
+    select * from member_favorite order by favorite_no
+  </select>
+  
+  	<!-- 마이페이지 찜 리스트에서 원하는 항목을 선택 (상세정보 페이지) -->
+  <select id="detail" resultType="Member_FavoriteVo">
+  	select * from member_favorite where member_favorite = #{member_favorite}	
+  </select>
+  
+  	<!-- 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택 -->
+  <delete id="delete">
+  	delete from member_favorite where favorite_no = #{favorite_no}
+  </delete>
+</mapper>

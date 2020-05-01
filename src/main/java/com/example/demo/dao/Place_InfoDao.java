@@ -12,4 +12,7 @@ public class Place_InfoDao {
 	public List<Place_InfoVo> listPlace_Info(){
 		return DBManager.listPlace_Info();
 	}
+	public Place_InfoVo detailPlace_Info(int place_no) {
+		return DBManager.detailPlace_Info(place_no);
+	}
 }

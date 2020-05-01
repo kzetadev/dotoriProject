@@ -5,41 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>명소 정보 게시판</title>
+<title>명소 상세 게시판</title>
 <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/coding.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <style type="text/css">
-		h1{
-			text-align:center;
-		}
-		.row{
-			padding:30px;
-		}
-		b{
-			font-size:15px;
-		}
-		p{
-			color:grey;
-			font-size:11px;
-		}
-		.pagination pagination-lg{
-			
-		}
-	/* Hide the carousel text when the screen is less than 600 pixels wide */
-		@media (max-width: 600px) {
-		    .carousel-caption {
-		      	display: none; 
-		    }
-		}/*
-		.carousel-inner img {
-      		width: 100%; 
-      		margin: auto;
-      		height:200px;
-  		}*/
-	</style>
+	h2{
+		text-align:center;
+	}
+	img, dl{
+		padding-right:200px;
+		padding-left:200px;
+	}
+</style>
 </head>
 <body>
 	<!-- 상단 -->
@@ -96,55 +76,59 @@
 		</div>
 	</nav>
 	
-	
-	
-	
-	<!-- 내용  -->
-	<h1><strong>명소</strong></h1>
+	<h2><b>명소 - ${p.place_name }</b></h2>
 	<br>
-	<img src="images/main.jpg" width="100%" height="500">
-	<br><br><br><br>
+	<img src="/img/${fn:split(p.place_img, '|')[0]}" width="100%" height="500">
+	<hr>
 
-	<div class="row">
-		<c:forEach var="p" items="${list }">
-			<div class="col-md-3">
-				<div class="thumbnail">
-					<a href="detailPlace_Info?place_no=${p.place_no}">
-						<img src="/img/${fn:split(p.place_img, '|')[0]}" width="300" height="300"> 
-						<div class="caption">
-							<b>${p.place_name}</b>
-							<br>
-							<p>aaaaaaaaaaaaaaaaaa</p>
-						</div>
-					</a>
-				</div>
-			</div>
-		</c:forEach>
+	<div class="detail-map-infor first border">
+		<dl>
+			<dt>전화번호</dt>
+			<dd>${p.place_tel }</dd>
+		</dl>
+		<dl>
+			<dt>운영 요일 & 휴무일</dt>
+			<dd>${p.place_open }</dd>
+		</dl>
+		<dl>
+			<dt>이용요금</dt>
+			<dd>${p.place_price }</dd>
+		</dl>
+		<dl>
+			<dt>주소</dt>
+			<dd>${p.place_addr }</dd>
+		</dl>
+		<dl>
+			<dt>상세 설명</dt>
+			<dd>${p.place_detail }</dd>
+		</dl>
 	</div>
-
-	<!-- 페이지 번호 -->
-	<ul class="pager">
-		<li><a href="#">Previous</a></li>
-		<li class="active"><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">Next</a></li>
-	</ul>
 	
-
-	<!-- 검색창 구현 -->
-	<form class="navbar-form" action="/everywhere.do">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="검색어를 입력해주세요.">
-			<div class="input-group-btn">
-				<button class="btn btn-default" type="submit">
-					<i class="glyphicon glyphicon-search"></i>
-				</button>
-			</div>
-		</div>
-	</form>
+	<div id="map" style="width:80%;height:350px;"></div>
+	
+	<script type="text/javascript">
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+	
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+		
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+		
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map); 
+	</script>
+	
+	
+	
 	
 	
 	<!-- 하단 -->
