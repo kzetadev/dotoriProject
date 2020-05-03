@@ -1,6 +1,7 @@
 package com.example.demo.db;
 
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -30,6 +31,14 @@ public class DBManager {
 		return list;
 	}
 	
+	// 정보게시판 여행 정보 페이징 처리
+	public static List<Place_InfoVo> listPlace_InfoPage(HashMap map){
+		SqlSession session = factory.openSession();
+		List<Place_InfoVo> list = session.selectList("place_info.selectPage");
+		session.close();
+		return list;
+	}
+	
 	// 정보게시판 여행 상세 보기
 	public static Place_InfoVo detailPlace_Info(int place_no) {
 		SqlSession session = factory.openSession();
@@ -39,6 +48,14 @@ public class DBManager {
 		return m;
 	}
 	
+	// 정보게시판 총 몇페이지까지 있는지 확인 (페이징 처리 관련)
+	public static int totalRecord() {
+		int cnt = 0;
+		SqlSession session = factory.openSession();
+		cnt = session.selectOne("place_info.totalRecord");
+		session.close();
+		return cnt;
+	}
 	
 	
 	// 마이페이지 찜한 리스트

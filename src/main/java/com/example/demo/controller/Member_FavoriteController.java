@@ -21,7 +21,6 @@ public class Member_FavoriteController {
 	public ModelAndView listMember_Favorite() {
 		System.out.println("컨트롤러 동작함");
 		ModelAndView m = new ModelAndView();
-		// m.setViewName("listPlace_Info");
 		m.addObject("list", f_dao.listMember_Favorite());
 		return m;
 	}

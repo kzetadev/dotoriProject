@@ -8,5 +8,6 @@
 </head>
 <body>
 <h2>커뮤니티 글 목록</h2>
+
 </body>
 </html>

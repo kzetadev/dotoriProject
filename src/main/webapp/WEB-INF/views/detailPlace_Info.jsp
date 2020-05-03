@@ -9,8 +9,11 @@
 <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/coding.css">
+<link rel="stylesheet" href="css/owl.carousel.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 <style type="text/css">
 	h2{
 		text-align:center;
@@ -19,65 +22,98 @@
 		padding-right:200px;
 		padding-left:200px;
 	}
+	.glyphicon glyphicon-star-empty, .glyphicon glyphicon-star{
+		display: black;
+		text-align: center;
+	}
+	.glyphicon glyphicon-star{
+		visible: hidden;
+	}
 </style>
 </head>
 <body>
-	<!-- 상단 -->
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="html.html" class="navbar-brand" style="font-size:25px"><span class="glyphicon glyphicon-plane"></span></a>
-			</div>
+	<h2><b>명소 - ${p.place_name }</b></h2>
+	<span class="glyphicon glyphicon-star-empty"></span>
+	<span class="glyphicon glyphicon-star"></span>
+	
+	<script type="text/javascript">
+		$(function(){
+			$(".glyphicon glyphicon-star-empty").click(function(){
+				alert("찜목록에 추가되었습니다.")
+				$(this).css("visibility", "hidden")
+				$(".glyphicon glyphicon-star").css("visibility", "visible")
+			})
+			$(".glyphicon glyphicon-star").click(function(){
+				alert("찜목록에서 제거되었습니다.")
+				$(this).css("visibility", "hidden")
+				$(".glyphicon glyphicon-star-empty").css("visibility", "visible")
+			})
+		})
+	</script>
 
-			<div class="collapsed navbar-collapse" id="bs-example-navbar-collapse-1">
-				<!-- 상단 메뉴바 -->
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="html.html">소개<span class="sr-only"></span></a></li>
-					<li><a href="goods.html">상품</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ex1<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="place.html?placeName=sights">ex1. 명소</a></li>
-							<li><a href="place.html?placeName=restaurant">ex1. 음식점</a></li>
-							<li><a href="place.html?placeName=hotel">ex1. 숙소</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ex2<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="board.html?boardName=review">ex2 게시판</a></li>
-							<li><a href="board.html?boardName=together">ex2 게시판</a></li>
-							<li><a href="board.html?boardName=free">ex2 게시판</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">정보의 광장<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="place.html?placeName=sights">명소</a></li>
-							<li><a href="place.html?placeName=restaurant">음식점</a></li>
-							<li><a href="place.html?placeName=hotel">숙소</a></li>
-						</ul>
-					</li>
-					<li><a href="youtube.html">참고자료</a></li>
-				</ul>
-				
-				<!-- sign, login -->
-				<ul class="nav navbar-nav navbar-right"> 
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-				</ul>
+ 	<!-- <div class="wide-slide-element">
+		<div class="wide-slide owl-carousel owl-loaded owl-drag">
+			<div class="owl-stage-outer">
+				<div class="owl-stage" style="transform: translate3d(-2804px, 0px, 0px); transition: all 0s ease 0s; width: 10515px;">
+					<div class="owl-item cloned" style="width: 94px; margin-right: 1px;">
+						<div class="item">
+							<img src="/img/${fn:split(p.place_img, '|')[0]}">
+						</div>
+					</div>
+					<div class="owl-item active" style="width: 94px; margin-right: 1px;">
+						<div class="item">
+							<img src="/img/${fn:split(p.place_img, '|')[0]}">
+						</div>
+					</div>
+					<div class="owl-item" style="width: 94px; margin-right: 1px;">
+						<div class="item">
+							<img src="/img/${fn:split(p.place_img, '|')[0]}">
+						</div>
+					</div>
+					<div class="owl-item cloned" style="width: 94px; margin-right: 1px;">
+						<div class="item">
+							<img src="/img/${fn:split(p.place_img, '|')[0]}">
+						</div>
+					</div>
+				</div>
+			</div>
+													
+			<div class="owl-nav disabled">
+				<button type="button" role="presentation" class="owl-prev">
+					<span aria-label="Previous">‹</span>
+				</button>
+				<button type="button" role="presentation" class="owl-next">
+					<span aria-label="Next">›</span>
+				</button>
+			</div>
+			
+			<div class="owl-dots">
+				<button role="button" class="owl-dot active">
+					<span></span>
+				</button>
+				<button role="button" class="owl-dot">
+					<span></span>
+				</button>
+				<button role="button" class="owl-dot">
+					<span></span>
+				</button>
+				<button role="button" class="owl-dot">
+					<span></span>
+				</button>
+				<button role="button" class="owl-dot">
+					<span></span>
+				</button>
+				<button role="button" class="owl-dot">
+					<span></span>
+				</button>
+				<button role="button" class="owl-dot">
+					<span></span>
+				</button>
 			</div>
 		</div>
-	</nav>
+	</div> -->
 	
-	<h2><b>명소 - ${p.place_name }</b></h2>
-	<br>
+	<br><br>
 	<img src="/img/${fn:split(p.place_img, '|')[0]}" width="100%" height="500">
 	<hr>
 
@@ -104,56 +140,28 @@
 		</dl>
 	</div>
 	
-	<div id="map" style="width:80%;height:350px;"></div>
+		<!-- 지도를 표시할 div 입니다 -->
+	<div id="map" style="width:100%;height:350px;"></div>
 	
-	<script type="text/javascript">
+	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };
-	
+		mapOption = { 
+		    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		    level: 3 // 지도의 확대 레벨
+		};
+		
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		
-		// 마커가 표시될 위치입니다 
+		//마커가 표시될 위치입니다 
 		var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
 		
-		// 마커를 생성합니다
+		//마커를 생성합니다
 		var marker = new kakao.maps.Marker({
-		    position: markerPosition
+		position: markerPosition
 		});
 		
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map); 
+		//마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
 	</script>
-	
-	
-	
-	
-	
-	<!-- 하단 -->
-	<footer style="background-color: #000000; color: #ffffff">
-		<div class="container"><br>
-			<div class="row">
-				<div class="col-sm-2" style="text-align: center;"><h5>Copyright &copy; 2020</h5><h5>박유철(Yuchul Park)</h5></div>
-				<div class="col-sm-4"><h4>팀원 소개</h4><p>저희 도토리 팀원은 박유철, 전은진, 홍수지, 이동현, 김정규 이렇게 있습니다.</p></div>
-				<div class="col-sm-2"><h4 style="text-align: center;">네비게이션</h4>
-					<div class="list-group">
-						<a href="html.html" class="list-group-item">소개</a>
-						<a href="goods.html" class="list-group-item">상품</a>
-						<a href="board.html" class="list-group-item">게시판 목록</a>	
-					</div>
-				</div>
-				<div class="col-sm-2"><h4 style="text-align: center;">SNS</h4>
-					<div class="list-group">
-						<a href="https://www.facebook.com/" class="list-group-item">페이스북</a>
-						<a href="https://www.instagram.com/" class="list-group-item">인스타그램</a>
-						<a href="https://www.youtube.com/" class="list-group-item">유튜브</a>	
-					</div>
-				</div>
-				<div class="col-sm-2"><h4 style="text-align: center;"><span class="glyphicon glyphicon-ok"></span>&nbsp;by 박유철</h4></div>
-			</div>
-		</div>
-	</footer>
 </body>
 </html>
