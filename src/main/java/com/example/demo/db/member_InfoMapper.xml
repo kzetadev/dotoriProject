@@ -21,12 +21,12 @@
 	
 	
 	<!-- 아이디 중복 체크 -->
-	<select id="checkOverId" parameterType="String" resultType="int">
+	<select id="checkOverId" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_id = #{mem_id}
 	</select>
 	
 	<!-- 닉네임 중복 체크 -->
-	<select id="checkOverEmail" parameterType="String" resultType="int">
+	<select id="checkOverEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_email = #{mem_email}
 	</select>
 </mapper>
