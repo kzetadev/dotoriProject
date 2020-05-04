@@ -32,9 +32,9 @@ public class DBManager {
 	}
 	
 	// 정보게시판 여행 정보 페이징 처리
-	public static List<Place_InfoVo> listPlace_InfoPage(HashMap map){
+	public static List<Place_InfoVo> listPlace_InfoPage(HashMap<String, Integer> map){
 		SqlSession session = factory.openSession();
-		List<Place_InfoVo> list = session.selectList("place_info.selectPage");
+		List<Place_InfoVo> list = session.selectList("place_info.selectPage", map);
 		session.close();
 		return list;
 	}
@@ -49,10 +49,10 @@ public class DBManager {
 	}
 	
 	// 정보게시판 총 몇페이지까지 있는지 확인 (페이징 처리 관련)
-	public static int totalRecord() {
+	public static int totalRecord(int place_type) {
 		int cnt = 0;
 		SqlSession session = factory.openSession();
-		cnt = session.selectOne("place_info.totalRecord");
+		cnt = session.selectOne("place_info.totalRecord", place_type);
 		session.close();
 		return cnt;
 	}
