@@ -19,8 +19,8 @@ public class Place_InfoController {
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
-	public int getTotalRecord() {
-		return DBManager.totalRecord();
+	public int getTotalRecord(int place_type) {
+		return DBManager.totalRecord(place_type);
 	}
 	
 	@Autowired
@@ -32,7 +32,9 @@ public class Place_InfoController {
 	
 	// 여행 장소 페이징 + 검색 처리 
 	@RequestMapping("/listPlace_Info")										// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
-	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, String all, String keyword, String searchColumn, HttpSession session) {
+
+	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String all, String keyword, String searchColumn, HttpSession session) {
+
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
 		if(keyword == null) {
@@ -45,11 +47,13 @@ public class Place_InfoController {
 		}
 		ModelAndView m = new ModelAndView();
 		HashMap map = new HashMap();
-		
-		totalRecord = getTotalRecord();
+
+		totalRecord = getTotalRecord(place_type);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
 		System.out.println("전체 페이지 수 : " + totalPage);
-		
+		if (pageNUM > totalPage) {
+			pageNUM = totalPage;
+		}
 		int start = (pageNUM - 1) * pageSIZE + 1;
 		int end = start + pageSIZE - 1;
 		if(end > totalRecord) {
@@ -60,11 +64,12 @@ public class Place_InfoController {
 		map.put("searchColumn", searchColumn);
 		map.put("start", start);
 		map.put("end", end);
+		map.put("type", place_type);
 		System.out.println(map);
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("searchColumn", searchColumn);
 
-		//m.addObject("list", p_dao.listPlace_Info());
+
 		m.addObject("list", p_dao.listPlace_InfoPage(map));
 		System.out.println(map);
 		System.out.println("전체 페이지 수 : " + totalPage);
@@ -72,9 +77,12 @@ public class Place_InfoController {
 		
 		int startPage = (pageNUM - 1) / pageGroup * pageGroup + 1;
 		int endPage = startPage + pageGroup - 1;
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
 		m.addObject("startPage", startPage);
 		m.addObject("endPage", endPage);
-		
+		m.addObject("place_type", place_type);
 		return m;
 	}
 	// 여행 장소 상세

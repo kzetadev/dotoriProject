@@ -42,10 +42,10 @@ public class DBManager {
 	}
 	
 	// 정보게시판 총 몇페이지까지 있는지 확인 (페이징 처리 관련)
-	public static int totalRecord() {
+	public static int totalRecord(int place_type) {
 		int cnt = 0;
 		SqlSession session = factory.openSession();
-		cnt = session.selectOne("place_info.totalRecord");
+		cnt = session.selectOne("place_info.totalRecord", place_type);
 		session.close();
 		return cnt;
 	}
