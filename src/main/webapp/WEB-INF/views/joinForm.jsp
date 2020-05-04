@@ -11,10 +11,40 @@
 	$("#mem_id").blur(function(){
 		var mem_id = $("#mem_id").val();
 		$.ajax({
-			url : 
+			url : '${pageContext.request.contextPath}/user/idCheck?mem_id='+mem_id,
+			type : 'get',
+			success : function(data){
+				consloe.log("1 = 중복 / 0 != 중복 : "+ data);
 
+				if(data ==1){
+					//1: 아이디가 중복되는 문구
+					$("#id_check").text("사용중인 아이디 입니다");
+					$("#id_check").css("color","red");
+					$("#reg_submit").attr("disabled",true)
+	
+				}else{
+					if(idJ.test(mem_id)){
+						// 0 : 아이디 길이 / 문자열 검사
+						$("#id_check").text("");
+						$("#reg_submit").attr("disabled", false);
+			
+					} else if(mem_id == ""){
+						
+						$("#id_check").text("아이디를 입력해주세요");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);				
+						
+					} else {
+						
+						$("#id_check").text("아이디는 소문자와 숫자 4~12까지만 가능합니다)");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
 
-
+					}
+				}
+				},error : function{
+					console.log("실패!!!!!!!!!!!!!!")
+			}
 		})
 	})
 </script>
@@ -44,6 +74,8 @@
 		<div class="form-group">
 			<label for="mem_id">아이디</label>
 				<input type="text" class="form-control" id="mem_id" name="mem_id"placeholder="아이디" required="required">
+			<div class="check_font" id="id_check"></div>
+		
 		</div>
 		<!-- 비밀번호 -->
 		<div class="form-group">
@@ -66,6 +98,10 @@
 						</button>&nbsp; -->
 					<div class="check_font" id="email_check"></div>
 			</div>
+		<button class="btn btn-primary px-3" id="reg_submit">
+			<i class="fa fa-heart pr-2" aria-hidden="true"></i>가입하기
+		</button>
+
 		
 	</form>
 </body>
