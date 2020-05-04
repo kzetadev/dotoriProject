@@ -43,6 +43,16 @@
   		}
 	</style>
 </head>
+<script type="text/javascript">
+$(function(){
+	$("#form").on("submit", function(event){
+		event.preventDefault();
+		var searchCondition = $("#form").serialize();
+		console.log(searchCondition);
+		location.href = "/listPlace_Info?" + searchCondition;
+	});
+});
+</script>
 <body>
 	<!-- 내용  -->
 	<h1><strong>명소</strong></h1>
@@ -91,7 +101,7 @@
 		
 
 	<!-- 검색창 구현 -->
-	<form class="navbar-form" action="/listPlace_Info" method="post">
+	<form id="form" class="navbar-form" action="/listPlace_Info" method="post">
 		<div class="input-group">
 			<select name="searchColumn">
 				<option value="place_name">장소명</option>

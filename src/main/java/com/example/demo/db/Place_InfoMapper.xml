@@ -27,16 +27,21 @@
   <select id="selectPage" resultType="Place_InfoVo">
   	select place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail from 
   		(select rownum r, place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail from 
-  			(select * from place_info where place_type = #{type} order by place_no)) 
-  				where r between #{start} and #{end}
-  				<if test="keyword != null and keyword != ''">
+  			(select * from place_info where place_type = #{place_type}
+  			<if test="keyword != null and keyword != ''">
   					and ${searchColumn} like '%' || #{keyword} || '%'
   				</if> <!-- 장소명과 내용만 가지고 검색 설정 -->
+  			  order by place_no)) 
+  				where r between #{start} and #{end}
+  				
   </select>
   
     <!-- 전체 몇페이지까지 있는지 확인 (페이징 처리 관련) -->
   <select id="totalRecord" resultType="java.lang.Integer">
   	select count(*) from place_info where place_type = #{place_type}
+	<if test="keyword != null and keyword != ''">
+		and ${searchColumn} like '%' || #{keyword} || '%'
+	</if>
   </select>
   
   	<!-- 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동  -->

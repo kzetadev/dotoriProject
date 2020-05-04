@@ -19,8 +19,8 @@ public class Place_InfoController {
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
-	public int getTotalRecord(int place_type) {
-		return DBManager.totalRecord(place_type);
+	public int getTotalRecord(HashMap map) {
+		return DBManager.totalRecord(map);
 	}
 	
 	@Autowired
@@ -47,8 +47,12 @@ public class Place_InfoController {
 		}
 		ModelAndView m = new ModelAndView();
 		HashMap map = new HashMap();
-
-		totalRecord = getTotalRecord(place_type);
+		
+		map.put("keyword", keyword);
+		map.put("searchColumn", searchColumn);
+		map.put("place_type", place_type);
+		
+		totalRecord = getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
 		System.out.println("전체 페이지 수 : " + totalPage);
 		if (pageNUM > totalPage) {
@@ -60,11 +64,9 @@ public class Place_InfoController {
 			end = totalRecord;
 		}
 	
-		map.put("keyword", keyword);
-		map.put("searchColumn", searchColumn);
+		
 		map.put("start", start);
 		map.put("end", end);
-		map.put("type", place_type);
 		System.out.println(map);
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("searchColumn", searchColumn);
