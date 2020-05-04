@@ -23,18 +23,11 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
-	// 정보게시판 여행 정보 리스트
-	public static List<Place_InfoVo> listPlace_Info(){
-		SqlSession session = factory.openSession();
-		List<Place_InfoVo> list = session.selectList("place_info.selectAll");
-		session.close();
-		return list;
-	}
 	
-	// 정보게시판 여행 정보 페이징 처리
+	// 정보게시판 여행 정보 페이징 처리 + 검색
 	public static List<Place_InfoVo> listPlace_InfoPage(HashMap map){
 		SqlSession session = factory.openSession();
-		List<Place_InfoVo> list = session.selectList("place_info.selectPage");
+		List<Place_InfoVo> list = session.selectList("place_info.selectPage", map);
 		session.close();
 		return list;
 	}

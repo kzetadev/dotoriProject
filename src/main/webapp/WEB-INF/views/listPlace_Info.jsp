@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/coding.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 <style type="text/css">
 		h1{
 			text-align:center;
@@ -25,9 +26,6 @@
 			color:grey;
 			font-size:11px;
 		}
-		.pagination pagination-lg{
-			
-		}
 	/* Hide the carousel text when the screen is less than 600 pixels wide */
 		@media (max-width: 600px) {
 		    .carousel-caption {
@@ -39,6 +37,10 @@
       		margin: auto;
       		height:200px;
   		}*/
+  		.pager{
+  			display:inline-block;
+			
+  		}
 	</style>
 </head>
 <body>
@@ -47,6 +49,8 @@
 	<br>
 	<img src="images/main.jpg" width="100%" height="500">
 	<br><br><br><br>
+	
+	<a href="faq">자주 묻는 질문들</a>
 
 	<div class="row">
 		<c:forEach var="p" items="${list }">
@@ -65,40 +69,35 @@
 		</c:forEach>
 	</div>
 	
+	
+	<!-- 페이징 처리 -->
 	<c:if test="${startPage > 1}">
 		<ul class="pager">
-			<li><a href="listPlace_Info?pageNUM=${startPage-1 }">이전</a></li>
+			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${startPage-1 }">이전</a></li>
 		</ul>
 	</c:if>
 	
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<ul class="pager">
-			<li><a href="listPlace_Info?pageNUM=${i }">${i }</a></li>
+			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${i }">${i }</a></li>
 		</ul>
 	</c:forEach>
 	
 	<c:if test="${endPage < totalPage }">
 		<ul class="pager">
-			<li><a href="listPlace_Info?pageNUM=${endPage+1 }">다음</a></li>
+			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${endPage+1 }">다음</a></li>
 		</ul>
 	</c:if>
-
-	<!-- 페이지 번호 -->
-	<!-- <ul class="pager">
-		<li><a href="#">Previous</a></li>
-		<li class="active"><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">Next</a></li>
-	</ul> -->
-	
+		
 
 	<!-- 검색창 구현 -->
-	<form class="navbar-form" action="/everywhere.do">
+	<form class="navbar-form" action="/listPlace_Info" method="post">
 		<div class="input-group">
-			<input type="text" class="form-control" placeholder="검색어를 입력해주세요.">
+			<select name="searchColumn">
+				<option value="place_name">장소명</option>
+				<option value="place_detail">내용</option>
+			</select>
+				<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력해주세요.">
 			<div class="input-group-btn">
 				<button class="btn btn-default" type="submit">
 					<i class="glyphicon glyphicon-search"></i>

@@ -10,10 +10,6 @@ import com.example.demo.vo.Place_InfoVo;
 
 @Repository
 public class Place_InfoDao {
-	public List<Place_InfoVo> listPlace_Info(){
-		return DBManager.listPlace_Info();
-	}
-	
 	public List<Place_InfoVo> listPlace_InfoPage(HashMap map){
 		return DBManager.listPlace_InfoPage(map);
 	}

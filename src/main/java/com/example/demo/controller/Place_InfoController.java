@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,19 +29,20 @@ public class Place_InfoController {
 	public void setP_dao(Place_InfoDao p_dao) {
 		this.p_dao = p_dao;
 	}
-//	// 여행 장소 목록
-//	@RequestMapping("/listPlace_Info")
-//	public ModelAndView ListPlace_Info() {
-//		System.out.println("컨트롤러 동작함");
-//		ModelAndView m = new ModelAndView();
-//		m.addObject("list", p_dao.listPlace_Info());
-//		return m;
-//	}
 	
-	// 여행 장소 페이징 처리
+	// 여행 장소 페이징 + 검색 처리 
 	@RequestMapping("/listPlace_Info")										// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
-	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM) {
+	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, String all, String keyword, String searchColumn, HttpSession session) {
 		System.out.println("컨트롤러 동작함");
+		System.out.println("검색어 : " + keyword);
+		if(keyword == null) {
+			keyword = (String)session.getAttribute("keyword");
+			searchColumn = (String)session.getAttribute("searchColumn");
+		}
+		if(all != null) {
+			keyword = null;
+			searchColumn = null;
+		}
 		ModelAndView m = new ModelAndView();
 		HashMap map = new HashMap();
 		
@@ -53,12 +56,16 @@ public class Place_InfoController {
 			end = totalRecord;
 		}
 	
+		map.put("keyword", keyword);
+		map.put("searchColumn", searchColumn);
 		map.put("start", start);
 		map.put("end", end);
 		System.out.println(map);
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("searchColumn", searchColumn);
 
-		m.addObject("list", p_dao.listPlace_Info());
-		m.addObject("listPage", p_dao.listPlace_InfoPage(map));
+		//m.addObject("list", p_dao.listPlace_Info());
+		m.addObject("list", p_dao.listPlace_InfoPage(map));
 		System.out.println(map);
 		System.out.println("전체 페이지 수 : " + totalPage);
 		m.addObject("totalPage", totalPage);
@@ -75,6 +82,13 @@ public class Place_InfoController {
 	public ModelAndView detailPlace_Info(int place_no) {
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", p_dao.detailPlace_Info(place_no));
+		return m;
+	}
+	
+	// FAQ (자주 묻는 질문들)
+	@RequestMapping("/faq")
+	public ModelAndView faq() {
+		ModelAndView m = new ModelAndView();
 		return m;
 	}
 }

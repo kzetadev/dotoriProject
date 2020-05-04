@@ -12,13 +12,13 @@
 <link rel="stylesheet" href="css/owl.carousel.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <style type="text/css">
 	h2{
 		text-align:center;
 	}
-	img, dl{
+	dl{
 		padding-right:200px;
 		padding-left:200px;
 	}
@@ -29,17 +29,21 @@
 	.glyphicon glyphicon-star{
 		visible: hidden;
 	}
+	.container{
+		margin:0 auto;
+	}
 </style>
 </head>
 <body>
 	<h2><b>명소 - ${p.place_name }</b></h2>
-	<span class="glyphicon glyphicon-star-empty"></span>
-	<span class="glyphicon glyphicon-star"></span>
+	<a href="detailPlace_Info."><span class="glyphicon glyphicon-star-empty"></span></a>
+	<a><span class="glyphicon glyphicon-star"></span></a>
 	
 	<script type="text/javascript">
 		$(function(){
 			$(".glyphicon glyphicon-star-empty").click(function(){
 				alert("찜목록에 추가되었습니다.")
+				
 				$(this).css("visibility", "hidden")
 				$(".glyphicon glyphicon-star").css("visibility", "visible")
 			})
@@ -114,7 +118,7 @@
 	</div> -->
 	
 	<br><br>
-	<img src="/img/${fn:split(p.place_img, '|')[0]}" width="100%" height="500">
+	<img src="/img/${fn:split(p.place_img, '|')[0]}" width="100%" height="500" style="padding-right:200px; padding-left:200px;">
 	<hr>
 
 	<div class="detail-map-infor first border">
@@ -141,23 +145,25 @@
 	</div>
 	
 		<!-- 지도를 표시할 div 입니다 -->
-	<div id="map" style="width:100%;height:350px;"></div>
+	<div id="container">
+		<div id="map" style="width:100%;height:100vh;"></div>
+	</div>
 	
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
-		    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		    center: new kakao.maps.LatLng(${p.place_row}, ${p.place_col}), // 지도의 중심좌표
 		    level: 3 // 지도의 확대 레벨
 		};
 		
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		
 		//마커가 표시될 위치입니다 
-		var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+		var markerPosition  = new kakao.maps.LatLng(${p.place_row}, ${p.place_col}); 
 		
 		//마커를 생성합니다
 		var marker = new kakao.maps.Marker({
-		position: markerPosition
+			position: markerPosition
 		});
 		
 		//마커가 지도 위에 표시되도록 설정합니다
