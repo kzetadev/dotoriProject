@@ -35,7 +35,7 @@ public class Member_InfoController {
 	}
 	
 	//id 중복 체크 컨트롤러
-	@RequestMapping(value="/idCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value="/user/idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int idCheck(@RequestParam("mem_id")String mem_id) {
 		
