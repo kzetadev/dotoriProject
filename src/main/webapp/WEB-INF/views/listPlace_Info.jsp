@@ -37,10 +37,19 @@
       		margin: auto;
       		height:200px;
   		}*/
-  		.pager{
-  			display:inline-block;
-			
+  		.pagination{
+  			display:block;
+			text-align: center;
   		}
+  		.pagination > li > a{
+  			float: none;
+  			margin-left: -5px;
+  		}
+  		form { 
+        	margin: 0 auto; 
+       		width:250px;
+    	}    
+		@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
 	</style>
 </head>
 <script type="text/javascript">
@@ -59,8 +68,6 @@ $(function(){
 	<br>
 	<img src="images/main.jpg" width="100%" height="500">
 	<br><br><br><br>
-	
-	<a href="faq">자주 묻는 질문들</a>
 
 	<div class="row">
 		<c:forEach var="p" items="${list }">
@@ -71,7 +78,9 @@ $(function(){
 						<div class="caption">
 							<b>${p.place_name}</b>
 							<br>
-							<p>aaaaaaaaaaaaaaaaaa</p>
+							<p>
+								${p.place_detail }
+							</p>
 						</div>
 					</a>
 				</div>
@@ -81,33 +90,40 @@ $(function(){
 	
 	
 	<!-- 페이징 처리 -->
-	<c:if test="${startPage > 1}">
-		<ul class="pager">
-			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${startPage-1 }">이전</a></li>
-		</ul>
-	</c:if>
-	
-	<c:forEach var="i" begin="${startPage }" end="${endPage }">
-		<ul class="pager">
-			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${i }">${i }</a></li>
-		</ul>
-	</c:forEach>
-	
-	<c:if test="${endPage < totalPage }">
-		<ul class="pager">
-			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${endPage+1 }">다음</a></li>
-		</ul>
-	</c:if>
+	<ul class="pagination pagination-lg">
+		<c:if test="${startPage > 1}">
+			<li>
+				<a href="listPlace_Info?place_type=${place_type }&pageNUM=${startPage-1 }" aria-label="이전">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+		</c:if>
 		
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${i }">${i }</a></li>
+		</c:forEach>
+		
+		<c:if test="${endPage < totalPage }">
+			<li>
+				<a href="listPlace_Info?place_type=${place_type }&pageNUM=${endPage+1 }" aria-label="다음">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</c:if>
+	</ul>	
+
 
 	<!-- 검색창 구현 -->
-	<form id="form" class="navbar-form" action="/listPlace_Info" method="post">
+	<form id="form" action="/listPlace_Info" method="post">
 		<div class="input-group">
-			<select name="searchColumn">
-				<option value="place_name">장소명</option>
-				<option value="place_detail">내용</option>
-			</select>
-				<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력해주세요.">
+			<div class="form-group">
+				<label for="sel"></label>
+				<select class="form-control" name="searchColumn" id="sel">
+					<option value="place_name">장소명</option>
+					<option value="place_detail">내용</option>
+				</select>
+			</div>
+			<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력해주세요.">
 			<div class="input-group-btn">
 				<button class="btn btn-default" type="submit">
 					<i class="glyphicon glyphicon-search"></i>
@@ -115,5 +131,6 @@ $(function(){
 			</div>
 		</div>
 	</form>
+	<br><br>
 </body>
 </html>
