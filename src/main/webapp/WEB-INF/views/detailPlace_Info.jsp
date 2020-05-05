@@ -9,11 +9,21 @@
 <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/coding.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
+<link rel="stylesheet" href="css/slick.css">
+<link rel="stylesheet" href="css/slick-theme.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".your-class").slick({
+			dots: true, infinite: true,
+			speed: 500, fade: true, cssEase: 'linear'
+		})
+	})
+</script>
 <style type="text/css">
 	h2{
 		text-align:center;
@@ -22,23 +32,26 @@
 		padding-right:200px;
 		padding-left:200px;
 	}
-	.glyphicon glyphicon-star-empty, .glyphicon glyphicon-star{
+	/*.glyphicon glyphicon-star-empty, .glyphicon glyphicon-star{
 		display: black;
 		text-align: center;
 	}
 	.glyphicon glyphicon-star{
 		visible: hidden;
-	}
-	.container{
+	}*/
+	
+	/*.container{
 		margin:0 auto;
-	}
+	}*/
 </style>
 </head>
 <body>
 	<h2><b>명소 - ${p.place_name }</b></h2>
-	<a href="detailPlace_Info."><span class="glyphicon glyphicon-star-empty"></span></a>
-	<a><span class="glyphicon glyphicon-star"></span></a>
-	
+	<button type="button" class="btn btn-default btn-lg">
+  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+	</button>
+	<br>
+	<!-- 
 	<script type="text/javascript">
 		$(function(){
 			$(".glyphicon glyphicon-star-empty").click(function(){
@@ -53,74 +66,27 @@
 				$(".glyphicon glyphicon-star-empty").css("visibility", "visible")
 			})
 		})
-	</script>
+	</script> -->
 
- 	<!-- <div class="wide-slide-element">
-		<div class="wide-slide owl-carousel owl-loaded owl-drag">
-			<div class="owl-stage-outer">
-				<div class="owl-stage" style="transform: translate3d(-2804px, 0px, 0px); transition: all 0s ease 0s; width: 10515px;">
-					<div class="owl-item cloned" style="width: 94px; margin-right: 1px;">
-						<div class="item">
-							<img src="/img/${fn:split(p.place_img, '|')[0]}">
-						</div>
-					</div>
-					<div class="owl-item active" style="width: 94px; margin-right: 1px;">
-						<div class="item">
-							<img src="/img/${fn:split(p.place_img, '|')[0]}">
-						</div>
-					</div>
-					<div class="owl-item" style="width: 94px; margin-right: 1px;">
-						<div class="item">
-							<img src="/img/${fn:split(p.place_img, '|')[0]}">
-						</div>
-					</div>
-					<div class="owl-item cloned" style="width: 94px; margin-right: 1px;">
-						<div class="item">
-							<img src="/img/${fn:split(p.place_img, '|')[0]}">
-						</div>
-					</div>
-				</div>
-			</div>
-													
-			<div class="owl-nav disabled">
-				<button type="button" role="presentation" class="owl-prev">
-					<span aria-label="Previous">‹</span>
-				</button>
-				<button type="button" role="presentation" class="owl-next">
-					<span aria-label="Next">›</span>
-				</button>
-			</div>
-			
-			<div class="owl-dots">
-				<button role="button" class="owl-dot active">
-					<span></span>
-				</button>
-				<button role="button" class="owl-dot">
-					<span></span>
-				</button>
-				<button role="button" class="owl-dot">
-					<span></span>
-				</button>
-				<button role="button" class="owl-dot">
-					<span></span>
-				</button>
-				<button role="button" class="owl-dot">
-					<span></span>
-				</button>
-				<button role="button" class="owl-dot">
-					<span></span>
-				</button>
-				<button role="button" class="owl-dot">
-					<span></span>
-				</button>
-			</div>
-		</div>
-	</div> -->
-	
-	<br><br>
-	<img src="/img/${fn:split(p.place_img, '|')[0]}" width="100%" height="500" style="padding-right:200px; padding-left:200px;">
+	<!-- 이미지 슬라이더 -->
+	<div class="your-class" align="center">
+	    <!-- <div><img src="/img/${fn:split(p.place_img, '|')[1]}"></div>
+	    <div><img src="/img/${fn:split(p.place_img, '|')[2]}"></div>
+	    <div><img src="/img/${fn:split(p.place_img, '|')[3]}"></div>
+	    <div><img src="/img/${fn:split(p.place_img, '|')[4]}"></div>
+	    <div><img src="/img/${fn:split(p.place_img, '|')[5]}"></div>
+	    <div><img src="/img/${fn:split(p.place_img, '|')[6]}"></div>
+	    <div><img src="/img/${fn:split(p.place_img, '|')[7]}"></div> -->
+	    <c:set var="pSplits" value="${fn:split(p.place_img, '|')}"/>
+	    <c:forEach var="i" items="${pSplits}" varStatus="status">
+	    	<div><img src="/img/${fn:split(p.place_img, '|')[status.index]}"></div>
+	    </c:forEach>
+	    
+	    
+  	</div>
+	<br>
 	<hr>
-
+	<br>
 	<div class="detail-map-infor first border">
 		<dl>
 			<dt>전화번호</dt>
@@ -145,29 +111,37 @@
 	</div>
 	
 		<!-- 지도를 표시할 div 입니다 -->
-	<div id="container">
-		<div id="map" style="width:100%;height:100vh;"></div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="container" align="center">
+				<div id="map" style="width:60%;height:80vh;"></div>
+			</div>
+		</div>
 	</div>
 	
 	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = { 
-		    center: new kakao.maps.LatLng(${p.place_row}, ${p.place_col}), // 지도의 중심좌표
-		    level: 3 // 지도의 확대 레벨
-		};
-		
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		
-		//마커가 표시될 위치입니다 
-		var markerPosition  = new kakao.maps.LatLng(${p.place_row}, ${p.place_col}); 
-		
-		//마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-			position: markerPosition
-		});
-		
-		//마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
+		$(function(){
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = { 
+			    center: new kakao.maps.LatLng(${p.place_row}, ${p.place_col}), // 지도의 중심좌표
+			    level: 3 // 지도의 확대 레벨
+			};
+			
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			
+			//마커가 표시될 위치입니다 
+			var markerPosition  = new kakao.maps.LatLng(${p.place_row}, ${p.place_col}); 
+			
+			//마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				position: markerPosition
+			});
+			
+			//마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+		})
 	</script>
+	<br>
+	<br>
 </body>
 </html>
