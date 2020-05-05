@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.Member_FavoriteVo;
 import com.example.demo.vo.Place_InfoVo;
+import com.example.demo.vo.Place_ThemeVo;
 
 public class DBManager {
 	private static SqlSessionFactory factory;
@@ -24,6 +25,20 @@ public class DBManager {
 		}
 	}
 	
+	//여행장소 테마 정보 조회. 정보게시판에서 각 테마별 링크에 사용.
+	//0 : 명소		1 : 음식		2 : 호텔		3 : 축제와 행사	...
+	public static List<Place_ThemeVo> listPlace_Theme(){
+		SqlSession session = factory.openSession();
+		List<Place_ThemeVo> list = session.selectList("place_theme.selectAll");
+		session.close();
+		return list;
+	}
+	public static Place_ThemeVo getPlace_Theme(int place_type){
+		SqlSession session = factory.openSession();
+		Place_ThemeVo pt = session.selectOne("place_theme.getPlaceTheme", place_type);
+		session.close();
+		return pt;
+	}
 	// 정보게시판 여행 정보 페이징 처리 + 검색
 	public static List<Place_InfoVo> listPlace_InfoPage(HashMap map){
 		SqlSession session = factory.openSession();

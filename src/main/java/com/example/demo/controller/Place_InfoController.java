@@ -1,17 +1,23 @@
 package com.example.demo.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.Place_InfoDao;
+import com.example.demo.dao.Place_ThemeDao;
 import com.example.demo.db.DBManager;
+import com.example.demo.vo.Place_ThemeVo;
+import com.google.gson.Gson;
 @Controller
 public class Place_InfoController {
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
@@ -29,22 +35,37 @@ public class Place_InfoController {
 	public void setP_dao(Place_InfoDao p_dao) {
 		this.p_dao = p_dao;
 	}
+	@Autowired
+	private Place_ThemeDao pt_dao;
+	public void setPt_dao(Place_ThemeDao pt_dao) {
+		this.pt_dao = pt_dao;
+	}
+	@RequestMapping(value="/listPlace_Theme", method={RequestMethod.GET}, produces="application/json")
+	@ResponseBody
+	public String listPlace_Theme() {
+		String str = "";
+		List<Place_ThemeVo> list = pt_dao.listPlace_Theme();
+		Gson gson = new Gson();
+		str = gson.toJson(list);
+		return str;
+		
+	}
 	
 	// 여행 장소 페이징 + 검색 처리 
 	@RequestMapping("/listPlace_Info")										// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
-
 	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String all, String keyword, String searchColumn, HttpSession session) {
-
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
-		if(keyword == null) {
-			keyword = (String)session.getAttribute("keyword");
-			searchColumn = (String)session.getAttribute("searchColumn");
-		}
-		if(all != null) {
-			keyword = null;
-			searchColumn = null;
-		}
+		Place_ThemeVo pt = pt_dao.getPlace_Theme(place_type);
+//		if(keyword == null) {
+//			keyword = (String)session.getAttribute("keyword");
+//			searchColumn = (String)session.getAttribute("searchColumn");
+//		}
+		
+//		if(all != null) {
+//			keyword = null;
+//			searchColumn = null;
+//		}
 		ModelAndView m = new ModelAndView();
 		HashMap map = new HashMap();
 		
@@ -64,12 +85,11 @@ public class Place_InfoController {
 			end = totalRecord;
 		}
 	
-		
 		map.put("start", start);
 		map.put("end", end);
 		System.out.println(map);
-		session.setAttribute("keyword", keyword);
-		session.setAttribute("searchColumn", searchColumn);
+//		session.setAttribute("keyword", keyword);
+//		session.setAttribute("searchColumn", searchColumn);
 
 
 		m.addObject("list", p_dao.listPlace_InfoPage(map));
@@ -85,6 +105,12 @@ public class Place_InfoController {
 		m.addObject("startPage", startPage);
 		m.addObject("endPage", endPage);
 		m.addObject("place_type", place_type);
+		if(keyword != null && !keyword.equals("")) {
+			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
+			m.addObject("keyword", "&keyword=" + keyword);
+		}
+		m.addObject("pt", pt);
+		//theme
 		return m;
 	}
 	// 여행 장소 상세

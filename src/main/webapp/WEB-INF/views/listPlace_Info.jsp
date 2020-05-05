@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>명소 정보 게시판</title>
+<title>${pt.place_type_name } 정보 게시판</title>
 <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/coding.css">
@@ -54,17 +54,50 @@
 </head>
 <script type="text/javascript">
 $(function(){
+	$.ajax({url:"/listPlace_Theme", type:"get", dataType:"json", success:function(result){
+		var ul = $('<ul class="pagination pagination-lg"/>');
+		
+		$.each(result, function(idx, theme){
+			var tab = $("<a/>").attr("href", "/listPlace_Info?place_type=" + theme["place_type"]).
+				text(theme["place_type_name"]);
+			var li = $("<li/>").append(tab);
+			$(ul).append(li);
+		});
+		$("body").prepend(ul);
+	}});
+	var params;
+	//쿼리스트링에서 특정 매개변수 값 반환하는 함수
+	function getParamVal(queryStr, paramKey){
+		if(queryStr.indexOf("?") >= 0){
+			params = queryStr.substr(1).split("&");
+			for(var i = 0; i < params.length; i++){
+				p = params[i];
+				if(p.split("=")[0] == paramKey){
+					return p;
+				}
+			}
+		}else{
+			return "";
+		}
+	}
 	$("#form").on("submit", function(event){
 		event.preventDefault();
 		var searchCondition = $("#form").serialize();
+		var paramPlacetype = getParamVal(location.search, "place_type");
+		if(paramPlacetype != ""){
+			paramPlacetype = paramPlacetype + "&";
+		}
+		if(searchCondition["keyword"] == ""){
+			searchCondition = "";
+		}
 		console.log(searchCondition);
-		location.href = "/listPlace_Info?" + searchCondition;
+		location.href = "/listPlace_Info?" + paramPlacetype + searchCondition;
 	});
 });
 </script>
 <body>
 	<!-- 내용  -->
-	<h1><strong>명소</strong></h1>
+	<h1><strong>${pt.place_type_name }</strong></h1>
 	<br>
 	<img src="images/main.jpg" width="100%" height="500">
 	<br><br><br><br>
@@ -93,19 +126,19 @@ $(function(){
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>
-				<a href="listPlace_Info?place_type=${place_type }&pageNUM=${startPage-1 }" aria-label="이전">
+				<a href="listPlace_Info?place_type=${place_type }&pageNUM=${startPage-1 }${searchColumn}${keyword}" aria-label="이전">
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
 		</c:if>
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${i }">${i }</a></li>
+			<li><a href="listPlace_Info?place_type=${place_type }&pageNUM=${i }${searchColumn}${keyword}">${i }</a></li>
 		</c:forEach>
 		
 		<c:if test="${endPage < totalPage }">
 			<li>
-				<a href="listPlace_Info?place_type=${place_type }&pageNUM=${endPage+1 }" aria-label="다음">
+				<a href="listPlace_Info?place_type=${place_type }&pageNUM=${endPage+1 }${searchColumn}${keyword}" aria-label="다음">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>
