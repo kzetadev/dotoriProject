@@ -33,7 +33,7 @@ a:hover{
 }
 .navbar-default .navbar-nav > li > a:hover, /* 네비게이션의 글자에 마우스를 올렸을 때 */
 .navbar-default .navbar-nav > li > a:focus{
-	color:#bbbbbb; /* 회색 */
+	color:#bbbbbb; /* �쉶�깋 */
 	background-color: #000000;
 }
 .navbar-default .navbar-nav > .open > a, /* 드랍다운이 열렸을 때 마우스 색상 이벤트 */

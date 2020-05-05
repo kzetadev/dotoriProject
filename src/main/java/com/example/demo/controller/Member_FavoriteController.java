@@ -12,12 +12,18 @@ import com.example.demo.dao.Place_InfoDao;
 public class Member_FavoriteController {
 	@Autowired
 	private Member_FavoriteDao f_dao;
+	@Autowired
+	private Place_InfoDao p_dao;
 
 	public void setM_dao(Member_FavoriteDao f_dao) {
 		this.f_dao = f_dao;
 	}
+	public void setP_dao(Place_InfoDao p_dao) {
+		this.p_dao = p_dao;
+	}
+
 	// 찜목록 리스트
-	@RequestMapping("/listMember_Favorite")
+	@RequestMapping("/listMember_Favorite.do")
 	public ModelAndView listMember_Favorite() {
 		System.out.println("컨트롤러 동작함");
 		ModelAndView m = new ModelAndView();
@@ -25,14 +31,14 @@ public class Member_FavoriteController {
 		return m;
 	}
 	// 찜목록 상세보기 (해당 정보게시판 상세페이지로 이동) // 필요 없을수도?
-//	@RequestMapping("/detailPlace_Info")
+//	@RequestMapping("/detailPlace_Info.do")
 //	public ModelAndView detailMember_Favorite(int favorite_no) {
 //		ModelAndView m = new ModelAndView();
 //		m.addObject("f",f_dao.detailMember_Favorite(favorite_no));
 //		return m;
 //	}
 	// 해당 찜한 것 삭제
-	@RequestMapping("/deleteMember_Favorite")
+	@RequestMapping("/deleteMember_Favorite.do")
 	public ModelAndView deleteMember_Favorite(int favorite_no) {
 		ModelAndView m = new ModelAndView();
 		m.setViewName("redirect:/listMember_Favorite");
