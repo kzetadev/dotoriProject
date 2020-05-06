@@ -9,7 +9,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
-	
+	$("#btnInsert").click(function(){
+		location.href="/insertBoard_Post"
+	})
 })
 </script>
 </head>
@@ -31,5 +33,6 @@ $(function(){
 		</tr>
 		</c:forEach>
 	</table>
+	<button id="btnInsert">±Û¾²±â</button>
 </body>
 </html>
