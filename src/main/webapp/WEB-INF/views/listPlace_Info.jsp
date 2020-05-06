@@ -55,7 +55,6 @@
        		width:250px;
     	}    
 		@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
-=======
 	<meta charset="UTF-8">
 	<title>명소 정보 게시판</title>
 	<style type="text/css">
