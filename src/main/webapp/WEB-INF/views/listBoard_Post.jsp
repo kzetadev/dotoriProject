@@ -1,38 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+
+<layoutTag:layout>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ììœ  ê²Œì‹œíŒ ê¸€ ëª©ë¡</title>
 <script type="text/javascript">
-$(function(){
-	$("#btnInsert").click(function(){
-		location.href="/insertBoard_Post"
-	})
-})
+	$(function() {
+		$("#btnInsert").click(function() {
+			location.href = "/insertBoard_Post"
+		});
+	});
 </script>
 </head>
 <body>
-<h2>Ä¿¹Â´ÏÆ¼ ±Û ¸ñ·Ï</h2>
+	<h2>ììœ </h2>
 	<table border="1" width="80%">
 		<tr>
-			<th>±Û¹øÈ£</th>
-			<th>ÀÛ¼ºÀÚ</th>
-			<th>ÀÛ¼ºÀÏ</th>
-			<th>Á¶È¸¼ö</th>
+			<th>ê¸€ë²ˆí˜¸</th>
+			<th>ì‘ì„±ì</th>
+			<th>ì‘ì„±ì¼</th>
+			<th>ì¡°íšŒìˆ˜</th>
 		</tr>
 		<c:forEach var="v" items="${list}">
-		<tr>
-			<td>${v.board_no}</td>
-			<td>${v.mem_no}</td>
-			<td>${v.board_date}</td>
-			<td>${v.board_hit}</td>
-		</tr>
+			<tr>
+				<td>${v.board_no}</td>
+ 				<td>${v.mem_no}</td>	<%-- ìˆ˜ì •í•„ìš” --%>
+				<td>${v.board_date}</td>
+				<td>${v.board_hit}</td>
+			</tr>
 		</c:forEach>
 	</table>
-	<button id="btnInsert">±Û¾²±â</button>
+	<button id="btnInsert">ê¸€ì“°ê¸°</button>
 </body>
 </html>
+
+</layoutTag:layout>

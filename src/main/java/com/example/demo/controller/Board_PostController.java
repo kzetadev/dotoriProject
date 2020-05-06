@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,7 +40,7 @@ public class Board_PostController {
 	}
 	
 	//커뮤니티 글 상세
-	@RequestMapping("/detailBoard_Post.do")
+	@RequestMapping(value = "/detailBoard_Post.do")
 	public ModelAndView detailBoard_Post(int board_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("detailBoard_Post");

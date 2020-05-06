@@ -18,20 +18,20 @@ public class Board_PostManager {
 			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	//커뮤니티 글 목록
-	public static List<Board_PostVo> listBoard_Post(){
+
+	// 커뮤니티 글 목록
+	public static List<Board_PostVo> listBoard_Post() {
 		SqlSession session = factory.openSession();
 		List<Board_PostVo> list = session.selectList("board_post.selectAll");
-		session.close();		
+		session.close();
 		return list;
 	}
-	
-	//커뮤니티 글 등록
+
+	// 커뮤니티 글 등록
 	public static int insertBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
@@ -40,16 +40,16 @@ public class Board_PostManager {
 		session.close();
 		return re;
 	}
-	
-	//커뮤니티 글 상세
-	public static Board_PostVo detailBoard_Post(int board_no){
+
+	// 커뮤니티 글 상세
+	public static Board_PostVo detailBoard_Post(int board_no) {
 		SqlSession session = factory.openSession();
 		Board_PostVo b = session.selectOne("board.detail", board_no);
 		session.close();
 		return b;
 	}
-	
-	//커뮤니티 글 수정
+
+	// 커뮤니티 글 수정
 	public static int updateBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
@@ -58,8 +58,8 @@ public class Board_PostManager {
 		session.close();
 		return re;
 	}
-	
-	//커뮤니티 글 삭제
+
+	// 커뮤니티 글 삭제
 	public static int deleteBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
