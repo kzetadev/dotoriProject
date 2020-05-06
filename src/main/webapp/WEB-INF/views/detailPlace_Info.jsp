@@ -1,72 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+
+<layoutTag:layout>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>명소 상세 게시판</title>
-<meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/coding.css">
-<link rel="stylesheet" href="css/slick.css">
-<link rel="stylesheet" href="css/slick-theme.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/slick.min.js"></script>
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
-<script type="text/javascript">
-	$(function(){
-		$(".your-class").slick({
-			dots: true, infinite: true,
-			speed: 500, fade: true, cssEase: 'linear'
-		})
-	})
-</script>
-<style type="text/css">
-	h2{
-		text-align:center;
-	}
-	dl{
-		padding-right:200px;
-		padding-left:200px;
-	}
-	/*.glyphicon glyphicon-star-empty, .glyphicon glyphicon-star{
-		display: black;
-		text-align: center;
-	}
-	.glyphicon glyphicon-star{
-		visible: hidden;
-	}*/
-	
-	/*.container{
-		margin:0 auto;
-	}*/
-</style>
-</head>
-<body>
-	<h2><b>명소 - ${p.place_name }</b></h2>
-	<button type="button" class="btn btn-default btn-lg">
-  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-	</button>
-	<br>
-	<!-- 
+	<meta charset="UTF-8">
+	<title>명소 상세 게시판</title>
+	<link rel="stylesheet" href="css/slick.css">
+	<link rel="stylesheet" href="css/slick-theme.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="js/slick.min.js"></script>
+	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 	<script type="text/javascript">
 		$(function(){
-			$(".glyphicon glyphicon-star-empty").click(function(){
-				alert("찜목록에 추가되었습니다.")
-				
-				$(this).css("visibility", "hidden")
-				$(".glyphicon glyphicon-star").css("visibility", "visible")
+			$(".your-class").slick({
+				dots: true, infinite: true,
+				speed: 500, fade: true, cssEase: 'linear'
 			})
-			$(".glyphicon glyphicon-star").click(function(){
-				alert("찜목록에서 제거되었습니다.")
+			$("#btn").click(function(){
 				$(this).css("visibility", "hidden")
-				$(".glyphicon glyphicon-star-empty").css("visibility", "visible")
+				$("#btn2").css("visibility", "visible")
+				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
+				if(re == true){
+					location.href="myPage.do"
+				}
+			})
+			$("#btn2").click(function(){
+				$(this).css("visibility", "hidden")
+				$("#btn").css("visibility", "visible")
+				alert("찜목록에서 제거되었습니다.")
 			})
 		})
-	</script> -->
+	</script>
+	<style type="text/css">
+		h2{
+			text-align:center;
+		}
+		dl, hr{
+			padding-right:200px;
+			padding-left:200px;
+		}
+		#btn2{
+			visibility: hidden;
+		}
+	</style>
+</head>
+<body>
+	<h2><b>${p.place_name }</b></h2>
+	
+	<div class="b" align="center">
+		<button type="button" class="btn btn-default btn-lg" id="btn">
+	  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+		</button>
+		<button type="button" class="btn btn-default btn-lg" id="btn2">
+	  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+		</button>
+	</div>
+	<br>
+	
 
 	<!-- 이미지 슬라이더 -->
 	<div class="your-class" align="center">
@@ -79,31 +74,32 @@
 	    <div><img src="/img/${fn:split(p.place_img, '|')[7]}"></div> -->
 	    <c:set var="pSplits" value="${fn:split(p.place_img, '|')}"/>
 	    <c:forEach var="i" items="${pSplits}" varStatus="status">
-	    	<div><img src="/img/${fn:split(p.place_img, '|')[status.index]}"></div>
-	    </c:forEach>
-	    
-	    
+	    	<div><img src="/img/${fn:split(p.place_img, '|')[status.index]}" height="90%"></div>
+	    </c:forEach> 
   	</div>
-	<br>
-	<hr>
-	<br>
+  	
+  	
 	<div class="detail-map-infor first border">
 		<dl>
 			<dt>전화번호</dt>
 			<dd>${p.place_tel }</dd>
 		</dl>
+		<hr>
 		<dl>
 			<dt>운영 요일 & 휴무일</dt>
 			<dd>${p.place_open }</dd>
 		</dl>
+		<hr>
 		<dl>
 			<dt>이용요금</dt>
 			<dd>${p.place_price }</dd>
 		</dl>
+		<hr>
 		<dl>
 			<dt>주소</dt>
 			<dd>${p.place_addr }</dd>
 		</dl>
+		<hr>
 		<dl>
 			<dt>상세 설명</dt>
 			<dd>${p.place_detail }</dd>
@@ -145,3 +141,5 @@
 	<br>
 </body>
 </html>
+
+</layoutTag:layout>

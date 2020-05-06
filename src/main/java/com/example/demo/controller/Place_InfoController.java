@@ -52,7 +52,7 @@ public class Place_InfoController {
 	}
 	
 	// 여행 장소 페이징 + 검색 처리 
-	@RequestMapping("/listPlace_Info")										// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
+	@RequestMapping("/listPlace_Info.do")	// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
 	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String all, String keyword, String searchColumn, HttpSession session) {
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
@@ -114,17 +114,10 @@ public class Place_InfoController {
 		return m;
 	}
 	// 여행 장소 상세
-	@RequestMapping("/detailPlace_Info")
+	@RequestMapping("/detailPlace_Info.do")
 	public ModelAndView detailPlace_Info(int place_no) {
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", p_dao.detailPlace_Info(place_no));
-		return m;
-	}
-	
-	// FAQ (자주 묻는 질문들)
-	@RequestMapping("/faq")
-	public ModelAndView faq() {
-		ModelAndView m = new ModelAndView();
 		return m;
 	}
 }

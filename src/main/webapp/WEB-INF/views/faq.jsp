@@ -1,108 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+
+<layoutTag:layout>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="shortcut icon" href="notebook.png" type="image/x-icon" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<title>자주 묻는 질문들</title>
-<style>
-	h3 {
-		font-weight: 900;
-	}
-	body {
-		font-family: Arial;
-	}
-	.accordion {
-		background-color: #eee;
-		color: #444;
-		cursor: pointer;
-		padding: 18px;
-		width: 100%;
-		border: none;
-		text-align: left;
-		outline: none;
-		font-size: 15px;
-		transition: 0.4s;
-	}
+	<meta charset="UTF-8">
+	<title>자주 묻는 질문들</title>
+	<link rel="shortcut icon" href="notebook.png" type="image/x-icon" />
+	<style>
+		h3 {
+			font-weight: 900;
+		}
+		body {
+			font-family: Arial;
+		}
+		.accordion {
+			background-color: #eee;
+			color: #444;
+			cursor: pointer;
+			padding: 18px;
+			width: 100%;
+			border: none;
+			text-align: left;
+			outline: none;
+			font-size: 15px;
+			transition: 0.4s;
+		}
+		
+		.active, .accordion:hover {
+			background-color: #ccc;
+		}
+		
+		.panel {
+			padding: 0 18px;
+			display: none;
+			background-color: white;
+			overflow: hidden;
+		}
+		
+		.menuA {
+			width: fit-content;
+			height: 50px;
+			margin: auto;
+		}
 	
-	.active, .accordion:hover {
-		background-color: #ccc;
-	}
-	
-	.panel {
-		padding: 0 18px;
-		display: none;
-		background-color: white;
-		overflow: hidden;
-	}
-	
-	.menuA {
-		width: fit-content;
-		height: 50px;
-		margin: auto;
-	}
-
-	input#search {
-		background: blueviolet;
-		color: white;
-		font-weight: bold;
-		border: 0 none;
-	}
-	
-	.member_more {
-		background-color: blueviolet;
-		font-weight: bold;
-		border: 1px solid blueviolet;
-		padding: 1%;
-		border-radius: 10px;
-		color: white;
-	}
-	
-	caption {
-		padding-top: 8px;
-		padding-bottom: 8px;
-		color: #777;
-		text-align: right;
-	}
-	
-	ul#gnb a {
-		font-size: 18px;
-	}
-	
-	.container.mks_top {
-		margin-top: 5%;
-	}
-	
-	.tab button.active {
-		background-color: #F56D6D;
-	}
-	
-	.tab {
-		font-weight: bold;
-		color: white;
-		background-color: blueviolet;
-	}
-	
-	#mks_image thead {
-		font-weight: bold;
-	}
-	
-	.popup_notice {
-		position: fixed;
-		width: 300px;
-		right: 25%;
-		top: 30%;
-		background-color: #FFFFF0;
-		z-index: 1000;
-	}
-</style>
+		input#search {
+			background: blueviolet;
+			color: white;
+			font-weight: bold;
+			border: 0 none;
+		}
+		
+		.member_more {
+			background-color: blueviolet;
+			font-weight: bold;
+			border: 1px solid blueviolet;
+			padding: 1%;
+			border-radius: 10px;
+			color: white;
+		}
+		
+		caption {
+			padding-top: 8px;
+			padding-bottom: 8px;
+			color: #777;
+			text-align: right;
+		}
+		
+		ul#gnb a {
+			font-size: 18px;
+		}
+		
+		.container.mks_top {
+			margin-top: 5%;
+		}
+		
+		.tab button.active {
+			background-color: #F56D6D;
+		}
+		
+		.tab {
+			font-weight: bold;
+			color: white;
+			background-color: blueviolet;
+		}
+		
+		#mks_image thead {
+			font-weight: bold;
+		}
+		
+		.popup_notice {
+			position: fixed;
+			width: 300px;
+			right: 25%;
+			top: 30%;
+			background-color: #FFFFF0;
+			z-index: 1000;
+		}
+	</style>
 </head>
 <body>
 	<div>
@@ -198,3 +196,5 @@
 	</div>
 </body>
 </html>
+
+</layoutTag:layout>
