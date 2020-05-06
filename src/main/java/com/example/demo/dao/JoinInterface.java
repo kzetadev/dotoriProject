@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import java.sql.SQLException;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.example.demo.vo.Member_InfoVo;
 
 public interface JoinInterface {
@@ -9,4 +11,5 @@ public interface JoinInterface {
 	int searchPwd(String mem_id, String mem_email, String mem_pwd);
 	int checkOverId(String mem_id);
 	int checkOverNickName(String mem_nickname);
+	Member_InfoVo loginMem(@Param("mem_id")String mem_id);//유저 로그인 메소드
 }

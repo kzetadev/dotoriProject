@@ -22,11 +22,12 @@ public class Member_InfoManager {
 			// TODO: handle exception
 		}
 	}
-	public static List<Member_InfoVo> login(){ //로그인 
+	public static Member_InfoVo login(Member_InfoVo vo) {
+		Member_InfoVo infovo = null;
 		SqlSession session = factory.openSession();
-		List<Member_InfoVo> list = session.selectList("mem_info.select");
+		infovo = session.selectOne("mem_info.login", vo);
 		session.close();
-		return list;
+		return infovo;
 	}
 	public static int insertJoin(Member_InfoVo vo) { //회원가입
 		int re = -1;

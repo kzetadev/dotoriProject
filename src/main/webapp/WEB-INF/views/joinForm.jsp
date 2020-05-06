@@ -27,7 +27,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a
 	$("#mem_id").blur(function(){
 		var mem_id = $("#mem_id").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/user/idCheck?mem_id='+mem_id,
+			url : '${pageContext.request.contextPath}/idCheck.do?mem_id='+mem_id,
 			type : 'get',
 			success : function(data){
 				consloe.log("1 = 중복 / 0 != 중복 : "+ data);
