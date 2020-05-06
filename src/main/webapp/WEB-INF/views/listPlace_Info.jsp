@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 <meta charset="UTF-8">
 <title>${pt.place_type_name } 정보 게시판</title>
 <meta name="viewport" content="width=device-width" initial-scale="1" minimum-scale="1">
@@ -113,7 +112,7 @@ $(function(){
 		var ul = $('<ul class="pagination pagination-lg"/>');
 		
 		$.each(result, function(idx, theme){
-			var tab = $("<a/>").attr("href", "/listPlace_Info?place_type=" + theme["place_type"]).
+			var tab = $("<a/>").attr("href", "/listPlace_Info.do?place_type=" + theme["place_type"]).
 				text(theme["place_type_name"]);
 			var li = $("<li/>").append(tab);
 			$(ul).append(li);
@@ -146,7 +145,7 @@ $(function(){
 			searchCondition = "";
 		}
 		console.log(searchCondition);
-		location.href = "/listPlace_Info?" + paramPlacetype + searchCondition;
+		location.href = "/listPlace_Info.do?" + paramPlacetype + searchCondition;
 	});
 });
 </script>
