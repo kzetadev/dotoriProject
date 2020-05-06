@@ -14,16 +14,9 @@ public class Board_PostController {
 	
 	@Autowired
 	private Board_PostDao b_dao;
-	
-	@Autowired
-	private Member_InfoDao m_dao;
 
 	public void setB_dao(Board_PostDao b_dao) {
 		this.b_dao = b_dao;
-	}
-	
-	public void setM_dao(Member_InfoDao m_dao) {
-		this.m_dao = m_dao;
 	}
 
 	//커뮤니티 글 목록
