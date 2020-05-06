@@ -6,7 +6,7 @@
 
   	<!-- 리스트 -->
   <select id="selectAll" resultType="Board_PostVo">
-    select board_no,m.mem_name,board_kinds,board_title,board_date,board_hit,board_content,board_head 
+    select board_no,m.mem_nickname,board_kinds,board_title,board_date,board_hit,board_content,board_head 
 	from board_post b, member_info m
 	where b.mem_no = m.mem_no
 	order by board_no
