@@ -5,7 +5,7 @@
 <configuration>
 <properties resource="com/example/demo/db/db.properties"/>
 <typeAliases>
-	<!-- <typeAlias type="com.example.demo.vo.Board_PostVo" alias="Board_PostVo"/> -->
+	<typeAlias type="com.example.demo.vo.Board_PostVo" alias="Board_PostVo"/>
 	<typeAlias type="com.example.demo.vo.Member_InfoVo" alias="Member_InfoVo"/>
 	<typeAlias type="com.example.demo.vo.Place_ThemeVo" alias="Place_ThemeVo"/>
 	<typeAlias type="com.example.demo.vo.Place_InfoVo" alias="Place_InfoVo"/>
@@ -23,7 +23,7 @@
     </environment>
   </environments>
   <mappers>
-   <!-- <mapper resource="com/example/demo/db/Board_PostMapper.xml"/> -->
+    <mapper resource="com/example/demo/db/Board_PostMapper.xml"/>
     <mapper resource="com/example/demo/db/member_InfoMapper.xml"/>
     <mapper resource="com/example/demo/db/Place_InfoMapper.xml"/>
     <mapper resource="com/example/demo/db/Place_ThemeMapper.xml"/>
