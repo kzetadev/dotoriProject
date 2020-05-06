@@ -20,6 +20,11 @@ public class Board_PostDao {
 		return Board_PostManager.insertBoard_Post(vo);
 	}
 	
+	//커뮤니티 글 상세
+	public Board_PostVo detailBoard_Post(int board_no) {
+		return Board_PostManager.detailBoard_Post(board_no);
+	}
+	
 	//커뮤니티 글 수정
 	public int updateBoard_Post(Board_PostVo vo) {
 		return Board_PostManager.updateBoard_Post(vo);

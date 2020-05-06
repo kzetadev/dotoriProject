@@ -37,6 +37,15 @@ public class Board_PostController {
 		return mav;
 	}
 	
+	//커뮤니티 글 상세
+	@RequestMapping("/detailBoard_Post.do")
+	public ModelAndView detailBoard_Post(int board_no) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("detailBoard_Post");
+		mav.addObject("detail", b_dao.detailBoard_Post(board_no));
+		return mav;
+	}
+	
 	//커뮤니티 글 수정
 	@RequestMapping("/updateBoard_Post.do")
 	public ModelAndView updateBoard_Post(Board_PostVo vo) {

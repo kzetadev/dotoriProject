@@ -41,6 +41,14 @@ public class Board_PostManager {
 		return re;
 	}
 	
+	//커뮤니티 글 상세
+	public static Board_PostVo detailBoard_Post(int board_no){
+		SqlSession session = factory.openSession();
+		Board_PostVo b = session.selectOne("board.detail", board_no);
+		session.close();
+		return b;
+	}
+	
 	//커뮤니티 글 수정
 	public static int updateBoard_Post(Board_PostVo vo) {
 		int re = -1;
