@@ -20,11 +20,11 @@
   
  	 <!-- 수정 -->
   <update id="update">
-  	update board_post set board_kinds=#{}, board_title=#{}, board_content=#{}, board_copy=#{}, board_head=#{} where board_no=#{}
+  	update board_post set board_kinds=#{board_kinds}, board_title=#{board_title}, board_content=#{board_content}, board_copy=#{board_copy}, board_head=#{board_head} where board_no=#{board_no}
   </update>
   
  	 <!-- 삭제 -->
   <delete id="delete">
-  	delete from board_post where board_no=#{}
+  	delete from board_post where board_no=#{board_no}
   </delete>
 </mapper>
