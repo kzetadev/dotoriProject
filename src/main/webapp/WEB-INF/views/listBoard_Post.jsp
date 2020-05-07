@@ -22,6 +22,8 @@
 	<table border="1" width="80%">
 		<tr>
 			<th>글번호</th>
+			<th>태그명</th>
+			<th>제   목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
@@ -29,7 +31,9 @@
 		<c:forEach var="v" items="${list}">
 			<tr>
 				<td>${v.board_no}</td>
- 				<td>${v.mem_no}</td>	<%-- 수정필요 --%>
+ 				<td>${v.head_tag_name}</td>
+				<td>${v.board_title}</td>
+				<td>${v.mem_nickname}</td>
 				<td>${v.board_date}</td>
 				<td>${v.board_hit}</td>
 			</tr>

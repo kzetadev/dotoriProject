@@ -6,16 +6,15 @@
 
 	<!-- 리스트 / 수정필요 -->
 	<select id="selectAll" resultType="Board_PostVo">
-		select board_no, m.mem_nickname, board_kinds, board_title, board_date, board_hit, board_content, board_head
-		from board_post b, member_info m
-		where b.mem_no = m.mem_no
-		order by board_no
+		select b.board_no, h.head_tag_name, b.board_title, m.mem_nickname, b.board_date, b.board_hit 
+		from board_post b, member_info m, head_tag h
+		where b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no order by b.board_no desc
 	</select>
 
 	<!-- 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->
 	<insert id="insert">
-		insert into board_post values(seq_board_no.nextval, #{mem_no}, #{board_kinds}, #{board_title}, #{board_date}, #{board_hit}, #{board_content}, #{board_copy}, #{board_head})
+		insert into board_post values(seq_board_no.nextval, #{board_kinds}, #{head_tag_name}, #{board_title}, #{mem_nickname}, sysdate, 0, #{board_content}, #{board_copy})
 	</insert>
 
 	<!-- 상세 -->
