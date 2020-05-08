@@ -10,6 +10,7 @@
 	<typeAlias type="com.example.demo.vo.Place_ThemeVo" alias="Place_ThemeVo"/>
 	<typeAlias type="com.example.demo.vo.Place_InfoVo" alias="Place_InfoVo"/>
 	<typeAlias type="com.example.demo.vo.Member_FavoriteVo" alias="Member_FavoriteVo"/>
+	<typeAlias type="com.example.demo.vo.Head_TagVo" alias="Head_TagVo"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">

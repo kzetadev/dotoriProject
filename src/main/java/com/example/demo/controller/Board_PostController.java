@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +13,12 @@ import com.example.demo.vo.Board_PostVo;
 
 @RestController
 public class Board_PostController {
+	
+	@Autowired
+	private Member_InfoDao m_dao;
+	
+//	@Autowired
+//	private 
 	
 	@Autowired
 	private Board_PostDao b_dao;
