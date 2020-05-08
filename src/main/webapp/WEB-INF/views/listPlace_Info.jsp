@@ -8,6 +8,46 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>${pt.place_type_name } 정보 게시판</title>
+<style type="text/css">
+		h1{
+			text-align:center;
+		}
+		.row{
+			padding:30px;
+		}
+		b{
+			font-size:15px;
+		}
+		p{
+			color:grey;
+			font-size:11px;
+		}
+	/* Hide the carousel text when the screen is less than 600 pixels wide */
+		@media (max-width: 600px) {
+		    .carousel-caption {
+		      	display: none; 
+		    }
+		}/*
+		.carousel-inner img {
+      		width: 100%; 
+      		margin: auto;
+      		height:200px;
+  		}*/
+  		.pagination{
+  			display:block;
+			text-align: center;
+  		}
+  		.pagination > li > a{
+  			float: none;
+  			margin-left: -5px;
+  		}
+  		form { 
+        	margin: 0 auto; 
+       		width:250px;
+    	}    
+		@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
 	<meta charset="UTF-8">
 	<title>명소 정보 게시판</title>
 	<style type="text/css">
@@ -60,9 +100,52 @@
 		});
 	</script>
 </head>
+<script type="text/javascript">
+$(function(){
+	$.ajax({url:"/listPlace_Theme", type:"get", dataType:"json", success:function(result){
+		var ul = $('<ul class="pagination pagination-lg"/>');
+		
+		$.each(result, function(idx, theme){
+			var tab = $("<a/>").attr("href", "/listPlace_Info.do?place_type=" + theme["place_type"]).
+				text(theme["place_type_name"]);
+			var li = $("<li/>").append(tab);
+			$(ul).append(li);
+		});
+		$("body").prepend(ul);
+	}});
+	var params;
+	//쿼리스트링에서 특정 매개변수 값 반환하는 함수
+	function getParamVal(queryStr, paramKey){
+		if(queryStr.indexOf("?") >= 0){
+			params = queryStr.substr(1).split("&");
+			for(var i = 0; i < params.length; i++){
+				p = params[i];
+				if(p.split("=")[0] == paramKey){
+					return p;
+				}
+			}
+		}else{
+			return "";
+		}
+	}
+	$("#form").on("submit", function(event){
+		event.preventDefault();
+		var searchCondition = $("#form").serialize();
+		var paramPlacetype = getParamVal(location.search, "place_type");
+		if(paramPlacetype != ""){
+			paramPlacetype = paramPlacetype + "&";
+		}
+		if(searchCondition["keyword"] == ""){
+			searchCondition = "";
+		}
+		console.log(searchCondition);
+		location.href = "/listPlace_Info.do?" + paramPlacetype + searchCondition;
+	});
+});
+</script>
 <body>
 	<!-- 내용  -->
-	<h1><strong>명소</strong></h1>
+	<h1><strong>${pt.place_type_name }</strong></h1>
 	<br>
 	<img src="img/main.jpg" width="100%" height="500">
 	<br><br><br><br>
@@ -93,19 +176,19 @@
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>
-				<a href="listPlace_Info.do?place_type=${place_type }&pageNUM=${startPage-1 }" aria-label="이전">
+				<a href="listPlace_Info.do?place_type=${place_type }&pageNUM=${startPage-1 }${searchColumn}${keyword}" aria-label="이전">
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
 		</c:if>
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<li><a href="listPlace_Info.do?place_type=${place_type }&pageNUM=${i }">${i }</a></li>
+			<li><a href="listPlace_Info.do?place_type=${place_type }&pageNUM=${i }${searchColumn}${keyword}">${i }</a></li>
 		</c:forEach>
 		
 		<c:if test="${endPage < totalPage }">
 			<li>
-				<a href="listPlace_Info.do?place_type=${place_type }&pageNUM=${endPage+1 }" aria-label="다음">
+				<a href="listPlace_Info.do?place_type=${place_type }&pageNUM=${endPage+1 }${searchColumn}${keyword}" aria-label="다음">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>
@@ -135,6 +218,5 @@
 	<br><br>
 </body>
 </html>
-
 
 </layoutTag:layout>
