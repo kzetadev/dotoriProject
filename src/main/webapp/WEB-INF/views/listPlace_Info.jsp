@@ -64,7 +64,7 @@
 	<!-- 내용  -->
 	<h1><strong>명소</strong></h1>
 	<br>
-	<img src="images/main.jpg" width="100%" height="500">
+	<img src="img/main.jpg" width="100%" height="500">
 	<br><br><br><br>
 
 
