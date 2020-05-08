@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,7 @@ public class Board_PostController {
 	//커뮤니티 글 목록
 	@RequestMapping("/listBoard_Post.do")
 	public ModelAndView listBoard_Post() {
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("listBoard_Post");
 		mav.addObject("list", b_dao.listBoard_Post());
