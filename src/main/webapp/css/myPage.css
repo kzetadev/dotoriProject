@@ -1,0 +1,612 @@
+@charset "UTF-8";
+@charset "UTF-8";
+/* mypageLeft.jsp*/
+.mypageL {color:blak; text-decoration: none; }
+.mypageL:link {color: black; text-decoration: none;}
+.mypageL:visited {color: black; text-decoration: none;}
+.mypageL:hover {color: #5f0080; text-decoration: none; font-weight: bolder;}
+.mypageL:active {color: black; text-decoration: none;}
+
+/* mypageTop.jsp - css  */
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight : bold;
+}
+#currentPaging{
+	color: #5f0080;
+	text-decoration: underline;
+	cursor: pointer;
+	font-weight : bold;
+}
+#profile{
+	width: 180px; 
+	height: 100px;
+	float: left;
+	font-size: 10pt;
+}
+
+#profileImg{
+	width: 70px;
+	height: 70px;
+}
+
+#point {
+	width: 150px; 
+	height: 70px;
+	top: 0px;
+	left: 0px;
+	border:1px solid #5f0080;
+	float:left;
+	font-size: 10pt;
+}
+.pointDetail:link{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+.pointDetail:visited{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+.pointDetail:hover{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+.pointDetail:active{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+
+#blank{
+	width: 40px; 
+	height: 70px;
+	top: 0px; 
+	left:150px;
+	float:left;
+}
+
+#coupon {
+	width: 150px; 
+	height: 70px;
+	top: 0px; 
+	left: 80px;
+	border:1px solid #5f0080;
+	float:left;
+	font-size: 10pt;
+}
+.couponDetail:link{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+.couponDetail:visited{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+.couponDetail:hover{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+.couponDetail:active{color:#5f0080; text-decoration:none; font-size: 14pt; font-weight: bold;}
+
+/* mypagePurchaseList.jsp - css  */
+
+#paging{
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight : bold;
+}
+
+#currentPaging{
+	color: #5f0080;
+	text-decoration: none;
+	cursor: pointer;
+	font-weight : bold;
+}
+#purchaseList{
+	width: 80px;
+	height: 25px;
+	font-weight: bold;
+	color: black;
+	margin-bottom: 10px;
+	float: left;
+	font-size: 14pt;
+}
+
+#purchaseListA{
+	font-size: 10pt;
+	color: gray;
+	width: 260px;
+	float: left;
+	margin-top: 7px;
+	left: 80px;
+}
+
+#purchaseYear{
+	float:left;
+	border-color: #5f0080;
+	height: 30px;/*25px -> 30px  */
+	width: 90px;/* 85px -> 90px  */
+	padding: 2px;
+}
+
+.purchaseListTable{
+	border: 1px solid #c0c0c0;
+ 	/* border-top: 2px solid #5f0080;
+	border-bottom: 0px;  */
+	width: 100%;
+	frame: void;
+
+	rules: rows;
+	font-size: 10pt;
+}
+.purchaseListTable th{
+	background-color: #F7F5F8;
+
+	/* rules: rows; */
+
+}
+.purchaseListDetailItemA{color:blak; text-decoration: none; }
+.purchaseListDetailItemA:link {color: black; text-decoration: none;}
+.purchaseListDetailItemA:visited {color: black; text-decoration: none;}
+.purchaseListDetailItemA:hover {color: #5f0080; text-decoration: none; font-weight: bold;}
+.purchaseListDetailItemA:active {color: black; text-decoration: none;}
+
+#purchaseListImg{
+	border-width: 70px;
+	width: 70px;
+	height: 70px;
+	float: left;
+}
+.purchaseListQnABtn{ 
+	width: 150px;
+	height: 40px;
+	background-color: white;
+	border: #5f0080 1px solid;
+	color: #5f0080;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	cursor: pointer;
+} 
+
+/* mypagePickItem.jsp - css  */
+
+#pickItemList{
+	width: 150px;
+	font-size: 14pt;
+	font-weight: bold;
+	position:relative;
+	padding-bottom: 10px;
+}
+
+.pickItemTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+}
+
+#pickItemImg{
+	border-width: 70px;
+	width: 70px;
+	height: 70px;
+	float: left;
+	margin-right: 10px;
+}
+
+.pickItemDetailA{color:blak; text-decoration: none; }
+.pickItemDetailA:link {color: black; text-decoration: none;}
+.pickItemDetailA:visited {color: black; text-decoration: none;}
+.pickItemDetailA:hover {color: #5f0080; text-decoration: none;}
+.pickItemDetailA:active {color: black; text-decoration: none;}
+
+.pickItemBasketBtn{ 
+	width: 120px;
+	height: 40px;
+	background-color: #5f0080;
+	border: #5f0080;
+	color: white;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+
+.pickItemDeleteBtn{ 
+	width: 120px;
+	height: 40px;
+	background-color: white;
+	border: #5f0080 1px solid;
+	color: #5f0080;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+
+#pickItemBlank{
+	height: 10px; 
+	width: 90%; 
+	float: left;
+}
+
+#pickItemBlank2{
+	height: 10px; 
+	width: 20px;  
+	float: left;
+}
+
+
+.pickItemAllOrderBtn{ 
+	width: 120px;
+	height: 40px;
+	background-color: #5f0080;
+	border: #5f0080;
+	color: white;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+
+.pickItemSelectDeleteBtn{ 
+	width: 120px;
+	height: 40px;
+	background-color: white;
+	border: #5f0080 1px solid;
+	color: #5f0080;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+
+/* mypagePickSeller.jsp - css  */
+
+#pickSellerList{
+	width: 150px;
+	font-size: 14pt;
+	font-weight: bold;
+	position:relative;
+	padding-bottom: 10px;
+}
+
+.pickSellerTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+}
+
+#pickSellerImg{
+	border-width: 70px;
+	width: 70px;
+	height: 70px;
+	float: left;
+	margin-right: 10px;
+}
+
+.pickSellerDetailA{color:blak; text-decoration: none; }
+.pickSellerDetailA:link {color: black; text-decoration: none;}
+.pickSellerDetailA:visited {color: black; text-decoration: none;}
+.pickSellerDetailA:hover {color: #5f0080; text-decoration: none; font-weight: bold;}
+.pickSellerDetailA:active {color: black; text-decoration: none;}
+
+
+.pickSellerHomeBtn{ 
+	width: 120px;
+	height: 40px;
+	background-color: #5f0080;
+	border: #5f0080;
+	color: white;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+
+.pickSellerDeleteBtn{
+	width: 120px;
+	height: 40px;
+	background-color: white;
+	border: #5f0080 1px solid;
+	color: #5f0080;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.pickSellerSelectDeleteBtn{
+	width: 120px;
+	height: 40px;
+	background-color: white;
+	border: #5f0080 1px solid;
+	color: #5f0080;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+#pickSellerBlank{
+	height: 10px; 
+	width: 90%; /* 850px -> 86% */
+	float: left;
+}
+
+/* mypageDeliveryTracking.jsp - css  */
+
+#mypageDeliveryTracking{
+	margin-top: 15px;
+	margin-bottom: 200px;
+
+}
+
+#deliveryTrackingList{
+	width: 150px;
+	font-size: 14pt;
+	font-weight: bold;
+	position:relative;
+	padding-bottom: 10px;
+}
+
+.deliveryTrackingTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+}
+
+.deliveryTrackingDetailA{color:blak; text-decoration: none; }
+.deliveryTrackingDetailA:link {color: black; text-decoration: none;}
+.deliveryTrackingDetailA:visited {color: black; text-decoration: none;}
+.deliveryTrackingDetailA:hover {color: #5f0080; text-decoration: none; font-weight: bold;}
+.deliveryTrackingDetailA:active {color: black; text-decoration: none;}
+
+/* mypagePoint.jsp - css  */
+
+#mypagePoint{
+	margin-bottom: 175px;
+}
+
+#pointList{
+	width: 60px;
+	font-size: 14pt;
+	font-weight: bold;
+	float: left;
+	position:relative;
+	margin-bottom: 10px;
+}
+
+#pointListA{
+	font-size: 10pt;
+	color: gray;
+	width: 400px;
+	float: left;
+	position:absolute; 
+	bottom:0px;
+	left: 60px;
+}
+
+.pointTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+}
+
+/* mypageCoupon.jsp - css  */
+
+#mypageCoupon{
+	margin-bottom: 50px;
+}
+
+#couponList{
+	width: 150px;
+	font-size: 14pt;
+	font-weight: bold;
+	position:relative;
+	padding-bottom: 10px;
+}
+
+#couponDiv{
+	border: 1px solid;
+	padding: 0px 5px 10px 5px; 
+	margin-bottom: 30px;
+}
+
+#couponInputDiv{
+	width: 180px; 
+	float: left; 
+	margin-right: 10px; 
+	margin-top: 20px; 
+	height: 30px;
+}
+
+.couponInputBtn{
+	width: 120px;
+	height: 30px;
+	background-color: #5f0080;
+	border: #5f0080;
+	color: white;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+.couponTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+}
+
+/* mypagePurchaseDetail.jsp - css  */
+
+.purchaseDetailBasketBtn{ 
+	width: 120px;
+	height: 40px;
+	background-color: #5f0080;
+	border: #5f0080;
+	color: white;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	cursor: pointer;
+} 
+
+.purchaseDetailAllOrderBtn{ 
+	width: 150px;
+	height: 40px;
+	background-color: #5f0080;
+	border: #5f0080;
+	color: white;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+.purchaseDetailAllDeleteBtn{ 
+	width: 150px;
+	height: 40px;
+	background-color: white;
+	border: #5f0080 1px solid;
+	color: #5f0080;
+	border-radius: 5px;
+	font-family: 'Noto Sans';
+	font-weight: bold;
+	outline: 0;
+	float: left;
+	margin-top: 10px;
+	cursor: pointer;
+} 
+
+#mypagePurchaseDetail{
+	margin-top: 16px;
+}
+
+#purchaseDetailListA{
+	width: 150px;
+	font-size: 14pt;
+	font-weight: bold;
+	position:relative;
+	padding-bottom: 15px;
+}
+
+.purchaseDetailQnA{color:#5f0080; text-decoration: none; font-size: 10pt;}
+.purchaseDetailQnA:link {color: #5f0080; text-decoration: none;}
+.purchaseDetailQnA:visited {color: #5f0080; text-decoration: none;}
+.purchaseDetailQnA:hover {color: #5f0080; text-decoration: none; cursor: pointer;}
+.purchaseDetailQnA:active {color: #5f0080; text-decoration: none;}
+
+
+#purchaseDetailDiv{
+	sborder: solid;
+	float: left;
+	width: 200px;
+	font-size: 12pt;
+	color: gray;
+}
+
+.purchaseDetailTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+}
+
+#purchaseDetailImg{
+	border-width: 70px;
+	width: 70px;
+	height: 70px;
+	float: left;
+}
+
+.purchaseDetailItem{color:blak; text-decoration: none; }
+.purchaseDetailItem:link {color: black; text-decoration: none;}
+.purchaseDetailItem:visited {color: black; text-decoration: none;}
+.purchaseDetailItem:hover {color: #5f0080; text-decoration: none; font-weight: bold;}
+.purchaseDetailItem:active {color: black; text-decoration: none;}
+
+#purchaseDetailPayDiv{
+	width: 200px;
+	font-size: 12pt;
+	color: gray;
+}
+
+.purchaseDetailPayTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+	font-size: 8pt;
+}
+
+#purchaseDetailOrderDiv{
+	margin-top: 15px;
+	sborder: solid;
+	float: left;
+	width: 200px;
+	font-size: 12pt;
+	color: gray;
+}
+
+.purchaseDetailOrderTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+	font-size: 8pt;
+}
+
+#purchaseDetailDeliveryDiv{
+	margin-top: 15px;
+	sborder: solid;
+	float: left;
+	width: 200px;
+	font-size: 12pt;
+	color: gray;
+}
+.purchaseDetailDeliveryTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+	font-size: 8pt;
+}
+
+/*mypageMyReview*/
+.myReviewListTable{
+	border-top: 2px solid #5f0080;
+	border-bottom: 2px solid gray;
+	width: 100%;
+	frame: void;
+	rules: rows;
+	font-size: 10pt;
+}
+.myReviewListTable th{
+	background-color: #F7F5F8;
+}

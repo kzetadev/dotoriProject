@@ -3,18 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member_favorite">
+	
+	<!-- 마이페이지에 담기 -->
+	<insert id="insertFavorite" parameterType="java.util.Map">
+		insert into member_favorite values(seq_member_favorite.nextval,#{mem_no},#{place_no})
+	</insert>
+
 	<!-- 마이페이지 찜 리스트를 보여줌  -->
-  <select id="selectAll" resultType="Member_FavoriteVo">
-    select * from member_favorite order by favorite_no
-  </select>
+  	<select id="selectAll" resultType="Member_FavoriteVo" parameterType="String">
+    	select mf.favorite_no, pt.place_type_name, pi.place_name
+  			from member_favorite mf, member_info mi, place_theme pt, place_info pi
+ WHERE mf.mem_no = mi.mem_no
+                          AND mf.place_no = pi.place_no
+                          AND pi.place_type = pt.place_type
+                          AND pt.place_type = 0        
+ ORDER BY mf.favorite_no, pt.place_type, pi.place_no;
+  	</select>
   
   	<!-- 마이페이지 찜 리스트에서 원하는 항목을 선택 (상세정보 페이지) -->
-  <select id="detail" resultType="Member_FavoriteVo">
-  	select * from member_favorite where member_favorite = #{member_favorite}	
-  </select>
+  	<select id="detail" resultType="Member_FavoriteVo">
+  		select * from member_favorite where member_favorite = #{member_favorite}	
+  	</select>
   
   	<!-- 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택 -->
-  <delete id="delete">
-  	delete from member_favorite where favorite_no = #{favorite_no}
-  </delete>
+ 	<delete id="delete">
+  		delete from member_favorite where favorite_no = #{favorite_no}
+  	</delete>
 </mapper>

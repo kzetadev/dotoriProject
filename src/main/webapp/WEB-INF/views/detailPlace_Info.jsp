@@ -22,6 +22,18 @@
 				speed: 500, fade: true, cssEase: 'linear'
 			})
 			$("#btn").click(function(){
+				var place_no = $(place_InfoVo.place_no)
+				
+				$.ajax({
+					type : 'get',
+					url : '/myPage/cartAdd',
+					data : 'place_no=' + place_no + '&mem_no=' + mem_no,
+					dataType : 'text',
+					success:function(data){
+						alert(data)
+					}
+				})
+				
 				$(this).css("visibility", "hidden")
 				$("#btn2").css("visibility", "visible")
 				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")

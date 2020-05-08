@@ -65,6 +65,15 @@ public class DBManager {
 		return cnt;
 	}
 	
+	// 마이페이지에 찜 추가
+	public static int insertMember_Favorite(Member_FavoriteVo m) {
+		int re = -1;
+		SqlSession session = factory.openSession();
+		re = session.insert("member_favorite.insertFavorite", m);
+		session.commit();
+		session.close();
+		return re;
+	}
 	
 	// 마이페이지 찜한 리스트
 	public static List<Member_FavoriteVo> listMember_Favorite(){
