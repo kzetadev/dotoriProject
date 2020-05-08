@@ -149,7 +149,7 @@ $(function(){
 	<br>
 	<img src="img/main.jpg" width="100%" height="500">
 	<br><br><br><br>
-
+	
 
 	<!-- 각 장소별 대표 이미지 리스트 -->
 	<div class="row">
@@ -216,6 +216,7 @@ $(function(){
 		</div>
 	</form>
 	<br><br>
+	<a href="myPage.do">임시 마이페이지로 이동</a>
 </body>
 </html>
 
