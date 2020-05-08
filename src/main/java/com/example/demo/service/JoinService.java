@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import com.example.demo.dao.JoinInterface;
 import com.example.demo.vo.Member_InfoVo;
 
 @Service
-public class JoinService { //회원가입 서비스
+public class JoinService { 
 	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
@@ -34,10 +34,10 @@ public class JoinService { //회원가입 서비스
 		return joinInterface.checkOverId(mem_id);
 	}
 	
-	//중복 닉네임 체크
-	public int memNickCheck(String mem_nickname) {
-		joinInterface = sessionTemplate.getMapper(JoinInterface.class);
-		
-		return joinInterface.checkOverNickName(mem_nickname);
-	}
+//	//중복 닉네임 체크
+//	public int memNickCheck(String mem_nickname) {
+//		joinInterface = sessionTemplate.getMapper(JoinInterface.class);
+//		
+//		return joinInterface.checkOverNickName(mem_nickname);
+//	}
 }

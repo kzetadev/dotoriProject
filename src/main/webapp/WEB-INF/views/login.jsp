@@ -1,34 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
+//ë¡œê·¸ì¸ id /pwd ìœ íš¨ì„± ê²€ì‚¬
 $('#loginBtn').click(function() {
 	var id = $('#inputId').val();
-	var pw = $('#inputPassword').val();
+	var pwd = $('#inputPwd').val();
 		$.ajax({
-		type : 'post', // ºñ¹Ğ¹øÈ£ÀÇ °ªÀÌ url¿¡ Ç¥½ÃµÇ¸é ¾È µÇ±â ¶§¹®¿¡ º¸¾ÈÀ» À§ÇØ POST ¹æ¹ıÀ¸·Î °ªÀ» º¸³½´Ù
+		type : 'post', // ë¹„ë°€ë²ˆí˜¸ì˜ ê°’ì´ urlì— í‘œì‹œë˜ë©´ ì•ˆ ë˜ê¸° ë•Œë¬¸ì— ë³´ì•ˆì„ ìœ„í•´ POST ë°©ë²•ìœ¼ë¡œ ê°’ì„ ë³´ë‚¸ë‹¤
 		url : '${pageContext.request.contextPath}/login.do',
 		data : {
 			mem_id : id,
 			mem_pwd : pwd,
 			},
 			success : function(data) {
-				if (data == 0) { //·Î±×ÀÎ ½ÇÆĞ½Ã
+				if (data == 0) { //ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ
 					console.log(data);
-					$('#spanLoginCheck').text('·Î±×ÀÎ Á¤º¸¸¦ Á¤È®È÷ ÀÔ·ÂÇØÁÖ¼¼¿ä.');					
-				} else if (data == -3) { // ¾ÆÀÌµğ°¡ »ç¿ëÁßÀÌ¶ó¸é?
+					$('#spanLoginCheck').text('ë¡œê·¸ì¸ ì •ë³´ë¥¼ ì •í™•íˆ ì…ë ¥í•´ì£¼ì„¸ìš”.');					
+				} <!-- else if (data == -3) { // ì•„ì´ë””ê°€ ì‚¬ìš©ì¤‘ì´ë¼ë©´?
+				  console.log(data);
+				  location.href = '${pageContext.request.contextPath}/user/redundant?mem_id=' + id + '&mem_Pwd=' + pwd + '&remember_memId=' + remember_us;						
+				}--> else { //ë¡œê·¸ì¸ ì„±ê³µì‹œ
 					console.log(data);
-					location.href = '${pageContext.request.contextPath}/user/redundant?mem_id=' + id + '&user_Pw=' + pw + '&remember_userId=' + remember_us;						
-				} else { //·Î±×ÀÎ ¼º°ø½Ã
-					console.log(data);
-					location.href = '${pageContext.request.contextPath}/user/storeChoice';
+					alert("ë¡œê·¸ì¸ ì„±ê³µ")
+					//location.href = '${pageContext.request.contextPath}/user/storeChoice';
 				}
 			}
 		});
@@ -37,7 +39,7 @@ $('#loginBtn').click(function() {
 </script>
 </head>
 <body>
-<!-- Cookie°¡ ºñ¾îÀÖÁö ¾ÊÀ» ¶§ checked ¼Ó¼ºÀ» ÁÜ -->
+<!-- Cookieê°€ ë¹„ì–´ìˆì§€ ì•Šì„ ë•Œ checked ì†ì„±ì„ ì¤Œ -->
 	<c:if test="${not empty cookie.user_check}">
 		<c:set value="checked" var="checked"/>
 	</c:if>
@@ -46,33 +48,33 @@ $('#loginBtn').click(function() {
 <div class="container">
 			<div class="area_inputs wow fadeIn">
 				<div class="form-group">
-					<label class="font-weight-bold text-white" for="inputId">¾ÆÀÌµğ</label>
+					<label class="font-weight-bold text-white" for="inputId">ì•„ì´ë””</label>
 					<div>
-						<input type="text" class="form-control" id="inputId" name="mem_id" value="${cookie.user_check.value}" placeholder="¾ÆÀÌµğ">
+						<input type="text" class="form-control" id="inputId" name="mem_id" value="${cookie.user_check.value}" placeholder="ì•„ì´ë””">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="font-weight-bold text-white" for="inputPassword">ºñ¹Ğ¹øÈ£</label>
+					<label class="font-weight-bold text-white" for="inputPassword">ë¹„ë°€ë²ˆí˜¸</label>
 					<div>
-						<input type="password" class="form-control" id="inputPassword" name="mem_pwd" placeholder="ºñ¹Ğ¹øÈ£">
+						<input type="password" class="form-control" id="inputPwd" name="mem_pwd" placeholder="ë¹„ë°€ë²ˆí˜¸">
 					</div>
 				</div>
 				<div class="form-group">
 					<span class="font-weight-bold text-white bg-dark" id="spanLoginCheck"></span>
 				</div>
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label class="font-weight-bold text-white"> 
-						<input type="checkbox" id="remember_us" name="remember_userId" ${checked}> ¾ÆÀÌµğ ±â¾ïÇÏ±â
+						<input type="checkbox" id="remember_us" name="remember_memId" ${checked}> ì•„ì´ë”” ê¸°ì–µí•˜ê¸°
 					</label>
-					<div class="interval_height a_none">
-						<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; °èÁ¤Ã£±â</a>
-					</div>
+					 <div class="interval_height a_none">
+						<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; ê³„ì •ì°¾ê¸°</a>
+					</div>  -->
 					<div>
-						<button id="loginBtn" type="button"	class="btn btn-primary btn-block">·Î±×ÀÎ</button>
+						<button id="loginBtn" type="button"	class="btn btn-primary btn-block">ë¡œê·¸ì¸</button>
 					</div>
 				</div>
 				<div class="form-group">
-					<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/joinForm.do">È¸¿ø°¡ÀÔ</a>
+					<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/joinForm.do">íšŒì›ê°€ì…</a>
 				</div>
 			</div>
 		</div>
