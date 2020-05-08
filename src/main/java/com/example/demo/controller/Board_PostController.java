@@ -40,7 +40,7 @@ public class Board_PostController {
 	public ModelAndView listBoard_Post() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("listBoard_Post");
-		mav.addObject("login", m_dao.login());
+		// 해당 부분에 Member_Info 추가해야 함
 		mav.addObject("list", b_dao.listBoard_Post());
 		mav.addObject("headtag", h_dao.listHead_Tag());
 		return mav;
