@@ -102,17 +102,17 @@
 </head>
 <script type="text/javascript">
 $(function(){
-	$.ajax({url:"/listPlace_Theme", type:"get", dataType:"json", success:function(result){
-		var ul = $('<ul class="pagination pagination-lg"/>');
+// 	$.ajax({url:"/listPlace_Theme", type:"get", dataType:"json", success:function(result){
+// 		var ul = $('<ul class="pagination pagination-lg"/>');
 		
-		$.each(result, function(idx, theme){
-			var tab = $("<a/>").attr("href", "/listPlace_Info.do?place_type=" + theme["place_type"]).
-				text(theme["place_type_name"]);
-			var li = $("<li/>").append(tab);
-			$(ul).append(li);
-		});
-		$("body").prepend(ul);
-	}});
+// 		$.each(result, function(idx, theme){
+// 			var tab = $("<a/>").attr("href", "/listPlace_Info.do?place_type=" + theme["place_type"]).
+// 				text(theme["place_type_name"]);
+// 			var li = $("<li/>").append(tab);
+// 			$(ul).append(li);
+// 		});
+// 		$("body").prepend(ul);
+// 	}});
 	var params;
 	//쿼리스트링에서 특정 매개변수 값 반환하는 함수
 	function getParamVal(queryStr, paramKey){
