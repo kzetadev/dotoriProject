@@ -4,34 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_post">
 
-	<!-- 리스트 / 수정필요 -->
-	<select id="selectAll" resultType="Board_PostVo">
+	<!-- 게시글 목록 -->
+	<select id="select" resultType="Board_PostVo">
 		select b.board_no, h.head_tag_name, b.board_title, m.mem_nickname, b.board_date, b.board_hit 
 		from board_post b, member_info m, head_tag h
 		where b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no order by b.board_no desc
 	</select>
 
-	<!-- 등록 -->
+	<!-- 게시글 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->
 	<insert id="insert">
 		insert into board_post values(seq_board_no.nextval, #{board_kinds}, #{head_tag_name}, #{board_title}, #{mem_nickname}, sysdate, 0, #{board_content}, #{board_copy})
 	</insert>
 
-	<!-- 상세 -->
+	<!-- 게시글 상세 -->
 	<select id="detail" resultType="Board_PostVo">
 		select * from board_post where board_no = #{board_no}
 	</select>
 
-	<!-- 수정 -->
+	<!-- 게시글 수정 -->
 	<update id="update">
 		update board_post set board_kinds=#{board_kinds},
 		board_title=#{board_title}, board_content=#{board_content},
-		board_copy=#{board_copy}, board_head=#{board_head} where
-		board_no=#{board_no}
+		board_copy=#{board_copy}
+		where board_no=#{board_no}
 	</update>
 
-	<!-- 삭제 -->
+	<!-- 게시글 삭제 -->
 	<delete id="delete">
 		delete from board_post where board_no=#{board_no}
 	</delete>
+	
+	<!-- 말머리 목록 -->
+	<select id="selectHead_Tag" resultType="Head_TagVo">
+		select head_tag_no from head_tag
+	</select>
+	
 </mapper>

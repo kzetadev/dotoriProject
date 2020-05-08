@@ -2,10 +2,12 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.Board_PostDao;
+import com.example.demo.dao.Head_TagDao;
 import com.example.demo.dao.Member_InfoDao;
 import com.example.demo.vo.Board_PostVo;
 
@@ -15,26 +17,36 @@ public class Board_PostController {
 	@Autowired
 	private Member_InfoDao m_dao;
 	
-//	@Autowired
-//	private 
-	
 	@Autowired
 	private Board_PostDao b_dao;
+	
+	@Autowired
+	private Head_TagDao h_dao;
+
+	public void setM_dao(Member_InfoDao m_dao) {
+		this.m_dao = m_dao;
+	}
 
 	public void setB_dao(Board_PostDao b_dao) {
 		this.b_dao = b_dao;
 	}
 
-	//커뮤니티 글 목록
-	@RequestMapping("/listBoard_Post.do")
+	public void setH_dao(Head_TagDao h_dao) {
+		this.h_dao = h_dao;
+	}
+
+	// 게시글 목록
+	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
 	public ModelAndView listBoard_Post() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("listBoard_Post");
+		mav.addObject("login", m_dao.login());
 		mav.addObject("list", b_dao.listBoard_Post());
+		mav.addObject("headtag", h_dao.listHead_Tag());
 		return mav;
 	}
 	
-	//커뮤니티 글 등록
+	// 게시글 등록
 	@RequestMapping("/insertBoard_Post.do")
 	public ModelAndView insertBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
@@ -43,7 +55,7 @@ public class Board_PostController {
 		return mav;
 	}
 	
-	//커뮤니티 글 상세
+	// 게시글 상세
 	@RequestMapping(value = "/detailBoard_Post.do")
 	public ModelAndView detailBoard_Post(int board_no) {
 		ModelAndView mav = new ModelAndView();
@@ -52,7 +64,7 @@ public class Board_PostController {
 		return mav;
 	}
 	
-	//커뮤니티 글 수정
+	// 게시글 수정
 	@RequestMapping("/updateBoard_Post.do")
 	public ModelAndView updateBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
@@ -61,7 +73,7 @@ public class Board_PostController {
 		return mav;
 	}
 	
-	//커뮤니티 글 삭제
+	// 게시글 삭제
 	@RequestMapping("/deleteBoard_Post.do")
 	public ModelAndView deleteBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();

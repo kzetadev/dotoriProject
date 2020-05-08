@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.Board_PostVo;
-import com.example.demo.vo.Member_InfoVo;
+import com.example.demo.vo.Head_TagVo;
 
 public class Board_PostManager {
 	private static SqlSessionFactory factory;
@@ -23,15 +23,15 @@ public class Board_PostManager {
 		}
 	}
 
-	// 커뮤니티 글 목록
+	// 게시글 목록
 	public static List<Board_PostVo> listBoard_Post() {
 		SqlSession session = factory.openSession();
-		List<Board_PostVo> list = session.selectList("board_post.selectAll");
+		List<Board_PostVo> list = session.selectList("board_post.select");
 		session.close();
 		return list;
 	}
 
-	// 커뮤니티 글 등록
+	// 게시글 등록
 	public static int insertBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
@@ -41,7 +41,7 @@ public class Board_PostManager {
 		return re;
 	}
 
-	// 커뮤니티 글 상세
+	// 게시글 상세
 	public static Board_PostVo detailBoard_Post(int board_no) {
 		SqlSession session = factory.openSession();
 		Board_PostVo b = session.selectOne("board.detail", board_no);
@@ -49,7 +49,7 @@ public class Board_PostManager {
 		return b;
 	}
 
-	// 커뮤니티 글 수정
+	// 게시글 수정
 	public static int updateBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
@@ -59,7 +59,7 @@ public class Board_PostManager {
 		return re;
 	}
 
-	// 커뮤니티 글 삭제
+	// 게시글 삭제
 	public static int deleteBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
@@ -67,5 +67,13 @@ public class Board_PostManager {
 		session.commit();
 		session.close();
 		return re;
+	}
+	
+	// 말머리 목록
+	public static List<Head_TagVo> listHead_Tag() {
+		SqlSession session = factory.openSession();
+		List<Head_TagVo> list = session.selectList("board_post.selectHead_Tag");
+		session.close();
+		return list;
 	}
 }
