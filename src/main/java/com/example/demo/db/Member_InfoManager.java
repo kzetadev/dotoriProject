@@ -22,11 +22,12 @@ public class Member_InfoManager {
 			// TODO: handle exception
 		}
 	}
-	public static List<Member_InfoVo> login(){ //로그인 
+	public static Member_InfoVo login(Member_InfoVo vo) {
+		Member_InfoVo infovo = null;
 		SqlSession session = factory.openSession();
-		List<Member_InfoVo> list = session.selectList("mem_info.select");
+		infovo = session.selectOne("mem_info.login", vo);
 		session.close();
-		return list;
+		return infovo;
 	}
 	public static int insertJoin(Member_InfoVo vo) { //회원가입
 		int re = -1;
@@ -48,6 +49,22 @@ public class Member_InfoManager {
 		int re = -1;
 		SqlSession session = factory.openSession();
 		re = session.delete("mem_info.delete", mem_no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int chageTempPwd(Member_InfoVo vo) {
+		int re = -1;
+		SqlSession session = factory.openSession();
+		re = session.update("mem_info.changeTempPwd", vo);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int checkOverId(String mem_id) {
+		int re = -1;
+		SqlSession session = factory.openSession();
+		re = session.selectOne("mem_info.checkOverId", mem_id);
 		session.close();
 		return re;
 	}

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+
+  xmlns:beans="http://www.springframework.org/schema/beans"
+
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+
+           http://www.springframework.org/schema/security
+
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	
+	<!-- resorces 폴더 안에 있는 파일들은 security 대상이 아니라는 것을 나타낸다(즉, 필터를 거치지 않음)
+		이 설정을 넣지 않으면 로그인 화면의 css와 각종 리소스 파일들이 안 먹힘 -->
+	<http pattern="/resources/**" security="none"></http>
+            
+
+	<!-- SqL을 사용해서 작성해야한다. 그렇지 않으면 에러 발생 -->
+	<http auto-config='true'  use-expressions="true">
+
+		<intercept-url pattern="/login" access="permitAll" /> 
+
+		<intercept-url pattern="/resources/**" access="permitAll" /> 
+
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> <!-- ROLE_USER권한을 가진사람만 허용 -->
+
+		
+		<!-- <form-login 사용자 이름과 비밀번호를 가지고 있는 폼기반 인증방법 -->
+		<!-- login-page="/login"를 설정하여 사용자가 만든 로그인 페이지를 스프링에게 알려준다 -->
+		<!-- default-target-url="/monitering"로그인 성공하면 이동할 페이지 설정 -->
+		<!-- username-praameter, password-parmeter는 설정 안 해도 된다. 나중에 jsp페이지에 FORM 안에 들어갈 name을 여기서 지정한 것으로 바꿔주면됨 -->
+		<!-- authentication-failure-url="/login?error"실패시 호출해줄 URL(login페이지에 error파라미터를 보내준다 -->
+		<!-- always-use-default-target='true' 안 할 시, 로그인이 성공해도 /monitering으로 제대로 안 간다 -->
+			<form-login login-page="/login.do"     
+
+				default-target-url="/main.do"  
+
+				username-parameter="mem_id"  
+
+				password-parameter="mem_pwd"  
+
+				authentication-failure-url="/login.do?error" 
+
+				always-use-default-target='true'
+
+			/> 
+			
+			<!-- 중복 로그인 방지 -->
+			<!-- expired-url -> 중복 로그인 발생시, 먼저 로그인한 세션이 끊어지고 끊어진 상태에서
+			모든 url을 호출할 경우 끊어진 원인을 알려줄 주소를 지정 -->
+			<!-- error-if-maximum-exceed -> true로 설정할 경우 원래는 먼저 로그인한 사용자의 세션이 끊어지지만
+			첫번째 로그인이 아닌 세션이 살아있는 상태에서 로그인은 거부된다 -->
+			<session-management>
+                  <concurrency-control max-sessions="1" expired-url="/login_duplicate" error-if-maximum-exceeded="true"/>
+            </session-management>
+	
+	
+	<!-- 로그아웃 되면 세션을 초기화 한다 -->
+	<!-- logout-success-url="/login?logout" -> 로그아웃 되면 이동할 페이지 -->
+	<!-- logout-url="/logout" -> 로그아웃을 위한 URL설정. 이거 안 해주면 디폴트로 j_spring_security_logout해주면 된다 -->
+	
+	 <logout invalidate-session="true" logout-url="/logout"   logout-success-url="/login?logout" />
+		
+
+		<!-- enable csrf protection -->
+		<!-- 간단한 설정으로 csrf를 통한 해킹을 막을 수 있다 -->
+		<!-- ( CSRF 설명: http://tm-csc.tistory.com/entry/7-WebHacking%EC%9B%B9%ED%95%B4%ED%82%B9-CSRF) -->
+		<csrf/> 
+	</http> 
+
+
+	<!-- 인증처리를 위한 최상위 태그 -->
+        <authentication-manager> 
+    <!-- user-service-ref="memberService"사용자이름/비밀번호를 제공해줄 서비스등록 -->
+		    <authentication-provider user-service-ref="LoginService"/> 
+	</authentication-manager>
+	
+	<!-- <authentication-manager>속성은 유저들의 권한을 설정한다
+	즉 아이디가 dotori, 비밀번호가 dotori인 사람의 권한은 ROLE_USER로서 웹페이지에 접근할 권한이 있다
+	또한 권한을 가진 유저가 하나이므로 저 아이디를 제외한 모든 아이디는 권한이 없으므로 접근이 불가능하다 
+	 <authentication-manager>
+
+        <authentication-provider>
+
+            <user-service>
+
+                <user name="dotori" password="dotori" authorities="ROLE_USER"/>   
+
+            </user-service>
+
+        </authentication-provider>
+
+    </authentication-manager>	-->
+
+		
+
+	<beans:bean id="LoginService" class="com.example.demo.service.LoginService"> 
+   	</beans:bean>
+
+   
+
+</beans:beans>
