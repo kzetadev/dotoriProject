@@ -1,5 +1,8 @@
 package com.example.demo.dao;
 
+import java.sql.SQLException;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.Member_InfoManager;
@@ -30,4 +33,27 @@ public class Member_InfoDao {
 	public int delete(int mem_no) {
 		return Member_InfoManager.deleteMem(mem_no);
 	}
+	//유저 회원가입 매소드
+	public int joinMem(Member_InfoVo vo) {
+		return Member_InfoManager.insertJoin(vo);
+	}
+	//회원임시 비밀번호 변경 메소드
+	public int changeTempPwd(Member_InfoVo vo) {
+		return Member_InfoManager.chageTempPwd(vo);
+	}
+	//아이디 중복체크
+	public int checkOverId(String mem_id) {
+		return Member_InfoManager.checkOverId(mem_id);
+	}
+//	//닉네임 중복체크
+//	public int checkOverNickName(String mem_nickname) {
+//		
+//	}
+//	//유저 로그인 메소드
+//	public Member_InfoVo loginMem(@Param("mem_id")String mem_id) {
+//		
+//	}
+//	public Member_InfoVo memInfo(String mem_id) {
+//		
+//	}
 }

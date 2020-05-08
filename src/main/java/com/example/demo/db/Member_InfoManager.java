@@ -49,6 +49,22 @@ public class Member_InfoManager {
 		int re = -1;
 		SqlSession session = factory.openSession();
 		re = session.delete("mem_info.delete", mem_no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int chageTempPwd(Member_InfoVo vo) {
+		int re = -1;
+		SqlSession session = factory.openSession();
+		re = session.update("mem_info.changeTempPwd", vo);
+		session.commit();
+		session.close();
+		return re;
+	}
+	public static int checkOverId(String mem_id) {
+		int re = -1;
+		SqlSession session = factory.openSession();
+		re = session.selectOne("mem_info.checkOverId", mem_id);
 		session.close();
 		return re;
 	}

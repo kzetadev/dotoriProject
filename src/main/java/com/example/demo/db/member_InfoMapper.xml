@@ -18,6 +18,10 @@
 	<delete id="delte"><!-- 회원 탈퇴 -->
 		delete from member_info where mem_no=#{mem_no}
 	</delete>
+	<!-- 비밀번호 찾기. 임시 비밀번호로 변경 -->
+	<update id="changeTempPwd">
+		update member_info set mem_pwd = #{mem_pwd} where mem_no = #{mem_no} and mem_email = #{mem_email}
+	</update>
 	
 	
 	<!-- 아이디 중복 체크 -->
@@ -25,8 +29,12 @@
 		select count(*) from member_info where mem_id = #{mem_id}
 	</select>
 	
-	<!-- 닉네임 중복 체크 
+	<!-- 닉네임 중복 체크 -->
+	<select id="checkOverNickname" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from member_info where mem_nickname = #{mem_nickname}
+	</select>
+	<!-- 이메일 중복 체크 -->
 	<select id="checkOverEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_email = #{mem_email}
-	</select>-->
+	</select>
 </mapper>
