@@ -13,5 +13,5 @@ public class Member_FavoriteVo {
 	private int favorite_no;    //찜번호
 	private int mem_no;     //회원번호
 	private int place_no;     //여행장소번호
-	
+
 }
