@@ -38,7 +38,7 @@
 				$("#btn2").css("visibility", "visible")
 				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
 				if(re == true){
-					location.href="myPage.do"
+					location.href="myPage_Favorite.do"
 				}
 			})
 			$("#btn2").click(function(){

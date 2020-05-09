@@ -9,11 +9,11 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>dotoriProject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>dotoriProject</name>
-	<description>Demo project for Spring Boot</description>
+	<groupId>com</groupId>
+   <artifactId>dotoriProject</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>dotoriProject</name>
+   <description>Demo project for Spring Boot</description>
 
 	<properties>
 		<security.version>4.2.7.RELEASE</security.version>
