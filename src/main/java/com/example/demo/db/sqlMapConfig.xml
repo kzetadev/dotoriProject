@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<properties resource="com/example/demo/db/db.properties"/>
+<typeAliases>
+	<typeAlias type="com.example.demo.vo.Board_PostVo" alias="Board_PostVo"/>
+	<typeAlias type="com.example.demo.vo.Member_InfoVo" alias="Member_InfoVo"/>
+	<typeAlias type="com.example.demo.vo.Place_ThemeVo" alias="Place_ThemeVo"/>
+	<typeAlias type="com.example.demo.vo.Place_InfoVo" alias="Place_InfoVo"/>
+	<typeAlias type="com.example.demo.vo.Member_FavoriteVo" alias="Member_FavoriteVo"/>
+	<typeAlias type="com.example.demo.vo.Head_TagVo" alias="Head_TagVo"/>
+</typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="com/example/demo/db/Board_PostMapper.xml"/>
+    <mapper resource="com/example/demo/db/member_InfoMapper.xml"/>
+    <mapper resource="com/example/demo/db/Place_InfoMapper.xml"/>
+    <mapper resource="com/example/demo/db/Place_ThemeMapper.xml"/>
+    <mapper resource="com/example/demo/db/Member_FavoriteMapper.xml"/>
+  </mappers>
+</configuration>
