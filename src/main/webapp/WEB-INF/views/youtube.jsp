@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>youtube contents</title>
-	<link rel="stylesheet" href="css/youtube.css">
+	<link rel="stylesheet" href="../css/youtube.css">
 </head>
 <body>
 	<div class="contents">

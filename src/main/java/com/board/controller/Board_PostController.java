@@ -39,7 +39,7 @@ public class Board_PostController {
 	}
 
 	// 게시글 목록
-	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
+	@RequestMapping(value="/listBoard_Post.do", method=RequestMethod.GET)
 	public ModelAndView listBoard_Post() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("listBoard_Post");

@@ -12,9 +12,10 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btnInsert").click(function() {
-			location.href = "/insertBoard_Post"
+			location.href = "/board/insertBoard_Post"
 		});
 	});
+	
 </script>
 </head>
 <body>
