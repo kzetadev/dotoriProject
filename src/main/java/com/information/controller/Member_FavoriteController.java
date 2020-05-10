@@ -15,46 +15,35 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.information.dao.Member_FavoriteDao;
 import com.information.dao.Place_InfoDao;
+import com.information.vo.Member_FavoriteVo;
 import com.information.vo.Place_InfoVo;
+import com.member.vo.Member_InfoVo;
 
 @Controller
 public class Member_FavoriteController {
 	@Autowired
 	private Member_FavoriteDao f_dao;
-	@Autowired
-	private Place_InfoDao p_dao;
 
 	public void setM_dao(Member_FavoriteDao f_dao) {
 		this.f_dao = f_dao;
-	}
-	public void setP_dao(Place_InfoDao p_dao) {
-		this.p_dao = p_dao;
 	}
 	
 	// ??????
 	@Autowired
 	private HttpSession session; 
-
-	// 별표시를 누르면 member_favorite에 추가됨
-	// @RequestMapping(value="cartAdd.do", method=RequestMethod.POST)
-	@RequestMapping("/cartAdd.do")
-	@ResponseBody
-	public boolean insertMember_Favorite(HttpSession session, @RequestParam int place_no) {
-		int mem_no = (Integer)session.getAttribute("mem_no");
-		place_no = (Integer)session.getAttribute("place_no");
-		System.out.println(mem_no);
-		
-		boolean data = false;
-
-			data = true;
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("mem_no", mem_no);
-			map.put("place_no", place_no);
-
-		return data;
-	}
 	
+	// 찜 장소 추가
+	@RequestMapping("/insertMember_Favorite.do")
+	public ModelAndView InsertMember_Favorite(Member_FavoriteVo f) {
+		System.out.println("찜목록 추가 컨트롤러 동작함");
+		// String id = (String)session.getAttribute("memberId");
+		
+		ModelAndView m = new ModelAndView();
+		int re = f_dao.insertMember_Favorite(f);
+		System.out.println("찜목록에 담긴 상품번호 : " + f.getFavorite_no());
+		System.out.println(re);
+		return m;
+	}
 	
 //	// 찜목록 리스트
 //	@RequestMapping("/myPage_Favorite.do")
@@ -72,41 +61,6 @@ public class Member_FavoriteController {
 //		m.addObject("f",f_dao.detailMember_Favorite(favorite_no));
 //		return m;
 //	}
-	
-//	// 로그인 확인
-//	
-//	@RequestMapping(value="/goMyPage.do", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String goMyPage(HttpSession session, @RequestParam String place_name, @RequestParam String place_tel, @RequestParam String place_img) {
-//		String id = (String)session.getAttribute("memberId");
-//		String exist = null;
-//		
-//		// 로그인 확인
-//		if(id == null) {
-//			return exist;
-//		}
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("id", id);
-//		map.put("place_name", place_name);
-//		map.put("place_tel", place_tel);
-//		map.put("place_img", place_img);
-//		
-//		exist = m_dao.
-//				
-//		return exist;
-//	}
-	
-	// 찜한 장소
-	@RequestMapping("/insert")
-	public ModelAndView myPage(HttpSession session) {
-		System.out.println("마이페이지 컨트롤러 동작함");
-		
-		// String id = (String)session.getAttribute("memberId");
-		
-		ModelAndView m = new ModelAndView();
-		
-		return m;
-	}
 	
 	// 해당 찜한 것 삭제
 	@RequestMapping("/deleteMember_Favorite.do")

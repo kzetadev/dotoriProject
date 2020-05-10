@@ -33,8 +33,14 @@
 	<select id="checkOverNickname" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_nickname = #{mem_nickname}
 	</select>
+	
 	<!-- 이메일 중복 체크 -->
 	<select id="checkOverEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_email = #{mem_email}
+	</select>
+	
+	<!-- 다른 페이지에서 @를 누르면 로그인하라고 창뜨게끔 => Member_FavoriteManager -->
+	<select id="isMember" resultType="Member_InfoVo">
+		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select>
 </mapper>

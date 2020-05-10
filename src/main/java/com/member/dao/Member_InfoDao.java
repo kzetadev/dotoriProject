@@ -56,4 +56,8 @@ public class Member_InfoDao {
 //	public Member_InfoVo memInfo(String mem_id) {
 //		
 //	}
+	// @을 눌렀을때 로그인 하라고 창이 뜨게끔 함
+	public Member_InfoVo isMember(Member_InfoVo i) {
+		return Member_InfoManager.isMember(i);
+	}
 }

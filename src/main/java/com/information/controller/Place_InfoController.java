@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.information.dao.Place_InfoDao;
 import com.information.dao.Place_ThemeDao;
-import com.information.mapper.DBManager;
+import com.information.manager.Place_InfoManager;
 import com.information.vo.Place_ThemeVo;
 @Controller
 public class Place_InfoController {
@@ -26,7 +26,7 @@ public class Place_InfoController {
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
 	public int getTotalRecord(HashMap map) {
-		return DBManager.totalRecord(map);
+		return Place_InfoManager.totalRecord(map);
 	}
 	
 	@Autowired

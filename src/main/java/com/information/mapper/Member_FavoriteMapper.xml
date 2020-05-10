@@ -6,7 +6,7 @@
 	
 	<!-- 마이페이지에 담기 -->
 	<insert id="insertFavorite" parameterType="java.util.Map">
-		insert into member_favorite values(seq_member_favorite.nextval,seq_board_no.nextval,#{place_no})
+		insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no})
 	</insert>
 
 	<!-- 마이페이지 찜 리스트를 보여줌  -->

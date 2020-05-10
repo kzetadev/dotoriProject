@@ -68,4 +68,13 @@ public class Member_InfoManager {
 		session.close();
 		return re;
 	}
+	// @을 눌렀을때 로그인 하라고 창이 뜨게끔 함
+	public static Member_InfoVo isMember(Member_InfoVo i) {
+		Member_InfoVo r = null;
+		SqlSession session = factory.openSession();
+		r = session.selectOne("mem_info.isMember", i);
+		session.close();
+		return r; 
+	}
+	
 }

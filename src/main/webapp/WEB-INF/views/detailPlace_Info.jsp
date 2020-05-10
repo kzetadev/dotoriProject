@@ -21,18 +21,10 @@
 				dots: true, infinite: true,
 				speed: 500, fade: true, cssEase: 'linear'
 			})
+			
+			
 			$("#btn").click(function(){
-				var place_no = $(place_InfoVo.place_no)
-				
-				$.ajax({
-					type : 'get',
-					url : '/myPage/cartAdd',
-					data : 'place_no=' + place_no + '&mem_no=' + mem_no,
-					dataType : 'text',
-					success:function(data){
-						alert(data)
-					}
-				})
+				// var cartList = $("")
 				
 				$(this).css("visibility", "hidden")
 				$("#btn2").css("visibility", "visible")
@@ -74,7 +66,6 @@
 	</div>
 	<br>
 	
-
 	<!-- 이미지 슬라이더 -->
 	<div class="your-class" align="center">
 	    <!-- <div><img src="/img/${fn:split(p.place_img, '|')[1]}"></div>
@@ -122,7 +113,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div id="container" align="center">
-				<div id="map" style="width:60%;height:80vh;"></div>
+				<div id="map" style="width:65%;height:80vh;"></div>
 			</div>
 		</div>
 	</div>
