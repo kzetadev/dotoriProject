@@ -1,33 +1,32 @@
 package com.information.controller;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.information.dao.Member_FavoriteDao;
 import com.information.dao.Place_InfoDao;
 import com.information.vo.Member_FavoriteVo;
-import com.information.vo.Place_InfoVo;
-import com.member.vo.Member_InfoVo;
 
 @Controller
 public class Member_FavoriteController {
 	@Autowired
 	private Member_FavoriteDao f_dao;
-
-	public void setM_dao(Member_FavoriteDao f_dao) {
+	@Autowired	
+	private Place_InfoDao p_dao;
+	
+	public void setF_dao(Member_FavoriteDao f_dao) {
 		this.f_dao = f_dao;
 	}
-	
+	public void setP_dao(Place_InfoDao p_dao) {
+		this.p_dao = p_dao;
+	}
+
 	// ??????
 	@Autowired
 	private HttpSession session; 
@@ -45,14 +44,15 @@ public class Member_FavoriteController {
 		return m;
 	}
 	
-//	// 찜목록 리스트
-//	@RequestMapping("/myPage_Favorite.do")
-//	public ModelAndView listMember_Favorite() {
-//		System.out.println("컨트롤러 동작함");
-//		ModelAndView m = new ModelAndView();
-//		m.addObject("list", f_dao.listMember_Favorite());
-//		return m;
-//	}
+	// 찜목록 리스트
+	@RequestMapping("/myPage_Favorite.do")
+	public ModelAndView listMember_Favorite(HashMap map) {
+		System.out.println("컨트롤러 동작함");
+		ModelAndView m = new ModelAndView();
+		m.addObject("Flist", f_dao.listMember_Favorite());
+		m.addObject("Plist", p_dao.listPlace_InfoPage(map));
+		return m;
+	}
 	
 	// 찜목록 상세보기 (해당 정보게시판 상세페이지로 이동) // 필요 없을수도?
 //	@RequestMapping("/detailPlace_Info.do")

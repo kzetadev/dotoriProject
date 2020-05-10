@@ -22,20 +22,12 @@
 				speed: 500, fade: true, cssEase: 'linear'
 			})
 			
-			
-			$("#btn").click(function(){
-				// var cartList = $("")
-				
-				$(this).css("visibility", "hidden")
-				$("#btn2").css("visibility", "visible")
+			$("#btn").toggle(function(){
 				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
 				if(re == true){
 					location.href="myPage_Favorite.do"
 				}
-			})
-			$("#btn2").click(function(){
-				$(this).css("visibility", "hidden")
-				$("#btn").css("visibility", "visible")
+			}, function(){
 				alert("찜목록에서 제거되었습니다.")
 			})
 		})
@@ -48,20 +40,15 @@
 			padding-right:200px;
 			padding-left:200px;
 		}
-		#btn2{
-			visibility: hidden;
-		}
 	</style>
 </head>
 <body>
 	<h2><b>${p.place_name }</b></h2>
 	
+	<!-- 찜 버튼 -->
 	<div class="b" align="center">
 		<button type="button" class="btn btn-default btn-lg" id="btn">
-	  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-		</button>
-		<button type="button" class="btn btn-default btn-lg" id="btn2">
-	  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+	  		<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
 		</button>
 	</div>
 	<br>

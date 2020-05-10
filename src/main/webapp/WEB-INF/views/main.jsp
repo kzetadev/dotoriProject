@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 <layoutTag:layout>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- Áß´Ü ÀÌ¹ÌÁö ½½¶óÀÌµå -->
+	<!-- ì¤‘ë‹¨ ì´ë¯¸ì§€ ìŠ¬ë¼ì´ë“œ -->
 	<div>
 	</div>
 	<div>

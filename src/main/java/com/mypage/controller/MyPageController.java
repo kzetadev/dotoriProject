@@ -20,12 +20,12 @@ public class MyPageController {
 		return m;
 	}
 	
-	// 내가 찜한 장소 목록
-	@RequestMapping("/myPage_Favorite.do")
-	public ModelAndView myPage_Favorite() {
-		ModelAndView m = new ModelAndView();
-		return m;
-	}	
+//	// 내가 찜한 장소 목록
+//	@RequestMapping("/myPage_Favorite.do")
+//	public ModelAndView myPage_Favorite() {
+//		ModelAndView m = new ModelAndView();
+//		return m;
+//	}	
 
 	// 내가 받은 쪽지 목록
 	@RequestMapping("/myPage_Message.do")

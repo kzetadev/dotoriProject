@@ -41,7 +41,7 @@ public class Member_FavoriteManager {
 		return list;
 	}
 		
-	// 마이페이지 찜한 상세정보 (해당 상세정보 페이지로 이동함)
+	// 마이페이지 찜한 상세정보 (해당 상세정보 페이지로 이동함) 필요 없을듯
 	public static Member_FavoriteVo detailMember_Favorite(int favorite_no) {
 		SqlSession session = factory.openSession();
 		Member_FavoriteVo m = null;

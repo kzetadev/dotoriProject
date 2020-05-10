@@ -46,39 +46,38 @@ $('#loginBtn').click(function() {
 
 
 <div class="container">
-			<div class="area_inputs wow fadeIn">
-				<div class="form-group">
-					<label class="font-weight-bold text-white" for="inputId">아이디</label>
-					<div>
-						<input type="text" class="form-control" id="inputId" name="mem_id" value="${cookie.user_check.value}" placeholder="아이디">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="font-weight-bold text-white" for="inputPassword">비밀번호</label>
-					<div>
-						<input type="password" class="form-control" id="inputPwd" name="mem_pwd" placeholder="비밀번호">
-					</div>
-				</div>
-				<div class="form-group">
-					<span class="font-weight-bold text-white bg-dark" id="spanLoginCheck"></span>
-				</div>
-				<!--<div class="form-group">
-					<label class="font-weight-bold text-white"> 
-						<input type="checkbox" id="remember_us" name="remember_memId" ${checked}> 아이디 기억하기
-					</label>
-					 <div class="interval_height a_none">
-						<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; 계정찾기</a>
-					</div>  -->
-					<div>
-						<button id="loginBtn" type="button"	class="btn btn-primary btn-block">로그인</button>
-					</div>
-				</div>
-				<div class="form-group">
-					<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/joinForm.do">회원가입</a>
-				</div>
+	<div class="area_inputs wow fadeIn">
+		<div class="form-group">
+			<label class="font-weight-bold text-white" for="inputId">아이디</label>
+			<div>
+				<input type="text" class="form-control" id="inputId" name="mem_id" value="${cookie.user_check.value}" placeholder="아이디">
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="font-weight-bold text-white" for="inputPassword">비밀번호</label>
+			<div>
+				<input type="password" class="form-control" id="inputPwd" name="mem_pwd" placeholder="비밀번호">
+			</div>
+		</div>
+		<div class="form-group">
+			<span class="font-weight-bold text-white bg-dark" id="spanLoginCheck"></span>
+		</div>
+		<div class="form-group">
+			<!--<label class="font-weight-bold text-white"> 
+				<input type="checkbox" id="remember_us" name="remember_memId" ${checked}> 아이디 기억하기
+			</label>
+			 <div class="interval_height a_none">
+				<a href="${pageContext.request.contextPath}/user/userSearch">&nbsp; 계정찾기</a>
+			</div>  -->
+			<div>
+				<button id="loginBtn" type="button"	class="btn btn-primary btn-block">로그인</button>
+			</div>
+		</div>
+		<div class="form-group">
+			<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/joinForm.do">회원가입</a>
+		</div>
 	</div>
+</div>
 
 </body>
 </html>
