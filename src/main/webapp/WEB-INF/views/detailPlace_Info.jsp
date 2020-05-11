@@ -33,6 +33,7 @@
 					location.href="myPage_Favorite.do"
 				}
 			}, function(){
+				
 				alert("찜목록에서 제거되었습니다.")
 			})
 

@@ -1,11 +1,12 @@
 package com.member.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.member.mapper.Member_InfoManager;
+import com.member.manager.Member_InfoManager;
 import com.member.vo.Member_InfoVo;
 
 @Repository
