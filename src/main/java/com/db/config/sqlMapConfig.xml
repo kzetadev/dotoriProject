@@ -30,5 +30,6 @@
     <mapper resource="com/information/mapper/Place_InfoMapper.xml"/>
     <mapper resource="com/information/mapper/Place_ThemeMapper.xml"/>
     <mapper resource="com/information/mapper/Member_FavoriteMapper.xml"/>
+    <mapper resource="com/member/mapper/AdminMapper.xml"/>
   </mappers>
 </configuration>

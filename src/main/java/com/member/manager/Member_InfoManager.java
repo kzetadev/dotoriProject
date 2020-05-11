@@ -1,4 +1,4 @@
-package com.member.mapper;
+package com.member.manager;
 
 import java.io.Reader;
 import java.util.List;
@@ -76,5 +76,4 @@ public class Member_InfoManager {
 		session.close();
 		return r; 
 	}
-	
 }

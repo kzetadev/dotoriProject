@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<!-- 관리자 - 회원 목록 출력 -->
+	<!-- <select id="selectMemberAll" resultType="Member_InfoVo">
+		select * from member_info where mem_role = 'USER'
+	</select> -->
+	
+	<!-- 관리자 - 회원 목록 출력 (페이징 처리) -->
+	<select id="selectMemberAll" resultType="Member_InfoVo">
+		select mem_no, mem_id, mem_pwd, mem_email, mem_email_agree, mem_name, mem_info_open, mem_regidate, mem_nickname, mem_content, mem_img, mem_role from 
+			(select rownum r, mem_no, mem_id, mem_pwd, mem_email, mem_email_agree, mem_name, mem_info_open, mem_regidate, mem_nickname, mem_content, mem_img, mem_role from 
+	   			(select * from member_info order by mem_no)) where r between #{start} and #{end}
+	</select>
+	
+	<!-- 총 페이지 수 구하기 -->
+	<select id="totalRecord" resultType="java.lang.Integer">
+		select count(*) from member_info
+	</select>
+	
+	<!-- 관리자 - 회원 삭제 -->
+	<delete id="deleteMember">
+		delete from member_info where mem_no = #{mem_no} 
+	</delete>
+</mapper>
