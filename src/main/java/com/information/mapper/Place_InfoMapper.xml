@@ -23,7 +23,7 @@
   				where r between #{start, jdbcType=VARCHAR} and #{end, jdbcType=VARCHAR}
   </select> -->
   
-  <!-- 페이징 처리 + 정렬 -->
+  <!-- 페이징 처리 + 검색 + 정렬 -->
   <select id="selectPage" resultType="Place_InfoVo">
   	select place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail from 
   		(select rownum r, place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail from 
@@ -35,7 +35,6 @@
   			  	order by ${sortColumn}
   			</if>
   				)) where r between #{start} and #{end}
-  				
   </select>
   
     <!-- 전체 몇페이지까지 있는지 확인 (페이징 처리 관련) -->

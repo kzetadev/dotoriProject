@@ -120,7 +120,7 @@
 	<div class="row">
 		<c:forEach var="p" items="${list }">
 			<div class="col-md-3">
-				<div class="thumbnail">
+				<div class="thumbnail">	
 					<a href="detailPlace_Info.do?place_no=${p.place_no}">
 						<img src="/img/${fn:split(p.place_img, '|')[0]}" width="300" height="300" id="img"> 
 						<div class="caption">

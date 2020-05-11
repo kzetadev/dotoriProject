@@ -6,6 +6,7 @@
 	
 	<!-- 마이페이지에 담기 -->
 	<insert id="insertFavorite" parameterType="java.util.Map">
+		<!-- insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no},#{place_name},#{place_img},#{place_type}) -->
 		insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no})
 	</insert>
 
