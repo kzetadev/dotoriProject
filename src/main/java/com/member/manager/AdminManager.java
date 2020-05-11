@@ -23,7 +23,7 @@ public class AdminManager {
 			// TODO: handle exception
 		}
 	}
-	// 관리자 - 모든 회원정보 리스트 출력
+	// 관리자 - 모든 회원정보 리스트 출력 + 페이징처리 + 검색 + 정렬
 	public static List<Member_InfoVo> listMemberAll(HashMap map){
 		SqlSession session = factory.openSession();
 		List<Member_InfoVo> list = null;
@@ -32,10 +32,10 @@ public class AdminManager {
 		return list;
 	}
 	// 관리자 - 총 페이지 수 
-	public static int totalRecord() {
+	public static int totalRecord(HashMap map) {
 		int cnt = 0;
 		SqlSession session = factory.openSession();
-		cnt = session.selectOne("admin.totalRecord");
+		cnt = session.selectOne("admin.totalRecord", map);
 		session.close();
 		return cnt;
 	}

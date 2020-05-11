@@ -53,7 +53,7 @@ public class Place_InfoController {
 	
 	// 여행 장소 페이징 + 검색 처리 
 	@RequestMapping("/listPlace_Info.do")	// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
-	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String all, String keyword, String searchColumn, String sortColumn, HttpSession session) {
+	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String keyword, String searchColumn, String sortColumn, HttpSession session) {
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
 		Place_ThemeVo pt = pt_dao.getPlace_Theme(place_type);
@@ -88,7 +88,7 @@ public class Place_InfoController {
 	
 		map.put("start", start);
 		map.put("end", end);
-		System.out.println(map);
+//		System.out.println(map);
 //		session.setAttribute("keyword", keyword);
 //		session.setAttribute("searchColumn", searchColumn);
 
@@ -108,6 +108,7 @@ public class Place_InfoController {
 		if(keyword != null && !keyword.equals("")) {
 			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
 			m.addObject("keyword", "&keyword=" + keyword);
+			m.addObject("sortColumn", "&sortColumn=" + sortColumn);
 		}
 		m.addObject("pt", pt);
 		//theme

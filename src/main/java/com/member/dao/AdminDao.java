@@ -9,7 +9,7 @@ import com.member.manager.AdminManager;
 import com.member.vo.Member_InfoVo;
 @Repository
 public class AdminDao {
-	// 관리자 - 모든 회원 리스트 출력
+	// 관리자 - 모든 회원 리스트 출력 + 페이징 처리 + 검색 + 정렬
 	public List<Member_InfoVo> listMemberAll(HashMap map){
 		return AdminManager.listMemberAll(map);
 	}

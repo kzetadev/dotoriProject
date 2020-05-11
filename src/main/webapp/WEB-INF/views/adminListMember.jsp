@@ -14,6 +14,19 @@
 		h2{
 			text-align:center;
 		}
+		.pagination{
+  			display:block;
+			text-align: center;
+  		}
+  		.pagination > li > a{
+  			float: none;
+  			margin-left: -5px;
+  		}
+  		form { 
+        	margin: 0 auto; 
+       		width:250px;
+    	}    
+		@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
 	</style>
 	<script type="text/javascript">
 		$(function(){
@@ -34,6 +47,30 @@
 </head>
 <body>
 	<h2><a>회원 목록</a></h2>
+	
+	<!-- 검색창 구현 -->
+	<form id="form" action="/adminListMember.do" method="post">
+		<div class="input-group">
+			<div class="form-group">
+				<label for="sel"></label>
+				<select class="form-control" name="searchColumn" id="sel">
+					<option value="mem_no">회원번호</option>
+					<option value="mem_id">아이디</option>
+					<option value="mem_email">이메일</option>
+					<option value="mem_name">이름</option>
+					<option value="mem_regidate">가입일자</option>
+					<option value="mem_nickname">닉네임</option>
+				</select>
+			</div>
+			<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력해주세요.">
+			<div class="input-group-btn">
+				<button class="btn btn-default" type="submit">
+					<i class="glyphicon glyphicon-search"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+	
 	<hr>
 	<table border="1" width="80%" class="table table-hover">
 		<thead>

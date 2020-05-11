@@ -51,58 +51,48 @@
 	</style>
 	<script type="text/javascript">
 		$(function(){
+		// 	$.ajax({url:"/listPlace_Theme", type:"get", dataType:"json", success:function(result){
+		// 		var ul = $('<ul class="pagination pagination-lg"/>');
+				
+		// 		$.each(result, function(idx, theme){
+		// 			var tab = $("<a/>").attr("href", "/listPlace_Info.do?place_type=" + theme["place_type"]).
+		// 				text(theme["place_type_name"]);
+		// 			var li = $("<li/>").append(tab);
+		// 			$(ul).append(li);
+		// 		});
+		// 		$("body").prepend(ul);
+		// 	}});
+			var params;
+			//쿼리스트링에서 특정 매개변수 값 반환하는 함수
+			function getParamVal(queryStr, paramKey){
+				if(queryStr.indexOf("?") >= 0){
+					params = queryStr.substr(1).split("&");
+					for(var i = 0; i < params.length; i++){
+						p = params[i];
+						if(p.split("=")[0] == paramKey){
+							return p;
+						}
+					}
+				}else{
+					return "";
+				}
+			}
 			$("#form").on("submit", function(event){
 				event.preventDefault();
 				var searchCondition = $("#form").serialize();
+				var paramPlacetype = getParamVal(location.search, "place_type");
+				if(paramPlacetype != ""){
+					paramPlacetype = paramPlacetype + "&";
+				}
+				if(searchCondition["keyword"] == ""){
+					searchCondition = "";
+				}
 				console.log(searchCondition);
-				location.href = "/listPlace_Info.do?" + searchCondition;
+				location.href = "/listPlace_Info.do?" + paramPlacetype + searchCondition;
 			});
 		});
 	</script>
 </head>
-<script type="text/javascript">
-	$(function(){
-	// 	$.ajax({url:"/listPlace_Theme", type:"get", dataType:"json", success:function(result){
-	// 		var ul = $('<ul class="pagination pagination-lg"/>');
-			
-	// 		$.each(result, function(idx, theme){
-	// 			var tab = $("<a/>").attr("href", "/listPlace_Info.do?place_type=" + theme["place_type"]).
-	// 				text(theme["place_type_name"]);
-	// 			var li = $("<li/>").append(tab);
-	// 			$(ul).append(li);
-	// 		});
-	// 		$("body").prepend(ul);
-	// 	}});
-		var params;
-		//쿼리스트링에서 특정 매개변수 값 반환하는 함수
-		function getParamVal(queryStr, paramKey){
-			if(queryStr.indexOf("?") >= 0){
-				params = queryStr.substr(1).split("&");
-				for(var i = 0; i < params.length; i++){
-					p = params[i];
-					if(p.split("=")[0] == paramKey){
-						return p;
-					}
-				}
-			}else{
-				return "";
-			}
-		}
-		$("#form").on("submit", function(event){
-			event.preventDefault();
-			var searchCondition = $("#form").serialize();
-			var paramPlacetype = getParamVal(location.search, "place_type");
-			if(paramPlacetype != ""){
-				paramPlacetype = paramPlacetype + "&";
-			}
-			if(searchCondition["keyword"] == ""){
-				searchCondition = "";
-			}
-			console.log(searchCondition);
-			location.href = "/listPlace_Info.do?" + paramPlacetype + searchCondition;
-		});
-	});
-</script>
 <body>
 	<!-- 내용  -->
 	<h1><strong>${pt.place_type_name }</strong></h1>
