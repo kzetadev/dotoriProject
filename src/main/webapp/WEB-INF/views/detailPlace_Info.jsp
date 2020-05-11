@@ -17,18 +17,38 @@
 	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 	<script type="text/javascript">
 		$(function(){
-			$(".your-class").slick({
-				dots: true, infinite: true,
-				speed: 500, fade: true, cssEase: 'linear'
-			})
-			
+			// 찜목록 구현
+			// $("#h2").attr("place_no",place_no)
 			$("#btn").toggle(function(){
+				// Place_no는 속성으로 안보이게 처리
+				/*var cartList = $("#img").attr("place_no",place_no)
+				$.each(cartList, function(){
+					var place_no = $("#h2").attr("place_no")
+					var place = {place_no:place_no}
+						$.ajax("/insertFavorite", {data:place, success:function(){
+					}})
+				})*/
 				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
 				if(re == true){
 					location.href="myPage_Favorite.do"
 				}
 			}, function(){
 				alert("찜목록에서 제거되었습니다.")
+			})
+
+			/*$.getJSON("/detailPlace_Info.do", function(arr){
+				$.each(arr, function(idx, place){
+					var item = $("#item")
+					var img = $(".your-class")
+					var name = $("#h2")
+					$("#item").append(item, img, name)
+				})
+			})*/
+
+			// 이미지 슬라이더
+			$(".your-class").slick({
+				dots: true, infinite: true,
+				speed: 500, fade: true, cssEase: 'linear'
 			})
 		})
 	</script>
@@ -43,8 +63,6 @@
 	</style>
 </head>
 <body>
-	<h2><b>${p.place_name }</b></h2>
-	
 	<!-- 찜 버튼 -->
 	<div class="b" align="center">
 		<button type="button" class="btn btn-default btn-lg" id="btn">
@@ -52,16 +70,15 @@
 		</button>
 	</div>
 	<br>
+
+	<h2 id="h2"><b>${p.place_name }</b></h2>
 	
 	<!-- 이미지 슬라이더 -->
-	<div class="your-class" align="center">
+	<div class="your-class" align="center" id="img">
 	    <!-- <div><img src="/img/${fn:split(p.place_img, '|')[1]}"></div>
 	    <div><img src="/img/${fn:split(p.place_img, '|')[2]}"></div>
 	    <div><img src="/img/${fn:split(p.place_img, '|')[3]}"></div>
-	    <div><img src="/img/${fn:split(p.place_img, '|')[4]}"></div>
-	    <div><img src="/img/${fn:split(p.place_img, '|')[5]}"></div>
-	    <div><img src="/img/${fn:split(p.place_img, '|')[6]}"></div>
-	    <div><img src="/img/${fn:split(p.place_img, '|')[7]}"></div> -->
+	    <div><img src="/img/${fn:split(p.place_img, '|')[4]}"></div> -->
 	    <c:set var="pSplits" value="${fn:split(p.place_img, '|')}"/>
 	    <c:forEach var="i" items="${pSplits}" varStatus="status">
 	    	<div><img src="/img/${fn:split(p.place_img, '|')[status.index]}" height="90%"></div>
@@ -69,6 +86,7 @@
   	</div>
   	
   	
+  	<!-- 상세 정보 -->
 	<div class="detail-map-infor first border">
 		<dl>
 			<dt>전화번호</dt>
