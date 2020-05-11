@@ -6,6 +6,7 @@
 <properties resource="com/db/config/db.properties"/>
 <typeAliases>
 	<typeAlias type="com.board.vo.Board_PostVo" alias="Board_PostVo"/>
+	<typeAlias type="com.board.vo.Board_PostViewVo" alias="Board_PostViewVo"/>
 	<typeAlias type="com.member.vo.Member_InfoVo" alias="Member_InfoVo"/>
 	<typeAlias type="com.information.vo.Place_ThemeVo" alias="Place_ThemeVo"/>
 	<typeAlias type="com.information.vo.Place_InfoVo" alias="Place_InfoVo"/>
