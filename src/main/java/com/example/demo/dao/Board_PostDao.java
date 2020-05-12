@@ -10,11 +10,16 @@ import com.example.demo.vo.Board_PostVo;
 @Repository
 public class Board_PostDao {
 
-	// 게시판 글 목록
-	public List<Board_PostVo> listBoard_Post() {
-		return Board_PostManager.listBoard_Post();
+	// 게시판 글 목록  //은진; 매개변수 추가
+	public List<Board_PostVo> listBoard_Post(int start, int end, String searchOption, String keyword) {
+		return Board_PostManager.listBoard_Post(start,end,searchOption, keyword);
 	}
 
+	//은진 추가; 게시글 레코드 갯수
+	public int countArticle(String searchOption, String keyword) {
+		return Board_PostManager.countArticle(searchOption, keyword);
+	}
+	
 	// 게시판 글 등록
 	public int insertBoard_Post(Board_PostVo vo) {
 		return Board_PostManager.insertBoard_Post(vo);

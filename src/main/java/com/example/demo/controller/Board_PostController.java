@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.Board_PostDao;
 import com.example.demo.dao.Head_TagDao;
 import com.example.demo.dao.Member_InfoDao;
+import com.example.demo.db.Board_PostManager;
 import com.example.demo.vo.Board_PostVo;
+import com.example.demo.service.Board_PostPager;
 
 @RestController
 public class Board_PostController {
@@ -40,12 +44,39 @@ public class Board_PostController {
 
 	// 게시글 목록
 	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
-	public ModelAndView listBoard_Post() {
+	public ModelAndView listBoard_Post
+	//은진     (){
+	//@RequestParam(defaultValue=" " 기본값 할당
+	(@RequestParam(defaultValue="title") String searchOption,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "1") int curPage) throws Exception{
+		
+		//레코드의 갯수 계산
+		int count = Board_PostManager.countArticle(searchOption,keyword);
+				
+		//페이지 나누기 관련 처리
+		Board_PostPager boardPager = new Board_PostPager(count, curPage);
+		int start = boardPager.getPageBegin();
+		int end = boardPager.getPageEnd();
+				
+		List<Board_PostVo> blist = Board_PostManager.listBoard_Post(start, end, searchOption,keyword);
+		//
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("listBoard_Post");
+		//은진
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("blist", blist);
+		map.put("count", count);
+		map.put("start",start);
+		map.put("end", end);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		//
 		// 해당 부분에 Member_Info 추가해야 함
-		mav.addObject("list", b_dao.listBoard_Post());
+		//mav.addObject("list", b_dao.listBoard_Post(searchOption,keyword));
+		mav.addObject("map",map);
 		mav.addObject("headtag", h_dao.listHead_Tag());
+		mav.setViewName("listBoard_Post");
 		return mav;
 	}
 	
