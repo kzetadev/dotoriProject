@@ -1,14 +1,15 @@
 package com.board.mapper;
 
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.board.vo.Board_PostViewVo;
 import com.board.vo.Board_PostVo;
 import com.board.vo.Head_TagVo;
 
@@ -16,24 +17,39 @@ public class Board_PostManager {
 	private static SqlSessionFactory factory;
 	static {
 		try {
-			Reader reader = Resources.getResourceAsReader("com/db/config/sqlMapConfig.xml");
+			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
-	
+
 	// 게시글 목록
-	public static List<Board_PostViewVo> listBoard_Post() {
+	public static List<Board_PostVo> listBoard_Post(int start, int end, String searchOption, String keyword) {
+		//은진; 매개변수 추가
 		SqlSession session = factory.openSession();
-		List<Board_PostViewVo> list = session.selectList("board_post.select");
+		List<Board_PostVo> list = session.selectList("board_post.select");
 		session.close();
 		return list;
 	}
+	
+	//은진 추가 ; 
+	//게시글 레코드 갯수 
+	//★★★ 수정해야됨
+	public static int countArticle(String searchOption, String keyword) {
+		SqlSession session = factory.openSession();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		//session.selectOne("board_post.map", searchOption, keyword);
+		session.close();
+		return 0;
+	}
+
 
 	// 게시글 등록
-	public static int insertBoard_Post(Board_PostViewVo vo) {
+	public static int insertBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
 		re = session.insert("board_post.insert", vo);
@@ -51,7 +67,7 @@ public class Board_PostManager {
 	}
 
 	// 게시글 수정
-	public static int updateBoard_Post(Board_PostViewVo vo) {
+	public static int updateBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
 		re = session.update("board_post.update", vo);
@@ -60,21 +76,11 @@ public class Board_PostManager {
 		return re;
 	}
 
-//	// 게시글 삭제
-//	public static int deleteBoard_Post(Board_PostVo vo) {
-//		int re = -1;
-//		SqlSession session = factory.openSession();
-//		re = session.delete("board_post.delete", vo);
-//		session.commit();
-//		session.close();
-//		return re;
-//	}
-	
 	// 게시글 삭제
-	public static int deleteBoard_Post(int board_no) {
+	public static int deleteBoard_Post(Board_PostVo vo) {
 		int re = -1;
 		SqlSession session = factory.openSession();
-		re = session.delete("board_post.delete", board_no);
+		re = session.delete("board_post.delete", vo);
 		session.commit();
 		session.close();
 		return re;
@@ -87,4 +93,7 @@ public class Board_PostManager {
 		session.close();
 		return list;
 	}
+
+
+	
 }
