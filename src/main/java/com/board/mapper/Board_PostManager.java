@@ -17,7 +17,7 @@ public class Board_PostManager {
 	private static SqlSessionFactory factory;
 	static {
 		try {
-			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
+			Reader reader = Resources.getResourceAsReader("com/db/config/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
 		} catch (Exception e) {
