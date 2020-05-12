@@ -23,7 +23,7 @@ public class AdminController {
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
 	public int getTotalRecord(HashMap map) {
-		return AdminManager.totalRecord();
+		return AdminManager.totalRecord(map);
 	}
 	
 	@Autowired
@@ -32,11 +32,17 @@ public class AdminController {
 	public void setM_dao(AdminDao m_dao) {
 		this.m_dao = m_dao;
 	}
-	// 관리자 - 회원 목록
+	// 관리자 - 회원 목록 (페이징 + 검색 + 정렬)
 	@RequestMapping("/adminListMember.do") 
-	public ModelAndView allMemberList(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session) {
+	public ModelAndView allMemberList(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session, String keyword, String searchColumn, String sortColumn) {
+		System.out.println("컨트롤러 동작함");
+		System.out.println("검색어 : " + keyword);
+		
 		ModelAndView m = new ModelAndView();
 		HashMap map = new HashMap();
+		map.put("sortColumn", sortColumn);
+		map.put("keyword", keyword);
+		map.put("searchColumn", searchColumn);
 		
 		totalRecord = getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
@@ -51,9 +57,12 @@ public class AdminController {
 		}
 		map.put("start", start);
 		map.put("end", end);
+//		System.out.println(map);
 		
 		m.addObject("list", m_dao.listMemberAll(map));
+		System.out.println(map);
 		m.addObject("totalPage", totalPage);
+		System.out.println("전체 페이지 수 : " + totalPage);
 		
 		int startPage = (pageNUM - 1) / pageGroup * pageGroup + 1;
 		int endPage = startPage + pageGroup - 1;
@@ -62,6 +71,12 @@ public class AdminController {
 		}
 		m.addObject("startPage", startPage);
 		m.addObject("endPage", endPage);
+		
+		if(keyword != null && !keyword.equals("")) {
+			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
+			m.addObject("keyword", "&keyword=" + keyword);
+			m.addObject("sortColumn", "&sortColumn=" + sortColumn);
+		}
 		return m;
 	}
 	

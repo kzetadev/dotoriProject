@@ -8,11 +8,18 @@
 		select * from member_info where mem_role = 'USER'
 	</select> -->
 	
-	<!-- 관리자 - 회원 목록 출력 (페이징 처리) -->
+	<!-- 관리자 - 회원 목록 출력 (페이징 처리) + 검색 + 정렬 -->
 	<select id="selectMemberAll" resultType="Member_InfoVo">
 		select mem_no, mem_id, mem_pwd, mem_email, mem_email_agree, mem_name, mem_info_open, mem_regidate, mem_nickname, mem_content, mem_img, mem_role from 
 			(select rownum r, mem_no, mem_id, mem_pwd, mem_email, mem_email_agree, mem_name, mem_info_open, mem_regidate, mem_nickname, mem_content, mem_img, mem_role from 
-	   			(select * from member_info order by mem_no)) where r between #{start} and #{end}
+	   			(select * from member_info 
+	   			<if test="keyword != null and keyword != ''">
+	   				where ${searchColumn} like '%' || #{keyword} || '%'
+	   			</if>
+	   			<if test="sortColumn != null">
+	   				order by ${sortColumn}
+	   			</if>
+	   			 	)) where r between #{start} and #{end}
 	</select>
 	
 	<!-- 총 페이지 수 구하기 -->

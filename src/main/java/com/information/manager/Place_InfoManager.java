@@ -25,7 +25,7 @@ public class Place_InfoManager {
 		}
 	}
 	
-	// 정보게시판 여행 정보 페이징 처리 + 검색
+	// 정보게시판 여행 정보 페이징 처리 + 검색 + 정렬
 	public static List<Place_InfoVo> listPlace_InfoPage(HashMap map){
 		SqlSession session = factory.openSession();
 		List<Place_InfoVo> list = session.selectList("place_info.selectPage", map);

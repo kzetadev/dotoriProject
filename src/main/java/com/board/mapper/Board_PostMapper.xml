@@ -17,7 +17,6 @@
 		insert into board_post values(seq_board_no.nextval, #{board_kinds}, #{head_tag_name}, #{board_title}, #{mem_nickname}, sysdate, 0, #{board_content}, #{board_copy})
 	</insert>
 
-	<!-- 게시글 상세 -->
 	<select id="detail" resultType="Board_PostViewVo">
 		select * from board_post where board_no = #{board_no}
 	</select>
