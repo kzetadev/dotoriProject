@@ -18,7 +18,7 @@ import com.board.mapper.Board_PostManager;
 import com.board.vo.Board_PostVo;
 import com.board.service.Board_PostPager;
 
-@RestController
+@RestController 
 public class Board_PostController {
 	
 	@Autowired
@@ -88,3 +88,4 @@ public class Board_PostController {
 		return mav;
 	}
 }
+

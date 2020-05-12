@@ -35,3 +35,4 @@ public class Board_PostDao {
 		return Board_PostManager.deleteBoard_Post(vo);
 	}
 }
+

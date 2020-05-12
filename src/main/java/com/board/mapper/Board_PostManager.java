@@ -80,6 +80,7 @@ public class Board_PostManager {
 		return list;
 	}
 
+	
 
 	
 }
