@@ -3,67 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_post">
-
+ 
 	<!-- 게시글 목록 -->
 	<select id="select" resultType="Board_PostVo">
 		SELECT b.board_no, h.head_tag_name, b.board_title, 
 		m.mem_nickname, b.board_date, b.board_hit 
 		FROM board_post b, member_info m, head_tag h
-		WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no 
-	 	<include refid="search"></include>  
+		WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no   
 		order by b.board_no desc
 	</select>
-<!--
-		select * from(
-			select rownum as rn, A.* from(
-				select rownum, bno, title, content, b.regdate, viewcnt, user_name
-				from tbl_board b, tbl_member m
-					<sql>
-						<choose>
-							 검색옵션이 전체검색일 경우
-							<when test="searchOption == 'al1'">
-								where b.writer = m.user_id
-								and
-								(user_name like '%'||#{keyword}||'%'
-								or content like '%'||#{keyword}||'%'
-								or title like '%'||#{keyword}||'%')
-							</when>
-							전체검색이 아닐 경우
-							<otherwise>
-								where b.writer = m.user_id
-								and ${searchOption} like '%'||#{keword}||'%'
-							</otherwise>
-						</choose>
-					</sql>
-				order by bno desc, b.regdate desc
-			) A
-		) where rn between #{start} and #{end}
-	-->
-	<!-- 
-	<select id="countArticle" resultType="int">
-		select count(*)
-		from board_post
-		<include refid="search"></include>
-	</select>
-	-->
-	<!-- 
-	<sql id="search">
-		<choose>
-			검색옵션이 전체 검색일 경우 
-			★★★ 닉네임을 변경하면 자기가 쓴 글이 아니어도 나올 수 있으므로 
-			mem_no로 해서 mem_nickname으로 가져오는법 찾아보기 
-			<when test="searchOption == 'all'">
-				where mem_nickname like '%'||#{keyword}||'%'
-				or board_content like '%'||#{keyword}||'%'
-				or board_title like '%' ||#{keyword}||'%'
-			</when>
-			전체 검색이 아닐 경우 
-			<otherwise>
-				where ${searchOption} like '%'||#{keyword}||'%'
-			</otherwise>
-		</choose>
-	</sql>
-	-->
 
 	<!-- 게시글 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->

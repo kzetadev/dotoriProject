@@ -26,25 +26,11 @@ public class Board_PostManager {
 	}
 
 	// 게시글 목록
-	public static List<Board_PostVo> listBoard_Post(int start, int end, String searchOption, String keyword) {
-		//은진; 매개변수 추가
+	public static List<Board_PostVo> listBoard_Post() {
 		SqlSession session = factory.openSession();
 		List<Board_PostVo> list = session.selectList("board_post.select");
 		session.close();
 		return list;
-	}
-	
-	//은진 추가 ; 
-	//게시글 레코드 갯수 
-	//★★★ 수정해야됨
-	public static int countArticle(String searchOption, String keyword) {
-		SqlSession session = factory.openSession();
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		//session.selectOne("board_post.map", searchOption, keyword);
-		session.close();
-		return 0;
 	}
 
 
@@ -94,6 +80,7 @@ public class Board_PostManager {
 		return list;
 	}
 
+	
 
 	
 }
