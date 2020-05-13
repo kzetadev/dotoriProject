@@ -13,33 +13,32 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btnInsert").click(function() {
-			location.href = "/insertBoard_Post.do"
+			location.href = "/insertBoard_Post.do";
 		});
 	});
 
-	//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해
-	function list(page){
-		location.href = "${path}/listBoard_Post?curPage="+page+"&searchOption-${map.searchOption}"+"&keyword=${map.keyword}";
-	}
+// 	//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해
+// 	function list(page){
+// 		location.href = "${path}/listBoard_Post?curPage="+page+"&searchOption-${map.searchOption}"+"&keyword=${map.keyword}";
+// 	}
 </script>
 </head>
 <body>
-	<h2>자유</h2>
+	<h2>전체</h2>
 	
-	<form name="form1" method="post" action="${path}/listBoard_Post">
-		<select name="searchOption">
-			<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/> >제목+이름+내용</option>
-			<option value="mem_nickname" <c:out value="${map.searchOption == 'mem_nickname'?'selected':''}"/> >이름</option>
-			<option value="board_content" <c:out value="${map.searchOption == 'board_content'?'selected':''}"/> >내용</option>
-			<option value="board_title" <c:out value="${map.searchOption == 'board_title'?'selected':''}"/> >제목</option>
-		</select>
-		<input name="keyword" value="${map.keyword}">
-		<input type="submit" value="조회">
-	</form>
-	
+<%-- 	<form name="form1" method="post" action="${path}/listBoard_Post"> --%>
+<!-- 		<select name="searchOption"> -->
+<%-- 			<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/> >제목+이름+내용</option> --%>
+<%-- 			<option value="mem_nickname" <c:out value="${map.searchOption == 'mem_nickname'?'selected':''}"/> >이름</option> --%>
+<%-- 			<option value="board_content" <c:out value="${map.searchOption == 'board_content'?'selected':''}"/> >내용</option> --%>
+<%-- 			<option value="board_title" <c:out value="${map.searchOption == 'board_title'?'selected':''}"/> >제목</option> --%>
+<!-- 		</select> -->
+<%-- 		<input name="keyword" value="${map.keyword}"> --%>
+<!-- 		<input type="submit" value="조회"> -->
+<!-- 	</form> -->
+
 	<table border="1" width="80%">
 		<tr>
-			<th>게시판 분류</th>
 			<th>글번호</th>
 			<th>말머리</th>
 			<th>글제목</th>
@@ -49,10 +48,11 @@
 		</tr>
 		<c:forEach var="v" items="${list}">
 			<tr>
-				<td>${v.board_kinds}</td>
 				<td>${v.board_no}</td>
  				<td>${v.head_tag_name}</td>
-				<td>${v.board_title}</td>
+				<td>
+					<a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+				</td>
 				<td>${v.mem_nickname}</td>
 				<td>${v.board_date}</td>
 				<td>${v.board_hit}</td>
