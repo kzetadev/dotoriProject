@@ -71,8 +71,8 @@
 		</button>
 	</div>
 	<br>
-
-	<h2 id="h2"><b>${p.place_name }</b></h2>
+	
+	<h2 id="h2"><b>${p.place_name } (조회수 - ${p.place_hit })</b></h2>
 	
 	<!-- 이미지 슬라이더 -->
 	<div class="your-class" align="center" id="img">
@@ -119,7 +119,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div id="container" align="center">
-				<div id="map" style="width:65%;height:80vh;"></div>
+				<div id="map" style="width:70%;height:80vh;"></div>
 			</div>
 		</div>
 	</div>

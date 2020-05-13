@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,10 @@ import com.information.vo.Place_ThemeVo;
 public class Place_InfoController {
 	@Resource(name="place_infoService")
 	private Place_InfoService place_infoService;
+	
 	@Resource(name="place_themeService")
 	private Place_ThemeService place_themeService;
+	
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
 	public static int pageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
@@ -37,7 +40,6 @@ public class Place_InfoController {
 		Gson gson = new Gson();
 		str = gson.toJson(list);
 		return str;
-		
 	}
 	
 	// 여행 장소 페이징 + 검색 처리 
@@ -55,6 +57,9 @@ public class Place_InfoController {
 //			keyword = null;
 //			searchColumn = null;
 //		}
+		// 조회수 증가
+		// place_infoService.updateHit(place_no);
+		
 		ModelAndView m = new ModelAndView();
 		Map map = new HashMap();
 		
@@ -106,6 +111,9 @@ public class Place_InfoController {
 	// 여행 장소 상세
 	@RequestMapping("/detailPlace_Info.do")
 	public ModelAndView detailPlace_Info(int place_no) {
+		// 조회수 증가
+		place_infoService.updateHit(place_no);
+		
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", place_infoService.detailPlace_Info(place_no));
 		return m;

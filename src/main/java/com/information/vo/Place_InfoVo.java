@@ -19,4 +19,5 @@ public class Place_InfoVo {
 	private String place_addr; // 주소
 	private int place_type; // 구분 (명소 : 0, 음식점 : 1, 숙소 : 2)
 	private String place_detail; // 상세 설명
+	private String place_hit; // 조회수
 }
