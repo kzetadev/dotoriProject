@@ -1,9 +1,9 @@
 package com.member.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,29 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.UserSha256;
-import com.member.dao.Member_InfoDao;
 import com.member.service.JoinService;
 import com.member.vo.Member_InfoVo;
 
 @Controller
 public class JoinAccountController {
-//	@Autowired
-//	private JoinService reg_service;
-	@Autowired
-	private Member_InfoDao m_dao;
-	public void setM_dao(Member_InfoDao m_dao) {
-		this.m_dao = m_dao;
-	}
+	@Resource(name="joinService")
+	private JoinService joinService;
 
-
-//	@RequestMapping("/listMember_info.do")
-//	public ModelAndView listMember_info() {
-//		System.out.println("listMember_info 컨트롤러 동작");
-//		ModelAndView m = new ModelAndView();
-//		m.setViewName("listMember_info");
-//		m.addObject("login", m_dao.login());
-//		return m;
-//	}
 	@RequestMapping("/joinForm.do")
 	public void joinForm() {
 		
@@ -50,7 +35,7 @@ public class JoinAccountController {
 		vo.setMem_pwd(encryPwd); //그 값을 저장시킨다
 		
 		// 회원가입 메소드
-		m_dao.insert(vo); //저장된 객체 그대로 DB로 보낸다
+		joinService.joinMember(vo); //저장된 객체 그대로 DB로 보낸다
 		mav.addObject("ok", vo.getMem_name());
 		return mav;
 	}
@@ -71,7 +56,7 @@ public class JoinAccountController {
 	@ResponseBody
 	public int idCheck(@RequestParam("mem_id") String mem_id) {
 
-		return m_dao.checkOverId(mem_id);
+		return joinService.checkOverId(mem_id);
 	}
 
 //	// 닉네임 중복 체크 컨트롤러

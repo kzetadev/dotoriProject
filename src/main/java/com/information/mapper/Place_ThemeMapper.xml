@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="place_theme">
 	<!-- 여행 장소 테마  -->
-  <select id="selectAll" resultType="Place_ThemeVo">
+  <select id="selectAll" resultType="com.information.vo.Place_ThemeVo">
     select * from place_theme order by place_type
   </select>
-  <select id="getPlaceTheme" resultType="Place_ThemeVo">
+  <select id="getPlaceTheme" resultType="com.information.vo.Place_ThemeVo">
   	select * from place_theme where place_type = #{place_type}
   </select>
 

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mem_info"> 
-	<select id="login" resultType="Member_InfoVo"> <!-- 로그인 -->
+	<select id="login" resultType="com.member.vo.Member_InfoVo"> <!-- 로그인 -->
 		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select> 
 	
@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 다른 페이지에서 @를 누르면 로그인하라고 창뜨게끔 => Member_FavoriteManager -->
-	<select id="isMember" resultType="Member_InfoVo">
+	<select id="isMember" resultType="com.member.vo.Member_InfoVo">
 		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select>
 </mapper>
