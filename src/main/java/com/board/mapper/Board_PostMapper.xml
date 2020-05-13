@@ -5,7 +5,7 @@
 <mapper namespace="board_post">
  
 	<!-- 게시글 목록 -->
-	<select id="select" resultType="Board_PostVo">
+	<select id="select" resultType="com.board.vo.Board_PostVo">
 		SELECT b.board_no, h.head_tag_name, b.board_title, 
 		m.mem_nickname, b.board_date, b.board_hit 
 		FROM board_post b, member_info m, head_tag h
@@ -20,7 +20,7 @@
 	</insert>
 
 	<!-- 게시글 상세 -->
-	<select id="detail" resultType="Board_PostVo">
+	<select id="detail" resultType="com.board.vo.Board_PostVo">
 		select * from board_post where board_no = #{board_no}
 	</select>
 
@@ -38,7 +38,7 @@
 	</delete>
 	
 	<!-- 말머리 목록 -->
-	<select id="selectHead_Tag" resultType="Head_TagVo">
+	<select id="selectHead_Tag" resultType="com.board.vo.Head_TagVo">
 		select head_tag_no from head_tag
 	</select>
 	

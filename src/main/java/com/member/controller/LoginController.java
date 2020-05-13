@@ -1,33 +1,26 @@
 package com.member.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.member.dao.Member_InfoDao;
+import com.member.service.LoginService;
 import com.member.vo.Member_InfoVo;
 
 @Controller
 public class LoginController {
-	
-	@Autowired
-	private Member_InfoDao dao;
-	
-	public void setDaa(Member_InfoDao dao) {
-		this.dao = dao;
-	}
+	@Resource(name="loginService")
+	private LoginService loginService;
 	@RequestMapping("/loginCheck.do")
 	public Member_InfoVo loginCheck(HttpServletRequest request, Member_InfoVo vo) {
 		System.out.println(vo);
-		Member_InfoVo infovo = dao.login(vo);
+		Member_InfoVo infovo = loginService.login(vo);
 		System.out.println(infovo);
 		return infovo;
 	}
