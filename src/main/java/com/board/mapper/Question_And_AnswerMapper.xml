@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question_and_answer">
+
+	<!-- 질문 게시판 업로드 -->
+  <insert id="insertQuestion">
+  	INSERT into board_post(board_no, mem_no, head_tag_no, board_kinds, board_title, board_date, board_hit, board_content) values(
+  			seq_board_no.nextval, seq_mem_no.nextval, 0, #{board_title}, sysdate, 0, #{board_content})
+  	
+  	INSERT into board_comment(comment_no, mem_no, board_no, board_ref, board_level, board_step) values(
+  		seq_comment_no.nextval, seq_mem_no.nextval, seq_board_no.nextval, #{board_ref}, #{board_level}, #{board_step})
+  </insert>
+  
+  <!-- 질문 게시판 리스트 -->
+  <select id="selectBlog" resultType="com.board.vo.Question_And_AnswerVo">
+    SELECT bp.board_no, mi.mem_no, bp.head_tag_no, bp.board_kinds, bp.board_title, bp.board_date, bp.board_hit, bp.board_content, bp.board_update_date, bc.board_ref, bc.board_level, bc.board_step 
+    	FROM member_info mi, board_post bp, board_comment bc, head_tag ht
+    		WHERE mi.mem_no = bp.mem_no
+    			AND bp.board_no = bc.board_no
+    			AND ht.head_tag_no = bp.head_tag_no
+    			AND bp.head_tag_no = 0
+    			AND bp.board_kinds = 4
+  </select>
+</mapper>
