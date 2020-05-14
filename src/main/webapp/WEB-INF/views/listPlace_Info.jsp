@@ -88,7 +88,7 @@
 					searchCondition = "";
 				}
 				console.log(searchCondition);
-				location.href = "/listPlace_Info.do?" + paramPlacetype + searchCondition;
+				location.href="/listPlace_Info.do?" + paramPlacetype + searchCondition;
 			});
 		});
 	</script>
@@ -104,6 +104,7 @@
 	<ul class="nav nav-tabs">
 		<li><a href="listPlace_Info.do?sortColumn=place_no">번호순</a></li>
 		<li><a href="listPlace_Info.do?sortColumn=place_name">이름순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_hit">조회수순</a></li>
 	</ul>
 				
 	<!-- 각 장소별 대표 이미지 리스트 -->
@@ -114,7 +115,7 @@
 					<a href="detailPlace_Info.do?place_no=${p.place_no}">
 						<img src="/img/${fn:split(p.place_img, '|')[0]}" width="300" height="300" id="img"> 
 						<div class="caption">
-							<b>${p.place_name}</b>
+							<b>${p.place_name} - 조회수 : ${p.place_hit }</b>
 							<br>
 							<p>
 								<c:set var="string" value="${p.place_detail}"/>
