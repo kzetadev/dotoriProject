@@ -27,7 +27,6 @@ public class Board_PostController {
 		// 해당 부분에 Member_Info 추가해야 함
 		mav.addObject("list", board_postService.listBoard_Post());
 		mav.addObject("headtag", head_tagService.listHead_Tag());
-		mav.addObject("list", board_postService.listBoard_Post());
 		mav.setViewName("listBoard_Post");
 		return mav;
 	}
