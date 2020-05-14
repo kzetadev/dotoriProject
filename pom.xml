@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>dotoriProject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>dotoriProject</name>
-	<description>Demo project for Spring Boot</description>
+   <artifactId>dotoriProject</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <name>dotoriProject</name>
+   <description>Demo project for Spring Boot</description>
 
 	<properties>
 		<security.version>4.2.7.RELEASE</security.version>
@@ -21,17 +21,6 @@
 	</properties>
 
 	<dependencies>
-
- 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency> 
 
 		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
 			</dependency> -->
@@ -45,34 +34,24 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-core</artifactId> 
-			<version>${security.version}</version> </dependency> -->
+<!-- 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${security.version}</version>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config 
-			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
-			<version>${security.version}</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${security.version}</version>
+		</dependency>-->
 
-	<!-- 	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
+		<!-- aop -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>  -->
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
 
 
 		<dependency>
@@ -82,13 +61,21 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs 
-			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-taglibs</artifactId> 
-			<version>${security.version}</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${security.version}</version>
+		</dependency>-->
 
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test 
-			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-test</artifactId> 
-			<version>${security.version}</version> <scope>test</scope> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<version>${security.version}</version>
+			<scope>test</scope>
+		</dependency>
+ -->
 
 
 
@@ -157,9 +144,9 @@
 
 		<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
+		    <groupId>javax.inject</groupId>
+		    <artifactId>javax.inject</artifactId>
+		    <version>1</version>
 		</dependency>
 
 	</dependencies>

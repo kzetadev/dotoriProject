@@ -9,32 +9,39 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-//로그인 id /pwd 유효성 검사
-$('#loginBtn').click(function() {
-	var id = $('#inputId').val();
-	var pwd = $('#inputPwd').val();
-		$.ajax({
-		type : 'post', // 비밀번호의 값이 url에 표시되면 안 되기 때문에 보안을 위해 POST 방법으로 값을 보낸다
-		url : '${pageContext.request.contextPath}/login.do',
-		data : {
-			mem_id : id,
-			mem_pwd : pwd,
-			},
-			success : function(data) {
-				if (data == 0) { //로그인 실패시
-					console.log(data);
-					$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');					
-				} <!-- else if (data == -3) { // 아이디가 사용중이라면?
-				  console.log(data);
-				  location.href = '${pageContext.request.contextPath}/user/redundant?mem_id=' + id + '&mem_Pwd=' + pwd + '&remember_memId=' + remember_us;						
-				}--> else { //로그인 성공시
-					console.log(data);
-					alert("로그인 성공")
-					//location.href = '${pageContext.request.contextPath}/user/storeChoice';
+	//로그인 id /pwd 유효성 검사
+	$('#loginBtn').click(function() {
+		var id = $('#inputId').val();
+		var pwd = $('#inputPwd').val();
+			$.ajax({
+			type : 'post', // 비밀번호의 값이 url에 표시되면 안 되기 때문에 보안을 위해 POST 방법으로 값을 보낸다
+			url : '${pageContext.request.contextPath}/login.do',
+			data : {
+				mem_id : id,
+				mem_pwd : pwd,
+				},
+				success : function(data) {
+					if (data == 0) { //로그인 실패시
+						console.log(data);
+						$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');					
+					} <!-- else if (data == -3) { // 아이디가 사용중이라면?
+					  console.log(data);
+					  location.href = '${pageContext.request.contextPath}/user/redundant?mem_id=' + id + '&mem_Pwd=' + pwd + '&remember_memId=' + remember_us;						
+					}--> else { //로그인 성공시
+						console.log(data);
+						alert("로그인 성공")
+						//location.href = '${pageContext.request.contextPath}/user/storeChoice';
+					}
 				}
-			}
+			});
 		});
-	});
+	
+	// 로그인 성공시 db에 로그 추가
+	$("#loginBtn").click(function(){
+		$.ajax("/insertLog.do", function(data){
+			alert(data)
+		})
+	})
 })
 </script>
 </head>
@@ -43,7 +50,6 @@ $('#loginBtn').click(function() {
 	<c:if test="${not empty cookie.user_check}">
 		<c:set value="checked" var="checked"/>
 	</c:if>
-
 
 <div class="container">
 	<div class="area_inputs wow fadeIn">

@@ -6,11 +6,12 @@
 	
 	<!-- 마이페이지에 담기 -->
 	<insert id="insertFavorite" parameterType="java.util.Map">
+		<!-- insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no},#{place_name},#{place_img},#{place_type}) -->
 		insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no})
 	</insert>
 
 	<!-- 마이페이지 찜 리스트를 보여줌  -->
-  	<select id="selectAll" resultType="Member_FavoriteVo">
+  	<select id="selectAll" resultType="com.information.vo.Member_FavoriteVo">
     	SELECT mf.favorite_no, pt.place_type_name, pi.place_name
   			FROM member_favorite mf, member_info mi, place_theme pt, place_info pi
  				WHERE mf.mem_no = mi.mem_no
@@ -22,7 +23,7 @@
   	</select>
   
   	<!-- 마이페이지 찜 리스트에서 원하는 항목을 선택 (상세정보 페이지) 필요 없을듯 -->
-  	<select id="detail" resultType="Member_FavoriteVo">
+  	<select id="detail" resultType="com.information.vo.Member_FavoriteVo">
   		select * from member_favorite where member_favorite = #{member_favorite}	
   	</select>
   

@@ -8,18 +8,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유 게시판 글 목록</title>
+<title>전체게시판 글 목록</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#btnInsert").click(function() {
-			location.href = "/board/insertBoard_Post"
+			location.href = "/insertBoard_Post.do";
 		});
 	});
-	
+
 </script>
 </head>
 <body>
-	<h2>자유</h2>
+	<h2>전체</h2>
+	
 	<table border="1" width="80%">
 		<tr>
 			<th>글번호</th>
@@ -33,7 +35,9 @@
 			<tr>
 				<td>${v.board_no}</td>
  				<td>${v.head_tag_name}</td>
-				<td>${v.board_title}</td>
+				<td>
+					<a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+				</td>
 				<td>${v.mem_nickname}</td>
 				<td>${v.board_date}</td>
 				<td>${v.board_hit}</td>

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="place_info">
 	<!-- place_type이 0이면 명소, 1이면 음식점, 2이면 숙소의 데이터 모두 출력 (순서대로)  -->
-  <select id="selectAll" resultType="Place_InfoVo">
+  <select id="selectAll" resultType="com.information.vo.Place_InfoVo">
   	select * from place_info order by place_no
     <!-- select * from place_info where place_type = #{place_type} order by place_no -->
     
@@ -23,19 +23,21 @@
   				where r between #{start, jdbcType=VARCHAR} and #{end, jdbcType=VARCHAR}
   </select> -->
   
-  <!-- 페이징 처리 + 정렬 -->
-  <select id="selectPage" resultType="Place_InfoVo">
-  	select place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail from 
-  		(select rownum r, place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail from 
+  <!-- 페이징 처리 + 검색 + 정렬 -->
+  <select id="selectPage" resultType="com.information.vo.Place_InfoVo">
+  	select place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail, place_hit from 
+  		(select rownum r, place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail, place_hit from 
   			(select * from place_info where place_type = #{place_type}
   			<if test="keyword != null and keyword != ''"> <!-- 장소명과 내용, 주소만 가지고 검색 설정 -->
   				and ${searchColumn} like '%' || #{keyword} || '%'
   			</if> 
+  			<if test="sortColumn == place_hit"> <!-- 인식 안됨 -->
+  				order by place_hit desc
+  			</if>
   			<if test="sortColumn != null">
   			  	order by ${sortColumn}
   			</if>
   				)) where r between #{start} and #{end}
-  				
   </select>
   
     <!-- 전체 몇페이지까지 있는지 확인 (페이징 처리 관련) -->
@@ -46,8 +48,13 @@
 	</if>
   </select>
   
-  	<!-- 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동  -->
-  <select id="detail" resultType="Place_InfoVo">
+  	<!-- 클릭시 조회수 증가 -->
+  <update id="updateHit">
+  	update place_info set place_hit = place_hit + 1 where place_no = #{place_no}
+  </update>
+  
+  	<!-- 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동 -->
+  <select id="detail" resultType="com.information.vo.Place_InfoVo">
   	select * from place_info where place_no = #{place_no}
   </select>
 </mapper>

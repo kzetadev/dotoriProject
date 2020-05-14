@@ -37,6 +37,17 @@
 					<li><a href="faq.do">FAQ</a></li>
 					<li><a href="qa.do">Q & A</a></li>
 				</ul>
+				<!-- 검색창 구현 -->
+				<form class="navbar-form navbar-left" action="/detailPlace_Info.do?">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="검색어를 입력해주세요.">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
 				
 				<!-- sign, login -->
 				<ul class="nav navbar-nav navbar-right"> 
