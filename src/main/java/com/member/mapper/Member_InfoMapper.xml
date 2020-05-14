@@ -6,7 +6,9 @@
 	<select id="login" resultType="Member_InfoVo"> <!-- 로그인 -->
 		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select> 
-	
+	<select id="selectMember" resultType="Member_InfoVo">
+   		 select * from member_info where mem_id=#{username}
+ 	 </select>
 	<insert id="insert"> <!-- 회원가입 -->
 		insert into member_info(mem_no,mem_id,mem_pwd,mem_email,mem_email_agree,mem_name,mem_info_open,mem_regidate,mem_nickname) values(seq_mem_no.nextval,#{mem_id},#{mem_pwd},#{mem_email},#{mem_email_agree},#{mem_name},#{mem_info_open},sysdate,#{mem_nickname})
 	</insert>

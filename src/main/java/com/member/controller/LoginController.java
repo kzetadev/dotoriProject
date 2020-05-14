@@ -21,9 +21,11 @@ public class LoginController {
 	@Autowired
 	private Member_InfoDao dao;
 	
-	public void setDaa(Member_InfoDao dao) {
+	
+	public void setDao(Member_InfoDao dao) {
 		this.dao = dao;
 	}
+
 	@RequestMapping("/loginCheck.do")
 	public Member_InfoVo loginCheck(HttpServletRequest request, Member_InfoVo vo) {
 		System.out.println(vo);

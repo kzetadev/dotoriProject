@@ -29,6 +29,12 @@ public class Member_InfoManager {
 		session.close();
 		return infovo;
 	}
+	public static Member_InfoVo selectMember(String username) {
+		SqlSession session = factory.openSession();
+		Member_InfoVo vo = session.selectOne("mem_info.selectMember", username);
+		session.close();
+		return vo;
+	}
 	public static int insertJoin(Member_InfoVo vo) { //회원가입
 		int re = -1;
 		SqlSession session = factory.openSession();
