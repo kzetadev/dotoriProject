@@ -21,12 +21,12 @@ public class Member_Login_LogController {
 	@RequestMapping("/insertLog.do")
 	public ModelAndView insertLog(Member_Login_LogVo mll, HttpServletRequest request) {
 		ModelAndView m = new ModelAndView();
-		String ip = request.getRemoteAddr();
-		String time = new Date().toLocaleString();
-		System.out.println("요청한 ip : " + ip);
-		System.out.println("요청한 시간 : " + time);
-		m.addObject("ip", ip);
-		m.addObject("time", time);
+		String mem_ip = request.getRemoteAddr();
+		String login_datetime = new Date().toLocaleString();
+		System.out.println("요청한 ip : " + mem_ip);
+		System.out.println("요청한 시간 : " + login_datetime);
+		m.addObject("mem_ip", mem_ip);
+		m.addObject("login_datetime", login_datetime);
 		System.out.println(m);
 		return m;
 	}

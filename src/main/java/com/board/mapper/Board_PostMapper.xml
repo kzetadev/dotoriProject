@@ -41,5 +41,4 @@
 	<select id="selectHead_Tag" resultType="com.board.vo.Head_TagVo">
 		select head_tag_no from head_tag
 	</select>
-	
 </mapper>
