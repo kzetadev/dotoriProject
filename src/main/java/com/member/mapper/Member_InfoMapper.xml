@@ -6,7 +6,7 @@
 	<select id="login" resultType="com.member.vo.Member_InfoVo"> <!-- 로그인 -->
 		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select> 
-	<select id="selectMember" resultType="Member_InfoVo">
+	<select id="selectMember" resultType="com.member.vo.Member_InfoVo">
    		 select * from member_info where mem_id=#{username}
  	 </select>
 	<insert id="insert"> <!-- 회원가입 -->
