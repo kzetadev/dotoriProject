@@ -6,7 +6,7 @@
  
 	<!-- 게시글 목록 -->
 	<select id="select" resultType="com.board.vo.Board_PostVo">
-		SELECT b.board_no, h.head_tag_name, b.board_title, 
+		SELECT b.board_no, b.board_kinds, h.head_tag_name, b.board_title, 
 		m.mem_nickname, b.board_date, b.board_hit 
 		FROM board_post b, member_info m, head_tag h
 		WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no   
