@@ -17,26 +17,11 @@
 		});
 	});
 
-// 	//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해
-// 	function list(page){
-// 		location.href = "${path}/listBoard_Post?curPage="+page+"&searchOption-${map.searchOption}"+"&keyword=${map.keyword}";
-// 	}
 </script>
 </head>
 <body>
 	<h2>전체</h2>
 	
-<%-- 	<form name="form1" method="post" action="${path}/listBoard_Post"> --%>
-<!-- 		<select name="searchOption"> -->
-<%-- 			<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/> >제목+이름+내용</option> --%>
-<%-- 			<option value="mem_nickname" <c:out value="${map.searchOption == 'mem_nickname'?'selected':''}"/> >이름</option> --%>
-<%-- 			<option value="board_content" <c:out value="${map.searchOption == 'board_content'?'selected':''}"/> >내용</option> --%>
-<%-- 			<option value="board_title" <c:out value="${map.searchOption == 'board_title'?'selected':''}"/> >제목</option> --%>
-<!-- 		</select> -->
-<%-- 		<input name="keyword" value="${map.keyword}"> --%>
-<!-- 		<input type="submit" value="조회"> -->
-<!-- 	</form> -->
-
 	<table border="1" width="80%">
 		<tr>
 			<th>글번호</th>
