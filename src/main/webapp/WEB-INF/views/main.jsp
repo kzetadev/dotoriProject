@@ -11,6 +11,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 <link rel="stylesheet" href="css/slick-theme.css">
+<style type="text/css">
+	.slick-track .slick-cloned .slick-slide .slick-active{
+		height:400px;
+	}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
