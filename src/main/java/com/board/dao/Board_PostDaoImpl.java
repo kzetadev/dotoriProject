@@ -27,7 +27,7 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	@Override
 	public Board_PostVo detailBoard_Post(int board_no) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectOne("board.detail", board_no);
+		return sqlSessionTemplate.selectOne("board_post.detail", board_no);
 	}
 
 	@Override
