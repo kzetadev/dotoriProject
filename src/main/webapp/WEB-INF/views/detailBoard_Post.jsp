@@ -80,8 +80,11 @@
 				location.href="/listBoard_Post.do"
 			})
 			$("#btnAnswer").click(function(){
-				$.ajax("/insertBoard_Comment.do", {success:function(){
-					alert("댓글 작성 완료")
+				var comment = {
+					
+				}
+				$.post("/insertBoard_Comment.do", data:comment, {success:function(){
+					location.href="detailBoard_Post.do
 				}})
 			})
 		})

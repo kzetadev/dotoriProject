@@ -37,6 +37,58 @@ $(document).ready(function(){
 	</div>
 	<div>
 	</div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<div class="youtubebox">
+				<iframe width="380" height="240" 
+						src="https://www.youtube.com/embed/DzMmEc8WW2w" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+			    </iframe>
+				<p class="youtube_title">상경러들이 추천하는 서울 핫플 BEST5</p>
+		    </div>
+	    </div>
+	    
+		<div class="col-md-8">
+			<!-- 날씨 api -->
+	    </div>
+    </div>
+    
+  <div class="container text-center">    
+  	<h3>인기 서울 장소 TOP 6</h3>
+  	<br>
+  	<div class="row">
+    	<div class="col-sm-2">
+	      	<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+  	    	<p>Partner 1</p>
+   		</div>
+   		
+    	<div class="col-sm-2"> 
+      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      		<p>Partner 2</p>    
+    	</div>
+    	
+    	<div class="col-sm-2"> 
+      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      		<p>Partner 3</p>
+    	</div>
+    
+    	<div class="col-sm-2"> 
+      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      		<p>Partner 4</p>
+    	</div> 
+    	
+    	<div class="col-sm-2"> 
+      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      		<p>Partner 5</p>
+    	</div>     
+    
+    	<div class="col-sm-2"> 
+      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      		<p>Partner 6</p>
+    	</div> 
+  </div>
+</div><br>
 </body>
 </html>
 </layoutTag:layout>
