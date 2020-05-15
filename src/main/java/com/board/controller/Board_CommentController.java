@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.Board_CommentService;
@@ -45,7 +46,7 @@ public class Board_CommentController {
 	}
 	
 	// x번 회원이 x번 게시물에 대한 댓글을 달음 (부정확)
-	@RequestMapping("/insertBoard_Comment.do")
+	@RequestMapping(value="/insertBoard_Comment.do", method=RequestMethod.POST)
 	public ModelAndView insertBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
 		int re = board_commentService.insertBoard_Comment(vo);

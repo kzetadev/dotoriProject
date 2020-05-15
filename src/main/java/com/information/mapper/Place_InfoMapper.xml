@@ -57,4 +57,10 @@
   <select id="detail" resultType="com.information.vo.Place_InfoVo">
   	select * from place_info where place_no = #{place_no}
   </select>
+  
+  	<!-- 메인 페이지 인기 서울 명소 TOP 6 -->
+  <!-- <select id="mainTop" resultType="com.information.vo.Place_InfoVo">
+  	select rownum, place_img, place_name, place_hit from 
+    	(select * from place_info order by place_hit desc) where rownum <= 6
+  </select> -->
 </mapper>
