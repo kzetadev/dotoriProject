@@ -21,7 +21,7 @@
 
 	<!-- 게시글 상세 -->
 	<select id="detail" resultType="com.board.vo.Board_PostVo">
-		select * from board_post where board_no = #{board_no}
+		select board_title, board_date, board_content from board_post where board_no = #{board_no}
 	</select>
 
 	<!-- 게시글 수정 -->
@@ -36,6 +36,11 @@
 	<delete id="delete">
 		delete from board_post where board_no=#{board_no}
 	</delete>
+	
+	<!-- 게시글 조회수 증가 -->
+	<update id="updateHit">
+		update board_post set board_hit = board_hit + 1 where board_no = #{board_no}
+	</update>
 	
 	<!-- 말머리 목록 -->
 	<select id="selectHead_Tag" resultType="com.board.vo.Head_TagVo">

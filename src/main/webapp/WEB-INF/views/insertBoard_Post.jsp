@@ -15,6 +15,15 @@
 <link rel="stylesheet" href="/css/summernote-lite.css">
 <script type="text/javascript">
 	$(function() {
+// 		// 써머노트 에디터
+// 		$('#summernote').summernote({
+// 			  height: 300,                 // 에디터 높이
+// 			  minHeight: null,             // 최소 높이
+// 			  maxHeight: null,             // 최대 높이
+// 			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+// 			  lang: "ko-KR",					// 한글 설정
+// 		});
+		
 		$("#btnSave").click(function() {
 			var title = $("#title").val();
 			var content = $("#summernote").val();
@@ -22,24 +31,13 @@
 				alert("제목을 입력하세요.");
 				document.f.title.focus();
 				return;
-			}
+			};
 			if(content == "") {
 				alert("내용을 입력하세요.");
 				document.f.content.focus();
 				return;
-			}
+			};
 			document.f.submit();
-		});
-
-		// 써머노트 에디터
-		$('#summernote').summernote({
-			  height: 300,                 // 에디터 높이
-			  minHeight: null,             // 최소 높이
-			  maxHeight: null,             // 최대 높이
-			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-			  lang: "ko-KR",					// 한글 설정
-			  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-	          
 		});
 
 		// 복사기능 체크
@@ -67,14 +65,13 @@
 		</select>
 		<div>
 			제목
-			<input name="title" id="title" size="80" value="${board_title }" placeholder="제목을 입력해주세요.">
+			<input name="title" id="title" size="80" value="${board_title }" placeholder="제목을 입력해주세요."><br>
 		</div>
-		<div>
-			내용
-			<textarea name="editordata" id="summernote" value="${board_content }"></textarea><br>
-		</div>
+		내용
+		<textarea name="content" id="content" value="${board_content }"></textarea><br>
+<%-- 		<textarea name="editordata" id="summernote" value="${board_content }"></textarea><br> --%>
 		<form name="cc">
-			<input type="checkbox" name="c" value="복사 가능"><br>
+			복사 가능<input type="checkbox" name="c" value="복사 가능"><br>
 		</form>
 		<div style="width:650px; text-align: center;">
 			<button type="button" id="btnSave">확인</button>

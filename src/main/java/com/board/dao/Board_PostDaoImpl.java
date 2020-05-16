@@ -42,4 +42,9 @@ public class Board_PostDaoImpl implements Board_PostDao {
 		return sqlSessionTemplate.delete("board_post.delete", vo);
 	}
 
+	@Override
+	public void updateHit(int board_no) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("board_post.updateHit", board_no);
+	}
 }
