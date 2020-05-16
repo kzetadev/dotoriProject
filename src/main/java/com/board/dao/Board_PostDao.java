@@ -15,5 +15,7 @@ public interface Board_PostDao {
 	int updateBoard_Post(Board_PostVo vo);
 	// 게시글 삭제
 	int deleteBoard_Post(Board_PostVo vo);
+	// 게시글 조회수 증가
+	void updateHit(int board_no);
 }
 

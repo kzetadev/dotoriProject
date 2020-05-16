@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -44,4 +45,8 @@ public class Board_PostServiceImpl implements Board_PostService {
 		return board_postDao.deleteBoard_Post(vo);
 	}
 
+	@Override
+	public void updateHit(int board_no) {
+		board_postDao.updateHit(board_no);
+	}
 }
