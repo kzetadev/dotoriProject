@@ -4,14 +4,62 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_post">
  
-	<!-- 게시글 목록 -->
+	<!-- 게시글 목록 
 	<select id="select" resultType="com.board.vo.Board_PostVo">
 		SELECT b.board_no, b.board_kinds, h.head_tag_name, b.board_title, 
 		m.mem_nickname, b.board_date, b.board_hit 
 		FROM board_post b, member_info m, head_tag h
 		WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no   
 		order by b.board_no desc
-	</select>
+	</select> -->
+	   <!-- 게시글 목록 -->   
+   <select id="select" resultType="com.board.vo.Board_PostVo">
+      SELECT
+       *
+       FROM (
+         SELECT 
+            A.*,
+            rn AS rnum,
+            COUNT(*) OVER() AS totcnt
+            FROM (
+               SELECT rownum rn
+                    , b.board_no
+                    , h.head_tag_name
+                    , b.board_title
+                    , b.board_content
+                    , m.mem_nickname
+                    , b.board_kinds
+                    , b.board_date
+                    , b.board_hit
+               FROM board_post b, member_info m, head_tag h
+               WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no  
+               
+               
+            <if test="searchOption == 1"> <!-- 전체 -->   
+               <if test="keyword != null and keyword != ''"> <!-- 검색조건 -->
+                    AND (b.board_title LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%' OR b.board_content LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%')
+                 </if> 
+            </if>   
+            
+            <if test="searchOption == 2"> <!-- 제목 -->
+               <if test="keyword != null and keyword != ''"> <!-- 검색조건 -->
+                  AND b.board_title LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%'
+               </if>
+            </if>   
+
+
+            <if test="searchOption == 3"> <!-- 제목 -->
+               <if test="keyword != null and keyword != ''"> <!-- 검색조건 -->
+                  AND b.board_content LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%'
+               </if>
+            </if>   
+            
+               
+               order by b.board_no DESC
+            )A
+          ) <![CDATA[ where rnum > 0 and rnum <= 10]]>
+   </select>  
+   <!-- 페이징 처리 아직 안되서, 현재 1~10번 한 페이지만 보여집니다. -->
 
 	<!-- 게시글 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->

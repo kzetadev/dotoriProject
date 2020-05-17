@@ -16,12 +16,32 @@
 		$("#btnInsert").click(function() {
 			location.href = "/insertBoard_Post.do";
 		});
+
+		$("#btnSelect").click(function() {
+	         var sel1 = document.getElementById("sel1").value;
+	         var sel2 = document.getElementById("sel2").value;
+	         var keyword2 = sel1+"@"+sel2;
+
+	         alert(keyword2);
+	         
+	         location.href = "/listBoard_Post.do?search="+encodeURI(keyword2);
+	      });
+			
 	});
 
 </script>
 </head>
 <body>
 	<h2>전체</h2>
+	
+	  <select id = "sel1">
+      <option value = "1"> 전체 </option>
+      <option value = "2"> 제목 </option>
+      <option value = "3"> 내용 </option>
+   </select>
+   
+   <input type = "TEXT" id = "sel2" size = '20'>
+   <button id="btnSelect">조회</button>
 	
 	<table border="1" width="80%">
 		<tr>
