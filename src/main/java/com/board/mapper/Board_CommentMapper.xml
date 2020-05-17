@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_comment">
 
+	<!-- 게시글 상세보기 하단 댓글 목록 -->
+	<select id="selectDetail" resultType="com.board.vo.Board_CommentVo">
+		SELECT comment_no, m.mem_no, bc.board_no, comment_content, comment_date 
+		FROM board_comment bc, board_post bp, member_info m
+		WHERE bc.board_no = bp.board_no AND m.mem_no = bp.mem_no
+		AND bc.board_no = #{bc.board_no}
+		ORDER BY comment_no
+	</select>
+
 	<!-- 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기 -->
   <select id="selectAll" resultType="com.board.vo.Board_CommentVo">
     select * from board_comment where mem_no = 

@@ -77,6 +77,8 @@
 	
 	<hr>
 	
+	<!-- 댓글 목록 보이게 추가해야 함 -->
+	
 	<!-- 댓글 -->
 	<div class="form-comment-group">
 		<div>

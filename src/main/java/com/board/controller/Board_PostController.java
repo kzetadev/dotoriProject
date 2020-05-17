@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.board.service.Board_CommentService;
 import com.board.service.Board_PostService;
 import com.board.service.Head_TagService;
+import com.board.vo.Board_CommentVo;
 import com.board.vo.Board_PostVo;
 
 @RestController 
@@ -21,6 +23,8 @@ public class Board_PostController {
 	private Head_TagService head_tagService;
 //	@Resource(name="member_infoService")
 //	private Member_InfoService member_infoService;
+	@Resource(name="board_commentService")
+	private Board_CommentService board_commentService;
 
 	// 게시글 목록
 	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
@@ -64,6 +68,7 @@ public class Board_PostController {
 		return mav;
 	}
 	
+	/*
 	// 게시글 상세
 	@RequestMapping(value = "/detailBoard_Post.do")
 	public ModelAndView detailBoard_Post(int board_no) {
@@ -71,6 +76,19 @@ public class Board_PostController {
 		mav.setViewName("detailBoard_Post");
 		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
 		board_postService.updateHit(board_no);
+		return mav;
+	}
+	*/
+	
+	// 게시글 상세
+	@RequestMapping(value = "/detailBoard_Post.do")
+	public ModelAndView detailBoard_Post(int board_no) {
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("detailBoard_Post");
+		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
+		board_postService.updateHit(board_no);
+		List<Board_CommentVo> clist = board_commentService.listComment(board_no);
+		mav.addObject("clist",board_commentService.listComment(board_no));
 		return mav;
 	}
 	
