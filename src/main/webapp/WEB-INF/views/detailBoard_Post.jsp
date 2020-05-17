@@ -26,6 +26,16 @@
 			list-style: none;
 		}
 	</style>
+	<script type="text/javascript">
+		$(function(){
+			$("#btnUpdate").click(function(){
+				location.href = "/updateBoard_Post.do";
+			})
+			$("#btnDelete").click(function(){
+				location.href = "/deleteBoard_Post.do";
+			})
+		})
+	</script>
 </head>
 <body>
 	<h2>상세 보기</h2>
@@ -59,8 +69,12 @@
 					<textarea class="form-control" rows="10" readonly="readonly" style="background-color: white">${detail.board_content }</textarea><br>
 				</div>
 			</div>
+		<button id="btnUpdate">수정</button>
+		<button id="btnDelete">삭제</button>
 		</div>
+		
 	</form>
+	
 	<hr>
 	
 	<!-- 댓글 -->
