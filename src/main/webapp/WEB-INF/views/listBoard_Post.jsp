@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 
 <layoutTag:layout>
@@ -39,7 +40,9 @@
 					<a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
 				</td>
 				<td>${v.mem_nickname}</td>
-				<td>${v.board_date}</td>
+				<td>
+					<fmt:formatDate value="${v.board_date}" pattern="yyyy-MM-dd" />
+				</td>
 				<td>${v.board_hit}</td>
 			</tr>
 		</c:forEach>

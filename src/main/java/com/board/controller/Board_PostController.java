@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,20 +50,21 @@ public class Board_PostController {
 	
 	// 게시글 작성 폼
 	@RequestMapping(value = "/insertBoard_Post.do", method = RequestMethod.GET)
-	public ModelAndView insertBoard_PostForm() {
+	public ModelAndView insertBoard_PostForm(@RequestParam(value = "board_no", defaultValue = "0") int board_no) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("insert", board_postService.listBoard_Post());
-		mav.addObject("insert", head_tagService.listHead_Tag());
+		mav.addObject("board_no", board_no);
 		return mav;
 	}
 	
 	// 게시글 작성
 	@RequestMapping(value = "/insertBoard_Post.do", method = RequestMethod.POST)
 	public ModelAndView insertBoard_PostSubmit(Board_PostVo vo) {
+		String msg = "게시물 등록에 실패했습니다.";
 		ModelAndView mav = new ModelAndView();
 		int re = board_postService.insertBoard_Post(vo);
 		if(re > 0) {
 			mav.setViewName("redirect:/listBoard_Post.do");
+			msg = "게시물 등록에 성공했습니다.";
 		}
 //		mav.addObject("re", re);
 		return mav;

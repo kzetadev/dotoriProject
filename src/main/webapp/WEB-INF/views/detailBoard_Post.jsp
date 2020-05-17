@@ -29,10 +29,10 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#btnUpdate").click(function(){
-				location.href = "/updateBoard_Post.do";
+				location.href = "updateBoard_Post?board_no="+board_no;
 			})
 			$("#btnDelete").click(function(){
-				location.href = "/deleteBoard_Post.do";
+// 				location.href = "/deleteBoard_Post.do";
 			})
 		})
 	</script>
