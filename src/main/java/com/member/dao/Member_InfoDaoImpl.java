@@ -51,5 +51,10 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("mem_info.checkOverNickname", mem_nickname);
 	}
+	@Override
+	public int checkOverEmail(String mem_email) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("mem_info.checkOverEmail", mem_email);
+	}
 
 }

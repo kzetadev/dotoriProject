@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class MainController {
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
 	@RequestMapping("/main.do")
-	public ModelAndView main() {
+	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		int pageNUM = 1;
 		int place_type = 0;

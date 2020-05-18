@@ -21,5 +21,14 @@ public class JoinServiceImpl implements JoinService {
 		// TODO Auto-generated method stub
 		return member_infoDao.checkOverId(mem_id);
 	}
-
+	@Override
+	public int checkOverNickName(String mem_nickname) {
+		// TODO Auto-generated method stub
+		return member_infoDao.checkOverNickName(mem_nickname);
+	}
+	@Override
+	public int checkOverEmail(String mem_email) {
+		// TODO Auto-generated method stub
+		return member_infoDao.checkOverEmail(mem_email);
+	}
 }

@@ -26,7 +26,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/login.do")
-	public void login() {
+	public void login(HttpServletRequest request) {
 		
 	}
 	

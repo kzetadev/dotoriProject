@@ -15,6 +15,8 @@ public interface Member_InfoDao {
 	int checkOverId(String mem_id);
 //	//닉네임 중복체크
 	int checkOverNickName(String mem_nickname);
+	//이메일 중복 체크
+	int checkOverEmail(String mem_email);
 ////	//유저 로그인 메소드
 //	Member_InfoVo loginMem(String mem_id);
 
