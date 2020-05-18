@@ -87,12 +87,19 @@
 	
 	<hr>
 	
-	<!-- 댓글 목록 보이게 추가해야 함 -->
-	
 	<!-- 댓글 -->
 	<div class="form-comment-group">
 		<div>
 			<label for="comment">댓글</label>
+		</div>
+		<div>
+			<ul>
+				<c:forEach var="v" items="${clist}">
+					<li>${v.comment_content }</li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div>
 			<textarea class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
 		</div>
 		<button class="btn btn-default" id="btnWrite">글쓰기</button>
