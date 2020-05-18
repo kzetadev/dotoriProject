@@ -50,4 +50,24 @@ public class Board_PostServiceImpl implements Board_PostService {
 	public void updateHit(int board_no) {
 		board_postDao.updateHit(board_no);
 	}
+	
+	@Override
+	public List<Board_PostVo> mainBoard_Post1(Board_PostVo vo){
+		return board_postDao.mainBoard_Post1(vo);
+	}
+	
+	@Override
+	public List<Board_PostVo> mainBoard_Post2(Board_PostVo vo){
+		return board_postDao.mainBoard_Post2(vo);
+	}
+	
+	@Override
+	public List<Board_PostVo> mainBoard_Post3(Board_PostVo vo){
+		return board_postDao.mainBoard_Post3(vo);
+	}
+	 
+	@Override
+	public List<Board_PostVo> mainBoard_Post4(Board_PostVo vo){
+		return board_postDao.mainBoard_Post4(vo);
+	}
 }

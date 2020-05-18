@@ -17,5 +17,13 @@ public interface Board_PostDao {
 	int deleteBoard_Post(Board_PostVo vo);
 	// 게시글 조회수 증가
 	void updateHit(int board_no);
+	// 커뮤니티 메인 / 최신글
+	List<Board_PostVo> mainBoard_Post1(Board_PostVo vo);
+	// 커뮤니티 메인 / 인기글
+	List<Board_PostVo> mainBoard_Post2(Board_PostVo vo);
+	// 커뮤니티 메인 / 인기글
+	List<Board_PostVo> mainBoard_Post3(Board_PostVo vo);
+	// 커뮤니티 메인 / 인기글
+	List<Board_PostVo> mainBoard_Post4(Board_PostVo vo);
 }
 

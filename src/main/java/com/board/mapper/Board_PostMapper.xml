@@ -94,4 +94,51 @@
 	<select id="selectHead_Tag" resultType="com.board.vo.Head_TagVo">
 		select head_tag_no from head_tag
 	</select>
+	
+	<!-- 게시판 메인1. 최신글 -->
+	<select id="selectMain1" resultType="com.board.vo.Board_PostVo">
+		SELECT board_content
+		FROM (SELECT *
+			FROM board_post
+			ORDER BY board_date DESC)
+		<![CDATA[ WHERE ROWNUM <= 5 ]]>
+	</select>
+	
+	<!-- 게시판 메인2. 인기글 -->
+	<select id="selectMain2" resultType="com.board.vo.Board_PostVo">
+		SELECT board_content
+		FROM (SELECT *
+			FROM board_post
+			ORDER BY board_hit DESC
+		)
+		<![CDATA[ WHERE ROWNUM <= 5 ]]>
+	</select>
+	
+	<!-- 게시판 메인3. 후기 -->
+	<select id="selectMain3" resultType="com.board.vo.Board_PostVo">
+		SELECT board_content
+		FROM (
+			SELECT
+			ROW_NUMBER() OVER (ORDER BY a.board_date DESC) AS NUM,
+			a.board_content
+			FROM board_post a
+			WHERE board_kinds=2
+			ORDER BY board_date DESC
+			)
+		<![CDATA[ WHERE ROWNUM <= 5 ]]>
+	</select>
+	
+	<!-- 게시판 메인4. 동행 -->
+	<select id="selectMain4" resultType="com.board.vo.Board_PostVo">
+		SELECT board_content
+		FROM (
+			SELECT
+			ROW_NUMBER() OVER (ORDER BY a.board_date DESC) AS NUM,
+			a.board_content
+			FROM board_post a
+			WHERE board_kinds=3
+			ORDER BY board_date DESC
+			)
+		<![CDATA[ WHERE ROWNUM <= 5 ]]>
+	</select>
 </mapper>
