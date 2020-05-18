@@ -8,29 +8,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Main</title>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-<link rel="stylesheet" href="css/slick-theme.css">
+<link rel="stylesheet" href="/css/slick-theme.css">
+<link rel="stylesheet" href="/css/youtube.css">
 <style type="text/css">
 	.slick-track .slick-cloned .slick-slide .slick-active{
 		height:400px;
+	}
+	.youtubebox{
+		padding-left: 50px;
+		
 	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	$(".slider").slick({
-		dots: true
-        , infinite: true
-        , centerMode: true
-        , slidesToShow: 5
-		, slidesToScroll: 1
-		, autoplay: true
-		, arrows: true
-		, autoplaySpeed: 1000
+	$(document).ready(function(){
+		$(".slider").slick({
+			dots: true
+	        , infinite: true
+	        , centerMode: true
+	        , slidesToShow: 5
+			, slidesToScroll: 1
+			, autoplay: true
+			, arrows: true
+			, autoplaySpeed: 1000
+		});
 	});
-});
 </script>
 </head>
 <body>
@@ -54,43 +59,92 @@ $(document).ready(function(){
 		    </div>
 	    </div>
 	    
-		<div class="col-md-8">
-			<!-- 날씨 api -->
+	    <div class="col-md-4">
+		    <div class="youtubebox">
+	        	<iframe width="380" height="240"
+						src="https://www.youtube.com/embed/5Lj8vLR_BTw" frameborder="0"
+			    		allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+			   			allowfullscreen>
+		      	</iframe>
+		        <p class="youtube_title">서울여행 추천명소 31</p>
+	        </div>
+	   	</div>
+        
+        <div class="col-md-4">
+			<div class="youtubebox">
+	        	<iframe width="380" height="240"
+			            src="https://www.youtube.com/embed/HdXIFdmr-7U" frameborder="0"
+			            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+			            allowfullscreen>
+		        </iframe>
+		    	<p class="youtube_title">서울여행 총정리</p>
+	        </div>        
 	    </div>
-    </div>
+	</div>
+	   
+	    
+	<!-- <div class="col-md-12">
+		<script type="text/javascript">
+			$(function(){
+				var apiURI = "http://api.openweathermap.org/data/2.5/weather?q="+@@+"&appid="+@@;
+				$.ajax({
+					url: apiURI,
+			        dataType: "json",
+			       	type: "GET",
+			        async: "false",
+			        success: function(resp) {
+			            console.log(resp);
+			            console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+			            console.log("현재습도 : "+ resp.main.humidity);
+			            console.log("날씨 : "+ resp.weather[0].main );
+			            console.log("상세날씨설명 : "+ resp.weather[0].description );
+			            console.log("날씨 이미지 : "+ resp.weather[0].icon );
+			            console.log("바람   : "+ resp.wind.speed );
+			            console.log("나라   : "+ resp.sys.country );
+			            console.log("도시이름  : "+ resp.name );
+			            console.log("구름  : "+ (resp.clouds.all) +"%" );
+			            <p>var imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
+			              	$("html컴포넌트").attr("src", imgURL);
+			            </p>     
+			        }
+				})
+			})
+		</script>
+	</div> -->
+    
     
   <div class="container text-center">    
   	<h3>인기 서울 장소 TOP 6</h3>
   	<br>
   	<div class="row">
     	<div class="col-sm-2">
-	      	<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-  	    	<p>Partner 1</p>
+	      	<img src="/img/SPAO_1.jpg" class="img-responsive">
+  	    	<b>스파오</b>
    		</div>
    		
     	<div class="col-sm-2"> 
-      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      		<p>Partner 2</p>    
+      		<img src="/img/${p.place_img}" class="img-responsive">
+      		<b>${p.place_name }</b>
     	</div>
     	
     	<div class="col-sm-2"> 
-      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      		<p>Partner 3</p>
+      		<img src="/img/${p.place_img}" class="img-responsive">
+      		<b>${p.place_name }</b>
     	</div>
     
     	<div class="col-sm-2"> 
-      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      		<p>Partner 4</p>
+      		<img src="/img/${p.place_img}" class="img-responsive">
+      		<b>${p.place_name }</b>
     	</div> 
     	
     	<div class="col-sm-2"> 
-      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      		<p>Partner 5</p>
+      		<img src="/img/${p.place_img}" class="img-responsive">
+      		<b>${p.place_name }</b>
     	</div>     
     
     	<div class="col-sm-2"> 
-      		<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      		<p>Partner 6</p>
+      		<img src="/img/${p.place_img}" class="img-responsive">
+      		<b>${p.place_name }</b>
     	</div> 
   </div>
 </div><br>

@@ -12,27 +12,22 @@ import com.information.vo.Member_FavoriteVo;
 public class Member_FavoriteDaoImpl implements Member_FavoriteDao {
 	@Inject
 	protected SqlSessionTemplate sqlSessionTemplate;
+	
+	// 마이페이지에 담기
 	@Override
 	public int insertMember_Favorite(Member_FavoriteVo f) {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.insert("member_favorite.insertFavorite", f);
 	}
 
+	// 마이페이지 찜 리스트를 보여줌
 	@Override
 	public List<Member_FavoriteVo> listMember_Favorite() {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("member_favorite.selectAll");
 	}
 
-	@Override
-	public Member_FavoriteVo detailMember_Favorite(int favorite_no) {
-		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectOne("member_favorite.delete", favorite_no);
-	}
-
+	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@Override
 	public int deleteMember_Favorite(int favorite_no) {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.delete("member_favorite.delete", favorite_no);
 	}
 

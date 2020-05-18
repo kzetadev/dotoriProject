@@ -14,27 +14,22 @@ public class Member_FavoriteServiceImpl implements Member_FavoriteService {
 	@Inject
 	@Resource(name="member_favoriteDao")
 	protected Member_FavoriteDao member_favoriteDao;
+	
+	// 마이페이지에 담기
 	@Override
 	public int insertMember_Favorite(Member_FavoriteVo f) {
-		// TODO Auto-generated method stub
 		return member_favoriteDao.insertMember_Favorite(f);
 	}
 
+	// 마이페이지 찜 리스트를 보여줌
 	@Override
 	public List<Member_FavoriteVo> listMember_Favorite() {
-		// TODO Auto-generated method stub
 		return member_favoriteDao.listMember_Favorite();
 	}
 
-	@Override
-	public Member_FavoriteVo detailMember_Favorite(int favorite_no) {
-		// TODO Auto-generated method stub
-		return member_favoriteDao.detailMember_Favorite(favorite_no);
-	}
-
+	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@Override
 	public int deleteMember_Favorite(int favorite_no) {
-		// TODO Auto-generated method stub
 		return member_favoriteDao.deleteMember_Favorite(favorite_no);
 	}
 
