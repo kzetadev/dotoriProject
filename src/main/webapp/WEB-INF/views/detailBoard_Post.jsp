@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>게시글 상세</title>
 	<style type="text/css">
 		.comment_box{
 	
@@ -25,23 +25,33 @@
 		.comment_li{
 			list-style: none;
 		}
+		#btnUpdate, btnDelete {
+			position: relative;
+			margin-left: 500px;
+		}
 	</style>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
-			$("#btnUpdate").click(function(){
-				location.href = "updateBoard_Post?board_no="+board_no;
-			})
-			$("#btnDelete").click(function(){
-// 				location.href = "/deleteBoard_Post.do";
-			})
-		})
+		$(function() {
+			var board_no = $("#board_no").val();
+			$("#btnUpdate").click(function() {
+				location.href = "/updateBoard_Post.do?board_no="+board_no;
+			});
+			
+			$("#btnDelete").click(function() {
+				console.log(board_no);
+				var re = confirm("삭제하시겠습니까?");
+				location.href = "/deleteBoard_Post.do?board_no="+board_no;
+				alert("삭제했습니다!");
+			});
+		});
 	</script>
 </head>
 <body>
 	<h2>상세 보기</h2>
 	<form name="f" method="post">
+		<input type="hidden" id="board_no" name="board_no" value="${detail.board_no }">
 		<div id="container">
-			<input type="hidden" name="board_no" value="${detail.board_no }">
 			<div>
 			 	<label for="write">작성자 : </label>
 			 	<a href="/myPage.do">
@@ -69,11 +79,11 @@
 					<textarea class="form-control" rows="10" readonly="readonly" style="background-color: white">${detail.board_content }</textarea><br>
 				</div>
 			</div>
-		<button id="btnUpdate">수정</button>
-		<button id="btnDelete">삭제</button>
 		</div>
 		
 	</form>
+	<button id="btnUpdate">수정</button>
+	<button id="btnDelete">삭제</button>
 	
 	<hr>
 	
@@ -92,20 +102,19 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			$("#btnList").click(function(){
-				location.href="/listBoard_Post.do"
-			})
-			$("#btnAnswer").click(function(){
+			$("#btnList").click(function() {
+				location.href="/listBoard_Post.do";
+			});
+			$("#btnAnswer").click(function() {
 				var comment = {
 					
 				}
-				$.post("/insertBoard_Comment.do", data:comment, {success:function(){
-					location.href="detailBoard_Post.do
-				}})
-			})
-		})
+				$.post("/insertBoard_Comment.do", comment, function() {
+					location.href="detailBoard_Post.do";
+				});
+			});
+		});
 	</script>
 </body>
 </html>
-
 </layoutTag:layout>

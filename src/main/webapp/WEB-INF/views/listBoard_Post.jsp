@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>전체게시판 글 목록</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#btnInsert").click(function() {
@@ -46,7 +46,7 @@
 			<th>말머리</th>
 			<th>글제목</th>
 			<th>작성자</th>
-			<th>작성일</th>
+			<th>게시일</th>
 			<th>조회수</th>
 		</tr>
 		<c:forEach var="v" items="${list}">

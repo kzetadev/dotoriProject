@@ -74,9 +74,7 @@
 
 	<!-- 게시글 수정 -->
 	<update id="update">
-		update board_post set board_kinds=#{board_kinds},
-		board_title=#{board_title}, board_content=#{board_content},
-		board_copy=#{board_copy}, board_update_date=sysdate
+		update board_post set board_title=#{board_title}, board_content=#{board_content}, board_copy=#{board_copy}, board_update_date=sysdate
 		where board_no=#{board_no}
 	</update>
 

@@ -43,11 +43,7 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	         return sqlSessionTemplate.selectList("board_post.select", search);            
 	         
 	      }
-	               
-
 	      
-
-
 	   }
 
 //	public List<Board_PostVo> listBoard_Post() {

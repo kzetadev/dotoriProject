@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 글쓰기</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- <script src="/js/summernote-lite.js"></script> -->
 <!-- <script src="/js/lang/summernote-ko-KR.js"></script> -->
 <!-- <link rel="stylesheet" href="/css/summernote-lite.css"> -->
@@ -105,7 +105,7 @@
 	<h2>글쓰기</h2>
 	<form name="f" action="/insertBoard_Post.do" method="post">
 	<input type="hidden" name="board_no" value="${board_no }">
-	<table border="1" width="80%">
+	<table border="1">
 <!-- 		select-option 변경 예시 -->
 <!-- 		<select id="select1" onchange="itemChange()"> -->
 <!-- 			<option>키보드</option> -->
@@ -117,15 +117,15 @@
 <!-- 		</select> -->
 
 		<tr>
-			<td>제목</td>
-			<td><input name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required"></td>
-		</tr>>
-		<tr>
 			<select name="board_kinds">
 				<option value="${board_kinds=1}">자유</option>
 				<option value="${board_kinds=2}">후기</option>
 				<option value="${board_kinds=3}">동행</option>
 			</select>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required"></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
@@ -143,9 +143,9 @@
 		<div style="width:650px; text-align: center;">
 			<button type="submit" id="btnSave">등록</button>
 			<button type="reset">취소</button>
+			<a href="listBoard_Post.do">목록으로</a>
 		</div>
 	</form>
-	<a href="listBoard_Post.do">목록으로</a>
 </body>
 </html>
 

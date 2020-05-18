@@ -9,73 +9,82 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 수정</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- <script src="/js/summernote-lite.js"></script> -->
 <!-- <script src="/js/lang/summernote-ko-KR.js"></script> -->
 <!-- <link rel="stylesheet" href="/css/summernote-lite.css"> -->
 <script type="text/javascript">
 	$(function() {
-// 		// 써머노트 에디터
-// 		$('#summernote').summernote({
-// 			  height: 300,                 // 에디터 높이
-// 			  minHeight: null,             // 최소 높이
-// 			  maxHeight: null,             // 최대 높이
-// 			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-// 			  lang: "ko-KR",					// 한글 설정
-// 		});
+// 		// 써머노트
+// 		$("#content").summernote({
+// 			disableDragAndDrop : true,
+// 			height: 700,
+// 			minHeight: null,
+// 			maxHeight: null,
+// 			focus: true,
+// 			lang: "ko-KR",
+// 			placeholder: "본문 내용을 입력해주세요.",
+// 			toolbar: [
+// 			    ['style', ['style']],
+// 			    ['font', ['fontsize','bold', 'italic', 'underline', 'clear']],
+// 			    ['color', ['color']],
+// 			    ['insert', ['picture','video']],
+// 			    ['para', ['ul', 'ol', 'paragraph']],
+// 			    ['table', ['table']]
+			    
+// 			 ],
+// 			callbacks: {
+// 				onImageUpload : function(files){
+// 					console.log(files);
+// 					$.each(files, function(idx, file){
+// 						uploadSummernoteImageFile(file, $("#content"));
+// 						console.log(file);
+// 					});
+// 				}	
+// 			}
+// 		})
 		
-		$("#btnSave").click(function() {
-			var title = $("#title").val();
-			var content = $("#summernote").val();
-			if(title == "") {
+		$("#btnUpdate").click(function() {
+			var board_title = $("#board_title").val();
+			var board_content = $("#board_content").val();
+			if(board_title == "") {
 				alert("제목을 입력하세요.");
-				document.f.title.focus();
+				document.f.board_title.focus();
 				return;
 			};
-			if(content == "") {
+			if(board_content == "") {
 				alert("내용을 입력하세요.");
-				document.f.content.focus();
+				document.f.board_content.focus();
 				return;
 			};
-			document.f.submit();
+			alert("수정되었습니다.");
 		});
-
-		// 복사기능 체크
-		function CheckCopy("form") {
-			//'확인' 버튼을 클릭했을 때 실행되는 메서드
-	        var msg = "";
-
-	        if(form.c.checked)
-		        msg += form.c.value + "\n";
-
-	        alert(msg);
-		}		
 	});
 </script>
 </head>
 <body>
-	<h2>글쓰기</h2>
-	<form name="f" action="/insertBoard_Post.do" method="post">
-		글번호<input type="hidden" name="no" value="${board_no }">
-		<select name="selectBox" id="selectBox">
-			<c:forEach var="b" items="${list }">
-				게시판 <option value=${b.board_kinds }>
-				말머리 <option value="${b.head_tag_name }">
-			</c:forEach>
-		</select>
-		<div>
-			제목
-			<input name="title" id="title" size="80" value="${board_title }" placeholder="제목을 입력해주세요."><br>
-		</div>
-		내용
-		<textarea name="content" id="content" value="${board_content }"></textarea><br>
-<%-- 		<textarea name="editordata" id="summernote" value="${board_content }"></textarea><br> --%>
-		<form name="cc">
-			복사 가능<input type="checkbox" name="c" value="복사 가능"><br>
-		</form>
-		<div style="width:650px; text-align: center;">
-			<button type="button" id="btnSave">확인</button>
+	<h2>수정</h2>
+	<form action="/insertBoard_Post.do" method="post">
+	<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
+	
+	<table border="1">
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}"></td>
+		</tr>
+		<tr>
+			<td>작성자</td>
+			<td><input type="text" name="mem_no" readonly="readonly" value="1"></td>
+		</tr>
+		<tr>
+			<td>내용</td>
+			<td><textarea name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required" rows="30%" cols="80%">${update.board_content}</textarea></td>
+		</tr>
+	</table>
+	<div style="width:650px; text-align: center;">
+			<button type="submit" id="btnUpdate">수정</button>
 			<button type="reset">취소</button>
+			<a href="listBoard_Post.do">목록으로</a>
 		</div>
 	</form>
 </body>
