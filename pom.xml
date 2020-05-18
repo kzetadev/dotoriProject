@@ -76,10 +76,6 @@
 			<scope>test</scope>
 		</dependency>
  -->
-
-
-
-
 		<dependency>
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>ojdbc8</artifactId>

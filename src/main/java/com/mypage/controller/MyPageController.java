@@ -13,7 +13,7 @@ public class MyPageController {
 		return m;
 	}
 	
-	// 내가 쓴 글 & 댓글 목록
+	// 내가 쓴 글댓글 목록
 	@RequestMapping("/myPage_Contents.do")
 	public ModelAndView myPage_Contents() {
 		ModelAndView m = new ModelAndView();
