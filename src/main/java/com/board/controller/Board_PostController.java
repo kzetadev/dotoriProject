@@ -42,19 +42,11 @@ public class Board_PostController {
 	   // 게시글 목록
 	   @RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
 	   public ModelAndView listBoard_Post(String search) {
-	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트1 : " + search);
-	      
 	      List<Board_PostVo> list = board_postService.listBoard_Post(search);
-	      
-	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트2 list : " + list);
-	      
 	      ModelAndView mav = new ModelAndView();
 	      // 해당 부분에 Member_Info 추가해야 함
-	      
 	      mav.setViewName("listBoard_Post");
 	      mav.addObject("list", list);
-	      
-	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트3 list : " + list);
 	      mav.addObject("headtag", head_tagService.listHead_Tag());
 	      return mav;
 	   }

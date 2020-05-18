@@ -18,7 +18,6 @@ public class Board_PostServiceImpl implements Board_PostService {
 	@Override
 	 public List<Board_PostVo> listBoard_Post(String search) {
 	      // TODO Auto-generated method stub
-	      System.out.println("board_postService 화면에서 받은 str : " + search);
 	      return board_postDao.listBoard_Post(search);
 	   }
 

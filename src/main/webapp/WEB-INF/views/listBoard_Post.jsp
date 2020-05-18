@@ -21,9 +21,6 @@
 	         var sel1 = document.getElementById("sel1").value;
 	         var sel2 = document.getElementById("sel2").value;
 	         var keyword2 = sel1+"@"+sel2;
-
-	         alert(keyword2);
-	         
 	         location.href = "/listBoard_Post.do?search="+encodeURI(keyword2);
 	      });
 			
