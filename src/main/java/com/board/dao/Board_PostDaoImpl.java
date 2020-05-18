@@ -17,9 +17,6 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	@Override
 	   public List<Board_PostVo> listBoard_Post(String search) {
 	      // TODO Auto-generated method stub
-	      System.out.println("Board_PostDaoImpl str : " + search);
-	      
-	      System.out.println("Board_PostDaoImpl 체크포인트1 str: " + search);
 	      String word = search;
 	      String searchOption = "";
 	      String keyword = "";      
@@ -31,7 +28,6 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	            
 	            if(i == 1) {
 	            	keyword = getSearch[1];
-	               System.out.println("Board_PostDaoImpl 체크포인트3 str1 : "+ searchOption + " str2 : " + keyword);
 	            }   
 	         }
 	         
@@ -39,16 +35,11 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	         map.put("searchOption", searchOption);
 	         if(!"".equals(keyword)) {
 	            map.put("keyword", keyword);
-	            System.out.println("Board_PostDaoImpl 체크포인트4 map.get() : "+ map.get("searchOption") + " : " + map.get("keyword"));
 	         }
-	         
-	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
-	         System.out.println("Board_PostDaoImpl 쿼리결과 : " + aaa);
 	         return sqlSessionTemplate.selectList("board_post.select", map);         
 	         
 	      }else {
 	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", search);      
-	         System.out.println("Board_PostDaoImpl 쿼리결과 : " + aaa);
 	         return sqlSessionTemplate.selectList("board_post.select", search);            
 	         
 	      }
