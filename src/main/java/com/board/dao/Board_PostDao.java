@@ -6,7 +6,7 @@ import com.board.vo.Board_PostVo;
 
 public interface Board_PostDao {
 	// 게시글 목록
-	List<Board_PostVo> listBoard_Post();
+	List<Board_PostVo> listBoard_Post(String search);
 	// 게시글 등록
 	int insertBoard_Post(Board_PostVo vo);
 	// 게시글 상세
@@ -15,5 +15,7 @@ public interface Board_PostDao {
 	int updateBoard_Post(Board_PostVo vo);
 	// 게시글 삭제
 	int deleteBoard_Post(Board_PostVo vo);
+	// 게시글 조회수 증가
+	void updateHit(int board_no);
 }
 

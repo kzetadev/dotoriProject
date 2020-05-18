@@ -5,6 +5,9 @@ import java.util.List;
 import com.board.vo.Board_CommentVo;
 
 public interface Board_CommentDao {
+	//게시글 상세보기 하단 댓글 목록
+	List<Board_CommentVo> listComment(int board_no);
+	
 	// 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기
 	List<Board_CommentVo> listBoard_Comment();
 	

@@ -14,6 +14,13 @@ public class Board_CommentDaoImpl implements Board_CommentDao {
 	@Inject
 	protected SqlSessionTemplate sqlSessionTemplate;
 	
+	//게시글 상세보기 하단 댓글 목록
+	@Override
+	public List<Board_CommentVo> listComment(int board_no) {
+		return sqlSessionTemplate.selectList("board_comment.selectDetail", board_no);
+	}
+	
+	
 	// 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기
 	@Override
 	public List<Board_CommentVo> listBoard_Comment() {

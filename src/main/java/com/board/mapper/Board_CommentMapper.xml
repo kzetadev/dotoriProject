@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_comment">
 
+	<!-- 게시글 상세보기 하단 댓글 목록 -->
+	<select id="selectDetail" resultType="com.board.vo.Board_CommentVo">
+		SELECT comment_no, m.mem_no, bc.board_no, comment_content, comment_date 
+		FROM board_comment bc, board_post bp, member_info m
+		WHERE bc.board_no = bp.board_no AND m.mem_no = bp.mem_no
+		AND bc.board_no = #{bc.board_no}
+		ORDER BY comment_no
+	</select>
+
 	<!-- 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기 -->
   <select id="selectAll" resultType="com.board.vo.Board_CommentVo">
     select * from board_comment where mem_no = 
@@ -18,7 +27,7 @@
   	<!-- x번 회원이 x번 게시물에 대한 댓글을 달음 (부정확) -->
   <insert id="insert">
   	insert into board_comment(comment_no, mem_no, board_no, comment_content, comment_date, comment_secret, board_ref, board_level, board_step) values(
-    	seq_comment_no.nextval, seq_mem_no.nextval, seq_board_no.nextval, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
+    	seq_comment_no.nextval, #{mem_no}, #{board_no}, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
   </insert>
 
 	<!-- x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함) -->

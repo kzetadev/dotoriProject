@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,11 @@ public class Board_PostServiceImpl implements Board_PostService {
 	@Resource(name="board_postDao")
 	protected Board_PostDao board_postDao;
 	@Override
-	public List<Board_PostVo> listBoard_Post() {
-		// TODO Auto-generated method stub
-		return board_postDao.listBoard_Post();
-	}
+	 public List<Board_PostVo> listBoard_Post(String search) {
+	      // TODO Auto-generated method stub
+	      return board_postDao.listBoard_Post(search);
+	   }
+
 
 	@Override
 	public int insertBoard_Post(Board_PostVo vo) {
@@ -44,4 +46,8 @@ public class Board_PostServiceImpl implements Board_PostService {
 		return board_postDao.deleteBoard_Post(vo);
 	}
 
+	@Override
+	public void updateHit(int board_no) {
+		board_postDao.updateHit(board_no);
+	}
 }
