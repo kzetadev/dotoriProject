@@ -16,10 +16,12 @@ public class Board_PostServiceImpl implements Board_PostService {
 	@Resource(name="board_postDao")
 	protected Board_PostDao board_postDao;
 	@Override
-	public List<Board_PostVo> listBoard_Post() {
-		// TODO Auto-generated method stub
-		return board_postDao.listBoard_Post();
-	}
+	 public List<Board_PostVo> listBoard_Post(String search) {
+	      // TODO Auto-generated method stub
+	      System.out.println("board_postService 화면에서 받은 str : " + search);
+	      return board_postDao.listBoard_Post(search);
+	   }
+
 
 	@Override
 	public int insertBoard_Post(Board_PostVo vo) {
