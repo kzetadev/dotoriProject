@@ -84,4 +84,24 @@ public class Board_PostDaoImpl implements Board_PostDao {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.update("board_post.updateHit", board_no);
 	}
+	
+	@Override
+	public List<Board_PostVo> mainBoard_Post1(Board_PostVo vo){
+		return sqlSessionTemplate.selectList("board_post.selectMain1", vo);
+	}
+	
+	@Override
+	public List<Board_PostVo> mainBoard_Post2(Board_PostVo vo){
+		return sqlSessionTemplate.selectList("board_post.selectMain2", vo);
+	}
+
+	@Override
+	public List<Board_PostVo> mainBoard_Post3(Board_PostVo vo){
+		return sqlSessionTemplate.selectList("board_post.selectMain3", vo);
+	}
+
+	@Override
+	public List<Board_PostVo> mainBoard_Post4(Board_PostVo vo){
+		return sqlSessionTemplate.selectList("board_post.selectMain4", vo);
+	}
 }

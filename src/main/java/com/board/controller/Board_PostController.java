@@ -154,5 +154,21 @@ public class Board_PostController {
 		}
 		return mav;
 	}
+	
+	//커뮤니티 메인 / 1.최신글  2.인기글  3.후기  4.동행
+		@RequestMapping("/mainBoard_Post.do")
+		public ModelAndView mainBoard_Post1(Board_PostVo vo) {
+			ModelAndView mav = new ModelAndView();
+			List<Board_PostVo> mlist1 = board_postService.mainBoard_Post1(vo);
+			List<Board_PostVo> mlist2 = board_postService.mainBoard_Post2(vo);
+			List<Board_PostVo> mlist3 = board_postService.mainBoard_Post3(vo);
+			List<Board_PostVo> mlist4 = board_postService.mainBoard_Post4(vo);
+			mav.setViewName("mainBoard_Post");
+			mav.addObject("mlist1", mlist1);
+			mav.addObject("mlist2", mlist2);
+			mav.addObject("mlist3", mlist3);
+			mav.addObject("mlist4", mlist4);
+			return mav;
+		}
 }
 
