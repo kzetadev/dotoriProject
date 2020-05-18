@@ -25,7 +25,7 @@ public class Member_FavoriteController {
 	@Autowired
 	private HttpSession session; 
 	
-	// 찜 장소 추가
+	// 마이페이지에 담기
 	@RequestMapping("/insertMember_Favorite.do")
 	public ModelAndView InsertMember_Favorite(Member_FavoriteVo f) {
 		System.out.println("찜목록 추가 컨트롤러 동작함");
@@ -38,7 +38,7 @@ public class Member_FavoriteController {
 		return m;
 	}
 	
-	// 찜목록 리스트
+	// 마이페이지 찜 리스트를 보여줌
 	@RequestMapping("/myPage_Favorite.do")
 	public ModelAndView listMember_Favorite(Map map) {
 		System.out.println("컨트롤러 동작함");
@@ -48,15 +48,7 @@ public class Member_FavoriteController {
 		return m;
 	}
 	
-	// 찜목록 상세보기 (해당 정보게시판 상세페이지로 이동) // 필요 없을수도?
-//	@RequestMapping("/detailPlace_Info.do")
-//	public ModelAndView detailMember_Favorite(int favorite_no) {
-//		ModelAndView m = new ModelAndView();
-//		m.addObject("f",f_dao.detailMember_Favorite(favorite_no));
-//		return m;
-//	}
-	
-	// 해당 찜한 것 삭제
+	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@RequestMapping("/deleteMember_Favorite.do")
 	public ModelAndView deleteMember_Favorite(int favorite_no) {
 		ModelAndView m = new ModelAndView();

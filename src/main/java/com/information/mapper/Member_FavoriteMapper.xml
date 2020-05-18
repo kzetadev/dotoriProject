@@ -22,11 +22,6 @@
  						<!-- ORDER BY mf.favorite_no, pt.place_type, pi.place_no -->
   	</select>
   
-  	<!-- 마이페이지 찜 리스트에서 원하는 항목을 선택 (상세정보 페이지) 필요 없을듯 -->
-  	<select id="detail" resultType="com.information.vo.Member_FavoriteVo">
-  		select * from member_favorite where member_favorite = #{member_favorite}	
-  	</select>
-  
   	<!-- 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택 -->
  	<delete id="delete">
   		delete from member_favorite where favorite_no = #{favorite_no}

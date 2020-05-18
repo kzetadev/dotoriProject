@@ -60,7 +60,19 @@
   
   	<!-- 메인 페이지 인기 서울 명소 TOP 6 -->
   <!-- <select id="mainTop" resultType="com.information.vo.Place_InfoVo">
-  	select rownum, place_img, place_name, place_hit from 
-    	(select * from place_info order by place_hit desc) where rownum <= 6
+  	<![CDATA[
+  		select rownum, place_img, place_name, place_hit from 
+    		(select * from place_info order by place_hit desc) where rownum <= 6
+   	]]> 	
   </select> -->
+  
+    <!-- 메인 페이지 인기 서울 명소 TOP 6 -->
+  <select id="mainTop" resultType="com.information.vo.Place_InfoVo">
+  	<![CDATA[
+  		select place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail, place_hit from 
+    		(select place_no, place_name, place_img, place_tel, place_open, place_price, place_row, place_col, place_addr, place_type, place_detail, place_hit from 
+    			(select * from place_info order by place_hit desc)) where rownum <= 6
+   	]]> 		
+  </select>
+  
 </mapper>

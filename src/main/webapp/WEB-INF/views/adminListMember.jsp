@@ -42,6 +42,22 @@
 					}});
 				}
 			})
+
+
+			   $("#btnDelete").click(function() {
+			        console.log(board_no);
+			        var board_no = $(this).attr("board_no");
+			        var a = confirm("삭제하시겠습니까?");
+			            if(a == true){
+							$.ajax({url:"/deleteBoard.do", data:{board_no:board_no}, success:function(result){
+								if(result == 1){
+									alert("삭제했습니다!");
+						               location.href = "/deleteBoard_Post.do?board_no="+board_no;
+								}
+							}})
+			            }
+			          }
+			     });
 		})
 	</script>
 </head>

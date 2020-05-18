@@ -3,10 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="place_theme">
-	<!-- 여행 장소 테마  -->
+	<!-- 여행 장소 테마 - 정렬  -->
   <select id="selectAll" resultType="com.information.vo.Place_ThemeVo">
     select * from place_theme order by place_type
   </select>
+  
+  	<!-- 여행 장소 테마 - 어느 테마인지 찾기 (명소, 음식점, 숙소)  -->
   <select id="getPlaceTheme" resultType="com.information.vo.Place_ThemeVo">
   	select * from place_theme where place_type = #{place_type}
   </select>
