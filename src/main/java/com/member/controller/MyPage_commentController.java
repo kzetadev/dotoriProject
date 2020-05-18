@@ -1,6 +1,7 @@
 package com.member.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ public class MyPage_commentController {
 	
 	//내가 쓴 댓글 목록
 	@RequestMapping(value = "/myPage_comment.do", method = RequestMethod.GET)
-	public ModelAndView listMyPage_comment() {
+	public ModelAndView listMyPage_comment(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", commentService.myPage_comment());
 		mav.setViewName("myPage_comment");
