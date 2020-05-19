@@ -144,21 +144,24 @@ a {
 
 
 				<div id="tab2" class="tabcontent">
-			<table>
-						<tr><td>글 번호</td></tr>
-						<tr><td>제목</td></tr>
-						<tr><td>닉네임</td></tr>
-						<tr><td>작성일</td></tr>
-						<tr><td>조회수</td></tr>
-						
-<!-- 				<c:forEach var="v" items="${list}">
+			<table width="80%">
+				<thead>
+					<tr>
+						<th>글 번호</th>
+						<th>제목</th>
+						<th>닉네임</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+ 			<%--	<c:forEach var="v" items="${list}">
 					<tr><td>${ }</td></tr>
 					<tr><td>${ }</td></tr>
 					<tr><td>${ }</td></tr>
 					<tr><td>${ }</td></tr>
 					<tr><td>${ }</td></tr>
-				</c:forEach> -->
-						
+				</c:forEach>
+			 --%>		
 						
 			</table>
 				</div>
@@ -166,12 +169,15 @@ a {
 
 
 				<div id="tab3" class="tabcontent">
-					<table>
-						<tr><th>댓글 번호</th></tr>
-						<tr><th>댓글 내용</th></tr>
-						<tr><th>닉네임</th></tr>
-						<tr><th>댓글 작성일</th></tr>
-					
+					<table width="80%">
+						<thead>
+							<tr>
+								<th>댓글 번호</th>
+								<th>댓글 내용</th>
+								<th>닉네임</th>
+								<th>댓글 작성일</th>
+							</tr>
+						</thead>
 				 	<c:forEach var="list" items="${list}">
 						<tr>
 							<td><c:out value="${list.comment_no}"></c:out></td>
