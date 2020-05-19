@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.member.service.MyPage_commentService;
 import com.member.vo.MyPage_CommentVo;
+import com.member.vo.MyPage_PostVo;
 
 @Controller
 public class MyPageController {
@@ -38,6 +39,16 @@ public class MyPageController {
 		int mem_no  = 1;
 		List<MyPage_CommentVo> list = commentService.list(mem_no);
 		mav.addObject("list", list);
+		return mav;
+	}
+	
+	//내가 쓴 글 목록
+	public ModelAndView list_post(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView("myPage_Contents");
+		logger.info("list_post");
+		int mem_no = 1;
+		List<MyPage_PostVo> list_post = commentService.list_post(mem_no);
+		mav.addObject("list_post", list_post);
 		return mav;
 	}
 	
