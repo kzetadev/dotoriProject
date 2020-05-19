@@ -4,8 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myPage">
 	<!-- 내가 쓴 댓글 -->
-	<select id="comment" resultType="com.member.vo.Member_InfoVo">
-		select comment_no, comment_content, comment_date
-		where mem_no=(select mem_no from member_info where mem_id = #{mem_id});
+	<select id="list" resultType="com.member.vo.MyPage_CommentVo">
+		select bc.comment_no, b.board_no,
+		b.board_title, mi.mem_nickname, bc.comment_date, bc.comment_content
+		from board_comment bc
+		inner join board_post b
+		on bc.board_no = b.board_no
+		inner join member_info mi
+		on bc.mem_no = mi.mem_no
+		where mi.mem_no = #{mem_no}
 	</select>
 </mapper>

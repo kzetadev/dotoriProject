@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-   <artifactId>dotoriProject</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
-   <name>dotoriProject</name>
-   <description>Demo project for Spring Boot</description>
+	<artifactId>dotoriProject</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>dotoriProject</name>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<security.version>4.2.7.RELEASE</security.version>
@@ -34,24 +34,32 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-<!-- 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${security.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-core</artifactId> 
+			<version>${security.version}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${security.version}</version>
-		</dependency>-->
+			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
+			<version>${security.version}</version> </dependency> -->
 
 		<!-- aop -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>5.2.5.RELEASE</version>
+		</dependency>
+
 
 
 		<dependency>
@@ -61,21 +69,13 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>${security.version}</version>
-		</dependency>-->
+			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-taglibs</artifactId> 
+			<version>${security.version}</version> </dependency> -->
 
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<version>${security.version}</version>
-			<scope>test</scope>
-		</dependency>
- -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test 
+			<dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-test</artifactId> 
+			<version>${security.version}</version> <scope>test</scope> </dependency> -->
 		<dependency>
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
@@ -140,9 +140,9 @@
 
 		<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
 		<dependency>
-		    <groupId>javax.inject</groupId>
-		    <artifactId>javax.inject</artifactId>
-		    <version>1</version>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
 
 	</dependencies>
