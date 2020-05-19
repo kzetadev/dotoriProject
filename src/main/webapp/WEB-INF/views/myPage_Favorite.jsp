@@ -58,7 +58,7 @@
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
 						<li class="list-group-item"><a href="myPage_Favorite.do">찜목록</a></li>
 						<li class="list-group-item"><a href="myPage_Message.do">쪽지함</a></li>
 					</ul>
