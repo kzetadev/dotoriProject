@@ -13,6 +13,14 @@ public class YoutubeAndFAQController {
 		ModelAndView m = new ModelAndView();
 		return m;
 	}
+	
+	// FAQ2 (자주 묻는 질문들
+	@RequestMapping("/etc/faq2.do")
+	public ModelAndView faq2() {
+		ModelAndView m = new ModelAndView();
+		return m;
+	}
+	
 	// contents (유튜브 영상)
 	@RequestMapping("/youtube.do")
 	public ModelAndView youtube() {
