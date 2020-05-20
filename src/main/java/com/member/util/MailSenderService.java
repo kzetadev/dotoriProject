@@ -45,6 +45,7 @@ public class MailSenderService {
 					System.out.println("mailSender map : " + map);
 					//https://zent.tistory.com/117
 					//&, + 문자가 자동 변환되어 복호화 실패하는 문제로, 해당 문자를 유니코드로 변환
+					encMem_id = encMem_id.replace("&", "%26").replace("+", "%2b");
 					encUUIDStr = encUUIDStr.replace("&", "%26").replace("+", "%2b");
 					System.out.println("uuidStr : " + uuidStr + "\tdecoded uuidStr : " + aes256.aesDecode(encUUIDStr) + "\tencUUIDStr : " + encUUIDStr);
 				}catch(Exception e) {
