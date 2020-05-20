@@ -21,7 +21,7 @@ public class Board_CommentController {
 	//private Member_InfoService member_infoService;
 	
 	// 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기
-	@RequestMapping("/myPageListBoard_Comment.do")
+	@RequestMapping("/myPage/myPageListBoard_Comment.do")
 	public ModelAndView myPageListBoard_Comment() {
 		ModelAndView m = new ModelAndView();
 		m.addObject("c_list", board_commentService.listBoard_Comment());
@@ -46,7 +46,7 @@ public class Board_CommentController {
 	}
 	
 	// x번 회원이 x번 게시물에 대한 댓글을 달음 (부정확)
-	@RequestMapping(value="/insertBoard_Comment.do", method=RequestMethod.POST)
+	@RequestMapping(value="/board/insertBoard_Comment.do", method=RequestMethod.POST)
 	public ModelAndView insertBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
 		int re = board_commentService.insertBoard_Comment(vo);
@@ -54,7 +54,7 @@ public class Board_CommentController {
 	}
 	
 	// x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함)
-	@RequestMapping("/updateBoard_Comment.do")
+	@RequestMapping("/board/updateBoard_Comment.do")
 	public ModelAndView updateBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
 		int re = board_commentService.updateBoard_Comment(vo);
@@ -62,7 +62,7 @@ public class Board_CommentController {
 	}
 	
 	// x번 회원이 x번 게시글에 쓴 댓글을 삭제 (첨부파일 삭제는 고려 안함)
-	@RequestMapping("/deleteBoard_Comment.do")
+	@RequestMapping("/board/deleteBoard_Comment.do")
 	public ModelAndView deleteBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
 		int re = board_commentService.deleteBoard_Comment(vo);

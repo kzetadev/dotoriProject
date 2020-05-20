@@ -10,25 +10,25 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <style>
-	/* Remove the navbar's default margin-bottom and rounded borders */
+	<%-- Remove the navbar's default margin-bottom and rounded borders --%>
 	.navbar {
 		margin-bottom: 0;
 		border-radius: 0;
 	}
 	
-	/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+	<%-- Set height of the grid so .sidenav can be 100% (adjust as needed) --%>
 	.row.content {
 		height: 450px
 	}
 	
-	/* Set gray background color and 100% height */
+	<%-- Set gray background color and 100% height --%>
 	.sidenav {
 		padding-top: 20px;
 		background-color: white;
 		height: 100%;
 	}
 	
-	/* On small screens, set height to 'auto' for sidenav and grid */
+	<%-- On small screens, set height to 'auto' for sidenav and grid --%>
 	@media screen and (max-width: 767px) {
 		.sidenav {
 			height: auto;
@@ -58,9 +58,9 @@
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
 					</ul>
 				</div>
 			</div>

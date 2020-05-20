@@ -6,6 +6,9 @@
 	<select id="login" resultType="com.member.vo.Member_InfoVo"> <!-- 로그인 -->
 		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select> 
+	<select id="loginById" resultType="com.member.vo.Member_InfoVo"> <!-- 시큐리티용 로그인 -->
+		select * from member_info where mem_id = #{mem_id}
+	</select> 
 	<select id="selectMember" resultType="com.member.vo.Member_InfoVo">
    		 select * from member_info where mem_id=#{username}
  	 </select>
@@ -46,4 +49,8 @@
 	<select id="isMember" resultType="com.member.vo.Member_InfoVo">
 		select * from member_info where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select>
+	<!-- 이메일 인증 완료 -->
+	<update id="emailAuth">
+		update member_info set mem_auth = #{mem_auth} where mem_no = #{mem_no}
+	</update>
 </mapper>

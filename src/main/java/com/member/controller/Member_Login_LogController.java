@@ -18,7 +18,7 @@ public class Member_Login_LogController {
 	private Member_Login_LogService member_login_logService;
 	
 	// 로그인시 로그가 기록됨
-	@RequestMapping("/insertLog.do")
+	@RequestMapping("/member/insertLog.do")
 	public ModelAndView insertLog(Member_Login_LogVo mll, HttpServletRequest request) {
 		ModelAndView m = new ModelAndView();
 		String mem_ip = request.getRemoteAddr();

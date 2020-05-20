@@ -58,8 +58,8 @@
 	<div class="slider autoplay slick-slider slick-dotted" role="toolbar">
 		<c:forEach var="p" items="${list }">
 			<div>
-				<a href="/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
-					<img src="img/${fn:split(p.place_img, '|')[0]}" height="30%">
+				<a href="/place/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
+					<img src="/img/${fn:split(p.place_img, '|')[0]}" height="30%">
 				</a>
 			</div>
 		</c:forEach>
@@ -139,7 +139,7 @@
   	<div class="row">
   		<c:forEach var="i" items="${p }">
 	  		<div class="col-sm-2">
-	    		<a href="/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
+	    		<a href="/place/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
 		      		<img src="/img/${fn:split(i.place_img, '|')[0]}" class="img-responsive" height="30">
 	  	    		<b>i.place_name</b>
 	  	    	</a>

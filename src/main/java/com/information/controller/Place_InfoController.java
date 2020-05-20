@@ -33,7 +33,7 @@ public class Place_InfoController {
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 
 	// 여행 장소 테마 - 정렬 
-	@RequestMapping(value="/listPlace_Theme", method={RequestMethod.GET}, produces="application/json")
+	@RequestMapping(value="/place/listPlace_Theme", method={RequestMethod.GET}, produces="application/json")
 	@ResponseBody
 	public String listPlace_Theme() {
 		String str = "";
@@ -44,7 +44,7 @@ public class Place_InfoController {
 	}
 	
 	// place_type별 정보 리스트 보기 + 페이징 처리 + 검색 + 정렬
-	@RequestMapping("/listPlace_Info.do")	// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
+	@RequestMapping("/place/listPlace_Info.do")	// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
 	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String keyword, String searchColumn, String sortColumn, HttpSession session) {
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
@@ -111,7 +111,7 @@ public class Place_InfoController {
 	}
 	
 	// 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동
-	@RequestMapping("/detailPlace_Info.do")
+	@RequestMapping("/place/detailPlace_Info.do")
 	public ModelAndView detailPlace_Info(int place_no) {
 		// 조회수 증가
 		place_infoService.updateHit(place_no);
@@ -122,7 +122,7 @@ public class Place_InfoController {
 	}
 	
 	// 메인 페이지 인기 서울 명소 TOP 6
-	@RequestMapping("/mainTop.do")
+	@RequestMapping("/main/mainTop.do")
 	public ModelAndView mainTop() {
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", place_infoService.mainTop());

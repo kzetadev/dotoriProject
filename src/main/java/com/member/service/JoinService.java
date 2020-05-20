@@ -11,4 +11,6 @@ public interface JoinService {
 	int checkOverNickName(String mem_nickname);
 	//이메일 중복 체크
 	int checkOverEmail(String mem_email);
+	//이메일 인증
+	int emailAuth(Member_InfoVo vo);
 }

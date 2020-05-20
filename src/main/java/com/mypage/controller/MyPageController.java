@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.member.service.MyPage_commentService;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
+import com.security.config.LoginUser;
 
 @Controller
 public class MyPageController {
@@ -25,18 +26,21 @@ public class MyPageController {
 	private MyPage_commentService commentService;
 	
 	// 마이페이지 메인
-	@RequestMapping("/myPage.do")
+	@RequestMapping("/myPage/myPage.do")
 	public ModelAndView myPage() {
 		ModelAndView m = new ModelAndView();
 		return m;
 	}
 	
 	//내가 쓴 댓글 목록
-	@RequestMapping(value = "/myPage_Content.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/myPage/myPage_Contents.do", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) throws Exception{
-		ModelAndView mav = new ModelAndView("myPage_Contents");
+		ModelAndView mav = new ModelAndView();
 		logger.info("list");
-		int mem_no  = 1;
+		int mem_no  = 0;
+		if(LoginUser.isLogin()) {
+			mem_no = LoginUser.getMember_no();
+		}
 		List<MyPage_CommentVo> list = commentService.list(mem_no);
 		mav.addObject("list", list);
 		return mav;
@@ -46,7 +50,10 @@ public class MyPageController {
 	public ModelAndView list_post(HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView("myPage_Contents");
 		logger.info("list_post");
-		int mem_no = 1;
+		int mem_no = 0;
+		if(LoginUser.isLogin()) {
+			mem_no = LoginUser.getMember_no();
+		}
 		List<MyPage_PostVo> list_post = commentService.list_post(mem_no);
 		mav.addObject("list_post", list_post);
 		return mav;
