@@ -44,6 +44,23 @@ a {
 	text-decoration: none;
 }
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#updateBtn").click(function(){
+			if(confirm("수정하시겠습니까?")){
+				document.form1.action = "${path}/member/updateMem.do";
+				document.form1.submit();
+			}
+		}
+		$("#delBtn").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				document.form1.action = "${path}/member/delMem.do";
+				document.form1.submit();
+			}
+		})
+	})
+</script>
 </head>
 <body>
 	<div class="container-fluid text-center">
@@ -69,23 +86,50 @@ a {
 			</div>
 
 			<!-- 내용 -->
-			<!--  수정 필요
+			
 			<div class="col-sm-10 text-left">
-				<form method="post">
-					<!-- <input> 프로필 변경란 
-					<input type="text" name = "mem_name" value="${login.mem_name}" readonly="readonly"> 
-					<input type="text" name="mem-id" value="${login.mem_id }" readonly="readonly">
-					<input type="text" name="mem_email" value="${login.mem_email}" readonly="readonly">
-					<input type= "text" name="mem_nickname" value="${login.mem_nickname }">
-				<!-- 	<input> 자기소개란 
-					<button type="submit" id="updateBtn">수정 하기</button>
+				<form name="form1" method="post">
+					<table>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" name = "mem_name" value="${vo.mem_name}" readonly="readonly"></td>
+					</tr>
+					
+					<tr>
+						<td>아이디</td>
+						<td><input type="text" name="mem-id" value="${vo.mem_id }" readonly="readonly"></td>
+					</tr>
+					
+					<tr>
+						<td>이메일</td>
+						<td><input type="text" name="mem_email" value="${vo.mem_email}" readonly="readonly"></td>
+					</tr>
+					
+					<tr>
+						<td>닉네임</td>
+						<td><input type= "text" name="mem_nickname" value="${vo.mem_nickname }"></td>
+					</tr>
+					
+					<!-- <input> 프로필 변경란 -->
+					 <tr>
+					 	<td colspan="2" align="center">
+					 		<input type="button" value="수정 하기" id="updateBtn">
+							<input type="button" value="회원 탈퇴" id="delBtn">
+					 	
+					 	</td>
+					 
+					 </tr>
+					
+					
+					
+				<!-- 	<input> 자기소개란 -->
+					
 				
-				
-					<input type= "text" name="password" value="${login.mem_password }">
-					<button type="submit" name="delBtn">회원 탈퇴</button>
+					<!-- <input type= "text" name="password" value="${login.mem_password }"> -->
+					</table>
 				</form>
 				
-				 -->
+		
 				
 			</div>
 		</div>

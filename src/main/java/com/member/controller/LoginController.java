@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +48,35 @@ public class LoginController {
 		
 		return mav;
 	}
+	//회원정보 수정처리
+	@RequestMapping("/member/updateMem.do")
+	public String updateMem(@ModelAttribute Member_InfoVo vo, Model model) {
+		//비밀번호 체크
+		boolean re = loginService.checkPwd(vo.getMem_id(), vo.getMem_pwd());
+		if(re) { //비밀번호가 일치할 경우 수정 처리후, 마이페이지로 리다렉
+			loginService.updateMem(vo);
+			return "redirect:/myPage/myPage_update.do";
+		}else {//비밀번호가 일치하지 않는 경우, div에 불일치 문구 출력
+			model.addAttribute("vo", vo);
+			model.addAttribute("message", "비밀번호 불일치");
+			return "member/myPage";
 	
-		
+	}
+	
+	}
+	//회원정보 삭제 처리
+	@RequestMapping("/member/delMem.do")
+	public String delMem(@RequestParam String mem_id, @RequestParam String mem_pwd, Model model) {
+		//비밀번호 체크
+		boolean re = loginService.checkPwd(mem_id, mem_pwd);
+		if(re) { //비밀번호가 맞다면 삭제처리후, 로그인 화면으로 이동
+			loginService.delMem(mem_id);
+			return "redirect:/member/login.do";
+			
+		}else { //비밀번호가 일치하지 않으면, div에 불일치 문구 출력
+			model.addAttribute("message", "비밀번호 불일치");
+			return "member/myPage";
+			
+		}
+	}
 }
