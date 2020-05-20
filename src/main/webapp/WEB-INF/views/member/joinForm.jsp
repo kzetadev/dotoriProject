@@ -198,8 +198,9 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 		jqXHR.setRequestHeader('X-CSRF-Token', token);
 	});
 	var inval_Arr = new Array(4).fill(false);
-	$("#form").submit(function(event){
-		event.preventDefault();
+// 	$("#form").submit(function(event){
+// 		event.preventDefault();
+	$("#reg_submit").click(function(){
 		console.log("가입하기 실행버튼 유효성 검사 성공")
 			//이름 정규식
 			if(nameJ.test($("#mem_name").val())){
@@ -256,12 +257,13 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 			};
 			console.log(mem_info);
 			console.log(mem_info.mem_email);
-			alert(mem_info);
+// 			alert(mem_info);
 			$.ajax({
-				url:"/memer/join.do",
+				url:"/member/join.do",
 				type:"POST",
 				data:mem_info,
 				success:function(result){
+					console.log("join result : " + result);
 					alert(result);
 				}
 			});
@@ -269,8 +271,8 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 		}else{
 			console.log("입력한 정보들을 다시 한 번 확인 해주세요")
 		}
-
-	})
+	});
+// 	})
 })
 </script>
 
@@ -280,7 +282,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 		<div class="titleStyle">
 			<h1>회원가입</h1>
 		</div>
-		<form id="form" method="POST" action="/member/join.do" name="memInfo">
+<!-- 		<form id="form" method="POST" action="/member/join.do" name="memInfo"> -->
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<!-- 세션에 저장한 소셜 아이디를 가져옴  -->
 			<c:if test="${!empty whatid }">
@@ -353,7 +355,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 						<i class="fa fa-rotate-right pr-2" aria-hidden="true"></i>초기화</a>
 			</div>
 			
-		</form>
+<!-- 		</form> -->
 		</div>
 	</body>
 </html>

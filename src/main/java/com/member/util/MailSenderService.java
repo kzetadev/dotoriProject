@@ -23,7 +23,7 @@ public class MailSenderService {
 		this.mailSender = mailSender;
 	}
 	//회원가입 후 인증메일 발송
-	public void sendAuthMail(String mem_id, ServletContext context, AES256Util aes256) {
+	public void sendAuthMail(String mem_id, String mem_email, ServletContext context, AES256Util aes256) {
 		
 		mailSender.send(new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws MessagingException{
@@ -58,7 +58,7 @@ public class MailSenderService {
 				message.setTo("kzeta@naver.com");
 				message.setSubject("회원가입 인증메일");
 				message.setText(contents, true);
-				message.addInline("myLogo", new ClassPathResource("/img/sunimg.jpg"));
+//				message.addInline("myLogo", new ClassPathResource("/img/sunimg.jpg"));
 				//세션은 해당 브라우저에만 해당하므로 컨텍스트로 유지시킴
 				//JoinController의 /mailAuth.do에서 사용.
 				context.setAttribute(mem_id, map);

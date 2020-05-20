@@ -13,8 +13,8 @@
    		 select * from member_info where mem_id=#{username}
  	 </select>
 	<insert id="insert"> <!-- 회원가입 -->
-		insert into member_info(mem_no,mem_id,mem_pwd,mem_email,mem_email_agree,mem_name,mem_info_open,mem_regidate,mem_nickname)
-		values(seq_mem_no.nextval,#{mem_id},#{mem_pwd},#{mem_email},#{mem_email_agree},#{mem_name},#{mem_info_open},sysdate,#{mem_nickname})
+		insert into member_info(mem_no,mem_id,mem_pwd,mem_email,mem_email_agree,mem_name,mem_info_open,mem_regidate,mem_nickname, mem_role)
+		values(seq_mem_no.nextval,#{mem_id},#{mem_pwd},#{mem_email},#{mem_email_agree},#{mem_name},#{mem_info_open},sysdate,#{mem_nickname}, #{mem_role})
 	</insert>
 	
 	<update id="update"><!-- 회원수정 -->
