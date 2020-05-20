@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,8 @@ public class JoinController {
 	private LoginService loginService;
 	@Resource(name="mailSenderService")
 	MailSenderService mailSenderService;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	@Resource(name="joinService")
 	private JoinService joinService;
@@ -46,8 +49,9 @@ public class JoinController {
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/member/join.do", method = RequestMethod.POST)
+	@ResponseBody
 //		public ModelAndView joinMem(Member_InfoVo vo, Model model, HttpServletRequest request, HttpSession session) {
-	public ModelAndView joinMem(Model model, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+	public String joinMem(HttpServletRequest request, Model model, HttpSession session, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		String mem_id = request.getParameter("mem_id");
 		String mem_pwd = request.getParameter("mem_pwd");
@@ -63,6 +67,8 @@ public class JoinController {
 		System.out.println(vo.getMem_nickname());
 		System.out.println(vo.getMem_pwd());
 		System.out.println(vo.getMem_email());
+		String encode_passwod = passwordEncoder.encode(vo.getMem_pwd());
+		vo.setMem_pwd(encode_passwod);
 		// 회원가입 메소드
 		int re = joinService.joinMember(vo); //저장된 객체 그대로 DB로 보낸다
 		System.out.println("re : " + re);
@@ -76,9 +82,9 @@ public class JoinController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			mailSenderService.sendAuthMail(vo.getMem_id(), request.getServletContext(), aes256);
+			mailSenderService.sendAuthMail(vo.getMem_id(), vo.getMem_email(), request.getServletContext(), aes256);
 		}
-		return mav;
+		return Integer.toString(re);
 	}
 
 	// id 중복 체크 컨트롤러

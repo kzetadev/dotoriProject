@@ -14,4 +14,5 @@ public interface MyPage_commentDao {
 	
 	//내가 쓴 글 목록
 	public List<MyPage_PostVo> list_post(int mem_no) throws Exception;
+
 }

@@ -59,21 +59,34 @@ a {
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="/myPage/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_update.do">회원 수정</a></li>
-						<li class="list-group-item"><a href="/myPage/pwd_update.do">비밀번호 변경</a></li>
+						<li class="list-group-item"><a href="myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="pwd_update.do">비밀번호 변경</a></li>
 					</ul>
 				</div>
 			</div>
 
 			<!-- 내용 -->
+			<!--  수정 필요
 			<div class="col-sm-10 text-left">
-				<h1>마이페이지 메인</h1>
-				<hr>
-				<h3>마이페이지 메인</h3>
-				<p>마이페이지 메인</p>
+				<form method="post">
+					<!-- <input> 프로필 변경란 
+					<input type="text" name = "mem_name" value="${login.mem_name}" readonly="readonly"> 
+					<input type="text" name="mem-id" value="${login.mem_id }" readonly="readonly">
+					<input type="text" name="mem_email" value="${login.mem_email}" readonly="readonly">
+					<input type= "text" name="mem_nickname" value="${login.mem_nickname }">
+				<!-- 	<input> 자기소개란 
+					<button type="submit" id="updateBtn">수정 하기</button>
+				
+				
+					<input type= "text" name="password" value="${login.mem_password }">
+					<button type="submit" name="delBtn">회원 탈퇴</button>
+				</form>
+				
+				 -->
+				
 			</div>
 		</div>
 	</div>

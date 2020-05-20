@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,7 @@ public class MyPageController {
 		mav.addObject("list_post", list_post);
 		return mav;
 	}
+
 	
 //	// 내가 쓴 글댓글 목록
 //	@RequestMapping("/myPage_Contents.do")
