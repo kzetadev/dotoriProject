@@ -35,7 +35,7 @@
 				var mem_no = $(this).attr("mem_no");
 				var a = confirm("정말로 탈퇴처리를 하시겠습니까?")
 				if(a == true){
-					$.ajax({url:"/adminDeleteMember.do", type:"POST", data:{mem_no:mem_no}, success:function(result){
+					$.ajax({url:"/admin/adminDeleteMember.do", type:"POST", data:{mem_no:mem_no}, success:function(result){
 						if(result == 1){
 							location.href = '/adminListMember.do';
 						}
@@ -49,10 +49,10 @@
 			        var board_no = $(this).attr("board_no");
 			        var a = confirm("삭제하시겠습니까?");
 			            if(a == true){
-							$.ajax({url:"/deleteBoard.do", data:{board_no:board_no}, success:function(result){
+							$.ajax({url:"/board/deleteBoard.do", data:{board_no:board_no}, success:function(result){
 								if(result == 1){
 									alert("삭제했습니다!");
-						               location.href = "/deleteBoard_Post.do?board_no="+board_no;
+						               location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
 								}
 							}})
 			            }
@@ -65,7 +65,7 @@
 	<h2><a>회원 목록</a></h2>
 	
 	<!-- 검색창 구현 -->
-	<form id="form" action="/adminListMember.do" method="post">
+	<form id="form" action="/admin/adminListMember.do" method="post">
 		<div class="input-group">
 			<div class="form-group">
 				<label for="sel"></label>
@@ -121,19 +121,19 @@
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>
-				<a href="adminListMember.do?pageNUM=${startPage-1 }" aria-label="이전">
+				<a href="/admin/adminListMember.do?pageNUM=${startPage-1 }" aria-label="이전">
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
 		</c:if>
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<li><a href="adminListMember.do?pageNUM=${i }">${i }</a></li>
+			<li><a href="/admin/adminListMember.do?pageNUM=${i }">${i }</a></li>
 		</c:forEach>
 		
 		<c:if test="${endPage < totalPage }">
 			<li>
-				<a href="adminListMember.do?pageNUM=${endPage+1 }" aria-label="다음">
+				<a href="/admin/adminListMember.do?pageNUM=${endPage+1 }" aria-label="다음">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>

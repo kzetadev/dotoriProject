@@ -15,7 +15,11 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("mem_info.login", vo);
 	}
-
+	@Override
+	public Member_InfoVo loginById(String mem_id) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("mem_info.loginById", mem_id);
+	}
 	@Override
 	public int update(Member_InfoVo vo) {
 		// TODO Auto-generated method stub
@@ -55,6 +59,11 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 	public int checkOverEmail(String mem_email) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("mem_info.checkOverEmail", mem_email);
+	}
+	@Override
+	public int emailAuth(Member_InfoVo vo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.update("mem_info.emailAuth", vo);
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class JavaWebApplicationInitializer implements WebApplicationInitializer {
@@ -18,6 +19,9 @@ public class JavaWebApplicationInitializer implements WebApplicationInitializer 
         
         ContextLoaderListener listener = new ContextLoaderListener(rootAppContext);
         servletContext.addListener(listener);
+        //시큐리티 필터 추가
+        servletContext.addFilter("springSecurityFilterChain", 
+        		new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
 //        
         AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
         servletAppContext.register(WebConfig.class);

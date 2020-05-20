@@ -35,13 +35,13 @@
 		$(function() {
 			var board_no = $("#board_no").val();
 			$("#btnUpdate").click(function() {
-				location.href = "/updateBoard_Post.do?board_no="+board_no;
+				location.href = "/board/updateBoard_Post.do?board_no="+board_no;
 			});
 			
 			$("#btnDelete").click(function() {
 				console.log(board_no);
 				var re = confirm("삭제하시겠습니까?");
-				location.href = "/deleteBoard_Post.do?board_no="+board_no;
+				location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
 				alert("삭제했습니다!");
 			});
 		});
@@ -54,7 +54,7 @@
 		<div id="container">
 			<div>
 			 	<label for="write">작성자 : </label>
-			 	<a href="/myPage.do">
+			 	<a href="/myPage/myPage.do">
 					<!-- ${detail.mem_nickname} --> 홍길동  <!-- 회원 프로필 사진 아이콘 넣기 -->
 				</a>
 			</div>
@@ -103,14 +103,14 @@
 	<script type="text/javascript">
 		$(function(){
 			$("#btnList").click(function() {
-				location.href="/listBoard_Post.do";
+				location.href="/board/listBoard_Post.do";
 			});
 			$("#btnAnswer").click(function() {
 				var comment = {
 					
 				}
-				$.post("/insertBoard_Comment.do", comment, function() {
-					location.href="detailBoard_Post.do";
+				$.post("/board/insertBoard_Comment.do", comment, function() {
+					location.href="/board/detailBoard_Post.do";
 				});
 			});
 		});

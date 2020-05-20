@@ -59,19 +59,19 @@ a {
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
 					</ul>
 				</div>
 			</div>
 
 			<!-- 내용 -->
 			<div class="col-sm-10 text-left">
-				<h1>마이페이지 메인</h1>
+				<h1>나의 쪽지함</h1>
 				<hr>
-				<h3>마이페이지 메인</h3>
-				<p>마이페이지 메인</p>
+				<h3>나의 쪽지함</h3>
+				<p>나의 쪽지함</p>
 			</div>
 		</div>
 	</div>

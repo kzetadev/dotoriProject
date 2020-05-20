@@ -5,6 +5,8 @@ import com.member.vo.Member_InfoVo;
 public interface Member_InfoDao {
 	//유저 로그인 메소드
 	Member_InfoVo login(Member_InfoVo vo);
+	//시큐리티용 로그인
+	Member_InfoVo loginById(String mem_id);
 	int update(Member_InfoVo vo);
 	int delete(int mem_no);
 	//유저 회원가입 매소드
@@ -17,6 +19,8 @@ public interface Member_InfoDao {
 	int checkOverNickName(String mem_nickname);
 	//이메일 중복 체크
 	int checkOverEmail(String mem_email);
+	//이메일 인증
+	int emailAuth(Member_InfoVo vo);
 ////	//유저 로그인 메소드
 //	Member_InfoVo loginMem(String mem_id);
 

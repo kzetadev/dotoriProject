@@ -14,14 +14,14 @@
 <script type="text/javascript">
 	$(function() {
 		$("#btnInsert").click(function() {
-			location.href = "/insertBoard_Post.do";
+			location.href = "/board/insertBoard_Post.do";
 		});
 
 		$("#btnSelect").click(function() {
 	         var sel1 = document.getElementById("sel1").value;
 	         var sel2 = document.getElementById("sel2").value;
 	         var keyword2 = sel1+"@"+sel2;
-	         location.href = "/listBoard_Post.do?search="+encodeURI(keyword2);
+	         location.href = "/board/listBoard_Post.do?search="+encodeURI(keyword2);
 	      });
 			
 	});
@@ -54,7 +54,7 @@
 				<td>${v.board_no}</td>
  				<td>${v.head_tag_name}</td>
 				<td>
-					<a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+					<a href="/board/detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
 				</td>
 				<td>${v.mem_nickname}</td>
 				<td>
