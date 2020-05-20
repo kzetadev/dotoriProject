@@ -69,11 +69,24 @@ a {
 			</div>
 
 			<!-- 내용 -->
+			<!--  수정 필요
 			<div class="col-sm-10 text-left">
-				<h1>나의 쪽지함</h1>
-				<hr>
-				<h3>나의 쪽지함</h3>
-				<p>나의 쪽지함</p>
+				<form method="post">
+					<!-- <input> 프로필 변경란 
+					<input type="text" name = "mem_name" value="${login.mem_name}" readonly="readonly"> 
+					<input type="text" name="mem-id" value="${login.mem_id }" readonly="readonly">
+					<input type="text" name="mem_email" value="${login.mem_email}" readonly="readonly">
+					<input type= "text" name="mem_nickname" value="${login.mem_nickname }">
+				<!-- 	<input> 자기소개란 
+					<button type="submit" id="updateBtn">수정 하기</button>
+				
+				
+					<input type= "text" name="password" value="${login.mem_password }">
+					<button type="submit" name="delBtn">회원 탈퇴</button>
+				</form>
+				
+				 -->
+				
 			</div>
 		</div>
 	</div>

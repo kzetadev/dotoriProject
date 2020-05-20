@@ -24,5 +24,16 @@
 		where m.mem_no = #{mem_no}
 	</select>
 	
+	<!-- 회원 수정 -->
+	<update id="updateUser">
+		update member_info set mem_id=#{mem_id}, mem_email=#{mem_email}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_content=#{mem_content}, mem_img=#{mem_img}
+		where mem_no = #{mem_no}
+	</update>
+	<!-- 회원 탈퇴 -->
+	<delete id="delMem">
+		delete from member_info
+		where mem_pwd = #{mem_pwd}
+	</delete>
+	
 	
 </mapper>
