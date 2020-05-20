@@ -86,11 +86,12 @@
 	<button id="btnDelete">삭제</button>
 	
 	<hr>
-
+	
 	<!-- 댓글 -->
 	<div class="form-comment-group">
 		<div>
 			<label for="comment">댓글</label>
+			<textarea class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
 		</div>
 		<div>
 			<ul>
@@ -98,9 +99,6 @@
 					<li>${v.comment_content }</li>
 				</c:forEach>
 			</ul>
-		</div>
-		<div>
-			<textarea class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
 		</div>
 		<button class="btn btn-default" id="btnWrite">글쓰기</button>
 		<button class="btn btn-default" id="btnAnswer">답글</button>	
@@ -125,3 +123,4 @@
 </body>
 </html>
 </layoutTag:layout>
+

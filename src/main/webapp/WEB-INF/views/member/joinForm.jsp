@@ -41,7 +41,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 		$("#nickname_check").css({ "display":"none"});
 		var mem_nickname = $("#mem_nickname").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/nickCheck?mem_nickname='+mem_nickname,
+			url : '${pageContext.request.contextPath}/nickCheck?mem_nickname='+mem_nickname,
 			type : "get",
 			success : function(data){
 				console.log("1 = 중복 / 0 != 중복 : "+ data);
@@ -76,7 +76,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 		$("#id_check").css({ "display":"none"});
 		var mem_id = $("#mem_id").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/idCheck?mem_id='+mem_id,
+			url : '${pageContext.request.contextPath}/idCheck?mem_id='+mem_id,
 			type : "get",
 			success : function(data){
 				console.log("1 = 중복 / 0 != 중복 : "+ data);
@@ -114,7 +114,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 		$("#email_check").css({ "display":"none"});
 		var mem_email = $("#mem_email").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/emailCheck?mem_email='+mem_email,
+			url : '${pageContext.request.contextPath}/emailCheck?mem_email='+mem_email,
 			type : "get",
 			success : function(data){
 				console.log("1 = 중복 / 0 != 중복 : "+ data);
