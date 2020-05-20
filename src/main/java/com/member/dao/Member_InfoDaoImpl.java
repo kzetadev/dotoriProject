@@ -1,5 +1,8 @@
 package com.member.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -65,5 +68,35 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.update("mem_info.emailAuth", vo);
 	}
-
+	
+	//회원정보수정
+	@Override
+	public void updateMem(Member_InfoVo vo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.delete("mem_info.updateMem",vo);
+	}
+	
+	//회원탈퇴
+	@Override
+	public void delMem(String mem_id) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.delete("mem_info.delMem",mem_id);
+	}
+	
+	//회원정보 수정,탈퇴를 위한 비밀번호 체크
+	@Override
+	public boolean checkPwd(String mem_id, String mem_pwd) {
+		boolean re = false;
+		
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("mem_id", mem_id);
+		map.put("mem_pwd", mem_pwd);
+		
+		int count = sqlSessionTemplate.selectOne("mem_info.checkPwd",map);
+		if(count == 1) re = true;
+		
+		return re;
+	}
+	
+	
 }

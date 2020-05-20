@@ -21,6 +21,16 @@ public interface Member_InfoDao {
 	int checkOverEmail(String mem_email);
 	//이메일 인증
 	int emailAuth(Member_InfoVo vo);
+	
+	//회원정보수정
+	void updateMem(Member_InfoVo vo);
+	
+	//회원 정보 삭제
+	void delMem(String mem_id);
+	
+	//비밀번호 체크
+	boolean checkPwd(String mem_id, String mem_pwd);
+	
 ////	//유저 로그인 메소드
 //	Member_InfoVo loginMem(String mem_id);
 
