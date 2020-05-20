@@ -9,16 +9,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Main</title>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" href="/css/slick.css">
 <link rel="stylesheet" href="/css/slick-theme.css">
 <link rel="stylesheet" href="/css/youtube.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style type="text/css">
 	.slick-track .slick-cloned .slick-slide .slick-active{
 		height:400px;
 	}
 	.youtubebox{
 		padding-left: 50px;
-		
+	}
+	.w3-image{
+		height:600px;
+	}
+	#word{
+		padding-botton: 50px;
 	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
@@ -39,14 +45,28 @@
 </script>
 </head>
 <body>
+	<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;">
+  		<img class="w3-image" src="/img/seoulMain.jpg" width="100%" height="600">
+  		<div class="w3-display-middle w3-margin-top w3-center">
+    		<h1 class="w3-xxlarge w3-text-white">
+    		<span class="w3-padding w3-black w3-opacity-min"><b>Seoul</b></span><br><br>
+    		<span class="w3-hide-small w3-text-light-grey" id="word">Welcome !</span></h1>
+  		</div>
+	</header>
+	
 	<!-- 중단 이미지 슬라이드 -->
 	<div class="slider autoplay slick-slider slick-dotted" role="toolbar">
 		<c:forEach var="p" items="${list }">
-			<div><img src="img/${fn:split(p.place_img, '|')[0]}" height="30%"></div>
+			<div>
+				<a href="/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
+					<img src="img/${fn:split(p.place_img, '|')[0]}" height="30%">
+				</a>
+			</div>
 		</c:forEach>
 	</div>
 	<div>
 	</div>
+	<br>
 	
 	<div class="row">
 		<div class="col-md-4">
@@ -81,7 +101,7 @@
 	        </div>        
 	    </div>
 	</div>
-	   
+	
 	    
 	<!-- <div class="col-md-12">
 		<script type="text/javascript">
@@ -111,41 +131,55 @@
 			})
 		</script>
 	</div> -->
-    
+   
     
   <div class="container text-center">    
   	<h3>인기 서울 장소 TOP 6</h3>
   	<br>
   	<div class="row">
-    	<div class="col-sm-2">
-	      	<img src="/img/SPAO_1.jpg" class="img-responsive">
-  	    	<b>스파오</b>
-   		</div>
+  		<c:forEach var="i" items="${p }">
+	  		<div class="col-sm-2">
+	    		<a href="/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
+		      		<img src="/img/${fn:split(i.place_img, '|')[0]}" class="img-responsive" height="30">
+	  	    		<b>i.place_name</b>
+	  	    	</a>
+	   		</div>
+  		</c:forEach>
    		
-    	<div class="col-sm-2"> 
-      		<img src="/img/${p.place_img}" class="img-responsive">
-      		<b>${p.place_name }</b>
+    	<!-- <div class="col-sm-2"> 
+    		<a href="" class="thumbnail">
+	      		<img src="/img/${p.place_img}" class="img-responsive">
+	      		<b>${p.place_name }</b>
+	      	</a>
     	</div>
     	
     	<div class="col-sm-2"> 
-      		<img src="/img/${p.place_img}" class="img-responsive">
-      		<b>${p.place_name }</b>
+    		<a href="" class="thumbnail">
+	      		<img src="/img/${p.place_img}" class="img-responsive">
+	      		<b>${p.place_name }</b>
+	      	</a>
     	</div>
     
     	<div class="col-sm-2"> 
-      		<img src="/img/${p.place_img}" class="img-responsive">
-      		<b>${p.place_name }</b>
+    		<a href="" class="thumbnail">
+	      		<img src="/img/${p.place_img}" class="img-responsive">
+	      		<b>${p.place_name }</b>
+	      	</a>
     	</div> 
     	
     	<div class="col-sm-2"> 
-      		<img src="/img/${p.place_img}" class="img-responsive">
-      		<b>${p.place_name }</b>
+    		<a href="" class="thumbnail">
+	      		<img src="/img/${p.place_img}" class="img-responsive">
+	      		<b>${p.place_name }</b>
+	      	</a>
     	</div>     
     
     	<div class="col-sm-2"> 
-      		<img src="/img/${p.place_img}" class="img-responsive">
-      		<b>${p.place_name }</b>
-    	</div> 
+    		<a href="" class="thumbnail">	
+	      		<img src="/img/${p.place_img}" class="img-responsive">
+	      		<b>${p.place_name }</b>
+	      	</a>
+    	</div>  -->
   </div>
 </div><br>
 </body>
