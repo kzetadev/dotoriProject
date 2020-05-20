@@ -49,7 +49,7 @@ public class RootConfig {
 		SimpleDriverDataSource ds = null;
 		try {
 			ds = new SimpleDriverDataSource();
-			ds.setDriverClass((Class<? extends Driver>) Class.forName(driver));
+			ds.setDriverClass((Class<? extends Driver>)Class.forName(driver));
 			ds.setUrl(url);
 			ds.setUsername(user);
 			ds.setPassword(password);
