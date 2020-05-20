@@ -39,9 +39,9 @@ public class JoinController {
 	@Resource(name="joinService")
 	private JoinService joinService;
 
-	@RequestMapping("/member/joinForm.do")
+	@RequestMapping(value="/member/joinForm.do", method=RequestMethod.GET)
 	public void joinForm(HttpServletRequest request) {
-		
+		System.out.println("/member/joinForm.do");
 	}
 	
 	//회원가입 컨트롤러
