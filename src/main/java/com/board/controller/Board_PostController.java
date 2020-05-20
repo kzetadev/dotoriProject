@@ -100,7 +100,7 @@ public class Board_PostController {
 	@RequestMapping(value = "/board/detailBoard_Post.do")
 	public ModelAndView detailBoard_Post(int board_no) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("detailBoard_Post");
+		mav.setViewName("/board/detailBoard_Post");
 		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
 		board_postService.updateHit(board_no);
 		List<Board_CommentVo> clist = board_commentService.listComment(board_no);

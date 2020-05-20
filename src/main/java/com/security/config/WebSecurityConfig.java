@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,14 +56,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authProvider);
 	}
 	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// TODO Auto-generated method stub
+		web.ignoring().antMatchers("/member/joinForm.do", "/member/join.do");
+	}
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeRequests()
-			.antMatchers("/admin/**").access("hasRole('ADMIN')")
-			.antMatchers("/member/**").access("hasRole('USER')")
+		.antMatchers("/admin/**").hasRole("ADMIN")
+		.antMatchers("/member/**").hasRole("USER")
+			
 			.antMatchers("/", "/css/**", "/fonts/**", "/img/**", "/js/**"
-					, "/login.do", "/member/login.do", "/loginError.do", "/main.do"
-					, "/joinForm.do", "/join.do", "/mailAuth.do"
+					, "/login.do", "/member/joinForm.do", "/member/join.do", "/member/login.do"
+					, "/main.do", "/mailAuth.do"
 					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
 			.anyRequest().authenticated();

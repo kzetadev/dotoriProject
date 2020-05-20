@@ -20,17 +20,17 @@
 					<li class="dropdown">
 						<a href="listPlace_Info.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">정보 게시판<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="listPlace_Info.do?place_type=0">명소</a></li>
-							<li><a href="listPlace_Info.do?place_type=1">음식점</a></li>
-							<li><a href="listPlace_Info.do?place_type=2">숙소</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=0">명소</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=1">음식점</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=2">숙소</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a href="listBoard_Post.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">커뮤니티<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="listBoard_Post.do?board_kinds=0">자유 게시판</a></li>
-							<li><a href="listBoard_Post.do?board_kinds=1">후기 게시판</a></li>
-							<li><a href="listBoard_Post.do?board_kinds=2">동행 게시판</a></li>
+							<li><a href="/board/listBoard_Post.do?board_kinds=0">자유 게시판</a></li>
+							<li><a href="/board/listBoard_Post.do?board_kinds=1">후기 게시판</a></li>
+							<li><a href="/board/listBoard_Post.do?board_kinds=2">동행 게시판</a></li>
 						</ul>
 					</li>
 					<li><a href="youtube.do">컨텐츠</a></li> <!-- youtube -->

@@ -21,3 +21,5 @@ public class Place_InfoVo {
 	private String place_detail; // 상세 설명
 	private String place_hit; // 조회수
 }
+
+// select place_no, place_
