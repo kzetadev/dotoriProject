@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
 			.anyRequest().authenticated();
-		http.exceptionHandling().accessDeniedPage("/403");	//접근 거부 페이지 추가해야됨.
+//		http.exceptionHandling().accessDeniedPage("/403");	//접근 거부 페이지 추가해야됨.
 		http.formLogin()
 			.loginPage("/member/login.do")						//사용자정의 로그인 페이지명 설정
 			.usernameParameter("mem_id")				//로그인 페이지에서 사용할 username 파라미터명을 다른 식별자로 사용(사용자 정의 로그인 페이지에 설정한 아이디 필드의 식별자)
