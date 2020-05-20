@@ -55,7 +55,7 @@ public class MailSenderService {
 				System.out.println(authLink);
 				contents += "<a href='" + authLink + "'>" + authLink + "</a>";
 				message.setFrom("kzeta@naver.com");
-				message.setTo("kzeta@naver.com");
+				message.setTo(mem_email);
 				message.setSubject("회원가입 인증메일");
 				message.setText(contents, true);
 //				message.addInline("myLogo", new ClassPathResource("/img/sunimg.jpg"));
