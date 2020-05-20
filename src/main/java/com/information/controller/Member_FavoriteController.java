@@ -3,9 +3,7 @@ package com.information.controller;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,12 +19,8 @@ public class Member_FavoriteController {
 	@Resource(name="place_infoService")
 	private Place_InfoService place_infoService;
 
-	// ??????
-	@Autowired
-	private HttpSession session; 
-	
 	// 마이페이지에 담기
-	@RequestMapping("/insertMember_Favorite.do")
+	@RequestMapping("/myPage/insertMember_Favorite.do")
 	public ModelAndView InsertMember_Favorite(Member_FavoriteVo f) {
 		System.out.println("찜목록 추가 컨트롤러 동작함");
 		// String id = (String)session.getAttribute("memberId");
@@ -39,7 +33,7 @@ public class Member_FavoriteController {
 	}
 	
 	// 마이페이지 찜 리스트를 보여줌
-	@RequestMapping("/myPage_Favorite.do")
+	@RequestMapping("/myPage/myPage_Favorite.do")
 	public ModelAndView listMember_Favorite(Map map) {
 		System.out.println("컨트롤러 동작함");
 		ModelAndView m = new ModelAndView();
@@ -49,10 +43,10 @@ public class Member_FavoriteController {
 	}
 	
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
-	@RequestMapping("/deleteMember_Favorite.do")
+	@RequestMapping("/myPage/deleteMember_Favorite.do")
 	public ModelAndView deleteMember_Favorite(int favorite_no) {
 		ModelAndView m = new ModelAndView();
-		m.setViewName("redirect:/listMember_Favorite");
+		m.setViewName("redirect:/myPage/listMember_Favorite");
 		return m;
 	}
 }

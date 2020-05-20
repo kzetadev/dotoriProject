@@ -103,7 +103,7 @@
 </head>
 <body>
 	<h2>글쓰기</h2>
-	<form name="f" action="/insertBoard_Post.do" method="post">
+	<form name="f" action="/board/insertBoard_Post.do" method="post">
 	<input type="hidden" name="board_no" value="${board_no }">
 	<table border="1">
 <!-- 		select-option 변경 예시 -->
@@ -143,7 +143,7 @@
 		<div style="width:650px; text-align: center;">
 			<button type="submit" id="btnSave">등록</button>
 			<button type="reset">취소</button>
-			<a href="listBoard_Post.do">목록으로</a>
+			<a href="/board/listBoard_Post.do">목록으로</a>
 		</div>
 	</form>
 </body>

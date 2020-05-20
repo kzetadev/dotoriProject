@@ -30,11 +30,11 @@
 	padding: 0;
 	overflow: hidden;
 }
-<%-- Float the list items side by side --%>
+/* Float the list items side by side */
 .tab li {
 	float: left;
 }
-<%-- Style the links inside the list items --%>
+/* Style the links inside the list items */
 .tab li a {
 	display: inline-block;
 	color: #000;
@@ -44,19 +44,19 @@
 	font-size: 17px;
 	transition: 0.3s;
 }
-<%-- Style the tab content --%>
+/* Style the tab content */
 .tabcontent {
 	display: none;
-<%--	background-color: rgb(0, 154, 200); --%>
+	background-color: rgb(0, 154, 200);
 	padding: 6px 12px;
 	color: #fff;
 }
 
 ul.tab li.current {
-	<%--background-color: rgb(0, 154, 200); --%>
+	background-color: rgb(0, 154, 200);
 	color: #222;
 	 display:  inline-block;
-  width:20%; 
+  width:33.33%; 
   float:left;  
   text-align:center; 
   background :#f9f9f9;
@@ -65,25 +65,25 @@ ul.tab li.current {
 .tabcontent.current {
 	display: block;
 }
-<%-- Remove the navbar's default margin-bottom and rounded borders --%>
+/* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
 }
 
-<%-- Set height of the grid so .sidenav can be 100% (adjust as needed) --%>
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
 	height: 450px
 }
 
-<%-- Set gray background color and 100% height --%>
+/* Set gray background color and 100% height */
 .sidenav {
 	padding-top: 20px;
 	background-color: white;
 	height: 100%;
 }
 
-<%-- On small screens, set height to 'auto' for sidenav and grid --%>
+/* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
 	.sidenav {
 		height: auto;
@@ -134,11 +134,9 @@ a {
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="myPage_update.do">회원 수정</a></li>
-						<li class="list-group-item"><a href="pwd_update.do">비밀번호 변경</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
 					</ul>
 				</div>
 			</div>
@@ -146,7 +144,7 @@ a {
 			<!-- 내용 -->
 			
 			<div class="col-sm-10 text-left">
-			
+				<h1>내가 쓴 글 & 댓글</h1>
 				<hr>
 
 				<ul class="tab">
@@ -166,7 +164,7 @@ a {
 						<th>조회수</th>
 					</tr>
 				</thead>
- 				<c:forEach var="list_post" items="${list_post}">
+ 			  <c:forEach var="list_post" items="${list_post}">
  						<tr>
 							<td><c:out value="${list_post.board_no}"></c:out></td>
 							<td><c:out value="${list_post.board_title}"></c:out></td>
@@ -176,7 +174,6 @@ a {
 							
 						</tr>
 				</c:forEach>
-			 	
 						
 			</table>
 				</div>

@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	$(function(){
 		$("#btn").click(function(){
-			$.ajax("/insertBoard_Comment.do", success:function(){
+			$.ajax("/board/insertBoard_Comment.do", success:function(){
 				alert("댓글이 추가됨")
 			})
 		})

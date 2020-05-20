@@ -15,5 +15,10 @@ public class LoginServiceImpl implements LoginService {
 		// TODO Auto-generated method stub
 		return member_infoDao.login(vo);
 	}
+	@Override
+	public Member_InfoVo loginById(String mem_id) {
+		// TODO Auto-generated method stub
+		return member_infoDao.loginById(mem_id);
+	}
 
 }

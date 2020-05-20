@@ -41,12 +41,12 @@ public class Board_PostController {
 //	}
 	
 	   // 게시글 목록
-	   @RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
+	   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
 	   public ModelAndView listBoard_Post(String search) {
 	      List<Board_PostVo> list = board_postService.listBoard_Post(search);
 	      ModelAndView mav = new ModelAndView();
 	      // 해당 부분에 Member_Info 추가해야 함
-	      mav.setViewName("listBoard_Post");
+	      mav.setViewName("/board/listBoard_Post");
 	      mav.addObject("list", list);
 	      mav.addObject("headtag", head_tagService.listHead_Tag());
 	      return mav;
@@ -63,7 +63,7 @@ public class Board_PostController {
 //	}
 	
 	// 게시글 작성 폼
-	@RequestMapping(value = "/insertBoard_Post.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/insertBoard_Post.do", method = RequestMethod.GET)
 	public ModelAndView insertBoard_PostForm(@RequestParam(value = "board_no", defaultValue = "0") int board_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board_no", board_no);
@@ -71,10 +71,10 @@ public class Board_PostController {
 	}
 	
 	// 게시글 작성
-	@RequestMapping(value = "/insertBoard_Post.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/insertBoard_Post.do", method = RequestMethod.POST)
 	public ModelAndView insertBoard_PostSubmit(Board_PostVo vo, HttpServletRequest req) {
 //		String msg = "게시물 등록에 실패했습니다.";
-		ModelAndView mav = new ModelAndView("redirect:/listBoard_Post.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
 		int re = board_postService.insertBoard_Post(vo);
 //		if(re > 0) {
 //			mav.setViewName("redirect:/listBoard_Post.do");
@@ -97,7 +97,7 @@ public class Board_PostController {
 	*/
 	
 	// 게시글 상세
-	@RequestMapping(value = "/detailBoard_Post.do")
+	@RequestMapping(value = "/board/detailBoard_Post.do")
 	public ModelAndView detailBoard_Post(int board_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("detailBoard_Post");
@@ -118,7 +118,7 @@ public class Board_PostController {
 //	}
 	
 	// 게시글 수정 폼
-	@RequestMapping(value = "/updateBoard_Post.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/updateBoard_Post.do", method = RequestMethod.GET)
 	public ModelAndView updateBoard_PostForm(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("update", board_postService.detailBoard_Post(vo.getBoard_no()));
@@ -126,9 +126,9 @@ public class Board_PostController {
 	}
 	
 	// 게시글 수정
-	@RequestMapping(value = "/updateBoard_Post.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/updateBoard_Post.do", method = RequestMethod.POST)
 	public ModelAndView updateBoard_PostSubmit(Board_PostVo vo, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView("redirect:/listBoard_Post.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
 		int re = board_postService.updateBoard_Post(vo);
 //		if(re > 0) {
 //			mav.setViewName("redirect:/listBoard_Post.do");
@@ -146,9 +146,9 @@ public class Board_PostController {
 //	}
 	
 	// 게시글 삭제
-	@RequestMapping("/deleteBoard_Post.do")
+	@RequestMapping("/board/deleteBoard_Post.do")
 	public ModelAndView deleteBoard_Post(Board_PostVo vo) {
-		ModelAndView mav = new ModelAndView("redirect:/listBoard_Post.do");
+		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
 		int re = board_postService.deleteBoard_Post(vo);
 //		if(re > 0) {
 //			mav.setViewName("redirect:/listBoard_Post.do");
@@ -158,19 +158,19 @@ public class Board_PostController {
 	}
 	
 	//커뮤니티 메인 / 1.최신글  2.인기글  3.후기  4.동행
-		@RequestMapping("/mainBoard_Post.do")
-		public ModelAndView mainBoard_Post1(Board_PostVo vo) {
-			ModelAndView mav = new ModelAndView();
-			List<Board_PostVo> mlist1 = board_postService.mainBoard_Post1(vo);
-			List<Board_PostVo> mlist2 = board_postService.mainBoard_Post2(vo);
-			List<Board_PostVo> mlist3 = board_postService.mainBoard_Post3(vo);
-			List<Board_PostVo> mlist4 = board_postService.mainBoard_Post4(vo);
-			mav.setViewName("mainBoard_Post");
-			mav.addObject("mlist1", mlist1);
-			mav.addObject("mlist2", mlist2);
-			mav.addObject("mlist3", mlist3);
-			mav.addObject("mlist4", mlist4);
-			return mav;
-		}
+	@RequestMapping("/board/mainBoard_Post.do")
+	public ModelAndView mainBoard_Post1(Board_PostVo vo) {
+		ModelAndView mav = new ModelAndView();
+		List<Board_PostVo> mlist1 = board_postService.mainBoard_Post1(vo);
+		List<Board_PostVo> mlist2 = board_postService.mainBoard_Post2(vo);
+		List<Board_PostVo> mlist3 = board_postService.mainBoard_Post3(vo);
+		List<Board_PostVo> mlist4 = board_postService.mainBoard_Post4(vo);
+		mav.setViewName("/board/mainBoard_Post");
+		mav.addObject("mlist1", mlist1);
+		mav.addObject("mlist2", mlist2);
+		mav.addObject("mlist3", mlist3);
+		mav.addObject("mlist4", mlist4);
+		return mav;
+	}
 }
 
