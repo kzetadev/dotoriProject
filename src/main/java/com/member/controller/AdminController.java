@@ -25,7 +25,7 @@ public class AdminController {
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 
 	// 관리자 - 회원 목록 (페이징 + 검색 + 정렬)
-	@RequestMapping("/adminListMember.do") 
+	@RequestMapping("/admin/adminListMember.do") 
 	public ModelAndView allMemberList(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session, String keyword, String searchColumn, String sortColumn) {
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
@@ -73,7 +73,7 @@ public class AdminController {
 	}
 	
 	// 관리자 - 회원 강퇴
-	@RequestMapping(value="/adminDeleteMember.do", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/adminDeleteMember.do", method=RequestMethod.GET)
 	public ModelAndView deleteMemberForm(int mem_no) {
 		ModelAndView m = new ModelAndView();
 		m.addObject("mem_no",mem_no);
@@ -81,7 +81,7 @@ public class AdminController {
 	}
 	
 	// 관리자 - 회원 강퇴
-	@RequestMapping(value="/adminDeleteMember.do", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/adminDeleteMember.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int deleteMemberSubmit(int mem_no) {
 //		ModelAndView m = new ModelAndView();

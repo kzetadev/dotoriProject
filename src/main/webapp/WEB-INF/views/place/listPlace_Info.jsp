@@ -97,7 +97,7 @@
 	<!-- 내용  -->
 	<h1><strong>${pt.place_type_name }</strong></h1>
 	<br>
-	<img src="img/main.jpg" width="100%" height="500">
+	<img src="/img/main.jpg" width="100%" height="500">
 	<br><br><br><br>
 	
 	<!-- 정렬 -->

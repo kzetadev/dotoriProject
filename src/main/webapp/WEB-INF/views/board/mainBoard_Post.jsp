@@ -14,7 +14,7 @@
 <script type="text/javascript">
 	$(function(){
 		$("#btnAdd").click(function(){
-			location.href = "/listBoard_Post.do"
+			location.href = "/board/listBoard_Post.do"
 			})
 		})
 </script>

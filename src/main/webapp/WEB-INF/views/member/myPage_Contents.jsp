@@ -13,6 +13,11 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <style>
+*{
+  margin:0; padding:0;
+  font-size:15px; 
+  line-height:1.3;
+}
 #container {
 	width: 960px;
 	margin: 0 auto;
@@ -50,6 +55,11 @@
 ul.tab li.current {
 	background-color: rgb(0, 154, 200);
 	color: #222;
+	 display:  inline-block;
+  width:33.33%; 
+  float:left;  
+  text-align:center; 
+  background :#f9f9f9;
 }
 
 .tabcontent.current {
@@ -124,9 +134,9 @@ a {
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
 					</ul>
 				</div>
 			</div>
@@ -154,14 +164,16 @@ a {
 						<th>조회수</th>
 					</tr>
 				</thead>
- 			<%--	<c:forEach var="v" items="${list}">
-					<tr><td>${ }</td></tr>
-					<tr><td>${ }</td></tr>
-					<tr><td>${ }</td></tr>
-					<tr><td>${ }</td></tr>
-					<tr><td>${ }</td></tr>
+ 			  <c:forEach var="list_post" items="${list_post}">
+ 						<tr>
+							<td><c:out value="${list_post.board_no}"></c:out></td>
+							<td><c:out value="${list_post.board_title}"></c:out></td>
+							<td><c:out value="${list_post.mem_nickname}"></c:out></td>
+							<td><fmt:formatDate value="${list_post.board_date}" pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${list_post.board_hit}"></c:out></td>
+							
+						</tr>
 				</c:forEach>
-			 --%>		
 						
 			</table>
 				</div>

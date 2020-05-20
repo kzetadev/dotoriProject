@@ -31,4 +31,9 @@ public class JoinServiceImpl implements JoinService {
 		// TODO Auto-generated method stub
 		return member_infoDao.checkOverEmail(mem_email);
 	}
+	@Override
+	public int emailAuth(Member_InfoVo vo) {
+		// TODO Auto-generated method stub
+		return member_infoDao.emailAuth(vo);
+	}
 }

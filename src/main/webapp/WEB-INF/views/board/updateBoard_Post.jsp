@@ -64,7 +64,7 @@
 </head>
 <body>
 	<h2>수정</h2>
-	<form action="/insertBoard_Post.do" method="post">
+	<form action="/board/insertBoard_Post.do" method="post">
 	<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
 	
 	<table border="1">
@@ -84,7 +84,7 @@
 	<div style="width:650px; text-align: center;">
 			<button type="submit" id="btnUpdate">수정</button>
 			<button type="reset">취소</button>
-			<a href="listBoard_Post.do">목록으로</a>
+			<a href="/boardlistBoard_Post.do">목록으로</a>
 		</div>
 	</form>
 </body>

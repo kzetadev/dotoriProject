@@ -17,7 +17,7 @@ import com.member.vo.Member_InfoVo;
 public class LoginController {
 	@Resource(name="loginService")
 	private LoginService loginService;
-	@RequestMapping("/loginCheck.do")
+	@RequestMapping("/member/loginCheck.do")
 	public Member_InfoVo loginCheck(HttpServletRequest request, Member_InfoVo vo) {
 		System.out.println(vo);
 		Member_InfoVo infovo = loginService.login(vo);
@@ -25,7 +25,7 @@ public class LoginController {
 		return infovo;
 	}
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/member/login.do")
 	public void login(HttpServletRequest request) {
 		
 	}
