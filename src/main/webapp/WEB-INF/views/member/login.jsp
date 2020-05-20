@@ -101,7 +101,7 @@ $(function(){
 					</div>
 				</div>
 				<div class="form-group">
-					<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/joinForm.do">회원가입</a>
+					<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/joinForm.do">회원가입</a>
 				</div>
 				<%--스프링 시큐리티 제공 최근 발생한 인증 오류 메시지--%>
 				<%--https://postitforhooney.tistory.com/entry/SpringSecurity-%EC%B4%88%EB%B3%B4%EC%9E%90%EA%B0%80-%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94-Spring-Security-%ED%8D%BC%EC%98%B4 --%>
