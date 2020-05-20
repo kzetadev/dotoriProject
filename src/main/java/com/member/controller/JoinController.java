@@ -88,26 +88,35 @@ public class JoinController {
 	}
 
 	// id 중복 체크 컨트롤러
-	@RequestMapping(value = "/member/idCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/idCheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int idCheck(HttpServletRequest request,@RequestParam("mem_id") String mem_id) {
+	public int idCheck(HttpServletRequest request) {
 		System.out.println("아이디 중복 컨트롤러 실행");
+		String mem_id = "";
+		mem_id = request.getParameter("mem_id");
+		System.out.println(mem_id);
 		return joinService.checkOverId(mem_id);
 	}
 
 //	 닉네임 중복 체크 컨트롤러
-	@RequestMapping(value = "/member/nickCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/nickCheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int nickNameCheck(HttpServletRequest request,@RequestParam("mem_nickname") String mem_nickname) {
+	public int nickNameCheck(HttpServletRequest request) {
 		System.out.println("닉네임중복 컨트롤러 실행");
+		String mem_nickname = "";
+		mem_nickname = request.getParameter("mem_nickname");
+		System.out.println(mem_nickname);
 		return joinService.checkOverNickName(mem_nickname);
 	}
 	
 //	 이메일 중복 체크 컨트롤러
-	@RequestMapping(value = "/member/emailCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/emailCheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int emailCheck(HttpServletRequest request,@RequestParam("mem_email") String mem_email) {
+	public int emailCheck(HttpServletRequest request) {
 		System.out.println("이메일중복 컨트롤러 실행");
+		String mem_email = "";
+		mem_email = request.getParameter("mem_email");
+		System.out.println(mem_email);
 		return joinService.checkOverEmail(mem_email);
 	}
 	//이메일 인증 메일 클릭 후 인증 여부 변경

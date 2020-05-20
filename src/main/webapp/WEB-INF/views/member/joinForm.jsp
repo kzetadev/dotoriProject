@@ -14,38 +14,40 @@
 <script type="text/javascript">
 
 $(function(){
+	//모든 공백 체크 정규식
+	var empJ = /\s/g;
 	
-
-//모든 공백 체크 정규식
-var empJ = /\s/g;
-
-//아이디 정규식
-var idJ = /^[a-z0-9]{4,12}$/;//a~z, 0~9로 시작하는 4~12자리의 아이디를 만들 수 있다
-
-//비밀번호 정규식
-var pwdJ = /^[A-Za-z0-9]{4,12}$/; //A~Z,a~z,0-9로 시작하는 4~12자리의 비밀번호를 설정할 수 있다
-
-//이름 정규식
-var nameJ = /^[가-힣]{2,6}$/; //가~힣, 한글로 이뤄진 문자만으로 2~6자리까지의 이름만 작성할 수 있다
-
-//닉네임 정규식
-var nickJ = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,12}$/;
-
-//이메일 검사 정규식
-var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
-//_(언더바)특수문자가 가능하며, 중앙에 @ 필수, .뒤에 2~3글자가 필요하다
-
-//닉네임 유효성 검사(1=중복/ 0 != 중복)
+	//아이디 정규식
+	var idJ = /^[a-z0-9]{4,12}$/;//a~z, 0~9로 시작하는 4~12자리의 아이디를 만들 수 있다
+	
+	//비밀번호 정규식
+	var pwdJ = /^[A-Za-z0-9]{4,12}$/; //A~Z,a~z,0-9로 시작하는 4~12자리의 비밀번호를 설정할 수 있다
+	
+	//이름 정규식
+	var nameJ = /^[가-힣]{2,6}$/; //가~힣, 한글로 이뤄진 문자만으로 2~6자리까지의 이름만 작성할 수 있다
+	
+	//닉네임 정규식
+	var nickJ = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,12}$/;
+	
+	//이메일 검사 정규식
+	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	//_(언더바)특수문자가 가능하며, 중앙에 @ 필수, .뒤에 2~3글자가 필요하다
+	
+	//닉네임 유효성 검사(1=중복/ 0 != 중복)
 	$("#nickName_overlap").click(function(event){
 		event.preventDefault();
 		$("#nickname_check").css({ "display":"none"});
 		var mem_nickname = $("#mem_nickname").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/nickCheck?mem_nickname='+mem_nickname,
-			type : "get",
+// 			url : '${pageContext.request.contextPath}/member/nickCheck.do?mem_nickname='+mem_nickname,
+			url : '${pageContext.request.contextPath}/member/nickCheck.do',
+			data:{
+				mem_nickname:mem_nickname
+			},
+			type : "post",
 			success : function(data){
 				console.log("1 = 중복 / 0 != 중복 : "+ data);
-				if(data == 1){
+				if(data != 0){
 					
 					console.log("닉네임 중복")
 					//1: 닉네임 중복되는 문구 
@@ -70,17 +72,21 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 			}
 		})
 	}) 
-//아이디 유효성 검사(1=중복/ 0 != 중복)
+	//아이디 유효성 검사(1=중복/ 0 != 중복)
 	$("#id_overlap").click(function(event){
 		event.preventDefault();
 		$("#id_check").css({ "display":"none"});
 		var mem_id = $("#mem_id").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/idCheck?mem_id='+mem_id,
-			type : "get",
+// 			url : '${pageContext.request.contextPath}/member/idCheck.do?mem_id='+mem_id,
+			url : '${pageContext.request.contextPath}/member/idCheck.do',
+			type : "post",
+			data:{
+				mem_id:mem_id
+			},
 			success : function(data){
 				console.log("1 = 중복 / 0 != 중복 : "+ data);
-				if(data == 1){
+				if(data != 0){
 
 					console.log("아이디 중복")
 					
@@ -112,19 +118,24 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 	$("#email_overlap").click(function(event){
 		event.preventDefault();
 		$("#email_check").css({ "display":"none"});
-		var mem_email = $("#mem_email").val();
+		var mem_email = $("#mem_email").val() + $("#mail2").val();
 		$.ajax({
-			url : '${pageContext.request.contextPath}/member/emailCheck?mem_email='+mem_email,
-			type : "get",
+// 			url : '${pageContext.request.contextPath}/member/emailCheck.do?mem_email='+mem_email,
+			url : '${pageContext.request.contextPath}/member/emailCheck.do',
+			data:{
+				mem_email:mem_email
+			},
+			type : "post",
 			success : function(data){
 				console.log("1 = 중복 / 0 != 중복 : "+ data);
-				if(data == 1){
+				if(data != 0){
 					console.log("이메일 중복")
 					//1: 이메일이 중복되는 문구 
 					alert("사용중인 이메일입니다")
 	
 				}else{
 					console.log("이메일 중복 아님")
+					console.log()
 					if(mailJ.test(mem_email)){
 						// 0 : 이메일 길이 / 문자열 검사
 						$("#email_check").text("사용가능한 이메일입니다");
@@ -220,7 +231,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 			}
 
 			//이메일 정규식
-			if(mailJ.test($("#mem_email").val())){
+			if(mailJ.test($("#mem_email").val() + $("#mail2").val())){
 				console.log("이메일 정규식 성공")
 				inval_Arr[2] = true;
 			}else{
@@ -242,7 +253,7 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 			for(var i = 0; i< inval_Arr.length; i++){
 				console.log("유효성 모두 통과 성공 for")
 				if(inval_Arr[i] == false){
-				console.log("유효성 모두 통과 성공 if")
+					console.log("유효성 모두 통과 성공 if")
 					validAll = false;
 				}
 			}
@@ -304,10 +315,9 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 			<!-- 닉네임 -->
 			<div class="form-group">
 				<label for="mem_nickname">닉네임</label>
-					<input type="text" class="form-control" id="mem_nickname" name="mem_nickname" placeholder="닉네임">
-					<button id="nickName_overlap">중복확인</button>
-					<div class="check_font" id="nickname_check"></div>
-					
+				<input type="text" class="form-control" id="mem_nickname" name="mem_nickname" placeholder="닉네임">
+				<button id="nickName_overlap">중복확인</button>
+				<div class="check_font" id="nickname_check"></div>
 			</div>
 			
 			<!-- 아이디 -->
@@ -335,17 +345,16 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*$/;
 			
 			<!-- 이메일 -->
 			<div class="form-group">
-					<label for="mem_email">이메일</label>
-						<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50">@
-							<select id="mail2" name="mail2">
-	                            <option value="@naver.com">naver.com</option>
-	                            <option value="@daum.net">daum.net</option>
-	                            <option value="@gmail.com">gmail.com</option>
-	                            <option value="@nate.com">nate.com</option>                        
-	                        </select>
-						<button id="email_overlap">중복확인</button>
-						<div class="check_font" id="email_check"></div>
-						
+				<label for="mem_email">이메일</label>
+					<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50">@
+						<select id="mail2" name="mail2">
+                            <option value="@naver.com">naver.com</option>
+                            <option value="@daum.net">daum.net</option>
+                            <option value="@gmail.com">gmail.com</option>
+                            <option value="@nate.com">nate.com</option>                        
+                        </select>
+					<button id="email_overlap">중복확인</button>
+					<div class="check_font" id="email_check"></div>
 				</div>
 			<button class="btn btn-primary px-3" id="reg_submit">
 				<i class="fa fa-heart pr-2" aria-hidden="true"></i>가입하기</button>
