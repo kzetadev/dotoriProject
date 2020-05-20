@@ -33,9 +33,9 @@
 							<li><a href="/board/listBoard_Post.do?board_kinds=2">동행 게시판</a></li>
 						</ul>
 					</li>
-					<li><a href="youtube.do">컨텐츠</a></li> <!-- youtube -->
-					<li><a href="faq.do">FAQ</a></li>
-					<li><a href="qa.do">Q & A</a></li>
+<!-- 					<li><a href="youtube.do">컨텐츠</a></li> youtube -->
+<!-- 					<li><a href="faq.do">FAQ</a></li> -->
+<!-- 					<li><a href="qa.do">Q & A</a></li> -->
 				</ul>
 				<!-- 검색창 구현 -->
 				<form class="navbar-form navbar-left" action="/detailPlace_Info.do?">

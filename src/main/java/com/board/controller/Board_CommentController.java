@@ -33,7 +33,7 @@ public class Board_CommentController {
 	}
 	
 	// 댓글 번호가 x번인 사람이 게시글에 올린 댓글(들) (부정확)
-	@RequestMapping("/detailListBoard_Comment.do")
+	@RequestMapping("/board/detailListBoard_Comment.do")
 	public ModelAndView listBoard_Comment(int comment_no) {
 		ModelAndView m = new ModelAndView();
 		m.addObject("c_list", board_commentService.detailBoard_Comment(comment_no));
