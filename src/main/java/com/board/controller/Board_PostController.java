@@ -46,7 +46,7 @@ public class Board_PostController {
 	      List<Board_PostVo> list = board_postService.listBoard_Post(search);
 	      ModelAndView mav = new ModelAndView();
 	      // 해당 부분에 Member_Info 추가해야 함
-	      mav.setViewName("listBoard_Post");
+	      mav.setViewName("/board/listBoard_Post");
 	      mav.addObject("list", list);
 	      mav.addObject("headtag", head_tagService.listHead_Tag());
 	      return mav;
