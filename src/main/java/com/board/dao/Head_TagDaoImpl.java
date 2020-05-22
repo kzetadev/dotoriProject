@@ -17,5 +17,9 @@ public class Head_TagDaoImpl implements Head_TagDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("board_post.selectHead_Tag");
 	}
-
+	@Override
+	public List<Head_TagVo> listHead_TagByBoard_Kinds(int board_kinds) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("board_post.selectHead_TagByBoard_Kinds", board_kinds);
+	}
 }

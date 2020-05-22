@@ -9,12 +9,24 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 수정</title>
+<link href="/css/summernote-lite.css" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-<!-- <script src="/js/summernote-lite.js"></script> -->
-<!-- <script src="/js/lang/summernote-ko-KR.js"></script> -->
-<!-- <link rel="stylesheet" href="/css/summernote-lite.css"> -->
+<script src="/js/summernote-lite.js"></script>
+<script src="/js/summernote-ko-KR.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$("#board_content").summernote({
+			height:300
+			, minHeight:null
+			, maxHeight:null
+			, focus:true
+			, lang:'ko-KR'
+			, placeholder:'최대 500자까지 작성 가능합니다.'
+			, tabsize:2
+// 			, airMode:true
+		});
+		var content = '${update.board_content}';
+		$("#board_content").summernote('code', content);
 // 		// 써머노트
 // 		$("#content").summernote({
 // 			disableDragAndDrop : true,
@@ -43,48 +55,66 @@
 // 				}	
 // 			}
 // 		})
-		
-		$("#btnUpdate").click(function() {
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+			var token = "${_csrf.token}";
+			jqXHR.setRequestHeader('X-CSRF-Token', token);
+		});
+// 		$("#btnUpdate").click(function() {
+		$("#f").submit(function(event){
+			event.preventDefault();
 			var board_title = $("#board_title").val();
 			var board_content = $("#board_content").val();
 			if(board_title == "") {
 				alert("제목을 입력하세요.");
 				document.f.board_title.focus();
-				return;
+				return false;
 			};
 			if(board_content == "") {
 				alert("내용을 입력하세요.");
 				document.f.board_content.focus();
-				return;
+				return false;
 			};
-			alert("수정되었습니다.");
+			var board = $("#f").serialize();
+			$.ajax({
+				url:"/board/updateBoard_Post.do"
+				, type:"post"
+				, data:board
+				, error:function(jqXHR, textStatus, errorThrown){
+				}
+				, success:function(data, jqXHR, textStatus){
+					if(data == 1){
+						alert("수정되었습니다.");
+						location.href = "/board/listBoard_Post.do";
+					}
+				}
+			});
 		});
 	});
 </script>
 </head>
 <body>
 	<h2>수정</h2>
-	<form action="/board/insertBoard_Post.do" method="post">
-	<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
-	
-	<table border="1">
-		<tr>
-			<td>제목</td>
-			<td><input type="text" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}"></td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td><input type="text" name="mem_no" readonly="readonly" value="1"></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><textarea name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required" rows="30%" cols="80%">${update.board_content}</textarea></td>
-		</tr>
-	</table>
-	<div style="width:650px; text-align: center;">
+	<form id="f" action="/board/insertBoard_Post.do" method="post">
+		<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
+		
+		<table border="1">
+			<tr>
+				<td>제목</td>
+				<td><input type="text" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}"></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><input type="text" name="mem_nickname" readonly="readonly" value="${update.mem_nickname }"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required" rows="30%" cols="80%"></textarea></td>
+			</tr>
+		</table>
+		<div style="width:650px; text-align: center;">
 			<button type="submit" id="btnUpdate">수정</button>
 			<button type="reset">취소</button>
-			<a href="/boardlistBoard_Post.do">목록으로</a>
+			<a href="/board/listBoard_Post.do">목록으로</a>
 		</div>
 	</form>
 </body>

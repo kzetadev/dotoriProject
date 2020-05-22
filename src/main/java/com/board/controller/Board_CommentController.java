@@ -3,13 +3,16 @@ package com.board.controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.Board_CommentService;
 import com.board.service.Board_PostService;
 import com.board.vo.Board_CommentVo;
+import com.google.gson.Gson;
 
 @Controller
 public class Board_CommentController {
@@ -32,6 +35,15 @@ public class Board_CommentController {
 		return m;
 	}
 	
+	@RequestMapping("/board/listBoardComment.do/{board_no}")
+	@ResponseBody
+	public String listBoardComment(@PathVariable("board_no")int board_no) {
+		String commentList = "";
+		commentList = (new Gson()).toJson(board_commentService.listComment(board_no));
+		System.out.println(commentList);
+		return commentList;
+	}
+	
 	// 댓글 번호가 x번인 사람이 게시글에 올린 댓글(들) (부정확)
 	@RequestMapping("/board/detailListBoard_Comment.do")
 	public ModelAndView listBoard_Comment(int comment_no) {
@@ -47,10 +59,13 @@ public class Board_CommentController {
 	
 	// x번 회원이 x번 게시물에 대한 댓글을 달음 (부정확)
 	@RequestMapping(value="/board/insertBoard_Comment.do", method=RequestMethod.POST)
-	public ModelAndView insertBoard_Comment(Board_CommentVo vo) {
+	@ResponseBody
+	public int insertBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
-		int re = board_commentService.insertBoard_Comment(vo);
-		return m;
+		System.out.println(vo);
+		int re = -1; 
+		re = board_commentService.insertBoard_Comment(vo);
+		return re;
 	}
 	
 	// x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함)

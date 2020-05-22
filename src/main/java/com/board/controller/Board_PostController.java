@@ -5,17 +5,21 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.Board_CommentService;
 import com.board.service.Board_PostService;
 import com.board.service.Head_TagService;
-import com.board.vo.Board_CommentVo;
 import com.board.vo.Board_PostVo;
+import com.google.gson.Gson;
+import com.security.config.LoginUser;
 
 @RestController
 public class Board_PostController {
@@ -40,19 +44,29 @@ public class Board_PostController {
 //		return mav;
 //	}
 	
-	   // 게시글 목록
-	   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
-	   public ModelAndView listBoard_Post(String search) {
-	      List<Board_PostVo> list = board_postService.listBoard_Post(search);
-	      ModelAndView mav = new ModelAndView();
-	      // 해당 부분에 Member_Info 추가해야 함
-	      mav.setViewName("/board/listBoard_Post");
-	      mav.addObject("list", list);
-	      mav.addObject("headtag", head_tagService.listHead_Tag());
-	      return mav;
-	   }
+	//게시판 구분에 따른 말머리 목록
+	@RequestMapping(value="/board/listHead_Tag.do/{board_kinds}", method=RequestMethod.GET)
+	@ResponseBody
+	public String listHead_Tag(@PathVariable("board_kinds")int board_kinds) {
+		String headTagList = "";
+		System.out.println(board_kinds);
+		headTagList = (new Gson()).toJson(head_tagService.listHead_TagByBoard_Kinds(board_kinds));
+		System.out.println(headTagList);
+		return headTagList;
+	}
+   // 게시글 목록
+   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
+   public ModelAndView listBoard_Post(String search) {
+      List<Board_PostVo> list = board_postService.listBoard_Post(search);
+      ModelAndView mav = new ModelAndView();
+      // 해당 부분에 Member_Info 추가해야 함
+      mav.setViewName("/board/listBoard_Post");
+      mav.addObject("list", list);
+      mav.addObject("headtag", head_tagService.listHead_Tag());
+      return mav;
+   }
 
-	
+   
 //	// 게시글 등록
 //	@RequestMapping("/insertBoard_Post.do")
 //	public ModelAndView insertBoard_Post(Board_PostVo vo) {
@@ -67,21 +81,27 @@ public class Board_PostController {
 	public ModelAndView insertBoard_PostForm(@RequestParam(value = "board_no", defaultValue = "0") int board_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board_no", board_no);
+		if(LoginUser.isLogin()) {
+			mav.addObject("member", LoginUser.getMember_InfoVo());
+		}
 		return mav;
 	}
 	
 	// 게시글 작성
 	@RequestMapping(value = "/board/insertBoard_Post.do", method = RequestMethod.POST)
-	public ModelAndView insertBoard_PostSubmit(Board_PostVo vo, HttpServletRequest req) {
+	@ResponseBody
+	public int insertBoard_PostSubmit(Board_PostVo vo, HttpServletRequest req) {
 //		String msg = "게시물 등록에 실패했습니다.";
+		System.out.println(vo);
 		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
-		int re = board_postService.insertBoard_Post(vo);
+		int re = -1;
+		re = board_postService.insertBoard_Post(vo);
 //		if(re > 0) {
 //			mav.setViewName("redirect:/listBoard_Post.do");
 //			msg = "게시물 등록에 성공했습니다.";
 //		}
 //		mav.addObject("re", re);
-		return mav;
+		return re;
 	}
 	
 	/*
@@ -98,13 +118,17 @@ public class Board_PostController {
 	
 	// 게시글 상세
 	@RequestMapping(value = "/board/detailBoard_Post.do")
+	@Transactional
 	public ModelAndView detailBoard_Post(int board_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/detailBoard_Post");
 		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
+		if(LoginUser.isLogin()) {
+			mav.addObject("mem_no", LoginUser.getMember_no());
+		}
 		board_postService.updateHit(board_no);
-		List<Board_CommentVo> clist = board_commentService.listComment(board_no);
-		mav.addObject("clist",board_commentService.listComment(board_no));
+//		List<Board_CommentVo> clist = board_commentService.listComment(board_no);
+//		mav.addObject("clist", clist);
 		return mav;
 	}
 	

@@ -13,6 +13,7 @@ public class Board_CommentVo {
 
 	private int comment_no;    //댓글번호
 	private int mem_no;     //회원번호
+	private String mem_nickname;	//회원 닉네임
 	private int board_no;      //글번호
 	private String comment_content;    //댓글내용
 	private Date comment_date;    //댓글 단 날짜
