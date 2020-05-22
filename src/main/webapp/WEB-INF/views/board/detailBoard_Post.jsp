@@ -11,7 +11,7 @@
 <head>
 <meta charset="EUC-KR">
 
-<title>게시글 상세</title>
+<title>${detail.board_title }</title>
 <link href="/css/summernote-lite.css" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/js/summernote-lite.js"></script>
@@ -132,10 +132,14 @@
 </script>
 </head>
 <body>
-	<h2>상세 보기</h2>
+	<h2>${detail.board_title }</h2>
 	<form name="f" method="post">
 		<input type="hidden" id="board_no" name="board_no" value="${detail.board_no }">
 		<div id="container">
+			<div>
+			 	<label for="headtag">말머리 : </label>
+			 	<a href="#">${detail.head_tag_name }</a>
+			</div>
 			<div>
 			 	<label for="write">작성자 : </label>
 			 	<a href="/myPage/myPage.do">
@@ -153,10 +157,10 @@
 				${detail.board_hit}
 			</div>
 			
-			<div>
-				<label for="title">제목 : </label>
-				${detail.board_title}
-			</div>
+<!-- 			<div> -->
+<!-- 				<label for="title">제목 : </label> -->
+<%-- 				${detail.board_title} --%>
+<!-- 			</div> -->
 			
 			<div class="form-group">
 				<div>

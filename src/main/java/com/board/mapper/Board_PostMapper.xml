@@ -26,7 +26,7 @@
                     , b.board_no
                     , h.head_tag_name
                     , b.board_title
-                    , b.board_content
+<!--                     , b.board_content -->
                     , m.mem_nickname
                     , b.board_kinds
                     , b.board_date
@@ -95,9 +95,12 @@
 	
 	<!-- 말머리 목록 -->
 	<select id="selectHead_Tag" resultType="com.board.vo.Head_TagVo">
-		select head_tag_no from head_tag
+		select * from head_tag
 	</select>
-	
+	<!-- 게시판 구분에 따른 말머리 목록 -->
+	<select id="selectHead_TagByBoard_Kinds" resultType="com.board.vo.Head_TagVo">
+		select * from head_tag where board_kinds = #{board_kinds}
+	</select>
 	<!-- 게시판 메인1. 최신글 -->
 	<select id="selectMain1" resultType="com.board.vo.Board_PostVo">
 		SELECT board_content

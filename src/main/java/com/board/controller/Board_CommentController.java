@@ -62,6 +62,7 @@ public class Board_CommentController {
 	@ResponseBody
 	public int insertBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
+		System.out.println(vo);
 		int re = -1; 
 		re = board_commentService.insertBoard_Comment(vo);
 		return re;

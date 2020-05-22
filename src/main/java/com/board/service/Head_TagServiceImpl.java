@@ -19,5 +19,9 @@ public class Head_TagServiceImpl implements Head_TagService {
 		// TODO Auto-generated method stub
 		return head_tagDao.listHead_Tag();
 	}
-
+	@Override
+	public List<Head_TagVo> listHead_TagByBoard_Kinds(int board_kinds) {
+		// TODO Auto-generated method stub
+		return head_tagDao.listHead_TagByBoard_Kinds(board_kinds);
+	}
 }
