@@ -69,7 +69,12 @@
 
 	<!-- 게시글 상세 -->
 	<select id="detail" resultType="com.board.vo.Board_PostVo">
-		select * from board_post where board_no = #{board_no}
+		SELECT b.board_no, b.mem_no, mi.mem_nickname, h.head_tag_name, b.board_kinds, b.board_title, to_char(b.board_date, 'YYYY-MM-DD HH:MI:SS') board_date, b.board_hit
+		    , b.board_content, b.board_copy
+		  FROM board_post b, member_info mi, head_tag h
+		 WHERE b.mem_no = mi.mem_no
+		       AND b.head_tag_no = h.head_tag_no
+		       AND b.board_no = #{board_no}
 	</select>
 
 	<!-- 게시글 수정 -->

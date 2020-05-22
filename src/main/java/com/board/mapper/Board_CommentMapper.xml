@@ -6,10 +6,11 @@
 
 	<!-- 게시글 상세보기 하단 댓글 목록 -->
 	<select id="selectDetail" resultType="com.board.vo.Board_CommentVo">
-		SELECT comment_no, m.mem_no, bc.board_no, comment_content, comment_date 
+		SELECT comment_no, m.mem_no, m.mem_nickname, bc.board_no, comment_content, comment_date 
 		FROM board_comment bc, board_post bp, member_info m
-		WHERE bc.board_no = bp.board_no AND m.mem_no = bp.mem_no
-		AND bc.board_no = #{bc.board_no}
+		WHERE bc.board_no = bp.board_no 
+			AND m.mem_no = bp.mem_no
+			AND bc.board_no = #{bc.board_no}
 		ORDER BY comment_no
 	</select>
 
@@ -26,8 +27,10 @@
   
   	<!-- x번 회원이 x번 게시물에 대한 댓글을 달음 (부정확) -->
   <insert id="insert">
-  	insert into board_comment(comment_no, mem_no, board_no, comment_content, comment_date, comment_secret, board_ref, board_level, board_step) values(
-    	seq_comment_no.nextval, #{mem_no}, #{board_no}, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
+  	insert into board_comment(comment_no, mem_no, board_no, comment_content, comment_date
+  	, comment_secret, board_ref, board_level, board_step)
+  	values((select nvl(max(comment_no), 0) + 1 from board_comment where board_no = #{board_no})
+    	, #{mem_no}, #{board_no}, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
   </insert>
 
 	<!-- x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함) -->

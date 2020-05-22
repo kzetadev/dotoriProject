@@ -10,42 +10,126 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+
 <title>게시글 상세</title>
-	<style type="text/css">
-		.comment_box{
-	
-		}
-		#container, .form-comment-group{
-			padding-left: 200px;
-			padding-right: 200px;
-		}
-		h2{
-			text-align:center;
-		}
-		.comment_li{
-			list-style: none;
-		}
-		#btnUpdate, btnDelete {
-			position: relative;
-			margin-left: 500px;
-		}
-	</style>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			var board_no = $("#board_no").val();
-			$("#btnUpdate").click(function() {
-				location.href = "/board/updateBoard_Post.do?board_no="+board_no;
+<link href="/css/summernote-lite.css" rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/js/summernote-lite.js"></script>
+<script src="/js/summernote-ko-KR.js"></script>
+<style type="text/css">
+	.comment_box{
+
+	}
+	#container, .form-comment-group{
+		padding-left: 100px;
+		padding-right: 100px;
+	}
+	h2{
+		text-align:center;
+	}
+	.comment_li{
+		list-style: none;
+	}
+	#btnUpdate, btnDelete {
+		position: relative;
+		margin-left: 500px;
+	}
+	.note-editor.note-frame .note-editing-area .note-editable[contenteditable="false"], .note-editor.note-airframe .note-editing-area .note-editable[contenteditable="false"] {
+		background-color: #ffffff;
+	}
+	.comment{
+		border:1px solid gray;
+		border-radius: 2px;
+	}
+	.commentDetail{
+		display:inline-block;
+	}
+	li{
+		list-style: none;
+	}
+</style>
+<script type="text/javascript">
+	$(function() {
+		var comments;
+		$("#content").summernote({
+//	 		height:300
+//	 		, 
+			minHeight:null
+			, maxHeight:null
+			, focus:true
+			, lang:'ko-KR'
+			, placeholder:'최대 500자까지 작성 가능합니다.'
+			, tabsize:2
+			, backColor:'white'
+			, toolbar:[]
+		});
+		var content = '${detail.board_content}';
+		$("#content").summernote('code', content);
+		$("#content").next().find(".note-editable").attr("contenteditable", false);
+		var board_no = $("#board_no").val();
+		$("#btnUpdate").click(function() {
+			location.href = "/board/updateBoard_Post.do?board_no="+board_no;
+		});
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+			var token = "${_csrf.token}";
+			jqXHR.setRequestHeader('X-CSRF-Token', token);
+		});
+		$("#btnDelete").click(function() {
+			console.log(board_no);
+			var re = confirm("삭제하시겠습니까?");
+			location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
+			alert("삭제했습니다!");
+		});
+		//댓글 목록 새로고침
+		function refreshComments(){
+			$.ajax({
+				url:'/board/listBoardComment.do/' + $("#board_no").val()
+				, type:'get'
+				, dataType:'JSON'
+				, success:function(data){
+					comments = data;
+					$("#commentList").empty();
+					var ul = $("<ul/>");
+					$.each(comments, function(idx, comment){
+						console.log(comment);
+						var li = $("<li/>");
+						var div = $("<div class='comment'/>");
+						var divNickname = $("<div class='commentDetail' width='50'/>").text(comment['mem_nickname']);
+						var divContent = $("<div class='commentDetail' width='200'/>").text(comment['comment_content']);
+						var divDate = $("<div class='commentDetail' width='100'/>").text(comment['comment_date']);
+						$(div).append(divNickname, divContent, divDate);
+						$(li).append(div);
+						$(ul).append(li);
+						$("#commentList").append(ul);
+					});
+				}
 			});
-			
-			$("#btnDelete").click(function() {
-				console.log(board_no);
-				var re = confirm("삭제하시겠습니까?");
-				location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
-				alert("삭제했습니다!");
+		}
+		refreshComments();
+		$("#btnList").click(function() {
+			location.href="/board/listBoard_Post.do";
+		});
+		$("#btnAnswer").click(function() {
+			var comment = {
+				mem_no:${mem_no}
+				, board_no:$("#board_no").val()
+				, comment_content:$("#comment_content").val()
+			}
+			$.ajax({
+				url:"/board/insertBoard_Comment.do"
+				, type:'post'
+				, data:comment
+				, success:function(result){
+					if(result == 1){
+						alert("댓글이 등록되었습니다.");
+						refreshComments();
+					}
+				}
 			});
 		});
-	</script>
+		
+	});
+</script>
 </head>
 <body>
 	<h2>상세 보기</h2>
@@ -55,7 +139,8 @@
 			<div>
 			 	<label for="write">작성자 : </label>
 			 	<a href="/myPage/myPage.do">
-					<!-- ${detail.mem_nickname} --> 홍길동  <!-- 회원 프로필 사진 아이콘 넣기 -->
+					${detail.mem_nickname}  
+<!-- 					회원 프로필 사진 아이콘 넣기 -->
 				</a>
 			</div>
 			
@@ -76,7 +161,7 @@
 			<div class="form-group">
 				<div>
 					<label for="comment">내용 : </label>
-					<textarea class="form-control" rows="10" readonly="readonly" style="background-color: white">${detail.board_content }</textarea><br>
+					<textarea id="content" class="form-control" rows="10" readonly="readonly" style="background-color: white"></textarea><br>
 				</div>
 			</div>
 		</div>
@@ -90,36 +175,25 @@
 	<!-- 댓글 -->
 	<div class="form-comment-group">
 		<div>
-			<label for="comment">댓글</label>
-			<textarea class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
+			<label for="comment_content">댓글</label>
+			<textarea id="comment_content" class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
 		</div>
-		<div>
-			<ul>
-				<c:forEach var="v" items="${clist}">
-					<li>${v.comment_content }</li>
-				</c:forEach>
-			</ul>
+		<div class="commentList" id="commentList">
+<!-- 			<ul> -->
+<%-- 			<c:forEach var="v" items="${clist}"> --%>
+<!-- 				<li> -->
+<%-- 					<div class="commentDetail">${v.mem_nickname }</div> --%>
+<%-- 					<div class="commentDetail">${v.comment_content }</div> --%>
+<%-- 					<div class="commentDetail">${v.comment_date }</div> --%>
+<!-- 				</li> -->
+<%-- <%-- 					<li>${v.comment_content }</li> --%>
+<%-- 			</c:forEach> --%>
+<!-- 			</ul> -->
 		</div>
 		<button class="btn btn-default" id="btnWrite">글쓰기</button>
 		<button class="btn btn-default" id="btnAnswer">답글</button>	
 		<button class="btn btn-default" id="btnList">글목록</button>			
 	</div>
-	
-	<script type="text/javascript">
-		$(function(){
-			$("#btnList").click(function() {
-				location.href="/board/listBoard_Post.do";
-			});
-			$("#btnAnswer").click(function() {
-				var comment = {
-					
-				}
-				$.post("/board/insertBoard_Comment.do", comment, function() {
-					location.href="/board/detailBoard_Post.do";
-				});
-			});
-		});
-	</script>
 </body>
 </html>
 </layoutTag:layout>

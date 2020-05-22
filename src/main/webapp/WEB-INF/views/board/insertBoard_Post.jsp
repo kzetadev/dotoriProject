@@ -9,12 +9,23 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 글쓰기</title>
+<link href="/css/summernote-lite.css" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-<!-- <script src="/js/summernote-lite.js"></script> -->
-<!-- <script src="/js/lang/summernote-ko-KR.js"></script> -->
-<!-- <link rel="stylesheet" href="/css/summernote-lite.css"> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/js/summernote-lite.js"></script>
+<script src="/js/summernote-ko-KR.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$("#board_content").summernote({
+			height:300
+			, minHeight:null
+			, maxHeight:null
+			, focus:true
+			, lang:'ko-KR'
+			, placeholder:'최대 500자까지 작성 가능합니다.'
+			, tabsize:2
+// 			, airMode:true
+		});
 // 		// 써머노트
 // 		$("#content").summernote({
 // 			disableDragAndDrop : true,
@@ -73,8 +84,12 @@
 // 		            }
 		 
 // 		}
-
-		$("#btnSave").click(function() {
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+			var token = "${_csrf.token}";
+			jqXHR.setRequestHeader('X-CSRF-Token', token);
+		});
+		$("#f").submit(function(event){
+			event.preventDefault();
 			var board_title = $("#board_title").val();
 			var board_content = $("#board_content").val();
 			if(board_title == "") {
@@ -87,7 +102,36 @@
 				document.f.board_content.focus();
 				return;
 			};
+			var board = $("#f").serialize();
+			console.log(board);
+			$.ajax({
+				url:"/board/insertBoard_Post.do"
+				, type:"post"
+				, data:board
+				, error:function(jqXHR, textStatus, errorThrown){
+				}
+				, success:function(data, jqXHR, textStatus){
+					if(data == 1){
+						alert("글이 등록되었습니다.");
+						location.href = "/board/listBoard_Post.do";
+					}
+				}
+			});
 		});
+// 		$("#btnSave").click(function() {
+// 			var board_title = $("#board_title").val();
+// 			var board_content = $("#board_content").val();
+// 			if(board_title == "") {
+// 				alert("제목을 입력하세요.");
+// 				document.f.board_title.focus();
+// 				return;
+// 			};
+// 			if(board_content == "") {
+// 				alert("내용을 입력하세요.");
+// 				document.f.board_content.focus();
+// 				return;
+// 			};
+// 		});
 
 // 		// 복사기능 체크
 // 		function CheckCopy("form") {
@@ -103,7 +147,7 @@
 </head>
 <body>
 	<h2>글쓰기</h2>
-	<form name="f" action="/board/insertBoard_Post.do" method="post">
+	<form id="f" name="f" action="/board/insertBoard_Post.do" method="post">
 	<input type="hidden" name="board_no" value="${board_no }">
 	<table border="1">
 <!-- 		select-option 변경 예시 -->
