@@ -29,9 +29,12 @@
   <insert id="insert">
   	insert into board_comment(comment_no, mem_no, board_no, comment_content, comment_date
   	, comment_secret, board_ref, board_level, board_step)
-  	values((select nvl(max(comment_no), 0) + 1 from board_comment where board_no = #{board_no})
-    	, #{mem_no}, #{board_no}, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
+  	values(#{comment_no}, #{mem_no}, #{board_no}, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
   </insert>
+	<!-- 글에 작성할 다음 댓글 번호 가져오기 -->  
+  <select id="selectNextCommentNo" resultType="java.lang.Integer">
+  	select nvl(max(comment_no), 0) + 1 as comment_no from board_comment where board_no = #{board_no}
+  </select>
 
 	<!-- x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함) -->
   <update id="update">

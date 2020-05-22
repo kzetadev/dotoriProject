@@ -60,7 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		web.ignoring().antMatchers("/member/joinForm.do", "/member/join.do"
 				, "/member/emailCheck.do", "/member/idCheck.do"
-				, "/member/nickCheck.do");
+				, "/member/nickCheck.do", "/css/**", "/fonts/**", "/img/**", "/js/**"
+				);
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -69,8 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/member/**").hasRole("USER")
 			
-			.antMatchers("/", "/css/**", "/fonts/**", "/img/**", "/js/**"
-					, "/login.do", "/member/login.do"
+			.antMatchers("/",  "/login.do", "/member/login.do"
 					, "/main.do", "/mailAuth.do"
 					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()

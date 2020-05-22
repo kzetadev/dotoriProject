@@ -24,7 +24,7 @@
 			, lang:'ko-KR'
 			, placeholder:'최대 500자까지 작성 가능합니다.'
 			, tabsize:2
-			, airMode:true
+// 			, airMode:true
 		});
 // 		// 써머노트
 // 		$("#content").summernote({

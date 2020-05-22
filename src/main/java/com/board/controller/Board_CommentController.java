@@ -3,6 +3,7 @@ package com.board.controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,9 +61,18 @@ public class Board_CommentController {
 	// x번 회원이 x번 게시물에 대한 댓글을 달음 (부정확)
 	@RequestMapping(value="/board/insertBoard_Comment.do", method=RequestMethod.POST)
 	@ResponseBody
+	@Transactional
 	public int insertBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
 		System.out.println(vo);
+		int nextCommentNo = board_commentService.selectNextCommentNo(vo.getBoard_no());
+		int board_ref = nextCommentNo;
+		if(vo.getBoard_ref() != 0) {
+			board_ref = vo.getBoard_ref();
+		}
+		vo.setComment_no(nextCommentNo);
+		vo.setBoard_ref(board_ref);
+		
 		int re = -1; 
 		re = board_commentService.insertBoard_Comment(vo);
 		return re;

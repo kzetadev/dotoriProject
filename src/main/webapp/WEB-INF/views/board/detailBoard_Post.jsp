@@ -38,11 +38,14 @@
 		background-color: #ffffff;
 	}
 	.comment{
-		border:1px solid gray;
-		border-radius: 2px;
+		border:1px solid lightgray;
+		border-radius: 5px;
+		border-left-style: none;
+		border-right-style: none;
 	}
 	.commentDetail{
 		display:inline-block;
+		padding: 10px;
 	}
 	li{
 		list-style: none;
@@ -51,6 +54,11 @@
 <script type="text/javascript">
 	$(function() {
 		var comments;
+		var commentReplyArea = $("<div id='commentReplyArea'/>")
+			.append($("<label for='comment_reply'>댓글</label>"))
+			.append($("<textarea id='comment_reply' class='form-control' rows='3' placeholder='댓글을 적어주세요.' style='background-color:white'/>"))
+			.append($("<button class='btn btn-default' id='btnReplyAnswer'>답글</button>"));
+		
 		$("#content").summernote({
 //	 		height:300
 //	 		, 
@@ -93,10 +101,21 @@
 					$.each(comments, function(idx, comment){
 						console.log(comment);
 						var li = $("<li/>");
-						var div = $("<div class='comment'/>");
-						var divNickname = $("<div class='commentDetail' width='50'/>").text(comment['mem_nickname']);
-						var divContent = $("<div class='commentDetail' width='200'/>").text(comment['comment_content']);
-						var divDate = $("<div class='commentDetail' width='100'/>").text(comment['comment_date']);
+						var board_level = comment['board_level'];
+						var div = $("<div class='comment' board_level='" + board_level + "''/>");
+						var divNickname = $("<span class='commentDetail' width='50'/>").text(comment['mem_nickname']);
+						var divContent = $("<span class='commentDetail' width='400'/>").text(comment['comment_content']);
+						var divDate = $("<span class='commentDetail' width='100'/>").text(comment['comment_date']);
+						$(div).click(function(){
+							console.log($(this).find('#commentReplyArea').length);
+							if($(this).find('#commentReplyArea').length == 0){
+// 								console.log($(this).attr("board_level"));
+								var temp = $(commentReplyArea).detach();
+								$(this).append(temp);
+							}else{
+								$(commentReplyArea).detach();
+							}
+						});
 						$(div).append(divNickname, divContent, divDate);
 						$(li).append(div);
 						$(ul).append(li);
@@ -105,6 +124,7 @@
 				}
 			});
 		}
+		
 		refreshComments();
 		$("#btnList").click(function() {
 			location.href="/board/listBoard_Post.do";
@@ -113,6 +133,8 @@
 			var comment = {
 				mem_no:${mem_no}
 				, board_no:$("#board_no").val()
+				, board_level:1
+				, board_step:1
 				, comment_content:$("#comment_content").val()
 			}
 			$.ajax({
