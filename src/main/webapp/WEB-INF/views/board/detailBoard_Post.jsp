@@ -55,9 +55,8 @@
 	$(function() {
 		var comments;
 		$("#content").summernote({
-//	 		height:300
-//	 		, 
-			minHeight:null
+	 		height:400
+	 		, minHeight:null
 			, maxHeight:null
 			, focus:true
 			, lang:'ko-KR'
@@ -66,26 +65,37 @@
 			, backColor:'white'
 			, toolbar:[]
 		});
-		//본문에 표시할 썸머노트 코드.
-		var content = '${detail.board_content}';
-		//썸머노트 코드로 본문에 로드시킴.
-		$("#content").summernote('code', content);
-		//편집 불가하게 변경.
-		$("#content").next().find(".note-editable").attr("contenteditable", false);
-		var board_no = $("#board_no").val();
-		$("#btnUpdate").click(function() {
-			location.href = "/board/updateBoard_Post.do?board_no="+board_no;
-		});
 		//시큐리티에서 csrf 토큰이 필요하여 ajax 통신 전 csrf를 header에 포함. 
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
 			var token = "${_csrf.token}";
 			jqXHR.setRequestHeader('X-CSRF-Token', token);
 		});
+		//var content에 jstl로 board_content를 저장 시 스크립트에 해당 내용이 노출되어
+		//ajax 방식으로 변경
+		$.ajax({
+			url:"/board/getBoardPost.do/" + $("#board_no").val()
+			, type:'get'
+			, dataType:'JSON'
+			, success:function(result){
+				//썸머노트 코드로 본문에 로드시킴.
+				$("#content").summernote('code', result['board_content']);
+				//편집 불가하게 변경.
+				$("#content").next().find(".note-editable").attr("contenteditable", false);
+			}
+		});
+		
+		var board_no = $("#board_no").val();
+		$("#btnUpdate").click(function() {
+			location.href = "/board/updateBoard_Post.do?board_no="+board_no;
+		});
+		
 		$("#btnDelete").click(function() {
 			console.log(board_no);
 			var re = confirm("삭제하시겠습니까?");
-			location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
-			alert("삭제했습니다!");
+			if(re == true){
+				location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
+				alert("삭제했습니다!");
+			}
 		});
 		//댓글 목록 새로고침
 		function refreshComments(){

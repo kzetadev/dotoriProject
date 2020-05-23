@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#board_content").summernote({
-			height:300
+			height:400
 			, minHeight:null
 			, maxHeight:null
 			, focus:true
@@ -25,8 +25,7 @@
 			, tabsize:2
 // 			, airMode:true
 		});
-		var content = '${update.board_content}';
-		$("#board_content").summernote('code', content);
+
 // 		// 써머노트
 // 		$("#content").summernote({
 // 			disableDragAndDrop : true,
@@ -59,6 +58,17 @@
 			var token = "${_csrf.token}";
 			jqXHR.setRequestHeader('X-CSRF-Token', token);
 		});
+		//var content에 jstl로 board_content를 저장 시 스크립트에 해당 내용이 노출되어
+		//ajax 방식으로 변경
+		$.ajax({
+			url:"/board/getBoardPost.do/" + $("#board_no").val()
+			, type:'get'
+			, dataType:'json'
+			, success:function(result){
+				$("#board_content").summernote('code', result['board_content']);
+			}
+		});
+		
 // 		$("#btnUpdate").click(function() {
 		$("#f").submit(function(event){
 			event.preventDefault();
@@ -80,6 +90,7 @@
 				, type:"post"
 				, data:board
 				, error:function(jqXHR, textStatus, errorThrown){
+					
 				}
 				, success:function(data, jqXHR, textStatus){
 					if(data == 1){
