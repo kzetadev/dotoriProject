@@ -6,12 +6,14 @@
 
 	<!-- 게시글 상세보기 하단 댓글 목록 -->
 	<select id="selectDetail" resultType="com.board.vo.Board_CommentVo">
-		SELECT comment_no, m.mem_no, m.mem_nickname, bc.board_no, comment_content, comment_date 
+		SELECT bc.comment_no, bc.board_ref, bc.board_level, bc.board_step, m.mem_no
+				, m.mem_nickname, bc.board_no, bc.comment_content
+				, to_char(bc.comment_date, 'YYYY-MM-DD HH:MI:SS') comment_date
 		FROM board_comment bc, board_post bp, member_info m
 		WHERE bc.board_no = bp.board_no 
 			AND m.mem_no = bp.mem_no
 			AND bc.board_no = #{bc.board_no}
-		ORDER BY comment_no
+		ORDER BY board_ref, board_level, board_step
 	</select>
 
 	<!-- 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기 -->
@@ -29,7 +31,10 @@
   <insert id="insert">
   	insert into board_comment(comment_no, mem_no, board_no, comment_content, comment_date
   	, comment_secret, board_ref, board_level, board_step)
-  	values(#{comment_no}, #{mem_no}, #{board_no}, #{comment_content}, sysdate, #{comment_secret}, #{board_ref}, #{board_level}, #{board_step})
+  	values(#{comment_no}, #{mem_no}, #{board_no}, #{comment_content}, sysdate
+  	, #{comment_secret}, #{board_ref}, #{board_level}
+  	, (select nvl(max(board_step), 0) + 1 from 
+  		board_comment where board_no = #{board_no} and board_ref = #{board_ref}))
   </insert>
 	<!-- 글에 작성할 다음 댓글 번호 가져오기 -->  
   <select id="selectNextCommentNo" resultType="java.lang.Integer">

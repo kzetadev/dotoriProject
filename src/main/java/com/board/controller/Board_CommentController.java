@@ -65,8 +65,11 @@ public class Board_CommentController {
 	public int insertBoard_Comment(Board_CommentVo vo) {
 		ModelAndView m = new ModelAndView();
 		System.out.println(vo);
+		//다음에 저장할 댓글번호 가져오기
 		int nextCommentNo = board_commentService.selectNextCommentNo(vo.getBoard_no());
+		//board_ref에 다음 댓글번호 일단 저장
 		int board_ref = nextCommentNo;
+		//board_ref가 0이 아니면 대댓글 작성으로 간주
 		if(vo.getBoard_ref() != 0) {
 			board_ref = vo.getBoard_ref();
 		}
