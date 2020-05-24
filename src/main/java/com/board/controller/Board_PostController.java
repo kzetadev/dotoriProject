@@ -131,7 +131,15 @@ public class Board_PostController {
 //		mav.addObject("clist", clist);
 		return mav;
 	}
-	
+	@RequestMapping(value="/board/getBoardPost.do/{board_no}", method=RequestMethod.GET)
+	@ResponseBody
+	public String getBoardPost(@PathVariable("board_no")int board_no) {
+		String board_str = "";
+//		System.out.println("/board/getBoardPost.do/" + board_no);
+		board_str = (new Gson()).toJson(board_postService.detailBoard_Post(board_no));
+//		System.out.println(board_str);
+		return board_str;
+	}
 //	// 게시글 수정
 //	@RequestMapping("/updateBoard_Post.do")
 //	public ModelAndView updateBoard_Post(Board_PostVo vo) {
@@ -151,13 +159,15 @@ public class Board_PostController {
 	
 	// 게시글 수정
 	@RequestMapping(value = "/board/updateBoard_Post.do", method = RequestMethod.POST)
-	public ModelAndView updateBoard_PostSubmit(Board_PostVo vo, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
-		int re = board_postService.updateBoard_Post(vo);
+	@ResponseBody
+	public int updateBoard_PostSubmit(Board_PostVo vo, HttpServletRequest req) {
+//		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
+		int re = -1;
+		re = board_postService.updateBoard_Post(vo);
 //		if(re > 0) {
 //			mav.setViewName("redirect:/listBoard_Post.do");
 //		}
-		return mav;
+		return re;
 	}
 	
 //	// 게시글 삭제

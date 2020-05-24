@@ -38,11 +38,14 @@
 		background-color: #ffffff;
 	}
 	.comment{
-		border:1px solid gray;
-		border-radius: 2px;
+		border:1px solid lightgray;
+		border-radius: 5px;
+		border-left-style: none;
+		border-right-style: none;
 	}
 	.commentDetail{
 		display:inline-block;
+		padding: 10px;
 	}
 	li{
 		list-style: none;
@@ -52,9 +55,8 @@
 	$(function() {
 		var comments;
 		$("#content").summernote({
-//	 		height:300
-//	 		, 
-			minHeight:null
+	 		height:400
+	 		, minHeight:null
 			, maxHeight:null
 			, focus:true
 			, lang:'ko-KR'
@@ -63,25 +65,75 @@
 			, backColor:'white'
 			, toolbar:[]
 		});
-		var content = '${detail.board_content}';
-		$("#content").summernote('code', content);
-		$("#content").next().find(".note-editable").attr("contenteditable", false);
-		var board_no = $("#board_no").val();
-		$("#btnUpdate").click(function() {
-			location.href = "/board/updateBoard_Post.do?board_no="+board_no;
-		});
+		//시큐리티에서 csrf 토큰이 필요하여 ajax 통신 전 csrf를 header에 포함. 
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
 			var token = "${_csrf.token}";
 			jqXHR.setRequestHeader('X-CSRF-Token', token);
 		});
+		//var content에 jstl로 board_content를 저장 시 스크립트에 해당 내용이 노출되어
+		//ajax 방식으로 변경
+		$.ajax({
+			url:"/board/getBoardPost.do/" + $("#board_no").val()
+			, type:'get'
+			, dataType:'JSON'
+			, success:function(result){
+				//썸머노트 코드로 본문에 로드시킴.
+				$("#content").summernote('code', result['board_content']);
+				//편집 불가하게 변경.
+				$("#content").next().find(".note-editable").attr("contenteditable", false);
+			}
+		});
+		
+		var board_no = $("#board_no").val();
+		$("#btnUpdate").click(function() {
+			location.href = "/board/updateBoard_Post.do?board_no="+board_no;
+		});
+		
 		$("#btnDelete").click(function() {
 			console.log(board_no);
 			var re = confirm("삭제하시겠습니까?");
-			location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
-			alert("삭제했습니다!");
+			if(re == true){
+				location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
+				alert("삭제했습니다!");
+			}
 		});
 		//댓글 목록 새로고침
 		function refreshComments(){
+			//댓글에 작성할 수 있는 댓글란
+			var btnReplyAnswer = $("<button class='btn btn-default' id='btnReplyAnswer'>답글</button>"); 
+			var commentReplyArea = $("<div id='commentReplyArea'/>")
+				.append($("<label for='comment_reply_content'>댓글</label>"))
+				.append($("<textarea id='comment_reply_content' class='form-control' rows='3' placeholder='댓글을 적어주세요.' style='background-color:white'/>"))
+				.append(btnReplyAnswer);
+			//댓글 작성 버튼 클릭
+			$(btnReplyAnswer).click(function(){
+				//상위 댓글의 board_ref, board_level을 가져와서 댓글 작성할 때 사용
+				var board_ref = $(this).parent().attr('board_ref');
+				var board_level = $(this).parent().attr('board_level');
+				var board_step = $(this).parent().attr('board_step');
+				console.log('commentReplyArea board_ref : ' + board_ref);
+				console.log('commentReplyArea board_level : ' + board_level);
+				console.log('commentReplyArea board_step : ' + board_step);
+				//대댓글 객체 만들기
+				var comment = {
+					board_ref:board_ref
+					, board_level:board_level
+					, mem_no:${mem_no}
+					, board_no:$("#board_no").val()
+					, comment_content:$("#comment_reply_content").val()
+				}
+				console.log(comment);
+				$.ajax({
+					url:"/board/insertBoard_Comment.do"
+					, type:"post"
+					, data:comment
+					, success:function(result){
+						alert("댓글이 등록되었습니다.");
+						refreshComments();
+					}
+				});
+			});
+			//해당 게시글에 대한 댓글 목록 가져오기
 			$.ajax({
 				url:'/board/listBoardComment.do/' + $("#board_no").val()
 				, type:'get'
@@ -93,19 +145,67 @@
 					$.each(comments, function(idx, comment){
 						console.log(comment);
 						var li = $("<li/>");
-						var div = $("<div class='comment'/>");
-						var divNickname = $("<div class='commentDetail' width='50'/>").text(comment['mem_nickname']);
-						var divContent = $("<div class='commentDetail' width='200'/>").text(comment['comment_content']);
-						var divDate = $("<div class='commentDetail' width='100'/>").text(comment['comment_date']);
+						//댓글 노드 만들기
+						var div = $("<div class='comment' comment_no='" + comment['comment_no'] + "' board_ref='" + comment['board_ref'] + "' board_level='" + comment['board_level'] + "'/>");
+						var divNickname = $("<span class='commentDetail' width='50'/>").text(comment['mem_nickname']);
+						var divContent = $("<span class='commentDetail' width='400'/>").text(comment['comment_content']);
+						var divDate = $("<span class='commentDetail' width='100'/>").text(comment['comment_date']);
+						//해당 댓글 노드가 상위 노드(board_level == 1 이면 상위 댓글)이면
+						//클릭 시 댓글 작성란을 하단에 표시 
+						if(parseInt($(div).attr('board_level')) == 1){
+							$(div).click(function(){
+								console.log($(this).text());
+								console.log('board_level : ' + $(this).attr('board_level'));
+// 								console.log($(this).siblings().length);
+	// 							if($(this).next().find('#commentReplyArea').length == 0){
+	
+								//해당 댓글의 형제노드(댓글 작성란 노드)가 없으면, 댓글 작성란 노드를 해당 댓글 형제노드로 붙임. siblings : 형제노드들
+								if($(this).siblings().length == 0){
+	// 								console.log($(this).attr("board_level"));
+									//댓글을 작성할 상위 댓글 노드의 참조 인덱스(board_ref)를 저장. board_level은 댓글들에 대한 계층 표현. 1 : 상위댓글	2 : 하위 댓글  
+									$(commentReplyArea).attr('board_ref', $(this).attr('comment_no'));
+									$(commentReplyArea).attr('board_level', parseInt($(this).attr('board_level')) + 1);
+									$(commentReplyArea).attr('board_step', parseInt($(this).attr('board_level')) + 1);
+									//다른 상위 댓글 노드를 클릭해서 댓글 작성란 노드가 표시되어 있을 수 있으므로
+									//댓글 작성란 노드를 분리하여 숨김처리함. 
+									var temp = $(commentReplyArea).detach();
+									//현재 클릭된 상위 댓글 노드에 댓글 작성란 노드를 형제노드로 붙임.
+									//append로 추가 시 commentReplyArea 클릭이 div 클릭에 포함되어 after로 변경
+									$(this).after(temp);
+								}else{	//현재 클릭된 상위 댓글 노드에 댓글 작성란 노드가 형제 노드로 붙어 있다고 간주. 숨김처리 해야 하므로 detach 시킴.
+									$(commentReplyArea).detach();
+								}
+							});
+						}
+						//댓글 노드 만들기
 						$(div).append(divNickname, divContent, divDate);
+						//해당 댓글 노드가 대댓글이면 이미지로 대댓글임을 표시/
+						if(parseInt(comment['board_level']) > 1){
+// 							var reply = $("<span/>").text("▶");
+							var img = $("<img src='${pageContext.request.contextPath}/reply.png' width='15' height='15'/>");
+							$(div).prepend(img);
+						}
+// 						if(parseInt(comment['board_level']) > 1){
+// 							var reply = $("<span/>").text("▶");
+// 							$(div).prepend(reply);
+// 							$(ul).children().last().find("[comment_no='" + comment['board_ref'] + "']").append(div);
+// 						}else{
+// 							$(li).append(div);
+// 							$(ul).append(li);
+// 						}
+						//리스트에 댓글 노드 추가
 						$(li).append(div);
+						//ul에 리스트 추가
 						$(ul).append(li);
-						$("#commentList").append(ul);
 					});
+					//댓글란 노드에 ul 추가
+					$("#commentList").append(ul);
 				}
 			});
 		}
+		//처음 화면 로딩시  댓글 목록 가져오기 실행.
 		refreshComments();
+		
 		$("#btnList").click(function() {
 			location.href="/board/listBoard_Post.do";
 		});
@@ -113,6 +213,8 @@
 			var comment = {
 				mem_no:${mem_no}
 				, board_no:$("#board_no").val()
+				, board_level:1
+				, board_step:1
 				, comment_content:$("#comment_content").val()
 			}
 			$.ajax({

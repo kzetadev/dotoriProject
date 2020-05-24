@@ -22,4 +22,7 @@ public interface Board_CommentDao {
 	
 	// 댓글번호가 x인 (x번 회원이 x번 게시글에 쓴) 댓글을 삭제 (첨부파일 삭제는 고려 안함)
 	int deleteBoard_Comment(Board_CommentVo vo);
+	
+	// 글에 작성할 다음 댓글 번호 가져오기
+	int selectNextCommentNo(int board_no);
 }

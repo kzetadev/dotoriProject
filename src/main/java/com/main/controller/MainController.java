@@ -24,9 +24,9 @@ public class MainController {
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
-	@RequestMapping("/main.do")
+	@RequestMapping({"/", "/main.do"})
 	public ModelAndView main(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("main");
 		int pageNUM = 1;
 		int place_type = 0;
 //		Place_ThemeVo pt = place_themeService.getPlace_Theme(place_type);

@@ -50,4 +50,9 @@ public class Board_CommentDaoImpl implements Board_CommentDao {
 	public int deleteBoard_Comment(Board_CommentVo vo) {
 		return sqlSessionTemplate.delete("board_comment.delete", vo);
 	}
+	@Override
+	public int selectNextCommentNo(int board_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("board_comment.selectNextCommentNo", board_no);
+	}
 }
