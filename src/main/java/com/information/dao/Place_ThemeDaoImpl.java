@@ -1,6 +1,7 @@
 package com.information.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,6 +24,12 @@ public class Place_ThemeDaoImpl implements Place_ThemeDao {
 	@Override
 	public Place_ThemeVo getPlace_Theme(int place_type) {
 		return sessionTemplate.selectOne("place_theme.getPlaceTheme", place_type);
+	}
+	// 통합검색 - 검색 키워드에 대한 테마리스트
+	@Override
+	public List<Place_ThemeVo> unifiedSearchTheme(Map map) {
+		// TODO Auto-generated method stub
+		return sessionTemplate.selectList("unified_search.unifiedSearchTheme", map);
 	}
 
 }

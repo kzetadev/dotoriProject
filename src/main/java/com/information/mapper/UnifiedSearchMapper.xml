@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="unified_search">
+
+   <!-- 통합검색으로 조회된 테마 리스트 -->
+  <select id="unifiedSearchTheme" resultType="com.information.vo.Place_ThemeVo">
+  	select *
+	  from place_theme
+	 where place_type in (select place_type
+	                        from place_info
+	                       where place_name like '%' || #{keyword} || '%'
+	                       union
+	                      select place_type
+	                        from place_info
+	                       where place_addr like '%' || #{keyword} || '%'
+	                       union
+	                      select place_type
+	                        from place_info
+	                       where place_detail like '%' || #{keyword} || '%'
+	                      )
+  </select>
+  
+  <!-- 검색할 키워드가 포함된 테마의 검색조건(장소명, 주소, 설명) 가져오기 -->
+<!--   <select id="unifiedSearchCondition" resultType="java.lang.String"> -->
+	<select id="unifiedSearchCondition" resultType="com.information.vo.SearchConditionVo">
+  	select condition_kor, condition_col, search_cnt
+	  from (select '장소명' condition_kor, 0 condition_col, count(place_no) search_cnt, 1 as sel_ord
+	          from place_info
+	         where place_name like '%' || #{keyword} || '%'
+	               and place_type = #{place_type}
+	         union
+	        select '주소' condition_kor, 1 condition_col, count(place_no) search_cnt, 2 as sel_ord
+	          from place_info
+	         where place_addr like '%' || #{keyword} || '%'
+	              and place_type = #{place_type}
+	         union
+	        select '설명' condition_kor, 2 condition_col, count(place_no) search_cnt, 3 as sel_ord
+	          from place_info
+	         where place_detail like '%' || #{keyword} || '%'
+	              and place_type = #{place_type}
+	        )
+	 where search_cnt != 0
+	 order by sel_ord
+  </select>
+  <select id="searchPlace" resultType="com.information.vo.Place_InfoVo">
+  	select r, place_no, place_name, place_img, place_detail
+	  from (select rownum r, place_no, place_name, place_img, place_detail
+	          from (select place_no, place_type, place_name, place_img, DBMS_LOB.substr(place_detail, 10, 1) place_detail
+	                  from place_info
+	                 where 
+	                 <choose>
+	                  	<when test="condition_col != null and condition_col == 0">
+	                 		place_name
+	                 	</when>
+		                 <when test="condition_col != null and condition_col == 1">
+		                 	place_addr
+		                 </when>
+		                 <when test="condition_col != null and condition_col == 2">
+		                 	place_detail
+		                 </when>
+		                 <otherwise>
+		                 	place_name
+		                 </otherwise>
+	                 </choose>
+	                 		like '%' || #{keyword} || '%'
+	                	   and place_type = #{place_type}
+	                 order by place_no
+	               )
+	       )
+	 where r between #{start} and #{end}
+	  	
+  </select>
+</mapper>

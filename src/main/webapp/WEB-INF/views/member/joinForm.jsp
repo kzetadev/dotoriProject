@@ -1,11 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+<layoutTag:layout>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
+<style type="text/css">
+
+	h2{
+		text-align:center;
+	}
+	.container{
+		padding-right:380px;
+		padding-left:300px;
+		
+	}
+	#nickName_overlap{
+		text-align: right;
+		display: inline-block;
+	}
+	#id_overlap{
+		text-align: right;
+		display: inline-block;
+	}
+	#email_overlap{
+		text-align: right;
+		display: inline-block;
+	
+	}
+	
+
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -291,7 +319,7 @@ $(function(){
 <body>
 	<div class="container">
 		<div class="titleStyle">
-			<h1>회원가입</h1>
+			<h2>회원가입</h2>
 		</div>
 <!-- 		<form id="form" method="POST" action="/member/join.do" name="memInfo"> -->
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -356,15 +384,17 @@ $(function(){
 					<button id="email_overlap">중복확인</button>
 					<div class="check_font" id="email_check"></div>
 				</div>
+				<div class="reg" style="text-align:center">
 			<button class="btn btn-primary px-3" id="reg_submit">
 				<i class="fa fa-heart pr-2" aria-hidden="true"></i>가입하기</button>
 			
-			<div class="reg_button">
+			<div class="reg btn">
 					<a class="btn btn-danger px-3" href="${pageContext.request.contextPath}">
 						<i class="fa fa-rotate-right pr-2" aria-hidden="true"></i>초기화</a>
 			</div>
-			
+			</div>
 <!-- 		</form> -->
 		</div>
 	</body>
 </html>
+</layoutTag:layout>

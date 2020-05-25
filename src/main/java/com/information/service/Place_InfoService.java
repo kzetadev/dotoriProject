@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.information.vo.Place_InfoVo;
+import com.information.vo.SearchConditionVo;
 
 public interface Place_InfoService {
 	// place_type별 정보 리스트 보기 + 페이징 처리 + 검색 + 정렬
@@ -20,4 +21,10 @@ public interface Place_InfoService {
 	
 	// 메인 페이지 인기 서울 명소 TOP 6
 	List<Place_InfoVo> mainTop();
+	
+	// 검색할 키워드가 포함된 테마의 검색조건(장소명, 주소, 설명) 가져오기
+	List<SearchConditionVo> unifiedSearchCondition(Map map);
+	
+	// 테마, 검색조건(장소명, 주소, 설명)에 해당하는 장소정보 리스트 가져오기
+	List<Place_InfoVo> searchPlace(Map map);
 }

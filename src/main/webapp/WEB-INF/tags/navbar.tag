@@ -1,6 +1,15 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 
 <!-- 상단 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#btnUnifiedSearch").click(function(event){
+		event.preventDefault();
+		location.href = "/unifiedSearch.do/" + $("#keyword").val();
+	});
+});
+</script>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -10,7 +19,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="main.do" class="navbar-brand" style="font-size:25px"><span class="glyphicon glyphicon-plane"></span></a>
+				<a href="/main.do" class="navbar-brand" style="font-size:25px"><span class="glyphicon glyphicon-plane"></span></a>
 			</div>
 
 			<div class="collapsed navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -36,16 +45,16 @@
 					<li><a href="/etc/faq2.do">FAQ</a></li>
 				</ul>
 				<!-- 검색창 구현 -->
-				<!-- <form class="navbar-form navbar-left" action="/detailPlace_Info.do?">
+				<form class="navbar-form navbar-left" action="/detailPlace_Info.do?">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="검색어를 입력해주세요.">
+						<input type="text" id="keyword" class="form-control" placeholder="검색어를 입력해주세요.">
 						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
+							<button id="btnUnifiedSearch" class="btn btn-default" type="submit">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
 					</div>
-				</form> -->
+				</form>
 				
 				<!-- sign, login -->
 				<ul class="nav navbar-nav navbar-right"> 
