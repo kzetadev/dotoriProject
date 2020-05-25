@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.member.service.MyPage_commentService;
 import com.member.vo.MyPage_CommentVo;
-import com.member.vo.MyPage_PostVo;
 import com.security.config.LoginUser;
 
 @Controller
@@ -33,15 +31,19 @@ public class MyPageController {
 		return m;
 	}
 	
-	@RequestMapping("/member/myPage_Contents.do")
-	public ModelAndView myPage_Contents(Model model) throws Exception{
-		ModelAndView m = new ModelAndView();
-		int mem_no = 0;
+
+	//내가 쓴 댓글 목록
+	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
+	public ModelAndView list(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		logger.info("list");
+		int mem_no  = 0;
 		if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
-		model.addAttribute("list_post", myPage_commentService.list_post(mem_no));
-		return m;
+		List<MyPage_CommentVo> list = myPage_commentService.list(mem_no);
+		mav.addObject("list", list);
+		return mav;
 	}
 	
 	//내가 쓴 댓글 목록
@@ -70,7 +72,7 @@ public class MyPageController {
 
 	
 //	// 내가 쓴 글댓글 목록
-//	@RequestMapping("/myPage_Contents.do")
+//	@RequestMapping("/member/myPage_Contents.do")
 //	public ModelAndView myPage_Contents() {
 //		ModelAndView m = new ModelAndView();
 //		return m;
