@@ -18,6 +18,9 @@
   font-size:15px; 
   line-height:1.3;
 }
+th,td {
+	text-align: center;
+}
 #container {
 	width: 960px;
 	margin: 0 auto;
@@ -130,15 +133,15 @@ a {
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a href="myPage.do">마이페이지</a>
+							<a href="/member/myPage.do">마이페이지</a>
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="/myPage/myPage_Content.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_update.do">회원 수정</a></li>
-						<li class="list-group-item"><a href="/myPage/pwd_update.do">비밀번호 변경</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="/member/myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
 					</ul>
 				</div>
 			</div>
@@ -154,38 +157,44 @@ a {
 					<li data-tab="tab3"><a href="#">내가 쓴 댓글</a></li>
 				</ul>
 
-
 				<div id="tab2" class="tabcontent">
+
 			<table width="80%">
 				<thead>
-					<tr>
+					<tr  style="border-bottom: 2px double #dddddd;">
 						<th>글 번호</th>
 						<th>제목</th>
 						<th>닉네임</th>
 						<th>작성일</th>
 						<th>조회수</th>
 					</tr>
+					
 				</thead>
- 			  <c:forEach var="list_post" items="${list_post}">
- 						<tr>
-							<td><c:out value="${list_post.board_no}"></c:out></td>
-							<td><c:out value="${list_post.board_title}"></c:out></td>
-							<td><c:out value="${list_post.mem_nickname}"></c:out></td>
-							<td><fmt:formatDate value="${list_post.board_date}" pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${list_post.board_hit}"></c:out></td>
+				
+
+				
+ 			  <c:forEach var="post" items="${list_post}">
+ 						<tr style="border-bottom: 1px double #dddddd;">
+							<td><c:out value="${post.board_no}"/></td>
+							<td><c:out value="${post.board_title}"/></td>
+							<td><c:out value="${post.mem_nickname}"/></td>
+							<td><fmt:formatDate value="${post.board_date}" pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${post.board_hit}"/></td>
 							
 						</tr>
 				</c:forEach>
 						
 			</table>
+				
 				</div>
+			
 
 
 
 				<div id="tab3" class="tabcontent">
 					<table width="80%">
 						<thead>
-							<tr>
+							<tr style="border-bottom: 2px double #dddddd;">
 								<th>댓글 번호</th>
 								<th>댓글 내용</th>
 								<th>닉네임</th>
@@ -193,16 +202,15 @@ a {
 							</tr>
 						</thead>
 				 	<c:forEach var="list" items="${list}">
-						<tr>
-							<td><c:out value="${list.comment_no}"></c:out></td>
-							<td><c:out value="${list.comment_content}"></c:out></td>
-							<td><c:out value="${list.mem_nickname}"></c:out></td>
+						<tr style="border-bottom: 1px double #dddddd;">
+							<td><c:out value="${list.comment_no}"/></td>
+							<td><c:out value="${list.comment_content}"/></td>
+							<td><c:out value="${list.mem_nickname}"/></td>
 							<td><fmt:formatDate value="${list.comment_date}" pattern="yyyy-MM-dd" /></td>
 						</tr>
 					</c:forEach>
 					</table>
 				</div>
-		
 			</div>
 		</div>
 </body>
