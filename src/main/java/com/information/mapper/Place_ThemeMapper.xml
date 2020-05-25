@@ -12,5 +12,5 @@
   <select id="getPlaceTheme" resultType="com.information.vo.Place_ThemeVo">
   	select * from place_theme where place_type = #{place_type}
   </select>
-
+    
 </mapper>

@@ -71,7 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/member/**").hasRole("USER")
 			
 			.antMatchers("/",  "/login.do", "/member/login.do"
-					, "/main.do", "/mailAuth.do"
+					, "/main.do", "/unifiedSearch.do/**", "/getCondition.do/**"
+					, "/searchPlace.do/**", "/mailAuth.do"
 					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
 			.anyRequest().authenticated();
