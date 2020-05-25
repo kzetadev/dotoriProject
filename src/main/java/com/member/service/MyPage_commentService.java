@@ -10,9 +10,9 @@ import com.member.vo.MyPage_PostVo;
 
 public interface MyPage_commentService {
 	//내가 쓴 댓글 목록
-	public List<MyPage_CommentVo> list(int mem_no) throws Exception;
+	List<MyPage_CommentVo> list(int mem_no) throws Exception;
 	
 	//내가 쓴 글 목록
-	public List<MyPage_PostVo> list_post(int mem_no) throws Exception;
+	List<MyPage_PostVo> list_post(int mem_no) throws Exception;
 
 }

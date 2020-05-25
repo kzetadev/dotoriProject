@@ -14,8 +14,7 @@
 		text-align:center;
 	}
 	.container{
-		padding-right:380px;
-		padding-left:300px;
+		max-width: 300px;
 		
 	}
 	#nickName_overlap{

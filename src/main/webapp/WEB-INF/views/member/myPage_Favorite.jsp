@@ -54,15 +54,15 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a href="myPage.do">마이페이지</a>
+							<a href="/member/myPage.do">마이페이지</a>
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="/myPage/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="/myPage/myPage_update.do">회원 수정</a></li>
-						<li class="list-group-item"><a href="/myPage/pwd_update.do">비밀번호 변경</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="/member/myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
 					</ul>
 				</div>
 			</div>
