@@ -1,5 +1,7 @@
 package com.member.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,8 @@ public class MyPage_PostVo {
 	private int board_no;
 	private String board_title;
 	private String mem_nickname;
-	private String board_date;
+	private Date board_date;
 	private int board_hit;
+	
 
 }

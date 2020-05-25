@@ -35,6 +35,10 @@
 		width:100px;
 		height:100px;
 	}
+	span.place_info{
+		width:200px;
+		height:200px;
+	}
 </style>
 <meta charset="UTF-8">
 <title>${keyword } 검색 결과</title>
@@ -64,6 +68,8 @@ $(document).ready(function(){
 			, success:function(result){
 				console.log(result);
 				$("#placeKeywordArea").empty();
+				$("#placePageArea").empty();
+				$("#placeArea").empty();
 				//검색조건 출력
 				$.each(result, function(idx, item){
 					var div = $("<div class='column'/>");
@@ -74,6 +80,7 @@ $(document).ready(function(){
 					$(span).click(function(){
 						column = parseInt($(this).attr('column'));
 						showPageList($(this), 1);
+						$(".place_page").first().trigger('click');
 /*
 						$("#placePageArea").empty();
 						var tot_cnt = parseInt($(this).attr('tot_cnt'));
@@ -139,8 +146,12 @@ $(document).ready(function(){
 */
 					});
 				});
+				$(".place_column").first().trigger('click');
+				$(".place_page").first().trigger('click');
 			}
 		});
+		console.log($(".place_column"));
+		
 	});
 	function showPageList(col_span, page){
 		$("#placePageArea").empty();
@@ -169,11 +180,13 @@ $(document).ready(function(){
 					, success:function(list){
 						$("#placeArea").empty();
 						$.each(list, function(idx, place){
+							var a = $("<a/>").attr('href', '/place/detailPlace_Info.do?place_no=' + place['place_no']);
 							var div = $("<div class='place_thumbnail'/>");
 							var img = $("<img class='place_info'/>").attr('src', '/img/' + place['place_img'].split('|')[0]);
 							var span = $("<span class='place_info'/>").text(place['place_name']);
 							$(div).append(img, span);
-							$("#placeArea").append(div);
+							$(a).append(div);
+							$("#placeArea").append(a);
 						});
 					}
 				});

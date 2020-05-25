@@ -15,8 +15,24 @@
 		text-align:center;
 	}
 	.container{
-		padding-right:300px;
-		padding-left:300px;
+		max-width: 300px;
+		width: 100%; 
+		height: 100vh; 
+		display: -webkit-box; 
+		display: -ms-flexbox; 
+		display: flex; 
+		-webkit-box-align: center; 
+		-ms-flex-align: center; 
+		align-items: center; 
+		-webkit-box-pack: center; 
+		-ms-flex-pack: center; 
+		justify-content: center;
+	}
+	h2{
+	 color: black; 
+   text-shadow: 0 0 10px rgba(0,0,0,0.3); 
+   letter-spacing:1px; 
+   text-align:center;
 	}
 	#find{
 		text-align: right;
@@ -81,8 +97,8 @@ $(function(){
 </script>
 </head>
 <body>
-	<h2>로그인</h2>
-	<br>
+	
+	
 <!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
 	<c:if test="${not empty cookie.user_check}">
 		<c:set value="checked" var="checked"/>
@@ -91,7 +107,10 @@ $(function(){
 	<form action="/member/login.do" method="post">
 		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 		<div class="container">
+		
 			<div class="area_inputs wow fadeIn">
+			<h2>로그인</h2>
+				<br>
 				<div class="input-group">
 					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 					<input type="text" class="form-control" id="mem_id" name="mem_id" value="${cookie.user_check.value}" placeholder="아이디를 입력해주세요.">
