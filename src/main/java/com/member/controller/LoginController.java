@@ -37,7 +37,7 @@ public class LoginController {
 	public ModelAndView login(@RequestParam(value="error",required = false)String error,
 			@RequestParam (value="logout",required =false)String logout) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("asd");
 		if(error != null) {
 			mav.addObject("error", "아이디와 비밀번호를 다시 확인해주세요");
 		}

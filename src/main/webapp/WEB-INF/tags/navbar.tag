@@ -1,4 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- 상단 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -58,8 +59,13 @@ $(document).ready(function(){
 				
 				<!-- sign, login -->
 				<ul class="nav navbar-nav navbar-right"> 
-					<li><a href="/member/joinForm.do"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-					<li><a href="/member/login.do"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+					<sec:authorize access="isAuthenticated()">
+						<li><a href="/member/myPage.do"><span class="glyphicon glyphicon-user"></span>마이페이지</a></li>
+					</sec:authorize>
+					<sec:authorize access="isAnonymous()">
+						<li><a href="/member/joinForm.do"><span class="glyphicon glyphicon-user"></span>회원가입</a></li>
+						<li><a href="/member/login.do"><span class="glyphicon glyphicon-log-in"></span>로그인</a></li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>

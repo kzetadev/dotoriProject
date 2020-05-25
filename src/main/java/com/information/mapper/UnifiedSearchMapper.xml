@@ -51,13 +51,13 @@
 	                  from place_info
 	                 where 
 	                 <choose>
-	                  	<when test="condition_col != null and condition_col == 0">
+	                  	<when test="column != null and column == 0">
 	                 		place_name
 	                 	</when>
-		                 <when test="condition_col != null and condition_col == 1">
+		                 <when test="column != null and column == 1">
 		                 	place_addr
 		                 </when>
-		                 <when test="condition_col != null and condition_col == 2">
+		                 <when test="column != null and column == 2">
 		                 	place_detail
 		                 </when>
 		                 <otherwise>
