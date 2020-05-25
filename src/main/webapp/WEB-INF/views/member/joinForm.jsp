@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+
+<layoutTag:layout>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -368,3 +372,5 @@ $(function(){
 		</div>
 	</body>
 </html>
+
+</layoutTag:layout>

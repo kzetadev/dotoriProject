@@ -8,73 +8,70 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ</title>
-<link rel="stylesheet" href="/resources/css/commMedia.css">
-<link rel="stylesheet" href="/resources/css/common.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
-<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css' rel='stylesheet' type='text/css'>
-<script src="/resources/js/header.js"></script>
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/> -->
+<link href="css/jquery-ui.min.css" rel="stylesheet" />
+<!-- <link href="css/custom.css" rel="stylesheet" /> -->
+<style type="text/css">
+	tr.detail {
+		display: none;
+		width: 100%;
+	}
+	tr.detail div {
+		display: none;
+	}
+	.showmore:hover {
+		cursor: pointer;
+	}
+	.wrapper h2{
+		text-align: center;
+	}
+</style>
 </head>
 <body>
-	<div class="notice">
-		<label for="">공지사항</label>
-		<div class="n_board">
-			<div class="brd_head">
-				<div class="n_no">No.</div>
-				<div class="n_title">Title</div>
-				<div class="n_date">Date</div>
-			</div>
-
-			<div class="brd_body">
-				<div class="brd_list">
-					<div class="n_no">11</div>
-					<div class="n_title">Open ~ Close Time</div>
-					<div class="n_date">2020-04-15</div>
-				</div>
-				<div class="n_content">
-					<div class="c_detail">09:00 ~ 22:00 (주문 마감) 21:00</div>
-				</div>
-			</div>
-			<!-- brd_body  -->
-
-			<div class="brd_body">
-				<div class="brd_list">
-					<div class="n_no">17</div>
-					<div class="n_title">라이딩 공지</div>
-					<div class="n_date">2020-04-15</div>
-				</div>
-				<div class="n_content">
-					<div class="c_detail">라이딩 공지는 카톡채널을 확인해주세요^^</div>
-				</div>
-			</div>
-			<!-- brd_body  -->
-
-			<div class="brd_body">
-				<div class="brd_list">
-					<div class="n_no">18</div>
-					<div class="n_title">코로나19로 인한 임시 휴업</div>
-					<div class="n_date">2020-04-15</div>
-				</div>
-				<div class="n_content">
-					<div class="c_detail">기간 : 2020.04.15. ~ 2020.05.15.</div>
-				</div>
-			</div>
-			<!-- brd_body  -->
-
-			<div class="brd_body">
-				<div class="brd_list">
-					<div class="n_no">19</div>
-					<div class="n_title">2차 라이딩 공지</div>
-					<div class="n_date">2020-04-15</div>
-				</div>
-				<div class="n_content">
-					<div class="c_detail">라이딩 공지는 카톡채널을 확인해주세요^^</div>
-				</div>
-			</div>
-			<!-- brd_body  -->
-
+	<div class="wrapper">
+		<h2>FAQ</h2>
+		<br>
+		<div class="container">
+			<table class="table mytable">
+				<tr>
+					<td>1</td>
+					<td>20/05/20</td>
+					<td><a class="showmore">새로운 공지사항입니다.</a></td>
+				</tr>
+				<tr class="detail">
+					<td colspan="3">
+						<div>
+							<table class="table">
+								<tr>
+									<td>확인 완료</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
+
+	<!-- <script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/jquery-ui.min.js"></script> -->
+
+	<!-- Latest compiled and minified JavaScript -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+	<script>
+		$(function() {
+			$('a.showmore').click(function(e) {
+				e.preventDefault();
+				// We break and store the result so we can use it to hide the row after the slideToggle is closed
+				var targetrow = $(this).closest('tr').next('.detail');
+				targetrow.show().find('div').slideToggle('slow', function() {
+					if (!$(this).is(':visible')) {
+						targetrow.hide();
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
 

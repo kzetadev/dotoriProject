@@ -19,6 +19,7 @@ import com.member.service.AdminService;
 public class AdminController {
 	@Resource(name="adminService")
 	private AdminService adminService;
+	
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
 	public static int pageSIZE = 10; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
