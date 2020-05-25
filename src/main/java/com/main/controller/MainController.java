@@ -1,17 +1,24 @@
 package com.main.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.information.service.Place_InfoService;
 import com.information.service.Place_ThemeService;
+import com.information.vo.Place_InfoVo;
+import com.information.vo.SearchConditionVo;
 
 @Controller
 public class MainController {
@@ -84,5 +91,62 @@ public class MainController {
 //		m.addObject("pt", pt);
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/unifiedSearch.do/{keyword}", method=RequestMethod.GET)
+	public ModelAndView unifiedSearch(@PathVariable("keyword")String keyword) {
+		ModelAndView mav = new ModelAndView("unifiedSearch");
+		System.out.println("unifiedSearch " + keyword);
+		Map map = new HashMap();
+		map.put("keyword", keyword);
+		mav.addObject("keyword", keyword);
+		mav.addObject("tList", place_themeService.unifiedSearchTheme(map));
+		return mav;
+	}
+	
+	@RequestMapping(value="/getCondition.do/{keyword}/{place_type}", method=RequestMethod.GET)
+	@ResponseBody
+	public String unifiedSearch(@PathVariable("keyword")String keyword, @PathVariable("place_type")int place_type) {
+		System.out.println("unifiedSearch " + keyword + "\t" + place_type);
+		String result = "";
+//		int convert_place_type = -1;
+//		System.out.println((place_type instanceof Integer));
+//		if(!(place_type instanceof Integer)) {
+//			result = "invalid";
+//			return result;
+//		}else {
+//			convert_place_type = (int)place_type;
+//			if(convert_place_type < 0) {
+//				result = "invalid";
+//				return result;
+//			}
+//		}
+//		convert_place_type = (Integer)place_type;
+		Map map = new HashMap();
+		map.put("keyword", keyword);
+		map.put("place_type", place_type);
+		List<SearchConditionVo> scList = place_infoService.unifiedSearchCondition(map);
+		result = (new Gson()).toJson(scList);
+		System.out.println(result);
+		return result;
+	}
+	@RequestMapping(value="/searchPlace.do/{keyword}/{place_type}/{column}", method=RequestMethod.GET)
+	@ResponseBody
+	public String searchPlace(@PathVariable("keyword")String keyword, @PathVariable("place_type")int place_type, @PathVariable("column")int column) {
+		System.out.println("searchPlace " + keyword + "\t" + place_type + "\t" + column);
+		String result = "";
+		int start = 1;
+		int end = 10;
+		Map map = new HashMap();
+		map.put("keyword", keyword);
+		map.put("place_type", place_type);
+		map.put("column", column);
+		map.put("start", start);
+		map.put("end", end);
+		List<Place_InfoVo> pList = place_infoService.searchPlace(map);
+		result = (new Gson()).toJson(pList);
+		System.out.println(pList);
+		return result;
+		
 	}
 }

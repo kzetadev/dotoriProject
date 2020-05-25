@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.information.dao.Place_InfoDao;
 import com.information.vo.Place_InfoVo;
-
+import com.information.vo.SearchConditionVo;
 @Service("place_infoService")
 public class Place_InfoServiceImpl implements Place_InfoService {
 	@Inject
@@ -47,5 +47,16 @@ public class Place_InfoServiceImpl implements Place_InfoService {
 	public List<Place_InfoVo> mainTop() {
 		return place_infoDao.mainTop();
 	}
-	
+	// 검색할 키워드가 포함된 테마의 검색조건(장소명, 주소, 설명) 가져오기
+	@Override
+	public List<SearchConditionVo> unifiedSearchCondition(Map map) {
+		// TODO Auto-generated method stub
+		return place_infoDao.unifiedSearchCondition(map);
+	}
+	// 테마, 검색조건(장소명, 주소, 설명)에 해당하는 장소정보 리스트 가져오기
+	@Override
+	public List<Place_InfoVo> searchPlace(Map map) {
+		// TODO Auto-generated method stub
+		return place_infoDao.searchPlace(map);
+	}
 }
