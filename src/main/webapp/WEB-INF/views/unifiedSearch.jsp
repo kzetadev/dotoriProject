@@ -64,6 +64,8 @@ $(document).ready(function(){
 			, success:function(result){
 				console.log(result);
 				$("#placeKeywordArea").empty();
+				$("#placePageArea").empty();
+				$("#placeArea").empty();
 				//검색조건 출력
 				$.each(result, function(idx, item){
 					var div = $("<div class='column'/>");
@@ -141,6 +143,8 @@ $(document).ready(function(){
 				});
 			}
 		});
+		console.log($(".place_column"));
+		$(".place_column").first().trigger('click');
 	});
 	function showPageList(col_span, page){
 		$("#placePageArea").empty();
