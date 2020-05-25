@@ -27,14 +27,14 @@ public class MyPageController {
 	private MyPage_commentService commentService;
 	
 	// 마이페이지 메인
-	@RequestMapping("/myPage/myPage.do")
+	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage() {
 		ModelAndView m = new ModelAndView();
 		return m;
 	}
 	
 	//내가 쓴 댓글 목록
-	@RequestMapping(value = "/myPage/myPage_Contents.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		logger.info("list");
@@ -62,7 +62,7 @@ public class MyPageController {
 
 	
 //	// 내가 쓴 글댓글 목록
-//	@RequestMapping("/myPage_Contents.do")
+//	@RequestMapping("/member/myPage_Contents.do")
 //	public ModelAndView myPage_Contents() {
 //		ModelAndView m = new ModelAndView();
 //		return m;
@@ -76,7 +76,7 @@ public class MyPageController {
 //	}	
 
 	// 내가 받은 쪽지 목록
-	@RequestMapping("/myPage_Message.do")
+	@RequestMapping("/member/myPage_Message.do")
 	public ModelAndView myPage_Message() {
 		ModelAndView m = new ModelAndView();
 		return m;

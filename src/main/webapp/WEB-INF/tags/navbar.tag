@@ -42,7 +42,8 @@ $(document).ready(function(){
 							<li><a href="/board/listBoard_Post.do?board_kinds=2">동행 게시판</a></li>
 						</ul>
 					</li>
-					<li><a href="/etc/faq2.do">FAQ</a></li>
+					<li><a href="/faq/listFaq.do">FAQ</a></li>
+					<li><a href="/admin/adminListMember.do">관리자 페이지</a>
 				</ul>
 				<!-- 검색창 구현 -->
 				<form class="navbar-form navbar-left" action="/detailPlace_Info.do?">
