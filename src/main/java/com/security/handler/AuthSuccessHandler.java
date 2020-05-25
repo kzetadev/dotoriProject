@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -35,6 +36,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler{
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("AuthSuccessHandler onAuthenticationSuccess authentication : " + authentication);
+		clearAuthenticationAttributes(request);
 		resultRedirectStrategy(request, response, authentication);
 	}
 	//인증 성공 후 이전 요청으로 리디렉션 해줌.
@@ -47,5 +49,12 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler{
 		}else {
 			redirectStrategy.sendRedirect(request, response, defaultUrl);
 		}
+	}
+	protected void clearAuthenticationAttributes(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if(session == null) {
+			return;
+		}
+		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 	}
 }
