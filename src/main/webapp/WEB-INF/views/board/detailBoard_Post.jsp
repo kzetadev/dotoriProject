@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
 <title>${detail.board_title }</title>
 <link href="/css/summernote-lite.css" rel="stylesheet">
@@ -97,6 +97,7 @@
 				alert("삭제했습니다!");
 			}
 		});
+		
 		//댓글 목록 새로고침
 		function refreshComments(){
 			//댓글에 작성할 수 있는 댓글란
@@ -268,6 +269,7 @@
 				<div>
 					<label for="comment">내용 : </label>
 					<textarea id="content" class="form-control" rows="10" readonly="readonly" style="background-color: white"></textarea><br>
+					<button id="btnAnswer">등록</button>
 				</div>
 			</div>
 		</div>
@@ -296,8 +298,8 @@
 <%-- 			</c:forEach> --%>
 <!-- 			</ul> -->
 		</div>
-		<button class="btn btn-default" id="btnWrite">글쓰기</button>
-		<button class="btn btn-default" id="btnAnswer">답글</button>	
+		<button class="btn btn-default" id="btnInsert">글쓰기</button>
+		<button class="btn btn-default" id="btnReplyInsert">답글</button>	
 		<button class="btn btn-default" id="btnList">글목록</button>			
 	</div>
 </body>
