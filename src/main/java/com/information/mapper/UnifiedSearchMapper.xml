@@ -24,7 +24,7 @@
   
   <!-- 검색할 키워드가 포함된 테마의 검색조건(장소명, 주소, 설명) 가져오기 -->
 <!--   <select id="unifiedSearchCondition" resultType="java.lang.String"> -->
-	<select id="unifiedSearchCondition" resultType="com.information.vo.SearchConditionVo">
+  <select id="unifiedSearchCondition" resultType="com.information.vo.SearchConditionVo">
   	select condition_kor, condition_col, search_cnt
 	  from (select '장소명' condition_kor, 0 condition_col, count(place_no) search_cnt, 1 as sel_ord
 	          from place_info
@@ -72,4 +72,128 @@
 	 where r between #{start} and #{end}
 	  	
   </select>
+  <select id="unifiedBoardSearch" resultType="java.util.Map">
+  	select board_kinds "board_kinds", board_kinds_str "board_kinds_str"
+	  from (select board_kinds, case board_kinds
+	                    when 1 then '자유'
+	                    when 2 then '후기'
+	                    when 3 then '동행'
+	                  end board_kinds_str
+	          from board_post
+	         where board_title like '%' || #{keyword} || '%'
+	         union
+	        select board_kinds, case board_kinds
+	                    when 1 then '자유'
+	                    when 2 then '후기'
+	                    when 3 then '동행'
+	                  end board_kinds_str
+	          from board_post
+	         where board_plain_content like '%' || #{keyword} || '%'
+	         union
+	        select board_kinds, case board_kinds
+	                    when 1 then '자유'
+	                    when 2 then '후기'
+	                    when 3 then '동행'
+	                  end board_kinds_str
+	          from board_post
+	         where board_no in (select board_no
+	                              from board_comment
+	                             where comment_content like '%' || #{keyword} || '%')
+	         union
+	        select board_kinds, case board_kinds
+	                    when 1 then '자유'
+	                    when 2 then '후기'
+	                    when 3 then '동행'
+	                  end board_kinds_str
+	          from board_post
+	         where head_tag_no in (select head_tag_no
+	                                 from head_tag
+	                                where head_tag_name like '%' || #{keyword} || '%')
+	       )
+	 where board_kinds != 0
+  </select>
+<!-- 검색할 키워드가 포함된 게시판의 검색조건(제목, 본문, 댓글, 말머리) 가져오기 -->
+  <select id="unifiedBoardCondition" resultType="com.information.vo.SearchConditionVo">
+	select *
+	  from (select '제목' condition_kor, 0 condition_col, count(board_no) search_cnt
+	          from board_post
+	         where board_title like '%' || #{keyword} || '%'
+	         	   and board_kinds = #{board_kinds}
+	         group by board_kinds
+	         union
+	        select '본문' condition_kor, 1 condition_col, count(board_no) search_cnt
+	          from board_post
+	         where board_plain_content like '%' || #{keyword} || '%'
+	         	   and board_kinds = #{board_kinds}
+	         group by board_kinds
+	         union
+	        select '댓글' condition_kor, 2 condition_col, count(board_no) search_cnt
+	          from board_post
+	         where board_no in (select board_no
+	                              from board_comment
+	                             where comment_content like '%' || #{keyword} || '%')
+	               and board_kinds = #{board_kinds}
+	         group by board_kinds
+	         union
+	        select '말머리' condition_kor, 3 condition_col, count(board_no) search_cnt
+	          from board_post
+	         where head_tag_no in (select head_tag_no
+	                                 from head_tag
+	                                where head_tag_name like '%' || #{keyword} || '%')
+	               and board_kinds = #{board_kinds}
+	         group by board_kinds
+	       )
+	 where search_cnt != 0
+	 order by condition_col
+  </select>
+  <!-- 게시판, 검색조건(제목, 본문, 댓글, 말머리)에 해당하는 게시글 리스트 가져오기  -->
+  <select id="searchBoard" resultType="com.board.vo.Board_PostSearchVo">
+  	select r, board_kinds_str, board_no, head_tag_name, board_title, board_plain_content, mem_nickname, board_hit, board_date
+	  from (select rownum r, board_kinds_str, board_no, head_tag_name, board_title, board_plain_content, mem_nickname, board_hit, board_date
+	          from (select case b.board_kinds
+	                          when 1 then '자유'
+	                          when 2 then '후기'
+	                          when 3 then '동행'
+	                        end board_kinds_str
+	                      , b.board_no, h.head_tag_name, b.board_title, DBMS_LOB.substr(b.board_plain_content, 10, 1) board_plain_content
+	                      , m.mem_nickname, b.board_hit, to_char(b.board_date, 'yyyy-mm-dd') board_date
+	                  from board_post b
+	                  inner join member_info m
+	                          on b.mem_no = m.mem_no
+	                  inner join head_tag h
+	                          on b.head_tag_no = h.head_tag_no
+	                 where 
+	                 <choose>
+	                 	<!-- 제목 -->
+	                  	<when test="column != null and column == 0">
+	                 		b.board_title like '%' || #{keyword} || '%'
+	                 	</when>
+	                 	<!-- 본문 -->
+		                 <when test="column != null and column == 1">
+		                 	b.board_plain_content like '%' || #{keyword} || '%'
+		                 </when>
+		                 <!-- 포함 댓글 -->
+		                  <when test="column != null and column == 2">
+		                 	b.board_no in (select board_no
+                              from board_comment
+                             where comment_content like '%' || #{keyword} || '%')
+		                 </when>
+		                 <!-- 말머리 -->
+		                 <when test="column != null and column == 3">
+		                 	b.head_tag_no in (select head_tag_no
+                                       from head_tag
+                                      where head_tag_name like '%%')
+		                 </when>
+		                 <otherwise>
+		                 	b.board_title like '%' || #{keyword} || '%'
+		                 </otherwise>
+	                 </choose>
+                    	and b.board_kinds = #{board_kinds}
+	                	order by b.board_no desc
+	               )
+	       )
+	 where r between #{start} and #{end}
+  </select>
+  
+	
 </mapper>

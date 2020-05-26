@@ -1,8 +1,11 @@
 package com.board.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.board.vo.Board_PostSearchVo;
 import com.board.vo.Board_PostVo;
+import com.information.vo.SearchConditionVo;
 
 public interface Board_PostService {
 	// 게시글 목록
@@ -25,4 +28,10 @@ public interface Board_PostService {
 	List<Board_PostVo> mainBoard_Post3(Board_PostVo vo);
 	// 커뮤니티 메인 / 동행
 	List<Board_PostVo> mainBoard_Post4(Board_PostVo vo);
+	// 통합검색화면에서 검색된 게시판정보
+	List<Map> unifiedBoardSearch(Map map);
+	// 통합검색화면에서 게시판으로 조회된 검색조건
+	List<SearchConditionVo> unifiedBoardCondition(Map map);
+	// 게시판, 검색조건(제목, 본문, 댓글, 말머리)에 해당하는 게시글 리스트 가져오기
+	List<Board_PostSearchVo> searchBoard(Map map);
 }

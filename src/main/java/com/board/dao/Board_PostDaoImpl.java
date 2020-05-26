@@ -9,7 +9,9 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.board.vo.Board_PostSearchVo;
 import com.board.vo.Board_PostVo;
+import com.information.vo.SearchConditionVo;
 @Repository("board_postDao")
 public class Board_PostDaoImpl implements Board_PostDao {
 	@Inject
@@ -99,5 +101,23 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	@Override
 	public List<Board_PostVo> mainBoard_Post4(Board_PostVo vo){
 		return sqlSessionTemplate.selectList("board_post.selectMain4", vo);
+	}
+	// 통합검색화면에서 검색된 게시판정보
+	@Override
+	public List<Map> unifiedBoardSearch(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("unified_search.unifiedBoardSearch", map);
+	}
+	// 통합검색화면에서 게시판으로 조회된 검색조건
+	@Override
+	public List<SearchConditionVo> unifiedBoardCondition(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("unified_search.unifiedBoardCondition", map);
+	}
+	// 게시판, 검색조건(제목, 본문, 댓글, 말머리)에 해당하는 게시글 리스트 가져오기
+	@Override
+	public List<Board_PostSearchVo> searchBoard(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("unified_search.searchBoard", map);
 	}
 }

@@ -45,6 +45,9 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler{
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		if(savedRequest != null) {
 			String targetUrl = savedRequest.getRedirectUrl();
+			if (targetUrl.indexOf("error") > 0) {
+				targetUrl = "/main.do";
+			}
 			redirectStrategy.sendRedirect(request,  response, targetUrl);
 		}else {
 			redirectStrategy.sendRedirect(request, response, defaultUrl);

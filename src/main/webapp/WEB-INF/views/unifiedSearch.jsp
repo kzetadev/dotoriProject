@@ -8,23 +8,24 @@
 <html>
 <head>
 <style type="text/css">
-	div#themeArea{
+	div#themeArea, #boardArea{
 		border: 2px solid lightgray;
 		margin: 5px 5px 5px 5px;
 		padding: 10px 10px 10px 10px;
 	}
-	div.theme, .column, .place_thumbnail, #placePageArea{
+	div.theme, .column, .place_thumbnail, #placePageArea, .board{
 		display:inline-block;
 	}
-	span.themeInfo, .place_column, .place_thumbnail, .place_page{
+	span.themeInfo, .place_column, .place_thumbnail, .place_page, .boardInfo, .board_column, .board_page{
 /* 		display:inline-block; */
 		border: 2px solid lightgray;
 		border-radius: 3px;
 		margin: 5px 5px 5px 5px;
 		padding: 5px 5px 5px 5px;
 	}
-	span.place_plage{
-		
+	div.place_thumbnail{
+		width:150px;
+		height:150px;
 	}
 	div#placeArea{
 		border: 2px solid lightgray;
@@ -57,9 +58,16 @@ $(document).ready(function(){
 	var type;
 	var search_cnt;
 	var column;
+
+	var board_kinds;
+
+	var clickedTheme;
+// 	var clickedBoard;
+	
 	$(".themeInfo").click(function(){
 		console.log($(this).attr('type'));
 		type = $(this).attr('type');
+		clickedTheme = $(this);
 // 		$("#keywordArea")
 		$.ajax({
 			url:"/getCondition.do/" + keyword + "/" + $(this).attr('type')
@@ -79,71 +87,8 @@ $(document).ready(function(){
 					//검색조건 클릭
 					$(span).click(function(){
 						column = parseInt($(this).attr('column'));
-						showPageList($(this), 1);
+						showPlacePageList($(this), 1);
 						$(".place_page").first().trigger('click');
-/*
-						$("#placePageArea").empty();
-						var tot_cnt = parseInt($(this).attr('tot_cnt'));
-						var tot_page = Math.ceil(tot_cnt / pageGroup);
-						startPage = ((currPage - 1) * pageGroup) + 1;		//1  6 11 16
-						endPage = (currPage * pageGroup);					//5 10 15 20
-						if(startPage > pageGroup){
-							var span = $("<span class='place_page' page='" + (startPage - pageGroup) + "'/>").text('이전');
-							$("#placePageArea").append(span);
-							movePage($(this), 'prev');
-						}
-						for(var i = startPage; i <= endPage; i++){
-							var span = $("<span class='place_page' page='" + i + "'/>").text(i);
-							$("#placePageArea").append(span);
-						}
-						if(endPage < tot_page){
-							var span = $("<span class='place_page' page='" + (endPage + 1) + "'/>").text('다음');
-							$("#placePageArea").append(span);
-							movePage($(this), 'next');
-						}
-*/
-/*
-						console.log('search_cnt : ' + $(this).attr('tot_cnt'));
-						console.log('pageSIZE : ' + pageSIZE);
-						totalRecord = parseInt($(this).attr('tot_cnt'));														
-						totalPage = Math.ceil(totalRecord / pageSIZE);		//	27 / 8 = 4
-						pageGroup = currPage * 5;
-						if(pageGroup > totalPage){							//	5 > 4
-							pageGroup = totalPage;
-						}
-						console.log('totalPage : ' + totalPage);
-						console.log('pageGroup : ' + pageGroup);
-						// 1  2  3  4  5
-						// 6  7  8  9 10
-						//11 12 13 14 15
-						for(var i = currPage; i <= pageGroup; i++){
-							var span;
-							if(currPage >= pageGroup){
-								span = $("<span class='place_page' page='" + (currPage - 1) + "'/>").text('이전');
-							}
-							if(i < totalPage){
-								span = $("<span class='place_page' page='" + (currPage + 1) + "'/>").text('다음');
-							}
-							$(span).click(function(){
-								$.ajax({
-									url:"/searchPlace.do/" + keyword + "/" + type + "/" + column + "/" + parseInt($(this).attr('page'))
-									, type:'get'
-									, dataType:'json'
-									, success:function(list){
-										$("#placeArea").empty();
-										$.each(list, function(idx, place){
-											var div = $("<div class='place_thumbnail'/>");
-											var img = $("<img class='place_info'/>").attr('src', '/img/' + place['place_img'].split('|')[0]);
-											var span = $("<span class='place_info'/>").text(place['place_name']);
-											$(div).append(img, span);
-											$("#placeArea").append(div);
-										});
-									}
-								});
-							});
-							$("#placePageArea").append(span);
-						}
-*/
 					});
 				});
 				$(".place_column").first().trigger('click');
@@ -153,7 +98,7 @@ $(document).ready(function(){
 		console.log($(".place_column"));
 		
 	});
-	function showPageList(col_span, page){
+	function showPlacePageList(col_span, page){
 		$("#placePageArea").empty();
 		var tot_cnt = parseInt($(col_span).attr('tot_cnt'));
 		var tot_page = Math.ceil(tot_cnt / pageSIZE);	//1	  2	  3   4
@@ -166,7 +111,7 @@ $(document).ready(function(){
 			var span = $("<span class='place_page' page='" + (startPage - pageGroup) + "'/>").text('이전');
 			$("#placePageArea").append(span);
 			$(span).click(function(){
-				showPageList(col_span, page - 1);
+				showPlacePageList(col_span, page - 1);
 			});
 		}
 		for(var i = startPage; i <= endPage; i++){
@@ -196,37 +141,95 @@ $(document).ready(function(){
 			var span = $("<span class='place_page' page='" + (endPage + 1) + "'/>").text('다음');
 			$("#placePageArea").append(span);
 			$(span).click(function(){
-				showPageList(col_span, page + 1);
+				showPlacePageList(col_span, page + 1);
 			});
 		}
 	}
-// 	function showPageList(span, page){
-// 		$("#placePageArea").empty();
-// 		var tot_cnt = parseInt($(span).attr('tot_cnt'));
-// 		var tot_page = Math.ceil(tot_cnt / pageGroup);
-// 		startPage = ((currPage - 1) * pageGroup) + 1;		//1  6 11 16
-// 		endPage = (currPage * pageGroup);					//5 10 15 20
-// 		if(startPage > pageGroup){
-// 			var span = $("<span class='place_page' page='" + (startPage - pageGroup) + "'/>").text('이전');
-// 			$("#placePageArea").append(span);
-// 			$(span).click(function(){
-// 				showPageList($(this));
-// 			});
-// 		}
-// 		for(var i = startPage; i <= endPage; i++){
-// 			var span = $("<span class='place_page' page='" + i + "'/>").text(i);
-// 			$("#placePageArea").append(span);
-// 		}
-// 		if(endPage < tot_page){
-// 			var span = $("<span class='place_page' page='" + (endPage + 1) + "'/>").text('다음');
-// 			$("#placePageArea").append(span);
-// 			$(span).click(function(){
-// 				showPageList($(this));
-// 			});
-// 		}
-// 	}
+	$('.boardInfo').click(function(){
+		board_kinds = $(this).attr('board_kinds');
+// 		clickedBoard = $(this);
+		$.ajax({
+			url:"/getBoardCondition.do/" + keyword + "/" + $(this).attr('board_kinds')
+			, type:'get'
+			, dataType:'json'
+			, success:function(result){
+				console.log(result);
+				$("#boardKeywordArea").empty();
+				$("#boardPostPageArea").empty();
+				$("#boardPostArea").empty();
+				//검색조건 출력
+				$.each(result, function(idx, item){
+					var div = $("<div class='column'/>");
+					var span = $("<span class='board_column' column='" + item['condition_col'] + "' tot_cnt='" + item['search_cnt'] + "'/>").text(item['condition_kor']);
+					$(div).append(span);
+					$("#boardKeywordArea").append(div);
+					//검색조건 클릭
+					$(span).click(function(){
+// 						column = parseInt($(this).attr('column'));
+						showBoardPageList($(this), 1);
+						$(".board_page").first().trigger('click');
+					});
+				});
+				$(".board_column").first().trigger('click');
+				$(".board_page").first().trigger('click');
+			}
+		});
+		console.log($(".board_column"));
+	});
+	function showBoardPageList(col_span, page){
+		$("#boardPostPageArea").empty();
+		var column = parseInt($(col_span).attr('column'));
+		var tot_cnt = parseInt($(col_span).attr('tot_cnt'));
+		var tot_page = Math.ceil(tot_cnt / pageSIZE);	//1	  2	  3   4
+		startPage = ((page - 1) * pageGroup) + 1;		//1   6  11  16
+		endPage = (page * pageGroup);					//5  10  15  20
+		if(endPage > tot_page){
+			endPage = tot_page;
+		}
+		if(startPage > pageGroup){
+			var span = $("<span class='board_page' page='" + (startPage - pageGroup) + "'/>").text('이전');
+			$("#boardPostPageArea").append(span);
+			$(span).click(function(){
+				showBoardPageList(col_span, page - 1);
+			});
+		}
+		for(var i = startPage; i <= endPage; i++){
+			var span = $("<span class='board_page' page='" + i + "'/>").text(i);
+			$("#boardPostPageArea").append(span);
+			$(span).click(function(){
+				$.ajax({
+					url:"/searchBoard.do/" + keyword + "/" + board_kinds + "/" + column + "/" + parseInt($(this).attr('page')) + "/" + tot_cnt + "/" + tot_page
+					, type:'get'
+					, dataType:'json'
+					, success:function(list){
+						console.log(list);
+						$("#boardPostArea").empty();
+						$.each(list, function(idx, board){
+							var a = $("<a/>").attr('href', '/board/detailBoard_Post.do?board_no=' + board['board_no']);
+							var div = $("<div class='post'/>");
+							var span_board = $("<span class='post_info'/>").text(board['board_kinds_str']);
+							var span_head = $("<span class='post_info'/>").text(board['head_tag_name']);
+							var span_title = $("<span class='post_info'/>").text(board['board_title']);
+							var span_nickname = $("<span class='post_info'/>").text(board['mem_nickname']);
+							$(div).append(span_board, span_head, span_title, span_nickname);
+							$(a).append(div);
+							$("#boardPostArea").append(a);
+						});
+					}
+				});
+			});
+		}
+		if(endPage < tot_page){
+			var span = $("<span class='board_page' page='" + (endPage + 1) + "'/>").text('다음');
+			$("#boardPostPageArea").append(span);
+			$(span).click(function(){
+				showBoardPageList(col_span, page + 1);
+			});
+		}
+	}
 	
 	$(".themeInfo").first().trigger('click');
+	$(".boardInfo").first().trigger('click');
 });
 </script>
 </head>
@@ -251,7 +254,23 @@ $(document).ready(function(){
 	</div>
 	<hr>
 <!-- 커뮤니티 게시판 영역 -->
-	
+	<h2>커뮤니티 검색 결과</h2>
+	<div id="boardArea">
+		<c:forEach var="b" items="${bList }">
+			<div class="board">
+				<span class="boardInfo" board_kinds="${b.board_kinds }">${b.board_kinds_str }</span>
+			</div>
+		</c:forEach>
+	</div>
+	<hr>
+	<div id="boardKeywordArea">
+	</div>
+	<hr>
+	<div id="boardPostArea">
+	</div>
+	<hr>
+	<div id="boardPostPageArea">
+	</div>
 </body>
 </html>
 </layoutTag:layout>

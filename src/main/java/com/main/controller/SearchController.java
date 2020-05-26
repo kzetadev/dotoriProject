@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.board.service.Board_PostService;
+import com.board.vo.Board_PostSearchVo;
 import com.google.gson.Gson;
 import com.information.service.Place_InfoService;
 import com.information.service.Place_ThemeService;
@@ -25,6 +27,8 @@ public class SearchController {
 	private Place_InfoService place_infoService;
 	@Resource(name="place_themeService")
 	private Place_ThemeService place_themeService;
+	@Resource(name="board_postService")
+	private Board_PostService board_postService;
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
 	public static int pageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
@@ -37,6 +41,7 @@ public class SearchController {
 		map.put("keyword", keyword);
 		mav.addObject("keyword", keyword);
 		mav.addObject("tList", place_themeService.unifiedSearchTheme(map));
+		mav.addObject("bList", board_postService.unifiedBoardSearch(map));
 		return mav;
 	}
 	
@@ -96,6 +101,50 @@ public class SearchController {
 		List<Place_InfoVo> pList = place_infoService.searchPlace(map);
 		result = (new Gson()).toJson(pList);
 		System.out.println(pList);
+		return result;
+		
+	}
+	
+	@RequestMapping("/getBoardCondition.do/{keyword}/{board_kinds}")
+	@ResponseBody
+	public String getBoardCondition(@PathVariable("keyword")String keyword, @PathVariable("board_kinds")int board_kinds) {
+		String result = "";
+		Map map = new HashMap();
+		map.put("keyword", keyword);
+		map.put("board_kinds", board_kinds);
+		List<SearchConditionVo> scList = board_postService.unifiedBoardCondition(map);
+		result = (new Gson()).toJson(scList);
+		return result;
+	}
+	@RequestMapping(value="/searchBoard.do/{keyword}/{board_kinds}/{column}/{pageNUM}/{total_record}/{total_page}", method=RequestMethod.GET)
+	@ResponseBody
+	public String searchBoard(@PathVariable("keyword")String keyword, @PathVariable("board_kinds")int board_kinds
+			, @PathVariable("column")int column, @PathVariable("pageNUM")int pageNUM, @PathVariable("total_record")int total_record
+			, @PathVariable("total_page")int total_page) {
+		String result = "";
+//		int start = 1;
+//		int end = 10;
+//		totalRecord = place_infoService.getTotalRecord(map);
+//		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
+		System.out.println("전체 페이지 수 : " + totalPage);
+		if (pageNUM > total_page) {
+			pageNUM = total_page;
+		}
+		int start = (pageNUM - 1) * pageSIZE + 1;
+		int end = start + pageSIZE - 1;
+		if(end > total_record) {
+			end = total_record;
+		}
+		Map map = new HashMap();
+		map.put("keyword", keyword);
+		map.put("board_kinds", board_kinds);
+		map.put("column", column);
+		map.put("start", start);
+		map.put("end", end);
+		System.out.println("keyword " + keyword + "\tboard_kinds " + board_kinds + "\tcolumn " + column + "\tpageNUM " + pageNUM + "\ttotal_record " + total_record + "\ttotal_page " + total_page + "\tstart " + start + "\tend " + end);
+		List<Board_PostSearchVo> bList = board_postService.searchBoard(map);
+		result = (new Gson()).toJson(bList);
+		System.out.println(bList);
 		return result;
 		
 	}
