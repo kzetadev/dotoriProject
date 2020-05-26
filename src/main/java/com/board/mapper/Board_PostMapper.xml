@@ -64,7 +64,10 @@
 	<!-- 게시글 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->
 	<insert id="insert">
-		insert into board_post(board_no, mem_no, board_kinds, board_title, board_date, board_hit, board_content, board_copy, head_tag_no) values(seq_board_no.nextval, #{mem_no}, #{board_kinds}, #{board_title}, sysdate, 0, #{board_content}, #{board_copy}, #{head_tag_no})
+		insert into board_post(board_no, mem_no, board_kinds, board_title, board_date
+			, board_hit, board_content, board_copy, head_tag_no, board_plain_content) 
+		values(seq_board_no.nextval, #{mem_no}, #{board_kinds}, #{board_title}, sysdate
+			, 0, #{board_content}, #{board_copy}, #{head_tag_no}, #{board_plain_content})
 	</insert>
 
 	<!-- 게시글 상세 -->
@@ -79,7 +82,8 @@
 
 	<!-- 게시글 수정 -->
 	<update id="update">
-		update board_post set board_title=#{board_title}, board_content=#{board_content}, board_copy=#{board_copy}, board_update_date=sysdate
+		update board_post set board_title=#{board_title}, board_content=#{board_content}
+			, board_copy=#{board_copy}, board_update_date=sysdate, board_plain_content = #{board_plain_content}
 		where board_no=#{board_no}
 	</update>
 

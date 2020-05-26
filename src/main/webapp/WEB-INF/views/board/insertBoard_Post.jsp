@@ -22,7 +22,7 @@
 			, maxHeight:null
 			, focus:true
 			, lang:'ko-KR'
-			, placeholder:'최대 500자까지 작성 가능합니다.'
+// 			, placeholder:'최대 500자까지 작성 가능합니다.'
 			, tabsize:2
 // 			, airMode:true
 		});
@@ -113,7 +113,7 @@
 		$("#f").submit(function(event){
 			event.preventDefault();
 			var board_title = $("#board_title").val();
-			var board_content = $("#board_content").val();
+			var board_content = $("#board_content").summernote('code');
 			if(board_title == "") {
 				alert("제목을 입력하세요.");
 				document.f.board_title.focus();
@@ -124,8 +124,17 @@
 				document.f.board_content.focus();
 				return;
 			};
-			var board = $("#f").serialize();
-			console.log(board);
+// 			var board = $("#f").serialize();
+// 			console.log(board);
+			var board = {
+				board_no:$("#board_no").val()
+				, mem_no:$("#mem_no").val()
+				, board_kinds:$("#board_kinds").val()
+				, board_title:$("#board_title").val()
+				, board_content:board_content
+				, head_tag_no:$("#head_tag_no").val()
+				, board_plain_content:$(".note-editing-area").text()
+			};
 			$.ajax({
 				url:"/board/insertBoard_Post.do"
 				, type:"post"
@@ -170,7 +179,7 @@
 <body>
 	<h2>글쓰기</h2>
 	<form id="f" name="f" action="/board/insertBoard_Post.do" method="post">
-	<input type="hidden" name="mem_no" value="${member.mem_no }">
+	<input type="hidden" id="mem_no" name="mem_no" value="${member.mem_no }">
 	<table border="1">
 <!-- 		select-option 변경 예시 -->
 <!-- 		<select id="select1" onchange="itemChange()"> -->
@@ -205,7 +214,7 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required"></textarea></td>
+			<td><div name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required"></div></td>
 <%-- 		<textarea name="editordata" id="summernote" value="${board_content }"></textarea><br> --%>
 <!-- 		<form name="cc"> -->
 <!-- 			복사 가능<input type="checkbox" name="c" value="복사 가능"><br> -->

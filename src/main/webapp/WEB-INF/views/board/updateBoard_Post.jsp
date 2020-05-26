@@ -21,7 +21,7 @@
 			, maxHeight:null
 			, focus:true
 			, lang:'ko-KR'
-			, placeholder:'최대 500자까지 작성 가능합니다.'
+// 			, placeholder:'최대 500자까지 작성 가능합니다.'
 			, tabsize:2
 // 			, airMode:true
 		});
@@ -73,7 +73,7 @@
 		$("#f").submit(function(event){
 			event.preventDefault();
 			var board_title = $("#board_title").val();
-			var board_content = $("#board_content").val();
+			var board_content = $("#board_content").summernote('code');
 			if(board_title == "") {
 				alert("제목을 입력하세요.");
 				document.f.board_title.focus();
@@ -84,7 +84,18 @@
 				document.f.board_content.focus();
 				return false;
 			};
-			var board = $("#f").serialize();
+// 			var board = $("#f").serialize();
+// 			console.log($("#board_content").val());
+// 			board['board_content'] = $("#board_content").val();
+// 			console.log(board);
+			var board = {
+				board_no:$("#board_no").val()
+				, board_title:$("#board_title").val()
+				, board_content:board_content
+				, board_plain_content:$(".note-editing-area").text()
+			};
+			console.log(board);
+			//board_plain_text:$(".note-editing-area").text()
 			$.ajax({
 				url:"/board/updateBoard_Post.do"
 				, type:"post"
@@ -119,7 +130,7 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required" rows="30%" cols="80%"></textarea></td>
+				<td><div name="board_content" id="board_content" placeholder="내용을 입력해주세요."required="required" rows="30%" cols="80%" ></div></td>
 			</tr>
 		</table>
 		<div style="width:650px; text-align: center;">
