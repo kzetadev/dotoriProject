@@ -90,6 +90,7 @@ public class MainController {
 //		}
 //		m.addObject("pt", pt);
 		
+		mav.addObject("top", place_infoService.mainTop());
 		return mav;
 	}
 }

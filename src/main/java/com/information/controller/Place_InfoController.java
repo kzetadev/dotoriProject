@@ -122,10 +122,10 @@ public class Place_InfoController {
 	}
 	
 	// 메인 페이지 인기 서울 명소 TOP 6
-	@RequestMapping("/main/mainTop.do")
+	@RequestMapping("/main.do")
 	public ModelAndView mainTop() {
 		ModelAndView m = new ModelAndView();
-		m.addObject("p", place_infoService.mainTop());
+		m.addObject("top", place_infoService.mainTop());
 		return m;
 	}
 }

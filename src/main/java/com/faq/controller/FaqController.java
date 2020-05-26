@@ -60,13 +60,13 @@ public class FaqController {
 	}
 	
 	// faq 삭제
-	@RequestMapping(value="/faq/deleteFaqForm.do", method=RequestMethod.GET)
+	@RequestMapping(value="/faq/deleteFaq.do", method=RequestMethod.GET)
 	public ModelAndView deleteFaqForm(int faq_no) {
 		ModelAndView m = new ModelAndView();
 		m.addObject("faq_no", faq_no);
 		return m;
 	}
-	@RequestMapping(value="/faq/deleteFaqSubmit.do", method=RequestMethod.POST)
+	@RequestMapping(value="/faq/deleteFaq.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int deleteFaqSubmit(int faq_no) {
 		int re = faqService.deleteFaq(faq_no);

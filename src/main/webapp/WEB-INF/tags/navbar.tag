@@ -44,7 +44,7 @@ $(document).ready(function(){
 						</ul>
 					</li>
 					<li><a href="/faq/listFaq.do">FAQ</a></li>
-					<li><a href="/admin/adminListMember.do">관리자 페이지</a>
+					<li><a href="/admin/adminListMember.do?pageNUM=1">관리자 페이지</a>
 				</ul>
 				<!-- 검색창 구현 -->
 				<form class="navbar-form navbar-left" action="/detailPlace_Info.do?">

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class AdminController {
 
 	// 관리자 - 회원 목록 (페이징 + 검색 + 정렬)
 	@RequestMapping("/admin/adminListMember.do") 
-	public ModelAndView allMemberList(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session, String keyword, String searchColumn, String sortColumn) {
+	public ModelAndView allMemberList(HttpServletRequest request, @RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session, String keyword, String searchColumn, String sortColumn) {
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
 		

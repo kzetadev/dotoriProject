@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 
 <layoutTag:layout>
 
-<!DOCTYPE html>
-<html>
+	<!DOCTYPE html>
+	<html>
 <head>
 <meta charset="UTF-8">
 <title>FAQ 목록</title>
@@ -23,35 +24,43 @@
 	.showmore:hover {
 		cursor: pointer;
 	}
-	.wrapper h2{
+	.wrapper h2 {
 		text-align: center;
 	}
+	
+	/* 사용자는 안보이고 관리자에게만 보이게 */
+	/*#btnAdd, .btnUpdate, .btnDelete{
+		visibility: hidden;
+	}*/
 </style>
 </head>
 <body>
-<div class="wrapper">
+	<div class="wrapper">
 		<h2>FAQ</h2>
-		<br>
+		<button id="btnAdd">추가</button>
 		<div class="container">
-			<button id="btnAdd">추가</button>
 			<table class="table mytable">
-			
+
 				<c:forEach var="f" items="${f_list }">
 					<tr>
-						<td><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></td>
+						<td><span class="glyphicon glyphicon-exclamation-sign"
+							aria-hidden="true"></span></td>
 						<td><a class="showmore">${f.faq_question }</a></td>
 						<td colspan="3">
-							<button class="btnUpdate">수정</button>
-							<button class="btnDelete">삭제</button>							
+							<button class="btnUpdate" faq_no="${f.faq_no }">수정</button>
+							<button class="btnDelete" faq_no="${f.faq_no }">삭제</button>
 						</td>
 					</tr>
-	
+
 					<tr class="detail">
 						<td colspan="6">
 							<div>
 								<table class="table">
 									<tr>
-										<td><td><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></td></td>
+										<td>
+										<td><span class="glyphicon glyphicon-arrow-right"
+											aria-hidden="true"></span></td>
+										</td>
 										<td>${f.faq_answer }</td>
 									</tr>
 								</table>
@@ -80,26 +89,38 @@
 					}
 				});
 			});
-			$("#btnAdd").click(function(){
+			$("#btnAdd").click(function() {
 				location.href = "/faq/insertFaq.do"
 			})
-			$(".btnUpdate").click(function(){
+			$(".btnUpdate").click(function() {
 				location.href = "/faq/updateFaq.do"
 			})
-			$(".btnDelete").click(function(){
-				var faq_no = $(this).attr("faq_no")
-				var a = confirm("정말로 삭제하시겠습니까?")
-				if(a == true){
-					$.ajax({url:"/faq/deleteFaq.do", type:"POST", data:{faq_no:faq_no}, success:function(result){
-						if(result == 1){
-							location.href = "/faq/listFaq.do"
+			$(".btnDelete").click(
+					function() {
+						var faq_no = $(this).attr("faq_no")
+						var a = confirm("정말로 삭제하시겠습니까?")
+						if (a == true) {
+							$.ajax({
+								url : "/faq/deleteFaq.do",
+								type : "POST",
+								data : {
+									faq_no : faq_no
+								},
+								beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+									xhr.setRequestHeader("${_csrf.headerName}",
+											"${_csrf.token}");
+								},
+								success : function(result) {
+									if (result == 1) {
+										location.href = "/faq/listFaq.do"
+									}
+								}
+							})
 						}
-					}})
-				}
-			})
+					})
 		});
 	</script>
 </body>
-</html>
+	</html>
 
 </layoutTag:layout>
