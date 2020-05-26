@@ -10,10 +10,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>명소 상세 게시판</title>
-	<link rel="stylesheet" href="css/slick.css">
-	<link rel="stylesheet" href="css/slick-theme.css">
+	<link rel="stylesheet" href="/css/slick.css">
+	<link rel="stylesheet" href="/css/slick-theme.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="js/slick.min.js"></script>
+	<script type="text/javascript" src="/js/slick.min.js"></script>
 	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -49,7 +49,8 @@
 			// 이미지 슬라이더
 			$(".your-class").slick({
 				dots: true, infinite: true,
-				speed: 500, fade: true, cssEase: 'linear'
+				speed: 500, fade: true, cssEase: 'linear',
+				autoplay: true, autoplaySpeed: 750
 			})
 		})
 	</script>

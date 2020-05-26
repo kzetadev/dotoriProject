@@ -133,55 +133,20 @@
 	</div> -->
    
     
-  <div class="container text-center">    
+  	<div class="container text-center">    
   	<h3>인기 서울 장소 TOP 6</h3>
   	<br>
-  	<div class="row">
-  		<c:forEach var="i" items="${p }">
-	  		<div class="col-sm-2">
-	    		<a href="/place/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
-		      		<img src="/img/${fn:split(i.place_img, '|')[0]}" class="img-responsive" height="30">
-	  	    		<b>i.place_name</b>
-	  	    	</a>
-	   		</div>
-  		</c:forEach>
-   		
-    	<!-- <div class="col-sm-2"> 
-    		<a href="" class="thumbnail">
-	      		<img src="/img/${p.place_img}" class="img-responsive">
-	      		<b>${p.place_name }</b>
-	      	</a>
-    	</div>
-    	
-    	<div class="col-sm-2"> 
-    		<a href="" class="thumbnail">
-	      		<img src="/img/${p.place_img}" class="img-responsive">
-	      		<b>${p.place_name }</b>
-	      	</a>
-    	</div>
-    
-    	<div class="col-sm-2"> 
-    		<a href="" class="thumbnail">
-	      		<img src="/img/${p.place_img}" class="img-responsive">
-	      		<b>${p.place_name }</b>
-	      	</a>
-    	</div> 
-    	
-    	<div class="col-sm-2"> 
-    		<a href="" class="thumbnail">
-	      		<img src="/img/${p.place_img}" class="img-responsive">
-	      		<b>${p.place_name }</b>
-	      	</a>
-    	</div>     
-    
-    	<div class="col-sm-2"> 
-    		<a href="" class="thumbnail">	
-	      		<img src="/img/${p.place_img}" class="img-responsive">
-	      		<b>${p.place_name }</b>
-	      	</a>
-    	</div>  -->
-  </div>
-</div><br>
+  		<div class="row">
+  			<c:forEach var="i" items="${top }">
+	  			<div class="col-sm-2">
+	    			<a href="/place/detailPlace_Info.do?place_no=${p.place_no }" class="thumbnail">
+		      			<img src="/img/${fn:split(i.place_img, '|')[0]}" class="img-responsive" height="30">
+	  	    			<b>${i.place_name}</b>
+	  	    		</a>
+	   			</div>
+	   		</c:forEach>
+  		</div>
+	</div><br>
 </body>
 </html>
 </layoutTag:layout>

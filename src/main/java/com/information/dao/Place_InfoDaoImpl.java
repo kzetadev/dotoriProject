@@ -43,7 +43,7 @@ public class Place_InfoDaoImpl implements Place_InfoDao {
 	// 메인 페이지 인기 서울 명소 TOP 6
 	@Override
 	public List<Place_InfoVo> mainTop() {
-		return sqlSessionTemplate.selectOne("place_info.mainTop");
+		return sqlSessionTemplate.selectList("place_info.mainTop");
 	}
 	
 	// 검색할 키워드가 포함된 테마의 검색조건(장소명, 주소, 설명) 가져오기

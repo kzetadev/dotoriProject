@@ -12,6 +12,11 @@
 	h2{
 		text-align:center;
 	}
+	form { 
+        margin: 0 auto; 
+        width:250px;
+    }
+	@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
 </style>
 </head>
 <body>
@@ -21,11 +26,11 @@
 		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 		<table border="1">
 			<tr>
-				<td><label for="faq_question">질문을 추가해주세요 : </label></td>
+				<td><label for="faq_question">질문 : </label></td>
 				<td><input type="text" id="faq_question" name="faq_question"></td>
 			</tr>
 			<tr>
-				<td><label for="faq_answer">답변을 추가해주세요 : </label></td>
+				<td><label for="faq_answer">답변 : </label></td>
 				<td><input type="text" id="faq_answer" name="faq_answer"></td>
 			</tr>
 		</table>
