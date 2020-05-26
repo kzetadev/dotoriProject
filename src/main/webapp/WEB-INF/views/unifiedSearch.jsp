@@ -231,6 +231,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<!-- 정보게시판 영역 -->
 	<h2>정보게시판 검색 결과</h2>
 	<div id="themeArea">
 		<c:forEach var="t" items="${tList }">
@@ -248,6 +249,9 @@ $(document).ready(function(){
 	<hr>
 	<div id="placePageArea">
 	</div>
+	<hr>
+<!-- 커뮤니티 게시판 영역 -->
+	
 </body>
 </html>
 </layoutTag:layout>

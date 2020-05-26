@@ -23,4 +23,5 @@ public class Board_PostVo {
 	private int board_copy;			// 복사기능
 	private String mem_nickname;	// 회원 닉네임
 	private String head_tag_name;	// 말머리명
+	private String board_plain_content;	//검색용 본문 내용(평문)
 }
