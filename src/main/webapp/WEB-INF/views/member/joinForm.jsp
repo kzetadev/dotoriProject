@@ -32,6 +32,9 @@
 		display: inline-block;
 	
 	}
+	#mem_pwd, #mem_id{
+		font-size: 12px;
+	}
 	
 
 </style>
@@ -220,14 +223,16 @@ $(function(){
 			
 			$("#pwd2_check").text("비밀번호가 일치합니다");
 			$("#reg_submit").attr("disabled", false);
-			//$("#pwd2_check").css("color","green");
+			$("#pwd2_check").css("color","green");
 			
 		}else{
-			$("#pwd2_check").text("비밀번호가 불일치합니다");
+			alert("비밀번호가 불일치 합니다")
 			
-			$("#pwd2_check").css("color","red");
+			//$("#pwd2_check").text("비밀번호가 불일치합니다");
+			
+			//$("#pwd2_check").css("color","red");
 		}
-		$("#pwd2_check").css({"color":"red", "display":""});
+		$("#pwd2_check").css({"color":"green", "display":""});
 	})
 	
 	
@@ -287,6 +292,7 @@ $(function(){
 				}
 			}
 		if(validAll){
+			alert("이메일을 인증을 통해 회원가입을 하십시오");
 			location.href="/member/login.do";
 			var mem_info = {
 				mem_id: $("#mem_id").val(),
@@ -352,16 +358,15 @@ $(function(){
 			<!-- 아이디 -->
 			<div class="form-group">
 				<label for="mem_id">아이디</label>
-					<input type="text" class="form-control" id="mem_id" name="mem_id"placeholder="아이디">
+					<input type="text" class="form-control" id="mem_id" name="mem_id"placeholder="특수문자를 제외한 4~12자리까지 입력하시오">
 				<button id="id_overlap">중복확인</button>
 				<div class="check_font" id="id_check"></div>
-				
 			</div>
 			
 			<!-- 비밀번호 -->
 			<div class="form-group">
 				<label for="mem_pwd">비밀번호</label>
-					<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="비밀번호">
+					<input type="password" class="form-control" id="mem_pwd" name="mem_pwd" placeholder="특수문자를 제외한 4~12자리까지 입력하시오">
 				<div class="check_font" id="pwd_check"></div><!-- class 속성은 css를 적용하는데 사용, id의 경우는 고유의 이름으로 스크립트가 적용되도록 설정하는데 사용 -->
 			</div>
 			
