@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.member.service.MyPage_commentService;
 import com.member.vo.MyPage_CommentVo;
+import com.member.vo.MyPage_PostVo;
 import com.security.config.LoginUser;
 
 @Controller
@@ -32,7 +33,7 @@ public class MyPageController {
 	}
 	
 
-	//내가 쓴 댓글 목록
+	//내가 쓴 글 & 댓글
 	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -41,6 +42,8 @@ public class MyPageController {
 		if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
+		List<MyPage_PostVo> list_post = myPage_commentService.list_post(mem_no);
+		mav.addObject("list_post", list_post);
 		List<MyPage_CommentVo> list = myPage_commentService.list(mem_no);
 		mav.addObject("list", list);
 		return mav;
