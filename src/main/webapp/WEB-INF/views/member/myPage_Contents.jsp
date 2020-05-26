@@ -158,58 +158,64 @@ a {
 				</ul>
 
 				<div id="tab2" class="tabcontent">
-
-			<table width="80%">
-				<thead>
-					<tr  style="border-bottom: 2px double #dddddd;">
-						<th>글 번호</th>
-						<th>제목</th>
-						<th>닉네임</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-					
-				</thead>
+					<div class="container">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr  style="border-bottom: 2px double #dddddd;">
+										<th>글 번호</th>
+										<th>제목</th>
+										<th>닉네임</th>
+										<th>작성일</th>
+										<th>조회수</th>
+									</tr>
+									
+								</thead>
+								
 				
-
-				
- 			  <c:forEach var="post" items="${list_post}">
- 						<tr style="border-bottom: 1px double #dddddd;">
-							<td><c:out value="${post.board_no}"/></td>
-							<td><c:out value="${post.board_title}"/></td>
-							<td><c:out value="${post.mem_nickname}"/></td>
-							<td><fmt:formatDate value="${post.board_date}" pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${post.board_hit}"/></td>
-							
-						</tr>
-				</c:forEach>
-						
-			</table>
-				
+								
+				 			  <c:forEach var="post" items="${list_post}">
+				 						<tr style="border-bottom: 1px double #dddddd;">
+											<td><c:out value="${post.board_no}"/></td>
+											<td><c:out value="${post.board_title}"/></td>
+											<td><c:out value="${post.mem_nickname}"/></td>
+											<td><fmt:formatDate value="${post.board_date}" pattern="yyyy-MM-dd" /></td>
+											<td><c:out value="${post.board_hit}"/></td>
+											
+										</tr>
+								</c:forEach>
+										
+							</table>
+						</div>
+					</div>
 				</div>
 			
 
 
 
 				<div id="tab3" class="tabcontent">
-					<table width="80%">
-						<thead>
-							<tr style="border-bottom: 2px double #dddddd;">
-								<th>댓글 번호</th>
-								<th>댓글 내용</th>
-								<th>닉네임</th>
-								<th>댓글 작성일</th>
-							</tr>
-						</thead>
-				 	<c:forEach var="list" items="${list}">
-						<tr style="border-bottom: 1px double #dddddd;">
-							<td><c:out value="${list.comment_no}"/></td>
-							<td><c:out value="${list.comment_content}"/></td>
-							<td><c:out value="${list.mem_nickname}"/></td>
-							<td><fmt:formatDate value="${list.comment_date}" pattern="yyyy-MM-dd" /></td>
-						</tr>
-					</c:forEach>
-					</table>
+					<div class="container">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr style="border-bottom: 2px double #dddddd;">
+										<th>댓글 번호</th>
+										<th>댓글 내용</th>
+										<th>닉네임</th>
+										<th>댓글 작성일</th>
+									</tr>
+								</thead>
+						 	<c:forEach var="list" items="${list}">
+								<tr style="border-bottom: 1px double #dddddd;">
+									<td><c:out value="${list.comment_no}"/></td>
+									<td><c:out value="${list.comment_content}"/></td>
+									<td><c:out value="${list.mem_nickname}"/></td>
+									<td><fmt:formatDate value="${list.comment_date}" pattern="yyyy-MM-dd" /></td>
+								</tr>
+							</c:forEach>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

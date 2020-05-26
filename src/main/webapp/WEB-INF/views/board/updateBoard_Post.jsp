@@ -88,11 +88,15 @@
 // 			console.log($("#board_content").val());
 // 			board['board_content'] = $("#board_content").val();
 // 			console.log(board);
+			var board_plain_content = "";
+			$(".note-editing-area p").each(function(idx, item){
+				board_plain_content = board_plain_content + $(item).text() + '\n';
+			});
 			var board = {
 				board_no:$("#board_no").val()
 				, board_title:$("#board_title").val()
 				, board_content:board_content
-				, board_plain_content:$(".note-editing-area").text()
+				, board_plain_content:board_plain_content
 			};
 			console.log(board);
 			//board_plain_text:$(".note-editing-area").text()

@@ -126,6 +126,11 @@
 			};
 // 			var board = $("#f").serialize();
 // 			console.log(board);
+			var board_plain_content = "";
+			$(".note-editing-area p").each(function(idx, item){
+				board_plain_content = board_plain_content + $(item).text() + '\n';
+			});
+			console.log(board_plain_content);
 			var board = {
 				board_no:$("#board_no").val()
 				, mem_no:$("#mem_no").val()
@@ -133,7 +138,7 @@
 				, board_title:$("#board_title").val()
 				, board_content:board_content
 				, head_tag_no:$("#head_tag_no").val()
-				, board_plain_content:$(".note-editing-area").text()
+				, board_plain_content:board_plain_content
 			};
 			$.ajax({
 				url:"/board/insertBoard_Post.do"

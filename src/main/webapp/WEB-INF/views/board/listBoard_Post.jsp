@@ -10,7 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>전체게시판 글 목록</title>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <script type="text/javascript">
 	$(function() {
 		$("#btnInsert").click(function() {
@@ -39,31 +41,36 @@
    
    <input type = "TEXT" id = "sel2" size = '20'>
    <button id="btnSelect">조회</button>
-	
-	<table border="1" width="80%">
-		<tr>
-			<th>글번호</th>
-			<th>말머리</th>
-			<th>글제목</th>
-			<th>작성자</th>
-			<th>게시일</th>
-			<th>조회수</th>
-		</tr>
-		<c:forEach var="v" items="${list}">
-			<tr>
-				<td>${v.board_no}</td>
- 				<td>${v.head_tag_name}</td>
-				<td>
-					<a href="/board/detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
-				</td>
-				<td>${v.mem_nickname}</td>
-				<td>
-					<fmt:formatDate value="${v.board_date}" pattern="yyyy-MM-dd" />
-				</td>
-				<td>${v.board_hit}</td>
-			</tr>
-		</c:forEach>
-	</table>
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>글번호</th>
+						<th>말머리</th>
+						<th>글제목</th>
+						<th>작성자</th>
+						<th>게시일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<c:forEach var="v" items="${list}">
+					<tr>
+						<td>${v.board_no}</td>
+		 				<td>${v.head_tag_name}</td>
+						<td>
+							<a href="/board/detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+						</td>
+						<td>${v.mem_nickname}</td>
+						<td>
+							<fmt:formatDate value="${v.board_date}" pattern="yyyy-MM-dd" />
+						</td>
+						<td>${v.board_hit}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
 	<button id="btnInsert">글쓰기</button>
 </body>
 </html>
