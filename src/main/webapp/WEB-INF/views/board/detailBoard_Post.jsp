@@ -269,7 +269,6 @@
 				<div>
 					<label for="comment">내용 : </label>
 					<textarea id="content" class="form-control" rows="10" readonly="readonly" style="background-color: white"></textarea><br>
-					<button id="btnAnswer">등록</button>
 				</div>
 			</div>
 		</div>
@@ -285,6 +284,7 @@
 		<div>
 			<label for="comment_content">댓글</label>
 			<textarea id="comment_content" class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
+			<button id="btnAnswer">등록</button>		
 		</div>
 		<div class="commentList" id="commentList">
 <!-- 			<ul> -->
@@ -298,8 +298,8 @@
 <%-- 			</c:forEach> --%>
 <!-- 			</ul> -->
 		</div>
-		<button class="btn btn-default" id="btnInsert">글쓰기</button>
-		<button class="btn btn-default" id="btnReplyInsert">답글</button>	
+		<button class="btn btn-default" id="btnWrite">글쓰기</button>
+		<button class="btn btn-default" id="btnAnswer">답글</button>	
 		<button class="btn btn-default" id="btnList">글목록</button>			
 	</div>
 </body>
