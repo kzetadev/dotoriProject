@@ -113,6 +113,7 @@ public class Place_InfoController {
 	// 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동
 	@RequestMapping("/place/detailPlace_Info.do")
 	public ModelAndView detailPlace_Info(int place_no) {
+		System.out.println("컨트롤러 작동");
 		// 조회수 증가
 		place_infoService.updateHit(place_no);
 		
@@ -121,11 +122,4 @@ public class Place_InfoController {
 		return m;
 	}
 	
-	// 메인 페이지 인기 서울 명소 TOP 6
-	@RequestMapping("/main.do")
-	public ModelAndView mainTop() {
-		ModelAndView m = new ModelAndView();
-		m.addObject("top", place_infoService.mainTop());
-		return m;
-	}
 }

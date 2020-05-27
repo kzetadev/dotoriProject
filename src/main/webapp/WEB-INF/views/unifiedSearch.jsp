@@ -7,40 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-	div#themeArea, #boardArea{
-		border: 2px solid lightgray;
-		margin: 5px 5px 5px 5px;
-		padding: 10px 10px 10px 10px;
-	}
-	div.theme, .column, .place_thumbnail, #placePageArea, .board{
-		display:inline-block;
-	}
-	span.themeInfo, .place_column, .place_thumbnail, .place_page, .boardInfo, .board_column, .board_page{
-/* 		display:inline-block; */
-		border: 2px solid lightgray;
-		border-radius: 3px;
-		margin: 5px 5px 5px 5px;
-		padding: 5px 5px 5px 5px;
-	}
-	div.place_thumbnail{
-		width:150px;
-		height:150px;
-	}
-	div#placeArea{
-		border: 2px solid lightgray;
-		margin: 5px 5px 5px 5px;
-		padding: 10px 10px 10px 10px;
-	}
-	img.place_info{
-		width:100px;
-		height:100px;
-	}
-	span.place_info{
-		width:200px;
-		height:200px;
-	}
-</style>
+
 <meta charset="UTF-8">
 <title>${keyword } 검색 결과</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -62,10 +29,11 @@ $(document).ready(function(){
 	var board_kinds;
 
 	var clickedTheme;
-// 	var clickedBoard;
-	
+	$(".theme").click(function(){
+		$(".theme").removeClass('active');
+		$(this).addClass('active');
+	});
 	$(".themeInfo").click(function(){
-		console.log($(this).attr('type'));
 		type = $(this).attr('type');
 		clickedTheme = $(this);
 // 		$("#keywordArea")
@@ -79,18 +47,24 @@ $(document).ready(function(){
 				$("#placePageArea").empty();
 				$("#placeArea").empty();
 				//검색조건 출력
+				var div = $("<div class='column container'/>");
+				var ul = $("<ul class='nav nav-tabs'/>");
 				$.each(result, function(idx, item){
-					var div = $("<div class='column'/>");
-					var span = $("<span class='place_column' column='" + item['condition_col'] + "' tot_cnt='" + item['search_cnt'] + "'/>").text(item['condition_kor']);
-					$(div).append(span);
-					$("#placeKeywordArea").append(div);
+					var li = $("<li class='place_column' column='" + item['condition_col'] + "' tot_cnt='" + item['search_cnt'] + "'/>");
+					var a = $("<a/>").text(item['condition_kor']);
+					$(li).append(a);
+					$(ul).append(li);
 					//검색조건 클릭
-					$(span).click(function(){
+					$(li).click(function(){
+						$(".place_column").removeClass('active');
+						$(this).addClass('active');
 						column = parseInt($(this).attr('column'));
 						showPlacePageList($(this), 1);
 						$(".place_page").first().trigger('click');
 					});
 				});
+				$(div).append(ul);
+				$("#placeKeywordArea").append(div);
 				$(".place_column").first().trigger('click');
 				$(".place_page").first().trigger('click');
 			}
@@ -107,44 +81,66 @@ $(document).ready(function(){
 		if(endPage > tot_page){
 			endPage = tot_page;
 		}
+		var ul = $("<ul class='pagination'/>");
 		if(startPage > pageGroup){
-			var span = $("<span class='place_page' page='" + (startPage - pageGroup) + "'/>").text('이전');
-			$("#placePageArea").append(span);
-			$(span).click(function(){
+			var li = $("<li class='place_page' page='" + (startPage - pageGroup) + "'/>");
+			var span = $("<span/>").text('이전');
+			$(li).append(span);
+			$(li).click(function(){
 				showPlacePageList(col_span, page - 1);
 			});
+			$(ul).append(li);
 		}
 		for(var i = startPage; i <= endPage; i++){
-			var span = $("<span class='place_page' page='" + i + "'/>").text(i);
-			$("#placePageArea").append(span);
-			$(span).click(function(){
+			var li = $("<li class='place_page' page='" + i + "'/>");
+			var span = $("<span/>").text(i);
+			$(li).append(span);
+			$(li).click(function(){
+				$(".place_page").removeClass('active');
+				$(this).addClass('active');
 				$.ajax({
 					url:"/searchPlace.do/" + keyword + "/" + type + "/" + column + "/" + parseInt($(this).attr('page')) + "/" + tot_cnt + "/" + tot_page
 					, type:'get'
 					, dataType:'json'
 					, success:function(list){
 						$("#placeArea").empty();
+						var divContainer = $("<div class='container'/>");
+						var divRow = $("<div class='row'/>");
 						$.each(list, function(idx, place){
+							var divColMd4 = $("<div class='col-md-4'/>");
+							var divThumbnail = $("<div class='thumbnail'/>");
 							var a = $("<a/>").attr('href', '/place/detailPlace_Info.do?place_no=' + place['place_no']);
-							var div = $("<div class='place_thumbnail'/>");
 							var img = $("<img class='place_info'/>").attr('src', '/img/' + place['place_img'].split('|')[0]);
-							var span = $("<span class='place_info'/>").text(place['place_name']);
-							$(div).append(img, span);
-							$(a).append(div);
-							$("#placeArea").append(a);
+							var divCaption = $("<div class='caption'/>");
+							var p = $("<p/>").text(place['place_name']);
+							$(divCaption).append(p);
+							$(a).append(img, divCaption);
+							$(divThumbnail).append(a);
+							$(divColMd4).append(divThumbnail);
+							$(divRow).append(divColMd4);
+							$(divContainer).append(divRow);
 						});
+						$("#placeArea").append(divContainer);
 					}
 				});
 			});
+			$(ul).append(li);
 		}
 		if(endPage < tot_page){
-			var span = $("<span class='place_page' page='" + (endPage + 1) + "'/>").text('다음');
-			$("#placePageArea").append(span);
-			$(span).click(function(){
+			var li = $("<li class='place_page' page='" + (endPage + 1) + "'/>");
+			var span = $("<span/>").text('다음');
+			$(li).append(span);
+			$(li).click(function(){
 				showPlacePageList(col_span, page + 1);
 			});
+			$(ul).append(li);
 		}
+		$("#placePageArea").append(ul);
 	}
+	$(".board").click(function(){
+		$(".board").removeClass('active');
+		$(this).addClass('active');
+	});
 	$('.boardInfo').click(function(){
 		board_kinds = $(this).attr('board_kinds');
 // 		clickedBoard = $(this);
@@ -158,18 +154,24 @@ $(document).ready(function(){
 				$("#boardPostPageArea").empty();
 				$("#boardPostArea").empty();
 				//검색조건 출력
+				
+				var div = $("<div class='column container'/>");
+				var ul = $("<ul class='nav nav-tabs'/>");
 				$.each(result, function(idx, item){
-					var div = $("<div class='column'/>");
-					var span = $("<span class='board_column' column='" + item['condition_col'] + "' tot_cnt='" + item['search_cnt'] + "'/>").text(item['condition_kor']);
-					$(div).append(span);
-					$("#boardKeywordArea").append(div);
+					var li = $("<li class='board_column' column='" + item['condition_col'] + "' tot_cnt='" + item['search_cnt'] + "'/>");
+					var a = $("<a/>").text(item['condition_kor']);
+					$(li).append(a);
+					$(ul).append(li);
 					//검색조건 클릭
-					$(span).click(function(){
-// 						column = parseInt($(this).attr('column'));
+					$(li).click(function(){
+						$(".board_column").removeClass('active');
+						$(this).addClass('active');
 						showBoardPageList($(this), 1);
 						$(".board_page").first().trigger('click');
 					});
 				});
+				$(div).append(ul);
+				$("#boardKeywordArea").append(div);
 				$(".board_column").first().trigger('click');
 				$(".board_page").first().trigger('click');
 			}
@@ -186,17 +188,23 @@ $(document).ready(function(){
 		if(endPage > tot_page){
 			endPage = tot_page;
 		}
+		var ul = $("<ul class='pagination'/>");
 		if(startPage > pageGroup){
-			var span = $("<span class='board_page' page='" + (startPage - pageGroup) + "'/>").text('이전');
-			$("#boardPostPageArea").append(span);
-			$(span).click(function(){
+			var li = $("<li class='board_page' page='" + (startPage - pageGroup) + "'/>");
+			var span = $("<span/>").text('이전');
+			$(li).append(span);
+			$(li).click(function(){
 				showBoardPageList(col_span, page - 1);
 			});
+			$(ul).append(li);
 		}
 		for(var i = startPage; i <= endPage; i++){
-			var span = $("<span class='board_page' page='" + i + "'/>").text(i);
-			$("#boardPostPageArea").append(span);
-			$(span).click(function(){
+			var li = $("<li class='board_page' page='" + i + "'/>");
+			var span = $("<span/>").text(i);
+			$(li).append(span);
+			$(li).click(function(){
+				$(".place_page").removeClass('active');
+				$(this).addClass('active');
 				$.ajax({
 					url:"/searchBoard.do/" + keyword + "/" + board_kinds + "/" + column + "/" + parseInt($(this).attr('page')) + "/" + tot_cnt + "/" + tot_page
 					, type:'get'
@@ -204,28 +212,46 @@ $(document).ready(function(){
 					, success:function(list){
 						console.log(list);
 						$("#boardPostArea").empty();
+						var div = $("<div class='container'/>");
+						var table = $("<table class='table table-hover'/>");
+						var tHead = $("<thead/>");
+						var trHead = $("<tr/>").append($("<th/>").text("게시판"), $("<th/>").text("말머리"), $("<th/>").text("글제목")
+								, $("<th/>").text("닉네임"), $("<th/>").text("조회수"), $("<th/>").text("작성일"));
+						$(tHead).append(trHead);
+						$(table).append(tHead);
+						var tbody = $("<tbody/>");
 						$.each(list, function(idx, board){
-							var a = $("<a/>").attr('href', '/board/detailBoard_Post.do?board_no=' + board['board_no']);
-							var div = $("<div class='post'/>");
-							var span_board = $("<span class='post_info'/>").text(board['board_kinds_str']);
-							var span_head = $("<span class='post_info'/>").text(board['head_tag_name']);
-							var span_title = $("<span class='post_info'/>").text(board['board_title']);
-							var span_nickname = $("<span class='post_info'/>").text(board['mem_nickname']);
-							$(div).append(span_board, span_head, span_title, span_nickname);
-							$(a).append(div);
-							$("#boardPostArea").append(a);
+							var tr = $("<tr/>");
+							var tdBoard = $("<td/>").text(board['board_kinds_str']);
+							var tdHeadTag = $("<td/>").text(board['head_tag_name']);
+							var a = $("<a/>").attr('href', '/board/detailBoard_Post.do?board_no=' + board['board_no']).text(board['board_title']);
+							var tdBoardTitle = $("<td/>").append(a);
+							var tdNickname = $("<td/>").text(board['mem_nickname']);
+							var tdBoardHit = $("<td/>").text(board['board_hit']);
+							var tdBoardDate = $("<td/>").text(board['board_date']);
+							
+							$(tr).append(tdBoard, tdHeadTag, tdBoardTitle, tdNickname, tdBoardHit, tdBoardDate);
+							$(tbody).append(tr);
+
 						});
+						$(table).append(tbody);
+						$(div).append(table);
+						$("#boardPostArea").append(div);
 					}
 				});
 			});
+			$(ul).append(li);
 		}
 		if(endPage < tot_page){
-			var span = $("<span class='board_page' page='" + (endPage + 1) + "'/>").text('다음');
-			$("#boardPostPageArea").append(span);
-			$(span).click(function(){
+			var li = $("<li class='board_page' page='" + (endPage + 1) + "'/>");
+			var span = $("<span/>").text('다음');
+			$(li).append(span);
+			$(li).click(function(){
 				showBoardPageList(col_span, page + 1);
 			});
+			$(ul).append(li);
 		}
+		$("#boardPostPageArea").append(ul);
 	}
 	
 	$(".themeInfo").first().trigger('click');
@@ -233,15 +259,18 @@ $(document).ready(function(){
 });
 </script>
 </head>
+
 <body>
 <!-- 정보게시판 영역 -->
-	<h2>정보게시판 검색 결과</h2>
-	<div id="themeArea">
+	<h2 style="text-align:center;">정보게시판 검색 결과</h2>
+	<div id="themeArea" class="container">
+		<ul class="nav nav-tabs">
 		<c:forEach var="t" items="${tList }">
-			<div class="theme">
-				<span class="themeInfo" type="${t.place_type }">${t.place_type_name }</span>
-			</div>
+			<li class="theme">
+				<a class="themeInfo" type="${t.place_type }">${t.place_type_name }</a>
+			</li>
 		</c:forEach>
+		</ul>
 	</div>
 	<hr>
 	<div id="placeKeywordArea">
@@ -250,17 +279,19 @@ $(document).ready(function(){
 	<div id="placeArea">
 	</div>
 	<hr>
-	<div id="placePageArea">
+	<div id="placePageArea" class="container">
 	</div>
 	<hr>
 <!-- 커뮤니티 게시판 영역 -->
-	<h2>커뮤니티 검색 결과</h2>
-	<div id="boardArea">
+	<h2 style="text-align:center;">커뮤니티 검색 결과</h2>
+	<div id="boardArea" class="container">
+		<ul class="nav nav-tabs">
 		<c:forEach var="b" items="${bList }">
-			<div class="board">
-				<span class="boardInfo" board_kinds="${b.board_kinds }">${b.board_kinds_str }</span>
-			</div>
+			<li class="board">
+				<a class="boardInfo" board_kinds="${b.board_kinds }">${b.board_kinds_str }</a>
+			</li>
 		</c:forEach>
+		</ul>
 	</div>
 	<hr>
 	<div id="boardKeywordArea">
@@ -269,7 +300,7 @@ $(document).ready(function(){
 	<div id="boardPostArea">
 	</div>
 	<hr>
-	<div id="boardPostPageArea">
+	<div id="boardPostPageArea" class="container">
 	</div>
 </body>
 </html>

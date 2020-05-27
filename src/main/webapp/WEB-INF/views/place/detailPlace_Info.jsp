@@ -52,6 +52,10 @@
 				speed: 500, fade: true, cssEase: 'linear',
 				autoplay: true, autoplaySpeed: 750
 			})
+
+			$("#btnList").click(function(){
+				location.href = "/place/listPlace_Info.do?place_type=0"
+			})
 		})
 	</script>
 	<style type="text/css">
@@ -61,6 +65,9 @@
 		dl, hr{
 			padding-right:200px;
 			padding-left:200px;
+		}
+		#list{
+			text-align:center;
 		}
 	</style>
 </head>
@@ -148,7 +155,11 @@
 		})
 	</script>
 	<br>
-	<br>
+	<div id="list">
+		<button type="button" class="btn btn-default btn-lg" id="btnList">
+			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+		</button>
+	</div>
 </body>
 </html>
 

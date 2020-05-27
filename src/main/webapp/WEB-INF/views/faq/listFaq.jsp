@@ -5,8 +5,8 @@
 
 <layoutTag:layout>
 
-	<!DOCTYPE html>
-	<html>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <title>FAQ 목록</title>
@@ -27,6 +27,9 @@
 	.wrapper h2 {
 		text-align: center;
 	}
+	.wrapper{
+		text-align: center;
+	}
 	
 	/* 사용자는 안보이고 관리자에게만 보이게 */
 	/*#btnAdd, .btnUpdate, .btnDelete{
@@ -37,18 +40,24 @@
 <body>
 	<div class="wrapper">
 		<h2>FAQ</h2>
-		<button id="btnAdd">추가</button>
+		<button type="button" class="btn btn-default" id="btnAdd">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</button>
+		
 		<div class="container">
 			<table class="table mytable">
-
 				<c:forEach var="f" items="${f_list }">
 					<tr>
 						<td><span class="glyphicon glyphicon-exclamation-sign"
 							aria-hidden="true"></span></td>
 						<td><a class="showmore">${f.faq_question }</a></td>
-						<td colspan="3">
-							<button class="btnUpdate" faq_no="${f.faq_no }">수정</button>
-							<button class="btnDelete" faq_no="${f.faq_no }">삭제</button>
+						<td colspan="6">
+							<button type="button" class="btn btn-default btnUpdate" faq_no="${f.faq_no }">
+								<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default btnDelete" faq_no="${f.faq_no }">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
 						</td>
 					</tr>
 
@@ -58,8 +67,7 @@
 								<table class="table">
 									<tr>
 										<td>
-										<td><span class="glyphicon glyphicon-arrow-right"
-											aria-hidden="true"></span></td>
+											<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
 										</td>
 										<td>${f.faq_answer }</td>
 									</tr>
@@ -95,32 +103,32 @@
 			$(".btnUpdate").click(function() {
 				location.href = "/faq/updateFaq.do"
 			})
-			$(".btnDelete").click(
-					function() {
-						var faq_no = $(this).attr("faq_no")
-						var a = confirm("정말로 삭제하시겠습니까?")
-						if (a == true) {
-							$.ajax({
-								url : "/faq/deleteFaq.do",
-								type : "POST",
-								data : {
-									faq_no : faq_no
-								},
-								beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-									xhr.setRequestHeader("${_csrf.headerName}",
-											"${_csrf.token}");
-								},
-								success : function(result) {
-									if (result == 1) {
-										location.href = "/faq/listFaq.do"
-									}
-								}
-							})
+			$(".btnDelete").click(function() {
+				var faq_no = $(this).attr("faq_no")
+				var a = confirm("정말로 삭제하시겠습니까?")
+				if (a == true) {
+					$.ajax({
+						url : "/faq/deleteFaq.do",
+						type : "POST",
+						data : {
+							faq_no : faq_no
+						},
+						beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+							xhr.setRequestHeader("${_csrf.headerName}","${_csrf.token}");
+						},
+						success : function(result) {
+							if (result == 1) {
+								jAlert("삭제 되었습니다.", "삭제", function(){
+									location.href = "/faq/listFaq.do"
+								})
+							}
 						}
 					})
+				}
+			})
 		});
 	</script>
 </body>
-	</html>
+</html>
 
 </layoutTag:layout>

@@ -88,7 +88,7 @@
 					searchCondition = "";
 				}
 				console.log(searchCondition);
-				location.href="/listPlace_Info.do?" + paramPlacetype + searchCondition;
+				location.href="/place/listPlace_Info.do?" + paramPlacetype + searchCondition;
 			});
 		});
 	</script>
@@ -152,7 +152,6 @@
 		</c:if>
 	</ul>	
 
-
 	<!-- 검색창 구현 -->
 	<form id="form" action="/listPlace_Info.do" method="post">
 		<div class="input-group">
@@ -173,7 +172,6 @@
 		</div>
 	</form>
 	<br><br>
-	<a href="myPage.do">임시 마이페이지로 이동</a>
 </body>
 </html>
 
