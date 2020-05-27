@@ -11,17 +11,15 @@
 <meta charset="UTF-8">
 <title>전체게시판 글 목록</title>
 <style type="text/css">
- ul{
- 	list-style: none;
- }
+	ul{
+		list-style: none;
+	}
+	h2{
+		text-align: center;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-
-
-
-
-
    $(function() {
       $("#btnInsert").click(function() {
          location.href = "/board/insertBoard_Post.do";
@@ -40,7 +38,6 @@
          location.href = "/board/listBoard_Post.do?str="+encodeURI(keyword);
       });
    });
-
 
    // 이전페이지
    function moveLeft(curPage){
@@ -61,9 +58,6 @@
       }            
    }   
    
-
-   
-
    function movePage(i){
 
       var numberChk = i;
@@ -79,18 +73,9 @@
 
       location.href = "/board/listBoard_Post.do?str="+encodeURI(keyword);
 
-      
 //      var totalPage = document.getElementById("totalPage").value;
 //      var tdTT = totalPage.innerText | totalPage.textContent;
-
-   
-      
-      
-            
-      
    }   
-   
-   
 </script>
 </head>
 <body>
@@ -104,42 +89,39 @@
    <input type = "TEXT" id = "sel2" size = '20'>
    <button id="btnSelect">조회</button>
    
-   <table border="1" width="80%">
-      <tr>
-         <th>글번호</th>
-         <th>말머리</th>
-         <th>글제목</th>
-         <th>작성자</th>
-         <th>작성일</th>
-         <th>조회수</th>
-      </tr>
-      <c:forEach var="v" items="${list}">
-         <tr>
-            <td>${v.board_no}</td>
-             <td>${v.head_tag_name}</td>
-            <td>
-               <a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
-            </td>
-            <td>${v.mem_nickname}</td>
-            <td>${v.board_date}</td>
-            <td>${v.board_hit}</td>
-         </tr>
-      </c:forEach>
-   </table>
-   
+   <div class="container">
+	   <table class="table table-hover">
+	      <tr>
+	         <th>글번호</th>
+	         <th>말머리</th>
+	         <th>글제목</th>
+	         <th>작성자</th>
+	         <th>작성일</th>
+	         <th>조회수</th>
+	      </tr>
+	      <c:forEach var="v" items="${list}">
+	         <tr>
+	            <td>${v.board_no}</td>
+	             <td>${v.head_tag_name}</td>
+	            <td>
+	               <a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+	            </td>
+	            <td>${v.mem_nickname}</td>
+	            <td>${v.board_date}</td>
+	            <td>${v.board_hit}</td>
+	         </tr>
+	      </c:forEach>
+	   </table>
+	</div>   
       <input type="hidden" name="totalPage" value=${totalPage}>
       <input type="hidden" name="totalRecord" value=${totalRecord}>
       <input type="hidden" name="curPage" value=&{curPage}>
       <input type="hidden" name="end" value=${end}>
-      
-      
-   
+
 <div style='text-align:center'>
    <c:if test="${totalPage != null}">
    <div style='display:inline-block'>
    	<ul>
-        
-
             <!--맨 첫페이지로 이동기능-->
            <li list-style-type:none-style>
               <a href="#" onclick='moveLeft(1)'>
@@ -151,8 +133,6 @@
                  <span> <  </span>  
               </a>
                      
-              
-              
               <!--페이지 선택-->
               <c:forEach var="i" begin="${start}" end="${end}" step="1">
                      <a onclick="movePage(${i})">${i}</a>
@@ -162,25 +142,16 @@
                <a href="#" onclick='moveRight(${curPage+1})'>
                  <span>></span>
               </a>
-                        
-                        
+                               
              <!--맨 마지막 페이지로 이동기능-->
              <a href="#" onclick='moveRight(${totalPage})'>
                  <span>>></span>
-              </a>
-                                     
+              </a>                    
            </li>  
- 
-            
- 
-       
         </ul>
    </div>
    </c:if>
 </div>       
-   
-      
-   
    <button id="btnInsert">글쓰기</button>
 </body>
 </html>

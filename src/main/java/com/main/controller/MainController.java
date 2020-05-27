@@ -90,6 +90,7 @@ public class MainController {
 //		}
 //		m.addObject("pt", pt);
 		
+		// 메인 페이지 인기 서울 명소 TOP 6
 		mav.addObject("top", place_infoService.mainTop());
 		return mav;
 	}
