@@ -97,6 +97,10 @@
 				alert("삭제했습니다!");
 			}
 		});
+
+		$("#btnWrite").click(function() {
+			location.href = "/board/insertBoard_Post.do";
+		});
 		
 		//댓글 목록 새로고침
 		function refreshComments(){
@@ -283,8 +287,7 @@
 	<div class="form-comment-group">
 		<div>
 			<label for="comment_content">댓글</label>
-			<textarea id="comment_content" class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
-			<button id="btnAnswer">등록</button>		
+			<textarea id="comment_content" class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>	
 		</div>
 		<div class="commentList" id="commentList">
 <!-- 			<ul> -->
