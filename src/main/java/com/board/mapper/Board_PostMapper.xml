@@ -47,7 +47,6 @@
                </if>
             </if>   
 
-
             <if test="str1 == 3"> <!-- 제목 -->
                <if test="str2 != null and str2 != ''"> <!-- 검색조건 -->
                   and b.BOARD_CONTENT LIKE '%'||#{str2,jdbcType=VARCHAR}||'%'
@@ -60,8 +59,7 @@
             
             order by board_no DESC
           ) 
-          
-          
+                 
           <![CDATA[ where rnum > #{str3,jdbcType=VARCHAR} and rnum <= #{str4,jdbcType=VARCHAR}]]>
           
    </select>

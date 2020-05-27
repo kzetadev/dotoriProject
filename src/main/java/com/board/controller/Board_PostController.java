@@ -90,11 +90,7 @@ public class Board_PostController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      // 해당 부분에 Member_Info 추가해야 함
-	      
-	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트1 : " + str);
-	      
-	      
-	      
+
 	      if(str != null) {
 	         String getStr[] = keyWord.split("@");
 	         for(int i=0; i<getStr.length; i++) {
@@ -112,13 +108,9 @@ public class Board_PostController {
 	            }
 	         }   
 	      }
-	      
-	      
+	      	      
 	      List<Board_PostListVo> list = board_postService.listBoard_Post(str);
-	      
-	      
-	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트2 list : " + list);   
-	      
+
 	      mav.setViewName("/board/listBoard_Post");
 	      mav.addObject("list", list);
 	      
@@ -128,8 +120,7 @@ public class Board_PostController {
 	      listCount = list.size();         // 현재 리스트에 몇건이 있는지 확인
 	      stotalRecord = list.get(0).getTotcnt();
 	      totalRecord = Integer.parseInt(stotalRecord);
-	      
-	      
+	       
 	      int devide = (int) Math.ceil(((float)(curPage+1)/(float)pageGroup));  //기준체크      
 	      int start = ((devide)*pageGroup) - (pageGroup-1); // 해당페이지에서 시작번호(step2) 
 	      int end = ((devide)*pageGroup); // 해당페이지에서 끝번호(step2)
@@ -141,10 +132,6 @@ public class Board_PostController {
 	      totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
 	      
 	      totalPage = totalPage-1;
-	      //end = end-1;
-	      
-	      
-	      
 	      
 	      mav.addObject("totalRecord", totalRecord);
 	      mav.addObject("totalPage", totalPage);
@@ -153,26 +140,12 @@ public class Board_PostController {
 	      mav.addObject("start", start);
 	      mav.addObject("end", end);
 	      mav.addObject("sel1", sel1);   // 말머리
-	      mav.addObject("sel2", sel2);   // 검색키워드
-	      
-	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트3 list : " + list);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 전체건수 : " + totalRecord);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 전체페이지 : " + totalPage);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 첫번째건수NUM : " + startNum);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 리스트건수 : " + listCount);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 start : " + start);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 end : " + end);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 현재페이지 : " + curPage);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 말머리 : " + sel1);
-	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 검색키워드 : " + sel2);
-	      
-	      
+	      mav.addObject("sel2", sel2);   // 검색키워드  
 	      
 	      mav.addObject("headtag", head_tagService.listHead_Tag());
 	      return mav;
 	   }
 
-   
 //	// 게시글 등록
 //	@RequestMapping("/insertBoard_Post.do")
 //	public ModelAndView insertBoard_Post(Board_PostVo vo) {

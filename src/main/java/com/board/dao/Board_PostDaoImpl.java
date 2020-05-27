@@ -20,10 +20,7 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	@Override
 	 public List<Board_PostListVo> listBoard_Post(String str) {
 	      // TODO Auto-generated method stub
-	      System.out.println("Board_PostDaoImpl str : " + str);
-	      
-	      System.out.println("Board_PostDaoImpl 체크포인트1 str: " + str);
-	      
+
 	      String keyWord = str;
 	      String str1 = "";     //검색 옵션
 	      String str2 = "";     //키워드
@@ -42,22 +39,17 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	            
 	            if(i == 1) {
 	               str2 = getStr[1];
-	               System.out.println("Board_PostDaoImpl 체크포인트3 str1 : "+ str1 + " str2 : " + str2);
 	            }
 	            
 	            if(i == 2) {
 	               
 	               if(getStr[2].equals("1")) {
-	                  
-	                  System.out.println("Board_PostDaoImpl 체크포인트3 페이징처리 getStr[2] : "+ getStr[2]);
-	                  
+  
 	                  str3 = Integer.toString(0);
 	                  str4 = Integer.toString(10);
 	                  
 	               }else {
-	                  
-	                  System.out.println("Board_PostDaoImpl 체크포인트3 페이징처리 getStr[2] : "+ getStr[2]);
-	                  
+
 	                  str3 = getStr[2];
 	                  int startPage = Integer.parseInt(str3) * 10;
 	                  int EndPage = startPage + 10;
@@ -69,13 +61,6 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	            }
 	         }
 	         
-	         
-	         
-	         
-
-	                  
-	         System.out.println("Board_PostDaoImpl 체크포인트3 페이징처리 str3 : "+ str3 + " str4 : " + str4);
-	         
 	         map.put("str1", str1);
 	         map.put("str3", str3);
 	         map.put("str4", str4);
@@ -85,7 +70,6 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	            System.out.println("Board_PostDaoImpl 체크포인트4 map.get() : "+ map.get("str1") + " : " + map.get("str2"));
 	         }
 	         
-
 	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
 	         System.out.println("Board_PostDaoImpl 쿼리결과#1 : " + aaa);
 	         return sqlSessionTemplate.selectList("board_post.select", map);         

@@ -18,10 +18,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
-
-
-
-
    $(function() {
       $("#btnInsert").click(function() {
          location.href = "/board/insertBoard_Post.do";
@@ -32,15 +28,10 @@
       $("#btnSelect").click(function() {
          var sel1 = document.getElementById("sel1").value;
          var sel2 = document.getElementById("sel2").value;
-
          var keyword = sel1+"@"+sel2;
-
-         alert(keyword);
-         
          location.href = "/board/listBoard_Post.do?str="+encodeURI(keyword);
       });
    });
-
 
    // 이전페이지
    function moveLeft(curPage){
@@ -65,29 +56,18 @@
    
 
    function movePage(i){
-
       var numberChk = i;
-
       var totalPage = $("#totalPage").val();
       var totalRecord = $('input[name=totalRecord]').val();
       var totalPage = $('input[name=totalPage]').val();
-
       var sel1 = document.getElementById("sel1").value;
       var sel2 = document.getElementById("sel2").value;
-
       var keyword = sel1+"@"+sel2+"@"+numberChk;
-
       location.href = "/board/listBoard_Post.do?str="+encodeURI(keyword);
-
       
 //      var totalPage = document.getElementById("totalPage").value;
 //      var tdTT = totalPage.innerText | totalPage.textContent;
-
    
-      
-      
-            
-      
    }   
    
    
@@ -139,7 +119,6 @@
    <div style='display:inline-block'>
    	<ul>
         
-
             <!--맨 첫페이지로 이동기능-->
            <li list-style-type:none-style>
               <a href="#" onclick='moveLeft(1)'>
@@ -150,9 +129,7 @@
               <a onclick = "moveLeft(${curPage-1})"> 
                  <span> <  </span>  
               </a>
-                     
-              
-              
+           
               <!--페이지 선택-->
               <c:forEach var="i" begin="${start}" end="${end}" step="1">
                      <a onclick="movePage(${i})">${i}</a>
@@ -162,24 +139,18 @@
                <a href="#" onclick='moveRight(${curPage+1})'>
                  <span>></span>
               </a>
-                        
-                        
+                                  
              <!--맨 마지막 페이지로 이동기능-->
              <a href="#" onclick='moveRight(${totalPage})'>
                  <span>>></span>
               </a>
                                      
            </li>  
- 
-            
- 
-       
+
         </ul>
    </div>
    </c:if>
 </div>       
-   
-      
    
    <button id="btnInsert">글쓰기</button>
 </body>
