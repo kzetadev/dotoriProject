@@ -61,11 +61,11 @@ $(document).ready(function(){
 				<!-- sign, login -->
 				<ul class="nav navbar-nav navbar-right"> 
 					<sec:authorize access="isAuthenticated()">
-						<li><a href="/member/myPage.do"><span class="glyphicon glyphicon-user"></span>마이페이지</a></li>
+						<li><a href="/member/myPage.do"><span class="glyphicon glyphicon-user"></span> 마이페이지</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
-						<li><a href="/member/joinForm.do"><span class="glyphicon glyphicon-user"></span>회원가입</a></li>
-						<li><a href="/member/login.do"><span class="glyphicon glyphicon-log-in"></span>로그인</a></li>
+						<li><a href="/member/joinForm.do"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+						<li><a href="/member/login.do"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 					</sec:authorize>
 				</ul>
 			</div>
