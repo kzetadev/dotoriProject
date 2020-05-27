@@ -153,7 +153,7 @@
 	</ul>	
 
 	<!-- 검색창 구현 -->
-	<form id="form" action="/listPlace_Info.do" method="post">
+	<form id="form" action="/place/listPlace_Info.do" method="post">
 		<div class="input-group">
 			<div class="form-group">
 				<label for="sel"></label>
