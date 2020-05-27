@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.board.dao.Board_PostDao;
+import com.board.vo.Board_PostListVo;
 import com.board.vo.Board_PostSearchVo;
 import com.board.vo.Board_PostVo;
 import com.information.vo.SearchConditionVo;
@@ -18,7 +19,7 @@ public class Board_PostServiceImpl implements Board_PostService {
 	@Resource(name="board_postDao")
 	protected Board_PostDao board_postDao;
 	@Override
-	public List<Board_PostVo> listBoard_Post(String search) {
+	public List<Board_PostListVo> listBoard_Post(String search) {
 		// TODO Auto-generated method stub
 		return board_postDao.listBoard_Post(search);
 	}

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.board.service.Board_CommentService;
 import com.board.service.Board_PostService;
 import com.board.service.Head_TagService;
+import com.board.vo.Board_PostListVo;
 import com.board.vo.Board_PostVo;
 import com.google.gson.Gson;
 import com.security.config.LoginUser;
@@ -43,6 +44,22 @@ public class Board_PostController {
 //		mav.addObject("headtag", head_tagService.listHead_Tag());
 //		return mav;
 //	}
+	public static int totalRecord = 0; //전체 레코드 수를 저장하기 위한 변수
+	public static int pageSIZE = 10; //한 화면에 보여줄 레코드 수를 제한하기 위한 변수
+	public static int totalPage = 1; //전체 페이지 수를 저장하기 위한 변수
+	public static int pageGroup = 10; //한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
+
+//	// 게시글 목록
+//	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
+//	public ModelAndView listBoard_Post() {
+//		List<Board_PostVo> list = board_postService.listBoard_Post();
+//		ModelAndView mav = new ModelAndView();
+//		// 해당 부분에 Member_Info 추가해야 함
+//		mav.setViewName("listBoard_Post");
+//		mav.addObject("list", list);
+//		mav.addObject("headtag", head_tagService.listHead_Tag());
+//		return mav;
+//	}
 	
 	//게시판 구분에 따른 말머리 목록
 	@RequestMapping(value="/board/listHead_Tag.do/{board_kinds}", method=RequestMethod.GET)
@@ -54,17 +71,106 @@ public class Board_PostController {
 		System.out.println(headTagList);
 		return headTagList;
 	}
-   // 게시글 목록
-   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
-   public ModelAndView listBoard_Post(String search) {
-      List<Board_PostVo> list = board_postService.listBoard_Post(search);
-      ModelAndView mav = new ModelAndView();
-      // 해당 부분에 Member_Info 추가해야 함
-      mav.setViewName("/board/listBoard_Post");
-      mav.addObject("list", list);
-      mav.addObject("headtag", head_tagService.listHead_Tag());
-      return mav;
-   }
+	// 게시글 목록
+	   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
+	   public ModelAndView listBoard_Post(String str) {
+	      
+	      String stotalRecord = "";
+	      String sNum = "";
+	      String eMum = "";
+	      String keyWord = str;
+	      String sel1 = "";
+	      String sel2 = "";
+	      
+	      int startNum = 0;
+	      int endNum = 0;
+	      int listCount = 0;
+	      int curPage = 1;      // 현재페이지
+	      float pageSize = (float)pageSIZE;    
+	      
+	      ModelAndView mav = new ModelAndView();
+	      // 해당 부분에 Member_Info 추가해야 함
+	      
+	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트1 : " + str);
+	      
+	      
+	      
+	      if(str != null) {
+	         String getStr[] = keyWord.split("@");
+	         for(int i=0; i<getStr.length; i++) {
+	            
+	            if(i == 0) {
+	               sel1 = getStr[0];      // 말머리   
+	            }
+	            
+	            if(i == 1) {
+	               sel2 = getStr[1];      // 검색키워드
+	            }
+	            
+	            if(i == 2) {
+	               curPage = Integer.parseInt(getStr[2]);
+	            }
+	         }   
+	      }
+	      
+	      
+	      List<Board_PostListVo> list = board_postService.listBoard_Post(str);
+	      
+	      
+	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트2 list : " + list);   
+	      
+	      mav.setViewName("/board/listBoard_Post");
+	      mav.addObject("list", list);
+	      
+	      sNum = list.get(0).getRnum();      // 시작페이지
+	      sNum = sNum.substring(0, 1);      // 첫번째 값으로 페이지 앞번호를 찾는다.
+	      startNum = Integer.parseInt(sNum);   // int로 캐스팅한 변수에 삽입
+	      listCount = list.size();         // 현재 리스트에 몇건이 있는지 확인
+	      stotalRecord = list.get(0).getTotcnt();
+	      totalRecord = Integer.parseInt(stotalRecord);
+	      
+	      
+	      int devide = (int) Math.ceil(((float)(curPage+1)/(float)pageGroup));  //기준체크      
+	      int start = ((devide)*pageGroup) - (pageGroup-1); // 해당페이지에서 시작번호(step2) 
+	      int end = ((devide)*pageGroup); // 해당페이지에서 끝번호(step2)
+	      int pgCnt = (int) Math.floor(totalRecord / pageSize);  
+	      if(end > pgCnt){  //최종 넘어가는 갯수 오버 방지
+	         end = pgCnt;
+	      }
+	      
+	      totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
+	      
+	      totalPage = totalPage-1;
+	      //end = end-1;
+	      
+	      
+	      
+	      
+	      mav.addObject("totalRecord", totalRecord);
+	      mav.addObject("totalPage", totalPage);
+	      mav.addObject("pageGroup", pageGroup);
+	      mav.addObject("curPage", curPage);
+	      mav.addObject("start", start);
+	      mav.addObject("end", end);
+	      mav.addObject("sel1", sel1);   // 말머리
+	      mav.addObject("sel2", sel2);   // 검색키워드
+	      
+	      System.out.println("Board_PostController 화면에서 받은 변수 체크포인트3 list : " + list);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 전체건수 : " + totalRecord);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 전체페이지 : " + totalPage);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 첫번째건수NUM : " + startNum);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 리스트건수 : " + listCount);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 start : " + start);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 end : " + end);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 현재페이지 : " + curPage);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 말머리 : " + sel1);
+	      System.out.println("Board_PostController 화면에서 받은 변수 전체페이지3 검색키워드 : " + sel2);
+	      
+	      
+	      
+	      mav.addObject("headtag", head_tagService.listHead_Tag());
+	      return mav;
+	   }
 
    
 //	// 게시글 등록

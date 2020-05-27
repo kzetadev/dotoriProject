@@ -12,55 +12,60 @@
 		WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no   
 		order by b.board_no desc
 	</select> -->
-	   <!-- 게시글 목록 -->   
-   <select id="select" resultType="com.board.vo.Board_PostVo">
-      SELECT
+  <!-- 게시글 목록 -->   
+   <select id="select" resultType="com.board.vo.Board_PostListVo">
+      select
        *
-       FROM (
-         SELECT 
-            A.*,
-            rn AS rnum,
-            COUNT(*) OVER() AS totcnt
-            FROM (
-               SELECT rownum rn
-                    , b.board_no
+       from (
+         select 
+            a.*,
+            rownum AS rnum,
+            count(*) over() AS totcnt
+            from (
+               select b.board_no
                     , h.head_tag_name
                     , b.board_title
-<!--                     , b.board_content -->
+                    , b.BOARD_CONTENT
                     , m.mem_nickname
                     , b.board_kinds
-                    , b.board_date
+                    , to_char(b.board_date, 'YYYYMMDD') AS board_date
                     , b.board_hit
-               FROM board_post b, member_info m, head_tag h
-               WHERE b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no  
+               from board_post b, member_info m, head_tag h
+               where b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no  
                
                
-            <if test="searchOption == 1"> <!-- 전체 -->   
-               <if test="keyword != null and keyword != ''"> <!-- 검색조건 -->
-                    AND (b.board_title LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%' OR b.board_content LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%')
+               
+            <if test="str1 == 1"> <!-- 전체 -->   
+               <if test="str2 != null and str2 != ''"> <!-- 검색조건 -->
+                    AND (b.board_title LIKE '%'||#{str2,jdbcType=VARCHAR}||'%' OR b.BOARD_CONTENT LIKE '%'||#{str2,jdbcType=VARCHAR}||'%')
                  </if> 
             </if>   
             
-            <if test="searchOption == 2"> <!-- 제목 -->
-               <if test="keyword != null and keyword != ''"> <!-- 검색조건 -->
-                  AND b.board_title LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%'
+            <if test="str1 == 2"> <!-- 제목 -->
+               <if test="str2 != null and str2 != ''"> <!-- 검색조건 -->
+                  and b.board_title LIKE '%'||#{str2,jdbcType=VARCHAR}||'%'
                </if>
             </if>   
 
 
-            <if test="searchOption == 3"> <!-- 제목 -->
-               <if test="keyword != null and keyword != ''"> <!-- 검색조건 -->
-                  AND b.board_content LIKE '%'||#{keyword,jdbcType=VARCHAR}||'%'
+            <if test="str1 == 3"> <!-- 제목 -->
+               <if test="str2 != null and str2 != ''"> <!-- 검색조건 -->
+                  and b.BOARD_CONTENT LIKE '%'||#{str2,jdbcType=VARCHAR}||'%'
                </if>
             </if>   
             
+               order by board_no desc
                
-               order by b.board_no DESC
             )A
-          ) <![CDATA[ where rnum > 0 and rnum <= 10]]>
-   </select>  
-   <!-- 페이징 처리 아직 안되서, 현재 1~10번 한 페이지만 보여집니다. -->
-
+            
+            order by board_no DESC
+          ) 
+          
+          
+          <![CDATA[ where rnum > #{str3,jdbcType=VARCHAR} and rnum <= #{str4,jdbcType=VARCHAR}]]>
+          
+   </select>
+   
 	<!-- 게시글 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->
 	<insert id="insert">

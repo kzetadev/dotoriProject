@@ -3,13 +3,14 @@ package com.board.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.board.vo.Board_PostListVo;
 import com.board.vo.Board_PostSearchVo;
 import com.board.vo.Board_PostVo;
 import com.information.vo.SearchConditionVo;
 
 public interface Board_PostDao {
 	// 게시글 목록
-	List<Board_PostVo> listBoard_Post(String search);
+	List<Board_PostListVo> listBoard_Post(String search);
 	// 게시글 등록
 	int insertBoard_Post(Board_PostVo vo);
 	// 게시글 상세

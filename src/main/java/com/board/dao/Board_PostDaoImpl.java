@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.board.vo.Board_PostListVo;
 import com.board.vo.Board_PostSearchVo;
 import com.board.vo.Board_PostVo;
 import com.information.vo.SearchConditionVo;
@@ -17,35 +18,93 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	@Inject
 	protected SqlSessionTemplate sqlSessionTemplate;
 	@Override
-	   public List<Board_PostVo> listBoard_Post(String search) {
+	 public List<Board_PostListVo> listBoard_Post(String str) {
 	      // TODO Auto-generated method stub
-	      String word = search;
-	      String searchOption = "";
-	      String keyword = "";      
+	      System.out.println("Board_PostDaoImpl str : " + str);
 	      
-	      if(search != null) {
-	         String getSearch[] = word.split("@");
-	         for(int i=0; i<getSearch.length; i++) {
-	        	 searchOption = getSearch[0];
+	      System.out.println("Board_PostDaoImpl 체크포인트1 str: " + str);
+	      
+	      String keyWord = str;
+	      String str1 = "";     //검색 옵션
+	      String str2 = "";     //키워드
+	      String str3 = "0";	//페이징 시작값
+	      String str4 = "10";	//페이징 끝값
+	      
+	      Map map = new HashMap();
+	      
+	      if(str != null) {
+	         String getStr[] = keyWord.split("@");
+	         for(int i=0; i<getStr.length; i++) {
+	            
+	            if(i == 0) {
+	               str1 = getStr[0];   
+	            }
 	            
 	            if(i == 1) {
-	            	keyword = getSearch[1];
-	            }   
+	               str2 = getStr[1];
+	               System.out.println("Board_PostDaoImpl 체크포인트3 str1 : "+ str1 + " str2 : " + str2);
+	            }
+	            
+	            if(i == 2) {
+	               
+	               if(getStr[2].equals("1")) {
+	                  
+	                  System.out.println("Board_PostDaoImpl 체크포인트3 페이징처리 getStr[2] : "+ getStr[2]);
+	                  
+	                  str3 = Integer.toString(0);
+	                  str4 = Integer.toString(10);
+	                  
+	               }else {
+	                  
+	                  System.out.println("Board_PostDaoImpl 체크포인트3 페이징처리 getStr[2] : "+ getStr[2]);
+	                  
+	                  str3 = getStr[2];
+	                  int startPage = Integer.parseInt(str3) * 10;
+	                  int EndPage = startPage + 10;
+	                  
+	                  str3 = Integer.toString(startPage);
+	                  str4 = Integer.toString(EndPage);
+	               }
+	                              
+	            }
 	         }
 	         
-	         Map map = new HashMap();
-	         map.put("searchOption", searchOption);
-	         if(!"".equals(keyword)) {
-	            map.put("keyword", keyword);
+	         
+	         
+	         
+
+	                  
+	         System.out.println("Board_PostDaoImpl 체크포인트3 페이징처리 str3 : "+ str3 + " str4 : " + str4);
+	         
+	         map.put("str1", str1);
+	         map.put("str3", str3);
+	         map.put("str4", str4);
+	         
+	         if(!"".equals(str2)) {
+	            map.put("str2", str2);
+	            System.out.println("Board_PostDaoImpl 체크포인트4 map.get() : "+ map.get("str1") + " : " + map.get("str2"));
 	         }
+	         
+
+	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
+	         System.out.println("Board_PostDaoImpl 쿼리결과#1 : " + aaa);
 	         return sqlSessionTemplate.selectList("board_post.select", map);         
 	         
 	      }else {
-	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", search);      
-	         return sqlSessionTemplate.selectList("board_post.select", search);            
+
+	         map.put("str3", str3);
+	         map.put("str4", str4);
+	         
+	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
+	         System.out.println("Board_PostDaoImpl 쿼리결과#2 : " + aaa);
+	         return sqlSessionTemplate.selectList("board_post.select", map);            
 	         
 	      }
+	               
+
 	      
+
+
 	   }
 
 //	public List<Board_PostVo> listBoard_Post() {
