@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	private String defaultUrl = "/";
+	private String defaultUrl = "/main.do";
 	//로그아웃 성공 후 동작하는 메소드
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)

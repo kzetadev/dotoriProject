@@ -9,6 +9,29 @@ $(document).ready(function(){
 		event.preventDefault();
 		location.href = "/unifiedSearch.do/" + $("#keyword").val();
 	});
+// 	var a = $("#logout");
+// 	a.onclick = function logout(){
+// 		$.ajax({
+// 			url:"/member/logout.do"
+// 			, type:'post'
+// 			, beforeSend : function(xhr){
+// 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+// 			}
+// 		});
+// 	}
+	var logoutFunction = function (){
+		$.ajax({
+			url:"/member/logout.do"
+			, type:'post'
+			, beforeSend : function(xhr){
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			}
+			, success:function(){
+				location.href = '/main.do';
+			}
+		});
+	}
+	$("#logout").click(logoutFunction);
 });
 </script>
 	<nav class="navbar navbar-default">
@@ -62,6 +85,7 @@ $(document).ready(function(){
 				<ul class="nav navbar-nav navbar-right"> 
 					<sec:authorize access="isAuthenticated()">
 						<li><a href="/member/myPage.do"><span class="glyphicon glyphicon-user"></span> 마이페이지</a></li>
+						<li><a id="logout"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
 						<li><a href="/member/joinForm.do"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>

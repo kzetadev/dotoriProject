@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/member/**").hasRole("USER")
 			
-			.antMatchers("/",  "/login.do", "/member/login.do"
+			.antMatchers("/",  "/member/login.do"
 					, "/main.do", "/unifiedSearch.do/**", "/getCondition.do/**", "/getBoardCondition.do/**"
 					, "/searchPlace.do/**", "/searchBoard.do/**", "/mailAuth.do"
 					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do"
@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.maximumSessions(1)
 			.maxSessionsPreventsLogin(true);
 		http.logout()									//로그아웃 사용
-			.logoutUrl("/logout.do")					//로그아웃 요청 url 설정
+			.logoutUrl("/member/logout.do")					//로그아웃 요청 url 설정
 			.addLogoutHandler(logoutHandler)			//로그아웃 처리 핸들러 설정
 			.logoutSuccessHandler(logoutSuccessHandler)	//로그아웃 성공 시 동작할 핸들러 설정
 			.permitAll();								//위에 해당하는 url들에 모든 접근 권한 부여
