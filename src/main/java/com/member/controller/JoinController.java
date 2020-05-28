@@ -51,17 +51,17 @@ public class JoinController {
 	@RequestMapping(value = "/member/join.do", method = RequestMethod.POST)
 	@ResponseBody
 //		public ModelAndView joinMem(Member_InfoVo vo, Model model, HttpServletRequest request, HttpSession session) {
-	public String joinMem(HttpServletRequest request, Model model, HttpSession session, HttpServletResponse response) {
+	public String joinMem(HttpServletRequest request, Member_InfoVo vo, Model model, HttpSession session, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		String mem_id = request.getParameter("mem_id");
-		String mem_pwd = request.getParameter("mem_pwd");
-		String mem_name = request.getParameter("mem_name");
-		String mem_nickname = request.getParameter("mem_nickname");
-		String mem_email = request.getParameter("mem_email");
+//		String mem_id = request.getParameter("mem_id");
+//		String mem_pwd = request.getParameter("mem_pwd");
+//		String mem_name = request.getParameter("mem_name");
+//		String mem_nickname = request.getParameter("mem_nickname");
+//		String mem_email = request.getParameter("mem_email");
 //			int mem_emailagree = (int)request.getParameter("mem_emailagree");
-		Member_InfoVo vo = new Member_InfoVo(0, mem_id, mem_pwd, mem_email, 0, mem_name, 0, "", mem_nickname
-				, "", "", "ROLE_USER", 0);
-		
+//		Member_InfoVo vo = new Member_InfoVo(0, mem_id, mem_pwd, mem_email, 0, mem_name, 0, "", mem_nickname
+//				, "", "", "ROLE_USER", 0);
+		vo.setMem_role("ROLE_USER");
 		System.out.println(vo.getMem_id());
 		System.out.println(vo.getMem_name());
 		System.out.println(vo.getMem_nickname());

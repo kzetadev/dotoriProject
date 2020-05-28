@@ -69,6 +69,8 @@ public class Place_InfoController {
 		map.put("sortColumn", sortColumn);
 		map.put("place_type", place_type);
 		
+		System.out.println(sortColumn);
+		
 		totalRecord = place_infoService.getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
 		System.out.println("전체 페이지 수 : " + totalPage);

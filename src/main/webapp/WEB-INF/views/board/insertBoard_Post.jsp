@@ -199,9 +199,9 @@
 		<tr>
 			<td>
 				<select id="board_kinds" name="board_kinds">
-					<option value="${board_kinds=1}">자유</option>
-					<option value="${board_kinds=2}">후기</option>
-					<option value="${board_kinds=3}">동행</option>
+					<option value="1">자유</option>
+					<option value="2">후기</option>
+					<option value="3">동행</option>
 				</select>
 			</td>
 			<td>
