@@ -19,21 +19,22 @@
 		$(function(){
 			// 찜목록 구현
 			// $("#h2").attr("place_no",place_no)
-			$("#btn").toggle(function(){
+			$("#btn").toggle(function(){ // 버튼을 눌렀을 때
 				// Place_no는 속성으로 안보이게 처리
-				var cartList = $("#img").attr("place_no",place_no)
-				$.each(cartList, function(){
-					var place_no = $("#h2").attr("place_no")
-					var place = {place_no:place_no}
-						$.ajax("/insertFavorite", {data:place, success:function(){
+				var cartList = $("#img").attr("place_no","place_no") // 사진 여러개를 cartList에 담음
+				alert(${p.place_no});
+				$.each(cartList, function(){ // 사진 각각마다 place_no를 부여해줌
+					
+					var place = {"place_no":${p.place_no}} //  ,"place_type": ${}
+						$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
+						alert(r)
 					}})
 				})
 				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
 				if(re == true){
-					location.href="myPage_Favorite.do"
+					location.href="/myPage/myPage_Favorite.do"
 				}
-			}, function(){
-				
+			}, function(){ // 다시 버튼을 눌렀을 때
 				alert("찜목록에서 제거되었습니다.")
 			})
 

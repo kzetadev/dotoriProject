@@ -78,10 +78,9 @@ public class MyPageController {
 	
 	// 마이페이지 메인
 	@RequestMapping("/member/myPage.do")
-	public ModelAndView myPage_Main(int mem_no) {
+	public ModelAndView myPage_Main() {
 		System.out.println("마이페이지 메인 컨트롤러");
-		
-		mem_no = 0;
+		int mem_no = 0;
 		ModelAndView m = new ModelAndView();
 		logger.info("list");
 		if(LoginUser.isLogin()) {
