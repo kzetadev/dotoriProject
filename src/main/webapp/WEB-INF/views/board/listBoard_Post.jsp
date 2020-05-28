@@ -97,7 +97,7 @@
 			</div>
 		</form>
 	
-		<table border="1" width="80%" class="table table-hover">
+		<table  class="table table-hover">
 			<tr>
 				<th>글번호</th>
 				<th>말머리</th>

@@ -24,6 +24,9 @@
 		where m.mem_no = #{mem_no}
 	</select>
 	
-
-	
+	<!-- 마이페이지 메인 -->
+	<select id="main" resultType="com.member.vo.MyPage_MainVo">
+		select mem_nickname, mem_img, mem_content from member_info where mem_no = #{mem_no}
+	</select>
+		
 </mapper>
