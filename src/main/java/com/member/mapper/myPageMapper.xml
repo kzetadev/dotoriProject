@@ -49,5 +49,12 @@
 	<select id="main" resultType="com.member.vo.MyPage_MainVo">
 		select mem_nickname, mem_img, mem_content from member_info where mem_no = #{mem_no}
 	</select>
+	
+	<!-- 쪽지 보내기 -->
+	<!-- create sequence seq_post_no increment by 1 start with 1; -->
+	<insert id="sendMessage">
+		insert into member_message(post_no, mem_no, post_from, post_to, post_content, post_regidate)
+		values (seq_post_no.nextval, #{mem_no}, #{post_from}, #{post_to}, #{post_content}, sysdate)
+	</insert>
 		
 </mapper>

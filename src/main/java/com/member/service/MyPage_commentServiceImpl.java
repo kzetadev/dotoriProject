@@ -2,13 +2,13 @@ package com.member.service;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.member.dao.MyPage_commentDao;
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
 
@@ -47,5 +47,10 @@ public class MyPage_commentServiceImpl implements MyPage_commentService {
 		// TODO Auto-generated method stub
 		return myPage_commentDao.checkPwd(mem_id, mem_pwd);
 	}
-
+	//쪽지 보내기
+	@Override
+	public int sendMessage(Member_MessageVo vo) {
+		// TODO Auto-generated method stub
+		return myPage_commentDao.sendMessage(vo);
+	}
 }
