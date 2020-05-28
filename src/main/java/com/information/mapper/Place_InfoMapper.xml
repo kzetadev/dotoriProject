@@ -31,9 +31,6 @@
   			<if test="keyword != null and keyword != ''"> <!-- 장소명과 내용, 주소만 가지고 검색 설정 -->
   				and ${searchColumn} like '%' || #{keyword} || '%'
   			</if> 
-  			<if test="sortColumn == place_hit"> <!-- 인식 안됨 -->
-  				order by place_hit desc
-  			</if>
   			<if test="sortColumn != null">
   			  	order by ${sortColumn}
   			</if>
