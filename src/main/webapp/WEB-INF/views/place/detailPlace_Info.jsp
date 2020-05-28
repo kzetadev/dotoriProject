@@ -25,7 +25,7 @@
 				alert(${p.place_no});
 				$.each(cartList, function(){ // 사진 각각마다 place_no를 부여해줌
 					
-					var place = {"place_no":${p.place_no}} //  ,"place_type": ${}
+					var place = {"place_no":${p.place_no}, "place_type":${place_type}} 
 						$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
 						alert(r)
 					}})
