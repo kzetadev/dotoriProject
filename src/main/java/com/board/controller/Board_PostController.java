@@ -85,6 +85,7 @@ public class Board_PostController {
 	      String keyWord = str;
 	      String sel1 = "";
 	      String sel2 = "";
+	      int boardKinds = 0;
 	      
 	      int startNum = 0;
 	      int endNum = 0;
@@ -94,59 +95,70 @@ public class Board_PostController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      // 해당 부분에 Member_Info 추가해야 함
-
-	      if(str != null) {
-	         String getStr[] = keyWord.split("@");
-	         for(int i=0; i<getStr.length; i++) {
-	            
-	            if(i == 0) {
-	               sel1 = getStr[0];      // 말머리   
-	            }
-	            
-	            if(i == 1) {
-	               sel2 = getStr[1];      // 검색키워드
-	            }
-	            
-	            if(i == 2) {
-	               curPage = Integer.parseInt(getStr[2]);
-	            }
-	         }   
+	      
+	      if("1".equals(str) || "2".equals(str) || "3".equals(str)) {
+	    	  
+	      } else if ("".equals(str) || str == null){
+	    	  str = "0"; //기본값 설정
+	      } else {
+	    	  if(str != null) {
+	    		  String getStr[] = keyWord.split("@");
+	    		  for(int i=0; i<getStr.length; i++) {
+	    			  if(i == 0) {
+	    				  sel1 = getStr[0]; //말머리
+	    			  }
+	    			  if(i == 1) {
+	    				  sel2 = getStr[1];	//검색 키워드
+	    			  }
+	    			  if(i == 2) {
+	    				  curPage = Integer.parseInt(getStr[2]);
+	    			  }
+	    		  }
+	    	  }
 	      }
-	      	      
+	      
 	      List<Board_PostListVo> list = board_postService.listBoard_Post(str);
-
+	      
 	      mav.setViewName("/board/listBoard_Post");
 	      mav.addObject("list", list);
-	      
-	      sNum = list.get(0).getRnum();      // 시작페이지
-	      sNum = sNum.substring(0, 1);      // 첫번째 값으로 페이지 앞번호를 찾는다.
-	      startNum = Integer.parseInt(sNum);   // int로 캐스팅한 변수에 삽입
-	      listCount = list.size();         // 현재 리스트에 몇건이 있는지 확인
-	      stotalRecord = list.get(0).getTotcnt();
-	      totalRecord = Integer.parseInt(stotalRecord);
-	       
-	      int devide = (int) Math.ceil(((float)(curPage+1)/(float)pageGroup));  //기준체크      
-	      int start = ((devide)*pageGroup) - (pageGroup-1); // 해당페이지에서 시작번호(step2) 
-	      int end = ((devide)*pageGroup); // 해당페이지에서 끝번호(step2)
-	      int pgCnt = (int) Math.floor(totalRecord / pageSize);  
-	      if(end > pgCnt){  //최종 넘어가는 갯수 오버 방지
-	         end = pgCnt;
+	      if(list.size() > 0) {
+		      sNum = list.get(0).getRnum();
+		      sNum = sNum.substring(0,1);
+		      startNum = Integer.parseInt(sNum);
+		      listCount = list.size();
+		      stotalRecord = list.get(0).getTotcnt();
+		      totalRecord = Integer.parseInt(stotalRecord);
+		      boardKinds = list.get(0).getBoard_kinds();
+		      
+		      int devide = 0;
+		      
+		      if(curPage % 10 == 0) {
+		    	  devide = (int)Math.ceil(((float)(curPage)/(float)pageGroup));
+		      } else {
+		    	  devide = (int)Math.ceil(((float)(curPage+1)/(float)pageGroup));
+		      }
+		      
+		      int start = ((devide)*pageGroup) - (pageGroup-1);
+		      int end = ((devide)*pageGroup);
+		      int pgCnt = (int)Math.floor(totalRecord/pageSize);
+		      
+		      if(end > pgCnt) {
+		    	  end = pgCnt;
+		      }
+		      
+		      totalPage = (int)Math.ceil(totalRecord / pageSIZE);
+		      
+		      mav.addObject("totalRecord", totalRecord);
+		      mav.addObject("totalPage", totalPage);
+		      mav.addObject("pageGroup", pageGroup);
+		      mav.addObject("boardKinds", boardKinds);
+		      mav.addObject("curPage", curPage);
+		      mav.addObject("start", start);
+		      mav.addObject("end", end);
+		      mav.addObject("sel1", sel1);
+		      mav.addObject("sel2", sel2);
+		      mav.addObject("headtag", head_tagService.listHead_Tag());
 	      }
-	      
-	      totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
-	      
-	      totalPage = totalPage-1;
-	      
-	      mav.addObject("totalRecord", totalRecord);
-	      mav.addObject("totalPage", totalPage);
-	      mav.addObject("pageGroup", pageGroup);
-	      mav.addObject("curPage", curPage);
-	      mav.addObject("start", start);
-	      mav.addObject("end", end);
-	      mav.addObject("sel1", sel1);   // 말머리
-	      mav.addObject("sel2", sel2);   // 검색키워드  
-	      
-	      mav.addObject("headtag", head_tagService.listHead_Tag());
 	      return mav;
 	   }
 

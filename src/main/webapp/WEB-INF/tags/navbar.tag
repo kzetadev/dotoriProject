@@ -61,9 +61,9 @@ $(document).ready(function(){
 					<li class="dropdown">
 						<a href="listBoard_Post.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">커뮤니티<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/board/listBoard_Post.do?board_kinds=0">자유 게시판</a></li>
-							<li><a href="/board/listBoard_Post.do?board_kinds=1">후기 게시판</a></li>
-							<li><a href="/board/listBoard_Post.do?board_kinds=2">동행 게시판</a></li>
+							<li><a href="/board/listBoard_Post.do?str=1">자유 게시판</a></li>
+							<li><a href="/board/listBoard_Post.do?str=2">후기 게시판</a></li>
+							<li><a href="/board/listBoard_Post.do?str=3">동행 게시판</a></li>
 						</ul>
 					</li>
 					<li><a href="/faq/listFaq.do">FAQ</a></li>
