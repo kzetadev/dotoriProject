@@ -20,6 +20,7 @@ import com.board.service.Head_TagService;
 import com.board.vo.Board_PostListVo;
 import com.board.vo.Board_PostVo;
 import com.google.gson.Gson;
+import com.member.service.LoginService;
 import com.security.config.LoginUser;
 
 @RestController
@@ -32,7 +33,10 @@ public class Board_PostController {
 //	private Member_InfoService member_infoService;
 	@Resource(name="board_commentService")
 	private Board_CommentService board_commentService;
-
+	
+	@Resource(name="loginService")
+	private LoginService loginService;
+	
 //	// 게시글 목록
 //	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
 //	public ModelAndView listBoard_Post() {
@@ -161,7 +165,7 @@ public class Board_PostController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board_no", board_no);
 		if(LoginUser.isLogin()) {
-			mav.addObject("member", LoginUser.getMember_InfoVo());
+			mav.addObject("member", loginService.loginById(LoginUser.getMember_InfoVo().getMem_id()));
 		}
 		return mav;
 	}
