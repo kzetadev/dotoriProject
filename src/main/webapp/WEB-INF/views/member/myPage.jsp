@@ -9,7 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<style>
+
+<style type="text/css">
 	<%-- Remove the navbar's default margin-bottom and rounded borders --%>
 	.navbar {
 		margin-bottom: 0;
@@ -47,6 +48,8 @@
 	h1{
 		text-align:center;
 	}
+	
+	
 </style>
 </head>
 <body>
@@ -74,10 +77,16 @@
 
 			<!-- 내용 -->
 			<div class="col-sm-10 text-left">
-				<h1>${main.nickname }님의 마이페이지</h1>
+				<h1>${main.mem_nickname }님의 마이페이지</h1>
 				<hr>
-				<img src="/img/basic.PNG" width="200" height="200">
-				<textarea rows="5" cols="100">${main.content }</textarea>
+				<div class="media">
+					<div class="media-left media-middle">
+						<img src="../img/basic.png" width="50" height="50">
+					</div>
+					<div class="media-body">
+						<textarea rows="5" cols="100" readonly="readonly">${main.mem_content }</textarea>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

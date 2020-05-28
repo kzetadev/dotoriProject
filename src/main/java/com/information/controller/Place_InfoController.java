@@ -102,10 +102,10 @@ public class Place_InfoController {
 		m.addObject("startPage", startPage);
 		m.addObject("endPage", endPage);
 		m.addObject("place_type", place_type);
+		m.addObject("sortColumn", sortColumn);
 		if(keyword != null && !keyword.equals("")) {
 			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
 			m.addObject("keyword", "&keyword=" + keyword);
-			m.addObject("sortColumn", "&sortColumn=" + sortColumn);
 		}
 		m.addObject("pt", pt);
 		//theme
