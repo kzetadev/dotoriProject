@@ -112,7 +112,7 @@
 		<c:forEach var="p" items="${list }">
 			<div class="col-md-3">
 				<div class="thumbnail">	
-					<a href="detailPlace_Info.do?place_no=${p.place_no}">
+					<a href="detailPlace_Info.do?place_no=${p.place_no}&place_type=${p.place_type}">
 						<img src="/img/${fn:split(p.place_img, '|')[0]}" width="300" height="300" id="img"> 
 						<div class="caption">
 							<b>${p.place_name} - 조회수 : ${p.place_hit }</b>
