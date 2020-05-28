@@ -21,13 +21,13 @@
 			// $("#h2").attr("place_no",place_no)
 			$("#btn").toggle(function(){
 				// Place_no는 속성으로 안보이게 처리
-				/*var cartList = $("#img").attr("place_no",place_no)
+				var cartList = $("#img").attr("place_no",place_no)
 				$.each(cartList, function(){
 					var place_no = $("#h2").attr("place_no")
 					var place = {place_no:place_no}
 						$.ajax("/insertFavorite", {data:place, success:function(){
 					}})
-				})*/
+				})
 				var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
 				if(re == true){
 					location.href="myPage_Favorite.do"

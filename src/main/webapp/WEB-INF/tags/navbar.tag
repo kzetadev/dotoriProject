@@ -2,7 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- 상단 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> -->
 <script>
 $(document).ready(function(){
 	$("#btnUnifiedSearch").click(function(event){

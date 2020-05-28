@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.member.service.LoginService;
+import com.member.service.MyPage_MainService;
+
 import com.member.service.MyPage_commentService;
 import com.member.vo.Member_InfoVo;
 import com.member.vo.MyPage_CommentVo;
@@ -39,12 +42,17 @@ public class MyPageController {
 	@Resource(name = "myPage_commentService")
 	private MyPage_commentService myPage_commentService;
 
+
 	// 마이페이지 메인
 	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage() {
 		ModelAndView m = new ModelAndView();
 		return m;
 	}
+
+	@Resource(name="mypage_mainService")
+	private MyPage_MainService mypage_mainService;
+
 
 	// 내가 쓴 글 & 댓글
 	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
@@ -85,7 +93,6 @@ public class MyPageController {
 		model.addAttribute("list_post", myPage_commentService.list_post(mem_no));
 		return "member/myPage_Contents";
 	}
-	
 	
 //	@RequestMapping("/member/myPage_update.do")
 //	public String updateMem(@ModelAttribute Member_InfoVo vo) {
@@ -175,11 +182,27 @@ public class MyPageController {
 //		ModelAndView m = new ModelAndView();
 //		return m;
 //	}	
-
 	// 내가 받은 쪽지 목록
 	@RequestMapping("/member/myPage_Message.do")
 	public ModelAndView myPage_Message() {
 		ModelAndView m = new ModelAndView();
 		return m;
 	}
+	
+	// 마이페이지 메인
+	@RequestMapping("/member/myPage.do")
+	public ModelAndView myPage_Main(int mem_no) {
+		System.out.println("마이페이지 메인 컨트롤러");
+		
+		mem_no = 0;
+		ModelAndView m = new ModelAndView();
+		logger.info("list");
+		if(LoginUser.isLogin()) {
+			mem_no = LoginUser.getMember_no();
+		}
+		m.addObject("main", mypage_mainService.myPage_Main(mem_no));
+		System.out.println("마이페이지 메인 컨트롤러");
+		return m;
+	}
+	
 }

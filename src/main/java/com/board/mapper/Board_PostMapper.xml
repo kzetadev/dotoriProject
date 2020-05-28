@@ -26,6 +26,7 @@
                     , h.head_tag_name
                     , b.board_title
                     , b.BOARD_CONTENT
+                    , m.mem_no
                     , m.mem_nickname
                     , b.board_kinds
                     , to_char(b.board_date, 'YYYYMMDD') AS board_date
