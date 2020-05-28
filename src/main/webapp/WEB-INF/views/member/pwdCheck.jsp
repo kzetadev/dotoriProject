@@ -3,12 +3,11 @@
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 
 <layoutTag:layout>
-
-<!DOCTYPE html>
-<html>
+	<!DOCTYPE html>
+	<html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>Insert title here</title>
 <style>
 <%-- Remove the navbar's default margin-bottom and rounded borders --%>
 .navbar {
@@ -29,6 +28,7 @@
 }
 
 <%-- On small screens, set height to 'auto' for sidenav and grid --%>
+
 @media screen and (max-width: 767px) {
 	.sidenav {
 		height: auto;
@@ -43,12 +43,46 @@ a {
 	color: #337ab7;
 	text-decoration: none;
 }
+
+#checkId{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
 </style>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#form").submit(
+				function(event) {
+					event.preventDefault();
+					$.ajax({
+						url : "/member/pwdCheck.do",
+						type : "post",
+						data : {
+							mem_pwd : $("#mem_pwd").val()
+						},
+						beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+							xhr.setRequestHeader("${_csrf.headerName}",
+									"${_csrf.token}");
+						},
+						success : function(re) {
+							if (re != 1) { //비밀번호가 틀렸을 경우
+								alert("비밀번호를 다시 입력해주세요")
+							} else {
+								location.href = "/member/updateMemForm.do"
+							}
+						}
+					})
+				})
+	})
+</script>
 </head>
 <body>
-	<div class="container-fluid text-center">
-		<br>
-		<div class="row content">
+
 			<!-- 좌측 메뉴 -->
 			<div class="col-sm-2 sidenav">
 				<!-- 사이드바 메뉴목록 -->
@@ -68,16 +102,17 @@ a {
 				</div>
 			</div>
 
-			<!-- 내용 -->
-			<div class="col-sm-10 text-left">
-				<h1>마이페이지 메인</h1>
-				<hr>
-				<h3>마이페이지 메인</h3>
-				<p>마이페이지 메인</p>
-			</div>
-		</div>
-	</div>
+	<form id="form"><br>
+	<h3 id="checkId" style="border-bottom: 2px double #dddddd;">비밀번호 확인</h3><br>
+	<table>
+		<tr >
+			<td>
+				비밀번호 <input type="password" name="mem_pwd" id="mem_pwd">
+				<button type="submit" id="btn">회원정보 수정하기</button>
+			</td>
+		</tr>
+	</table>
+	</form>
 </body>
-</html>
-
+	</html>
 </layoutTag:layout>

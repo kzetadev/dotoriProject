@@ -54,24 +54,6 @@
 		update member_info set mem_auth = #{mem_auth} where mem_no = #{mem_no}
 	</update>
 	
-		<!-- 회원 수정 -->
-	<update id="updateMem">
-		update member_info set mem_id=#{mem_id}, mem_email=#{mem_email}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_content=#{mem_content}, mem_img=#{mem_img}
-		where mem_no = #{mem_no}
-	</update>
 	
-	
-	<!-- 회원 탈퇴 -->
-	<delete id="delMem">
-		delete from member_info
-		where mem_pwd = #{mem_pwd}
-	</delete>
-	
-	<!-- 비밀번호 체크 -->
-	<select id="checkPwd" resultType="int">
-		select count(*)
-		from member_info
-		where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
-	</select>
 	
 </mapper>

@@ -23,20 +23,5 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	}
-	@Override
-	public void updateMem(Member_InfoVo vo) {
-		member_infoDao.updateMem(vo);
-		
-	}
-	@Override
-	public void delMem(String mem_id) {
-		member_infoDao.delMem(mem_id);
-		
-	}
-	@Override
-	public boolean checkPwd(String mem_id, String mem_pwd) {
-		// TODO Auto-generated method stub
-		return member_infoDao.checkPwd(mem_id, mem_pwd);
-	}
-
+	
 }

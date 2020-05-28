@@ -21,15 +21,20 @@
 	}
 	#nickName_overlap{
 		text-align: right;
-		display: inline-block;
+		float:right;
+		display:inline-block;
 	}
+	
 	#id_overlap{
 		text-align: right;
-		display: inline-block;
-	}
+		float:right;
+		display:inline-block;
+	} 
+	
 	#email_overlap{
 		text-align: right;
-		display: inline-block;
+		float:right;
+		display:inline-block;
 	
 	}
 	#mem_pwd, #mem_id{
@@ -358,8 +363,13 @@ $(function(){
 			<!-- 아이디 -->
 			<div class="form-group">
 				<label for="mem_id">아이디</label>
-					<input type="text" class="form-control" id="mem_id" name="mem_id"placeholder="특수문자를 제외한 4~12자리까지 입력하시오">
-				<button id="id_overlap">중복확인</button>
+		
+							<input type="text" class="form-control" id="mem_id" name="mem_id"placeholder="특수문자를 제외한 4~12자리까지 입력하시오" >
+							<button id="id_overlap" >중복확인</button>
+							
+						
+					<!-- <input type="button" id="id_overlap" value="중복확인"> -->
+			
 				<div class="check_font" id="id_check"></div>
 			</div>
 			

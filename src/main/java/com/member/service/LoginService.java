@@ -9,13 +9,9 @@ public interface LoginService {
 	// 시큐리티용 로그인
 	Member_InfoVo loginById(String mem_id);
 
-	// 회원정보수정
-	void updateMem(Member_InfoVo vo);
-
-	// 회원 정보 삭제
-	void delMem(String mem_id);
-
 	// 비밀번호 체크
-	boolean checkPwd(String mem_id, String mem_pwd);
+//	boolean checkPwd(String mem_id, String mem_pwd);
+
+	
 
 }
