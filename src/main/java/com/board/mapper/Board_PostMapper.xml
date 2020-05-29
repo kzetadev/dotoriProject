@@ -13,7 +13,7 @@
 		order by b.board_no desc
 	</select> -->
   <!-- 게시글 목록 -->   
-   <select id="select" resultType="com.board.vo.Board_PostListVo">
+    <select id="select" resultType="com.board.vo.Board_PostListVo">
       select
        *
        from (
@@ -32,7 +32,7 @@
                     , b.board_hit
                from board_post b, member_info m, head_tag h
                where b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no  
-               
+              
                
                
             <if test="str1 == 1"> <!-- 전체 -->   
@@ -47,22 +47,28 @@
                </if>
             </if>   
 
+
             <if test="str1 == 3"> <!-- 제목 -->
                <if test="str2 != null and str2 != ''"> <!-- 검색조건 -->
                   and b.BOARD_CONTENT LIKE '%'||#{str2,jdbcType=VARCHAR}||'%'
                </if>
             </if>   
             
-               order by board_no desc
+            
+               <if test="str5 != null and str5 != ''"> <!-- 검색조건 -->
+                  and b.board_kinds LIKE '%'||#{str5,jdbcType=VARCHAR}||'%'
+               </if>            
+                order by board_no desc
                
             )A
             
             order by board_no DESC
           ) 
-                 
+          
+          
           <![CDATA[ where rnum > #{str3,jdbcType=VARCHAR} and rnum <= #{str4,jdbcType=VARCHAR}]]>
           
-   </select>
+   </select> 
    
 	<!-- 게시글 등록 -->
 	<!-- CREATE SEQUENCE seq_board_no INCREMENT BY 1 START WITH 1 MINVALUE 1; -->

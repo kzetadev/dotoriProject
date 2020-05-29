@@ -20,7 +20,7 @@ public class Member_FavoriteController {
 	private Place_InfoService place_infoService;
 
 	// 마이페이지에 담기
-	@RequestMapping("/myPage/insertMember_Favorite.do")
+	@RequestMapping("/place/insertMember_Favorite.do")
 	public ModelAndView InsertMember_Favorite(Member_FavoriteVo f) {
 		System.out.println("찜목록 추가 컨트롤러 동작함");
 		// String id = (String)session.getAttribute("memberId");

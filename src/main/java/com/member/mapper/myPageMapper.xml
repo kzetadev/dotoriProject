@@ -24,6 +24,7 @@
 		where m.mem_no = #{mem_no}
 	</select>
 	
+
 		<!-- 회원 수정 -->
 	<update id="updateMem">
 		update member_info set mem_id=#{mem_id}, mem_email=#{mem_email}, mem_name=#{mem_name}, mem_nickname=#{mem_nickname}, mem_content=#{mem_content}, mem_img=#{mem_img}
@@ -43,4 +44,17 @@
 		from member_info
 		where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select>
+
+	<!-- 마이페이지 메인 -->
+	<select id="main" resultType="com.member.vo.MyPage_MainVo">
+		select mem_nickname, mem_img, mem_content from member_info where mem_no = #{mem_no}
+	</select>
+	
+	<!-- 쪽지 보내기 -->
+	<!-- create sequence seq_post_no increment by 1 start with 1; -->
+	<insert id="sendMessage">
+		insert into member_message(post_no, mem_no, post_from, post_to, post_content, post_regidate)
+		values (seq_post_no.nextval, #{mem_no}, #{post_from}, #{post_to}, #{post_content}, sysdate)
+	</insert>
+		
 </mapper>

@@ -1,10 +1,9 @@
 package com.member.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.member.dao.Member_InfoDao;
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
 
@@ -23,5 +22,8 @@ public interface MyPage_commentService {
 
 	// 비밀번호 체크
 	boolean checkPwd(String mem_id, String mem_pwd);
+	
+	//쪽지 보내기
+	int sendMessage(Member_MessageVo vo);
 
 }

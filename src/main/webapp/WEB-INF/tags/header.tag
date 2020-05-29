@@ -6,6 +6,6 @@
 <link rel="stylesheet" href="/css/coding.css">
 <link rel="stylesheet" href="/css/jquery.alerts.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/JavaScript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- <script type="text/JavaScript" src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script type="text/javascript" src="/js/bootstrap.js"></script>
 <script type="text/JavaScript" src="/js/jquery.alerts.js" ></script>

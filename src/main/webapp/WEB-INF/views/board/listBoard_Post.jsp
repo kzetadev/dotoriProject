@@ -22,9 +22,74 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
    $(function() {
-      $("#btnInsert").click(function() {
-         location.href = "/board/insertBoard_Post.do";
-      });
+// 	   var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
+// 	   $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
+	   //레이어
+		var divContainer = $("<div id='popup_layer' class='container'/>").css({
+			'position':'absolute'
+			, 'top':100
+			, 'left':100
+			, 'z-index':1
+			, 'visibility':'hidden'
+		});
+		//버튼 그룹
+		var divBtnGroup = $("<div id='btnGroup' class='btn-group-vertical'/>");
+		//쪽지보내기 버튼
+		var btnMsg = $("<button type='button' class='btn btn-default'/>").text("쪽지보내기");
+		// 프로필보기 버튼
+		var btnProfile = $("<button type='button' class='btn btn-default'/>").text("프로필보기");
+		$(btnMsg).click(function(){
+// 			window.open("/member/sendMessage.do", "_blank", "width=400, height=300, menubar=no, toolbar=no, status=no").focus();
+			jQuery.noConflict();
+			$("#modalMessage .modal-content")
+				.load("/member/sendMessage.do?mem_no=" + $(this).parent().attr('mem_no') 
+					+ "&mem_nickname=" + $(this).parent().attr('mem_nickname'), function(){
+				alert("load was performed");
+				$("#modalMessage").modal();
+			});
+		});
+		$(divBtnGroup).append(btnMsg, btnProfile);
+		$(divContainer).append(divBtnGroup);
+		$('body').append(divContainer);
+		$("#btnInsert").click(function() {
+			location.href = "/board/insertBoard_Post.do";
+		});
+		//https://chobokkiri.tistory.com/67
+		//화면 내 특정영역(닉네임)을 제외한 부분 클릭 시 레이어 숨김
+		$('html').click(function(e){
+			if(!$(e.target).hasClass('nickname')){
+				$("#popup_layer").css({
+					'visibility':'hidden'
+				});
+				$("#btnGroup").attr('mem_no', '');
+			}
+		});
+		//https://zzznara2.tistory.com/621
+		//닉네임 클릭 시 레이어 표시
+		$(".nickname").click(function(e){
+// 			var sWidth = window.innerWidth;
+// 			var sHeight = window.innerHeight;
+			$("#btnGroup").attr('mem_no', $(this).attr('mem_no'));
+			$("#btnGroup").attr('mem_nickname', $(this).text());
+			var oWidth = $("#popup_layer").width();
+			var oHeight = $("#popup_layer").height();
+			
+			var divLeft = e.clientX + 10;
+			var divTop = e.clientY;
+			
+// 			if(divLeft + oWidth > sWidth) divLeft -= oWidth;
+// 			if(divTop + oHeight > sHeight) divTop -= oHeight;
+			
+// 			if(divLeft < 0) divLeft = 0;
+// 			if(divTop < 0) divTop = 0;
+		
+			$("#popup_layer").css({
+			    "top":divTop
+			    , "left":divLeft
+			    , "position":"absolute"
+				, 'visibility':'visible'
+			});
+		});
    });
 
    $(function() {
@@ -97,7 +162,7 @@
 			</div>
 		</form>
 	
-		<table border="1" width="80%" class="table table-hover">
+		<table  class="table table-hover">
 			<tr>
 				<th>글번호</th>
 				<th>말머리</th>
@@ -112,7 +177,7 @@
 					<td>${v.head_tag_name}</td>
 					<td><a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
 					</td>
-					<td>${v.mem_nickname}</td>
+					<td><a class="nickname" mem_no="${v.mem_no }">${v.mem_nickname}</a></td>
 					<td>${v.board_date}</td>
 					<td>${v.board_hit}</td>
 				</tr>
@@ -128,7 +193,7 @@
 	<div style='text-align: center'>
 		<c:if test="${totalPage != null}">
 			<div style='display: inline-block'>
-				<ul>
+				<ul class="pagination">
 					<!--맨 첫페이지로 이동기능-->
 					<li list-style-type:none-style><a href="#"
 						onclick='moveLeft(1)'> <span> << </span>
@@ -149,7 +214,14 @@
 		<button type="button" class="btn btn-default btn-lg" id="btnInsert">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 글작성
 		</button>
-	</div> 
+	</div>
+	<!-- https://badstorage.tistory.com/18 -->
+	<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog"
+		aria-labelledby="historyModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content"></div>
+		</div>
+	</div>
 </body>
 </html>
 

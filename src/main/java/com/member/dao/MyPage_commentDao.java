@@ -3,6 +3,7 @@ package com.member.dao;
 import java.util.List;
 
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
 
@@ -22,5 +23,8 @@ public interface MyPage_commentDao {
 
 	// 비밀번호 체크
 	boolean checkPwd(String mem_id, String mem_pwd);
+	
+	//쪽지 보내기
+	int sendMessage(Member_MessageVo vo);
 
 }
