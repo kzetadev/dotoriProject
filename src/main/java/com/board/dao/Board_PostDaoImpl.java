@@ -30,7 +30,7 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	      
 	      Map map = new HashMap();
 	      
-	      if("0".equals(str) || "1".equals(str) || "2".equals(str)) {
+	      if("1".equals(str) || "2".equals(str) || "3".equals(str)) {
 	    	  str5 = str;
 	      
 	      map.put("str3", str3);
