@@ -149,7 +149,14 @@
 				, success:function(data, jqXHR, textStatus){
 					if(data == 1){
 						alert("글이 등록되었습니다.");
-						location.href = "/board/listBoard_Post.do";
+						var boardKinds = $("#board_kinds").val();
+						if(boardKinds == 1){
+							location.href = "/board/listBoard_Post.do?str=1";
+						}else if(boardKinds == 2){
+							location.href = "/board/listBoard_Post.do?str=2";
+						}else{
+							location.href = "/board/listBoard_Post.do?str=3";
+						}
 					}
 				}
 			});
