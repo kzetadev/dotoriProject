@@ -1,6 +1,7 @@
 package com.information.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -21,12 +22,18 @@ public class Member_FavoriteServiceImpl implements Member_FavoriteService {
 		return member_favoriteDao.insertMember_Favorite(f);
 	}
 
-	// 마이페이지 찜 리스트를 보여줌
+	// 마이페이지 찜 전체 리스트
 	@Override
-	public List<Member_FavoriteVo> listMember_Favorite() {
-		return member_favoriteDao.listMember_Favorite();
+	public List<Member_FavoriteVo> listMember_Favorite(Map map) {
+		return member_favoriteDao.listMember_Favorite(map);
 	}
-
+	
+	// 마이페이지 찜 전체 리스트의 개수
+	@Override
+	public int listAllCount(int place_type) {
+		return member_favoriteDao.listAllCount(place_type);
+	}
+	
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@Override
 	public int deleteMember_Favorite(int favorite_no) {

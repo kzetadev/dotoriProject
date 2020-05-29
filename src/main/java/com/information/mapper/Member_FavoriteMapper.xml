@@ -7,21 +7,38 @@
 	<!-- 마이페이지에 담기 -->
 	<insert id="insertFavorite" parameterType="java.util.Map">
 		<!-- insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no},#{place_name},#{place_img},#{place_type}) -->
-		insert into member_favorite values(seq_member_favorite.nextval,seq_mem_no.nextval,#{place_no})
+		insert into member_favorite values(seq_member_favorite.nextval,#{mem_no},#{place_no})
 	</insert>
 
-	<!-- 마이페이지 찜 리스트를 보여줌  -->
+	<!-- 마이페이지 찜 전체 리스트  -->
   	<select id="selectAll" resultType="com.information.vo.Member_FavoriteVo">
-    	SELECT mf.favorite_no, pt.place_type_name, pi.place_name
+    	SELECT mf.favorite_no, mi.mem_no, pi.place_no, pt.place_type, pi.place_name, 
+	    	<!-- img를 하나만 보여줄거니 | 앞에서 자름 (|이 없는 이미지명들은 그대로 보여줌) -->
+	    	case instr(place_img, '|') 
+	        	when 0 then place_img 
+	        		else substr(place_img, 0, instr(place_img, '|') - 1)
+	        			end place_img
   			FROM member_favorite mf, member_info mi, place_theme pt, place_info pi
  				WHERE mf.mem_no = mi.mem_no
                 	AND mf.place_no = pi.place_no
                     AND pi.place_type = pt.place_type
-                    AND pt.place_type = #{pt.place_type}
-                    AND mf.mem_no = #{mf.mem_no}
+                    AND mi.mem_no = #{mem_no}
+                    <if test="place_type != null">
+                    	AND pi.place_type = #{place_type}
+                    </if>
  						<!-- ORDER BY mf.favorite_no, pt.place_type, pi.place_no -->
   	</select>
-  
+  	
+  	<!-- 마이페이지 찜 전체 리스트의 개수 -->
+  	<select id="selectAllCount" resultType="java.lang.Integer">
+  		SELECT count(*) FROM member_favorite mf, place_info pi, place_theme pt
+  			WHERE pi.place_type = pt.place_type
+  				AND pi.place_no = mf.place_no
+  				<if test="place_type > -1">
+  					AND pi.place_type = #{place_type}
+  				</if>
+  	</select>
+	  
   	<!-- 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택 -->
  	<delete id="delete">
   		delete from member_favorite where favorite_no = #{favorite_no}

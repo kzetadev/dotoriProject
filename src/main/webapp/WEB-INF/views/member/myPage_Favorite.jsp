@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
+
 
 <layoutTag:layout>
 
@@ -9,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<style>
+<style type="text/css">
 	<%-- Remove the navbar's default margin-bottom and rounded borders --%>
 	.navbar {
 		margin-bottom: 0;
@@ -42,7 +44,16 @@
 		color: #337ab7;
 		text-decoration: none;
 	}
+	h1{
+		text-align:center;
+	}
+	
 </style>
+<script type="text/javascript">
+	$(function(){
+			
+	})
+</script>
 </head>
 <body>
 	<div class="container-fluid text-center">
@@ -66,13 +77,48 @@
 					</ul>
 				</div>
 			</div>
-
+		
+		
 			<!-- 내용 -->
 			<div class="col-sm-10 text-left">
-				<h1>내가 찜한 장소</h1>
+				<h1>찜목록</h1>
 				<hr>
-				<h3>내가 찜한 장소</h3>
-				<p>내가 찜한 장소</p>
+				
+				<!-- 탭 부분 (전체와 place_type으로 구분) -->
+				<ul class="nav nav-tabs">
+				  <li role="presentation" class="active">
+				  	<a href="/member/myPage_Favorite.do">전체</a>
+				  </li>
+				  <li role="presentation" id="place">
+				  	<a href="/member/myPage_Favorite.do?place_type=0">명소</a>
+				  </li>
+				  <li role="presentation" id="restaurant">
+				  	<a href="/member/myPage_Favorite.do?place_type=1">음식점</a>
+				  </li>
+				  <li role="presentation" id="hotel">
+				  	<a href="/member/myPage_Favorite.do?place_type=2">숙소</a>
+				  </li>
+				</ul>
+				
+				
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;총 ${AllCount }개를 찜하셨습니다.</h3>
+					</div>
+						
+					<c:forEach var="f" items="${favorite_list }">
+						<div class="panel-body">
+							<div class="media">
+								<div class="media-left">
+									<a href="/place/detailPlace_Info.do?place_no=${f.place_no }&place_type=${f.place_type }"><img class="media-object" src="../img/${f.place_img }" width="100" height="100"></a>
+								</div>
+								<div class="media-body">
+									<h4 class="media-heading"><a href="/place/detailPlace_Info.do?place_no=${f.place_no }&place_type=${f.place_type }">${f.place_name }</a></h4>
+								</div>
+							</div>
+						</div><hr>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>
