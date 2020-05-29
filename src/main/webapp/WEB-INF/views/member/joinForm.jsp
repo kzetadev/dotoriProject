@@ -344,7 +344,6 @@ $(function(){
 			<c:if test="${!empty divide }">
 				<input type="hidden" name="divide" value="${divide }"/>
 			</c:if>  
-		
 			<!-- 성명 -->
 			<div class="form-froup">
 				<label for="mem_name">성명</label>

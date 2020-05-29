@@ -1,5 +1,6 @@
 package com.mypage.controller;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.member.service.LoginService;
@@ -126,10 +128,29 @@ public class MyPageController {
 	
 	@RequestMapping(value = "/member/updateMem.do", method = RequestMethod.POST)
 	@ResponseBody
-
 	public int updateMem(Model model, Member_InfoVo vo, HttpServletRequest request) {
 		int re = -1;
 		re = myPage_commentService.updateMem(vo);
+		String oldFname = vo.getMem_img();
+		String fname = null;
+		
+		String path = request.getRealPath("img");
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(uploadFile != null) {
+			fname = uploadFile.getOriginalFilename();
+			if(fname != null && !fname.equals("")) {
+				vo.setMem_img(fname);
+				try {
+					byte[]data = uploadFile.getBytes();
+					FileOutputStream fos = new FileOutputStream(path + "/"+ fname);
+							fos.write(data);
+				} catch (Exception e) {
+					System.out.println("예외 발생" + e.getMessage());
+					// TODO: handle exception
+				}
+			}
+		}
+		
 		return re;
 //		boolean re = myPage_commentService.checkPwd(vo.getMem_id(), vo.getMem_pwd());
 //		if (re) { // 비밀번호가 일치할 경우 수정 처리후, 마이페이지로 리다렉

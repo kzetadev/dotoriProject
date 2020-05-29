@@ -48,9 +48,19 @@ a {
 <script type="text/javascript">
 	$(function(){
 		//닉네임 정규식
+		var file = $("<input type='file' />");
+		$(file).change(function(e){
+			console.log(e);
+		});
 		var nickJ = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,12}$/;
+		$("#mem_img").click(function(){
+			$(file).click();
+			console.log(file);
+		});
+		function fileSelected(obj){
+			console.log(obj);
+		};
 		
-
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
 			var token = "${_csrf.token}";
 			jqXHR.setRequestHeader('X-CSRF-Token', token);
@@ -172,15 +182,16 @@ a {
 			<!-- 내용 -->
 			
 			<div class="col-sm-10 text-left">
-				<form id="form1" method="post" action="myPage.jsp">
+				<form id="form1" method="post" action="myPage.jsp" enctype="multipart/form-data">
 				<input type="hidden" name="mem_no" id="mem_no" value="${update.mem_no }" readonly="readonly">
-				<input type="text" name = "mem_img" value="">
+				
 				<h2>회원수정</h2>
+					<div>
+<!-- 						<input type="file" name="uploadFile"> -->
+						<img id="mem_img" name="mem_img" src="${update.mem_img }">
+					</div>
+					<pre></pre>
 					<table>
-					<!-- <input> 프로필 변경란 -->
-					
-					
-					
 					<tr>
 						<td>이름</td>
 						<td><input type="text" name = "mem_name" value="${update.mem_name}" readonly="readonly"></td>
