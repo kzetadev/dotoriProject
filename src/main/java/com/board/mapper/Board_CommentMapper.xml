@@ -11,7 +11,7 @@
 				, to_char(bc.comment_date, 'YYYY-MM-DD HH:MI:SS') comment_date
 		FROM board_comment bc, board_post bp, member_info m
 		WHERE bc.board_no = bp.board_no 
-			AND m.mem_no = bp.mem_no
+			AND m.mem_no = bc.mem_no
 			AND bc.board_no = #{bc.board_no}
 		ORDER BY board_ref, board_level, board_step
 	</select>
