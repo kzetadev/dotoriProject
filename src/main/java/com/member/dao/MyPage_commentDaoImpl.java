@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageListVo;
 import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
@@ -69,6 +70,12 @@ public class MyPage_commentDaoImpl implements MyPage_commentDao {
 	public int sendMessage(Member_MessageVo vo) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.insert("myPage.sendMessage", vo);
+	}
+	//발신 쪽지 목록 가져오기
+	@Override
+	public List<Member_MessageListVo> sendMsgList(int mem_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("myPage.sendMsgList", mem_no);
 	}
 
 }

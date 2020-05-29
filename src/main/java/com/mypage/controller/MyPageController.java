@@ -162,6 +162,8 @@ public class MyPageController {
 	@RequestMapping("/member/myPage_Message.do")
 	public ModelAndView myPage_Message() {
 		ModelAndView m = new ModelAndView();
+		int mem_no = LoginUser.getMember_no();
+		m.addObject("sendMsg", myPage_commentService.sendMsgList(mem_no));
 		return m;
 	}
 	

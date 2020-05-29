@@ -11,6 +11,7 @@ $(document).ready(function(){
 	$("#send").click(function(){
 		var message = {
 			post_to:parseInt($("#historyModalLabel").attr('post_to'))
+			, post_title:$("#post_title").val()
 			, post_content:$("#post_content").val()
 		};
 		console.log(message);
@@ -42,8 +43,12 @@ $(document).ready(function(){
 	        <div class="container">
 	        </div>
 	        <form id="form" action="" method="post">
-				<h3 style=>내용</h3>
-				<textarea rows="3" cols="30" id="post_content" name="post_content"></textarea>
+	        	<div class="form-group">
+		        	<label for=post_title>제목</label>
+					<input class="form-control" type="text" id="post_title" name="post_title"><br>
+					<label for=post_content>내용</label>
+					<textarea class='form-control' rows="3" cols="30" id="post_content" name="post_content"></textarea>
+	        	</div>
 <!-- 				<input id="submit" type="submit" value="Submit"> -->
 			</form>
 <!-- 	        <table class="table table-hover"> -->

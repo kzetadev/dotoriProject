@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.member.dao.MyPage_commentDao;
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageListVo;
 import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
@@ -52,5 +53,11 @@ public class MyPage_commentServiceImpl implements MyPage_commentService {
 	public int sendMessage(Member_MessageVo vo) {
 		// TODO Auto-generated method stub
 		return myPage_commentDao.sendMessage(vo);
+	}
+	//발신 쪽지 목록 가져오기
+	@Override
+	public List<Member_MessageListVo> sendMsgList(int mem_no) {
+		// TODO Auto-generated method stub
+		return myPage_commentDao.sendMsgList(mem_no);
 	}
 }

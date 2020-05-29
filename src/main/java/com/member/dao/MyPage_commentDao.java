@@ -3,6 +3,7 @@ package com.member.dao;
 import java.util.List;
 
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageListVo;
 import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
@@ -26,5 +27,8 @@ public interface MyPage_commentDao {
 	
 	//쪽지 보내기
 	int sendMessage(Member_MessageVo vo);
+	
+	//발신 쪽지 목록 가져오기
+	List<Member_MessageListVo> sendMsgList(int mem_no);
 
 }
