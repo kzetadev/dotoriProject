@@ -84,12 +84,13 @@ public class MyPageController {
 		return re;
 	}
 	@RequestMapping(value="/member/myPage_MessageDetail.do", method=RequestMethod.GET)
-	public String messageDetail(int post_no, Model model) {
+	public String messageDetail(int post_no, int mem_no, Model model) {
 		Map map = new HashMap();
 		System.out.println("/member/myPage_MessageDetail.do post_no : " + post_no);
 		map.put("post_no", post_no);
 		map.put("mem_no", LoginUser.getMember_no());
 		model.addAttribute("message", myPage_commentService.messageDetail(map));
+		model.addAttribute("mem_no", mem_no);
 		return "/member/myPage_MessageDetail";
 	}
 //	@RequestMapping(value="/member/myPage_MessageDetail.do", method=RequestMethod.POST)

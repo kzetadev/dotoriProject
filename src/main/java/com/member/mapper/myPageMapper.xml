@@ -81,7 +81,7 @@
 	<select id="receiveMsgList" resultType="com.member.vo.Member_MessageListVo">
 		select rownum r, post_no, mem_no, mem_nickname, post_title
 		      , post_content, post_ref_no, post_read, post_reply, post_regidate
-		  from(select msg.post_no, msgto.mem_no, msgfrom.mem_nickname, msg.post_title
+		  from(select msg.post_no, msgfrom.mem_no, msgfrom.mem_nickname, msg.post_title
 		            , substr(msg.post_content, 0, 10) post_content, msg.post_ref_no,
 		              case msg.post_read
 		                when 0 then '안읽음'

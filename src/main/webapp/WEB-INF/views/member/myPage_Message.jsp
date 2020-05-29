@@ -112,9 +112,10 @@ a {
 		$(".receiveMsg").click(function(){
 			$("#modalMessage .modal-content")
 				.load("/member/myPage_MessageDetail.do?post_no=" + parseInt($(this).attr('post_ref_no')) 
-					, function(){
+					+ "&mem_no=" + parseInt($(this).attr('mem_no')), function(){
 				alert("load was performed");
 				$("#modalMessage").modal();
+// 				$("#modalMessage").modal('hide');
 			});
 // 			$.ajax({
 // 				url:"/member/myPage_MessageDetail.do"
