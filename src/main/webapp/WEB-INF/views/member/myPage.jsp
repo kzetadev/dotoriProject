@@ -81,10 +81,40 @@
 				<hr>
 				<div class="media">
 					<div class="media-left media-middle">
-						<img src="../img/basic.png" width="50" height="50">
+						<table>
+							
+						</table>
 					</div>
 					<div class="media-body">
-						<textarea rows="5" cols="100" readonly="readonly">${main.mem_content }</textarea>
+						<table>
+						<tr>
+								<td>
+									<img src="../img/basic.png" width="50" height="50">
+								</td>
+							</tr>
+							<tr>
+								<td>이름</td>
+								<td>${main.mem_name }</td>
+							</tr>	
+							<tr>
+								<td>아이디</td>
+								<td>${main.mem_id }</td>
+							</tr>
+							
+							<tr>
+								<td>이메일</td>
+								<td>${main.mem_email }</td>
+							</tr>
+							
+							<tr>
+								<td>닉네임</td>
+								<td>${main.mem_nickname }</td>
+							</tr>
+							<tr>
+							<td>자기소개</td>
+							<td><textarea rows="20" cols="30" readonly="readonly">${main.mem_content }</textarea></td>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</div>

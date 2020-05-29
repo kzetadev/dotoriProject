@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 public class MyPage_MainVo {
 	// 마이페이지 메인 화면에 나올 닉네임, 사진, 자기소개
 	private int mem_no;
+	private String mem_name;
+	private String mem_id;
+	private String mem_email;
 	private String mem_nickname;
 	private String mem_img;
 	private String mem_content;
