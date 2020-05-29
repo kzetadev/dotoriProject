@@ -1,6 +1,7 @@
 package com.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -59,5 +60,17 @@ public class MyPage_commentServiceImpl implements MyPage_commentService {
 	public List<Member_MessageListVo> sendMsgList(int mem_no) {
 		// TODO Auto-generated method stub
 		return myPage_commentDao.sendMsgList(mem_no);
+	}
+	//수신 쪽지 목록 가져오기
+	@Override
+	public List<Member_MessageListVo> receiveMsgList(int mem_no) {
+		// TODO Auto-generated method stub
+		return myPage_commentDao.receiveMsgList(mem_no);
+	}
+	//쪽지 읽기
+	@Override
+	public Member_MessageListVo messageDetail(Map map) {
+		// TODO Auto-generated method stub
+		return myPage_commentDao.messageDetail(map);
 	}
 }

@@ -108,6 +108,35 @@ a {
 			$(this).addClass('current');
 			$('#' + activeTab).addClass('current');
 		})
+
+		$(".receiveMsg").click(function(){
+			$("#modalMessage .modal-content")
+				.load("/member/myPage_MessageDetail.do?post_no=" + parseInt($(this).attr('post_ref_no')) 
+					, function(){
+				alert("load was performed");
+				$("#modalMessage").modal();
+			});
+// 			$.ajax({
+// 				url:"/member/myPage_MessageDetail.do"
+// 				, type:"post"
+// 				, data:{
+// 					post_no:parseInt($(this).attr('post_ref_no'))
+// 				}
+// 				, beforeSend:function(xhr){
+// 					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+// 				}
+// 				, success:function(result){
+// 				}
+// 			});
+// 			jQuery.noConflict();
+// 			$("#modalMessage .modal-content")
+// 				.load("/member/sendReplyMessage.do?mem_no=" + $(this).attr('mem_no') 
+// 					+ "&mem_nickname=" + $(this).attr('mem_nickname')
+// 					+ "&post_ref_no=" + $(this).attr('post_ref_no'), function(){
+// 				alert("load was performed");
+// 				$("#modalMessage").modal();
+// 			});
+		});
 	});
 </script>
 </head>
@@ -125,11 +154,17 @@ a {
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
-						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="/member/myPage_update.do">회원 수정</a></li>
-						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
+						<li class="list-group-item"><a
+							href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 &
+								댓글</a></li>
+						<li class="list-group-item"><a
+							href="/member/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a
+							href="/member/myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a
+							href="/member/myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호
+								변경</a></li>
 					</ul>
 				</div>
 			</div>
@@ -138,77 +173,86 @@ a {
 			<div class="col-sm-10 text-left">
 				<h1>나의 쪽지함</h1>
 				<hr>
-				<h3>나의 쪽지함</h3>
 				<div class="col-sm-10 text-left">
-		
-				<hr>
+					<hr>
+					<ul class="tab">
+						<li data-tab="tab2"><a href="#">발신함</a></li>
+						<li data-tab="tab3"><a href="#">수신함</a></li>
+					</ul>
 
-				<ul class="tab">
-					<li data-tab="tab2"><a href="#">발신함</a></li>
-					<li data-tab="tab3"><a href="#">수신함</a></li>
-				</ul>
+					<div id="tab2" class="tabcontent">
+						<div class="container">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr style="border-bottom: 2px double #dddddd;">
+											<th>제목</th>
+											<th>내용</th>
+											<th>닉네임</th>
+											<th>읽음</th>
+											<th>발신일</th>
+										</tr>
 
-				<div id="tab2" class="tabcontent">
-					<div class="container">
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr  style="border-bottom: 2px double #dddddd;">
-										<th>제목</th>
-										<th>내용</th>
-										<th>닉네임</th>
-										<th>읽음</th>
-										<th>발신일</th>
-									</tr>
-									
-								</thead>
+									</thead>
 
 									<c:forEach var="send" items="${sendMsg}">
-				 						<tr style="border-bottom: 1px double #dddddd;">
-											<td><c:out value="${send.post_title}"/></td>
-											<td><c:out value="${send.post_content}"/></td>
-											<td><c:out value="${send.mem_nickname}"/></td>
-											<td><c:out value="${send.post_read }"/></td>
-											<td><c:out value="${send.post_regidate}"/></td>
-											
+										<tr style="border-bottom: 1px double #dddddd;">
+											<td><c:out value="${send.post_title}" /></td>
+											<td><c:out value="${send.post_content}" /></td>
+											<td><c:out value="${send.mem_nickname}" /></td>
+											<td><c:out value="${send.post_read }" /></td>
+											<td><c:out value="${send.post_regidate}" /></td>
+
 										</tr>
-								</c:forEach>
-										
-							</table>
+									</c:forEach>
+
+								</table>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div id="tab3" class="tabcontent">
-					<div class="container">
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr  style="border-bottom: 2px double #dddddd;">
-										<th>제목</th>
-										<th>내용</th>
-										<th>닉네임</th>
-										<th>읽음</th>
-										<th>발신일</th>
-									</tr>
-									
-								</thead>
+					<div id="tab3" class="tabcontent">
+						<div class="container">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr style="border-bottom: 2px double #dddddd;">
+											<th>제목</th>
+											<th>내용</th>
+											<th>닉네임</th>
+											<th>읽음</th>
+											<th>발신일</th>
+										</tr>
+
+									</thead>
 
 									<c:forEach var="receive" items="${receiveMsg}">
-				 						<tr style="border-bottom: 1px double #dddddd;">
-											<td><c:out value="${receive.post_title}"/></td>
-											<td><c:out value="${receive.post_content}"/></td>
-											<td><c:out value="${receive.mem_nickname}"/></td>
-											<td><c:out value="${receive.post_read }"/></td>
-											<td><c:out value="${receive.post_regidate}"/></td>
-											
+										<tr mem_no="${receive.mem_no }"
+											mem_nickname="${receive.mem_nickname }" 
+											post_ref_no="${receive.post_no }" class='receiveMsg'
+											style="border-bottom: 1px double #dddddd;">
+											<td><c:out value="${receive.post_title}" /></td>
+											<td><c:out value="${receive.post_content}" /></td>
+											<td><c:out value="${receive.mem_nickname}" /></td>
+											<td><c:out value="${receive.post_read }" /></td>
+											<td><c:out value="${receive.post_regidate}" /></td>
+
 										</tr>
-								</c:forEach>
-							</table>
+									</c:forEach>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			<!-- https://badstorage.tistory.com/18 -->
+			<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog"
+				aria-labelledby="historyModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl" role="document">
+					<div class="modal-content"></div>
+				</div>
 			</div>
+			
 		</div>
 	</div>
 </body>

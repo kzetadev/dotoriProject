@@ -1,6 +1,7 @@
 package com.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.member.vo.Member_InfoVo;
 import com.member.vo.Member_MessageListVo;
@@ -29,4 +30,10 @@ public interface MyPage_commentService {
 
 	//발신 쪽지 목록 가져오기
 	List<Member_MessageListVo> sendMsgList(int mem_no);
+	
+	//수신 쪽지 목록 가져오기
+	List<Member_MessageListVo> receiveMsgList(int mem_no);
+	
+	//쪽지 읽기
+	Member_MessageListVo messageDetail(Map map);
 }

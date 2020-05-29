@@ -33,7 +33,7 @@ $(document).ready(function(){
 </head>
 <body>
 	<div class="modal-header">
-	    <h2 class="modal-title" id="historyModalLabel" post_to="${mem_no}">${sendNick } 님에게 쪽지 보내기</h5>
+	    <h2 class="modal-title" id="historyModalLabel" post_to="${mem_no}">${sendNick } 님에게 쪽지 보내기</h2>
 	    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
 	        <span aria-hidden="true">×</span>
 	    </button>

@@ -1,7 +1,9 @@
 package com.mypage.controller;
 
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +63,44 @@ public class MyPageController {
 		re = myPage_commentService.sendMessage(vo);
 		return re;
 	}
+	@RequestMapping(value="/member/sendReplyMessage.do", method=RequestMethod.GET)
+	public String sendReplyMessage(int mem_no, String mem_nickname, int post_ref_no,  Model model) {
+		if (LoginUser.isLogin()) {
+			model.addAttribute("mem_no", mem_no);
+			model.addAttribute("sendNick", mem_nickname);
+			model.addAttribute("post_ref_no", post_ref_no);
+			return "/member/sendReplyMessage";
+		}
+		return "redirect:/member/login.do";
+	}
+	@RequestMapping(value="/member/sendReplyMessage.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int sendReplyMessage(Member_MessageVo vo) {
+		int re = -1;
+		vo.setMem_no(LoginUser.getMember_no());
+		vo.setPost_from(LoginUser.getMember_no());
+		System.out.println(vo);
+		re = myPage_commentService.sendMessage(vo);
+		return re;
+	}
+	@RequestMapping(value="/member/myPage_MessageDetail.do", method=RequestMethod.GET)
+	public String messageDetail(int post_no, Model model) {
+		Map map = new HashMap();
+		System.out.println("/member/myPage_MessageDetail.do post_no : " + post_no);
+		map.put("post_no", post_no);
+		map.put("mem_no", LoginUser.getMember_no());
+		model.addAttribute("message", myPage_commentService.messageDetail(map));
+		return "/member/myPage_MessageDetail";
+	}
+//	@RequestMapping(value="/member/myPage_MessageDetail.do", method=RequestMethod.POST)
+//	public void messageDetail(int post_no, Model model) {
+//		Map map = new HashMap();
+//		System.out.println("/member/myPage_MessageDetail.do post_no : " + post_no);
+//		map.put("post_no", post_no);
+//		map.put("mem_no", LoginUser.getMember_no());
+//		model.addAttribute("message", myPage_commentService.messageDetail(map));
+//	}
+	
 	//내가 쓴 글 & 댓글
 	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) throws Exception{
@@ -185,6 +225,7 @@ public class MyPageController {
 		ModelAndView m = new ModelAndView();
 		int mem_no = LoginUser.getMember_no();
 		m.addObject("sendMsg", myPage_commentService.sendMsgList(mem_no));
+		m.addObject("receiveMsg", myPage_commentService.receiveMsgList(mem_no));
 		return m;
 	}
 	
