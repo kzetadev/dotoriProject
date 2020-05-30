@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#send").click(function(){
+	$("#sendReply").click(function(){
 		var message = {
 			post_to:parseInt($("#historyModalLabel").attr('post_to'))
 			, post_ref_no:parseInt($("#historyModalLabel").attr('post_ref_no'))
@@ -48,18 +49,20 @@ $(document).ready(function(){
 				<div class="well well-lg">${message.post_content }</div>
 			</div>
 	    </div>
-		<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">답장하기</button>
-		<div id="demo" class="collapse">
-<!-- 		  <form id="form" action="" method="post"> -->
-	        	<div class="form-group">
-		        	<label for=post_title>제목</label>
-					<input class="form-control" type="text" id="post_title" name="post_title"><br>
-					<label for=post_content>내용</label>
-					<textarea class='form-control' rows="3" cols="30" id="post_content" name="post_content"></textarea>
-	        	</div>
-				<button id="send" type="button" class="btn btn-default">답장</button>
-<!-- 			</form> -->
-		</div>
+	    <c:if test="${msg_type eq 'receive' && message.post_reply ne 1}">
+			<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">답장하기</button>
+			<div id="demo" class="collapse">
+	<!-- 		  <form id="form" action="" method="post"> -->
+		        	<div class="form-group">
+			        	<label for=post_title>제목</label>
+						<input class="form-control" type="text" id="post_title" name="post_title"><br>
+						<label for=post_content>내용</label>
+						<textarea class='form-control' rows="3" cols="30" id="post_content" name="post_content"></textarea>
+		        	</div>
+					<button id="sendReply" type="button" class="btn btn-default">답장</button>
+	<!-- 			</form> -->
+			</div>
+		</c:if>
 	</div>
 	<div class="modal-footer">
 <!-- 	    <button class="ui-button ui-widget ui-corner-all" id="send" type="button" data-dismiss="modal">보내기</button> -->

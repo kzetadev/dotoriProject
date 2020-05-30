@@ -83,6 +83,18 @@ public class MyPage_commentDaoImpl implements MyPage_commentDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("myPage.receiveMsgList", mem_no);
 	}
+	//쪽지 읽기 여부 저장
+	@Override
+	public int messageRead(int post_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.update("myPage.messageRead", post_no);
+	}
+	//쪽지 답변 여부 저장
+	@Override
+	public int messageReply(int post_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.update("myPage.messageReply", post_no);
+	}
 	//쪽지 읽기
 	@Override
 	public Member_MessageListVo messageDetail(Map map) {

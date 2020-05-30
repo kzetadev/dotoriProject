@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import com.member.service.LoginService;
 import com.member.service.MyPage_MainService;
 import com.member.service.MyPage_commentService;
 import com.member.vo.Member_InfoVo;
+import com.member.vo.Member_MessageListVo;
 import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
@@ -44,8 +46,11 @@ public class MyPageController {
 	private MyPage_commentService myPage_commentService;
 	@Resource(name="mypage_mainService")
 	private MyPage_MainService mypage_mainService;
+	//게시판 목록에서 닉네임을 클릭했을때 출력되는 레이어의 쪽지보내기 버튼을 클릭했을 때 요청되는 url
+	//게시판 목록에서 모달창으로 출력됨.
 	@RequestMapping(value="/member/sendMessage.do", method=RequestMethod.GET)
 	public String sendMessage(int mem_no, String mem_nickname,  Model model) {
+						//mem_no : 쪽지를 보낼 대상의 mem_no	mem_nickname : 쪽지를 보낼 대상의 mem_nickname
 		if (LoginUser.isLogin()) {
 			model.addAttribute("mem_no", mem_no);
 			model.addAttribute("sendNick", mem_nickname);
@@ -53,6 +58,7 @@ public class MyPageController {
 		}
 		return "redirect:/member/login";
 	}
+	//쪽지보내기 모달창에서 입력한 쪽지내용으로 쪽지 발송(저장)
 	@RequestMapping(value="/member/sendMessage.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int sendMessage(Member_MessageVo vo) {
@@ -63,34 +69,51 @@ public class MyPageController {
 		re = myPage_commentService.sendMessage(vo);
 		return re;
 	}
-	@RequestMapping(value="/member/sendReplyMessage.do", method=RequestMethod.GET)
-	public String sendReplyMessage(int mem_no, String mem_nickname, int post_ref_no,  Model model) {
-		if (LoginUser.isLogin()) {
-			model.addAttribute("mem_no", mem_no);
-			model.addAttribute("sendNick", mem_nickname);
-			model.addAttribute("post_ref_no", post_ref_no);
-			return "/member/sendReplyMessage";
-		}
-		return "redirect:/member/login.do";
-	}
+	//마이페이지에서 수신 쪽지를 클릭했을 때 요청되는 url
+	//마이페이지에서 모달창으로 출력됨.
+//	@RequestMapping(value="/member/sendReplyMessage.do", method=RequestMethod.GET)
+//	public String sendReplyMessage(int mem_no, String mem_nickname, int post_ref_no,  Model model) {
+//					//mem_no : 쪽지를 보낼 대상의 mem_no	mem_nickname : 쪽지를 보낼 대상의 mem_nickname
+//					//post_ref_no : 답장할 쪽지가 참조하는 쪽지번호
+//		if (LoginUser.isLogin()) {
+//			model.addAttribute("mem_no", mem_no);
+//			model.addAttribute("sendNick", mem_nickname);
+//			model.addAttribute("post_ref_no", post_ref_no);
+//			return "/member/sendReplyMessage";
+//		}
+//		return "redirect:/member/login.do";
+//	}
+	//쪽지보내기 모달창에서 입력한 쪽지내용으로 쪽지 발송(저장)
 	@RequestMapping(value="/member/sendReplyMessage.do", method=RequestMethod.POST)
+	@Transactional
 	@ResponseBody
 	public int sendReplyMessage(Member_MessageVo vo) {
 		int re = -1;
 		vo.setMem_no(LoginUser.getMember_no());
 		vo.setPost_from(LoginUser.getMember_no());
 		System.out.println(vo);
+		re = myPage_commentService.messageReply(vo.getPost_ref_no());
 		re = myPage_commentService.sendMessage(vo);
 		return re;
 	}
+	//마이페이지에서 수신 쪽지를 클릭했을 때 요청되는 url
+	//마이페이지에서 모달창으로 출력됨.
 	@RequestMapping(value="/member/myPage_MessageDetail.do", method=RequestMethod.GET)
-	public String messageDetail(int post_no, int mem_no, Model model) {
+	@Transactional
+	public String messageDetail(int post_no, int mem_no, String msg_type, Model model) {
+			//post_no : 클릭한 쪽지번호	mem_no : 보낸사람의 mem_no
 		Map map = new HashMap();
-		System.out.println("/member/myPage_MessageDetail.do post_no : " + post_no);
+		System.out.println("/member/myPage_MessageDetail.do post_no : " + post_no + "\tmem_no : " + mem_no + "\tmsg_type : " + msg_type);
 		map.put("post_no", post_no);
 		map.put("mem_no", LoginUser.getMember_no());
+		map.put("msg_type", msg_type);
+		if(msg_type.equals("receive")) {
+			myPage_commentService.messageRead(post_no);
+		}
 		model.addAttribute("message", myPage_commentService.messageDetail(map));
+		System.out.println(myPage_commentService.messageDetail(map));
 		model.addAttribute("mem_no", mem_no);
+		model.addAttribute("msg_type", msg_type);
 		return "/member/myPage_MessageDetail";
 	}
 //	@RequestMapping(value="/member/myPage_MessageDetail.do", method=RequestMethod.POST)
@@ -222,11 +245,21 @@ public class MyPageController {
 
 	// 내가 받은 쪽지 목록
 	@RequestMapping("/member/myPage_Message.do")
-	public ModelAndView myPage_Message() {
+	public ModelAndView myPage_Message(@RequestParam(name="msg_type", defaultValue="send")String msg_type) {
 		ModelAndView m = new ModelAndView();
+		System.out.println("/member/myPage_Message.do " + msg_type);
 		int mem_no = LoginUser.getMember_no();
-		m.addObject("sendMsg", myPage_commentService.sendMsgList(mem_no));
-		m.addObject("receiveMsg", myPage_commentService.receiveMsgList(mem_no));
+		List<Member_MessageListVo> msgList = null;
+		if(msg_type.equals("send")) {
+			msgList = myPage_commentService.sendMsgList(mem_no);
+		}else {
+			msgList = myPage_commentService.receiveMsgList(mem_no);
+		}
+		m.addObject("msg_type", msg_type);
+		m.addObject("msgList", msgList);
+		
+//		m.addObject("sendMsg", myPage_commentService.sendMsgList(mem_no));
+//		m.addObject("receiveMsg", myPage_commentService.receiveMsgList(mem_no));
 		return m;
 	}
 	

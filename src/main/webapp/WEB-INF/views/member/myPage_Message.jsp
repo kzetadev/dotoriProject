@@ -99,8 +99,10 @@ a {
 	text-decoration: none;
 }
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$("#${msg_type}").addClass("active");
 		$('ul.tab li').click(function() {
 			var activeTab = $(this).attr('data-tab');
 			$('ul.tab li').removeClass('current');
@@ -109,10 +111,12 @@ a {
 			$('#' + activeTab).addClass('current');
 		})
 
-		$(".receiveMsg").click(function(){
+		$(".message").click(function(){
+			jQuery.noConflict();
 			$("#modalMessage .modal-content")
 				.load("/member/myPage_MessageDetail.do?post_no=" + parseInt($(this).attr('post_ref_no')) 
-					+ "&mem_no=" + parseInt($(this).attr('mem_no')), function(){
+					+ "&mem_no=" + parseInt($(this).attr('mem_no'))
+					+ "&msg_type=" + $(this).attr('msg_type'), function(){
 				alert("load was performed");
 				$("#modalMessage").modal();
 // 				$("#modalMessage").modal('hide');
@@ -155,17 +159,11 @@ a {
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a
-							href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 &
-								댓글</a></li>
-						<li class="list-group-item"><a
-							href="/member/myPage_Favorite.do">찜목록</a></li>
-						<li class="list-group-item"><a
-							href="/member/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a
-							href="/member/myPage_update.do">회원 수정</a></li>
-						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호
-								변경</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
+						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
+						<li class="list-group-item"><a href="/member/myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
 					</ul>
 				</div>
 			</div>
@@ -176,12 +174,18 @@ a {
 				<hr>
 				<div class="col-sm-10 text-left">
 					<hr>
-					<ul class="tab">
-						<li data-tab="tab2"><a href="#">발신함</a></li>
-						<li data-tab="tab3"><a href="#">수신함</a></li>
+					<!-- 탭 부분 (전체와 place_type으로 구분) -->
+					<ul class="nav nav-tabs">
+					  <li role="presentation" id="send">
+					  	<a href="/member/myPage_Message.do">발신</a>
+					  </li>
+					  <li role="presentation" id="receive">
+					  	<a href="/member/myPage_Message.do?msg_type=receive"">수신</a>
+					  </li>
 					</ul>
-
-					<div id="tab2" class="tabcontent">
+					
+					
+<!-- 					<div class="panel panel-primary"> -->
 						<div class="container">
 							<div class="table-responsive">
 								<table class="table">
@@ -193,56 +197,87 @@ a {
 											<th>읽음</th>
 											<th>발신일</th>
 										</tr>
-
 									</thead>
-
-									<c:forEach var="send" items="${sendMsg}">
-										<tr style="border-bottom: 1px double #dddddd;">
-											<td><c:out value="${send.post_title}" /></td>
-											<td><c:out value="${send.post_content}" /></td>
-											<td><c:out value="${send.mem_nickname}" /></td>
-											<td><c:out value="${send.post_read }" /></td>
-											<td><c:out value="${send.post_regidate}" /></td>
-
-										</tr>
-									</c:forEach>
-
-								</table>
-							</div>
-						</div>
-					</div>
-					<div id="tab3" class="tabcontent">
-						<div class="container">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr style="border-bottom: 2px double #dddddd;">
-											<th>제목</th>
-											<th>내용</th>
-											<th>닉네임</th>
-											<th>읽음</th>
-											<th>발신일</th>
-										</tr>
-
-									</thead>
-
-									<c:forEach var="receive" items="${receiveMsg}">
-										<tr mem_no="${receive.mem_no }"
-											mem_nickname="${receive.mem_nickname }" 
-											post_ref_no="${receive.post_no }" class='receiveMsg'
+									<c:forEach var="msg" items="${msgList}">
+										<tr mem_no="${msg.mem_no }"
+											mem_nickname="${msg.mem_nickname }" 
+											post_ref_no="${msg.post_no }" class="message"
+											msg_type="${msg_type }"
 											style="border-bottom: 1px double #dddddd;">
-											<td><c:out value="${receive.post_title}" /></td>
-											<td><c:out value="${receive.post_content}" /></td>
-											<td><c:out value="${receive.mem_nickname}" /></td>
-											<td><c:out value="${receive.post_read }" /></td>
-											<td><c:out value="${receive.post_regidate}" /></td>
-
+											<td><c:out value="${msg.post_title}" /></td>
+											<td><c:out value="${msg.post_content}" /></td>
+											<td><c:out value="${msg.mem_nickname}" /></td>
+											<td><c:out value="${msg.post_read }" /></td>
+											<td><c:out value="${msg.post_regidate}" /></td>
 										</tr>
 									</c:forEach>
 								</table>
 							</div>
 						</div>
-					</div>
+<!-- 					</div> -->
+
+<!-- 					<div id="tab2" class="tabcontent"> -->
+<!-- 						<div class="container"> -->
+<!-- 							<div class="table-responsive"> -->
+<!-- 								<table class="table"> -->
+<!-- 									<thead> -->
+<!-- 										<tr style="border-bottom: 2px double #dddddd;"> -->
+<!-- 											<th>제목</th> -->
+<!-- 											<th>내용</th> -->
+<!-- 											<th>닉네임</th> -->
+<!-- 											<th>읽음</th> -->
+<!-- 											<th>발신일</th> -->
+<!-- 										</tr> -->
+
+<!-- 									</thead> -->
+
+<%-- 									<c:forEach var="send" items="${sendMsg}"> --%>
+<!-- 										<tr style="border-bottom: 1px double #dddddd;"> -->
+<%-- 											<td><c:out value="${send.post_title}" /></td> --%>
+<%-- 											<td><c:out value="${send.post_content}" /></td> --%>
+<%-- 											<td><c:out value="${send.mem_nickname}" /></td> --%>
+<%-- 											<td><c:out value="${send.post_read }" /></td> --%>
+<%-- 											<td><c:out value="${send.post_regidate}" /></td> --%>
+
+<!-- 										</tr> -->
+<%-- 									</c:forEach> --%>
+
+<!-- 								</table> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div id="tab3" class="tabcontent"> -->
+<!-- 						<div class="container"> -->
+<!-- 							<div class="table-responsive"> -->
+<!-- 								<table class="table"> -->
+<!-- 									<thead> -->
+<!-- 										<tr style="border-bottom: 2px double #dddddd;"> -->
+<!-- 											<th>제목</th> -->
+<!-- 											<th>내용</th> -->
+<!-- 											<th>닉네임</th> -->
+<!-- 											<th>읽음</th> -->
+<!-- 											<th>발신일</th> -->
+<!-- 										</tr> -->
+
+<!-- 									</thead> -->
+
+<%-- 									<c:forEach var="receive" items="${receiveMsg}"> --%>
+<%-- 										<tr mem_no="${receive.mem_no }" --%>
+<%-- 											mem_nickname="${receive.mem_nickname }"  --%>
+<%-- 											post_ref_no="${receive.post_no }" class='receiveMsg' --%>
+<!-- 											style="border-bottom: 1px double #dddddd;"> -->
+<%-- 											<td><c:out value="${receive.post_title}" /></td> --%>
+<%-- 											<td><c:out value="${receive.post_content}" /></td> --%>
+<%-- 											<td><c:out value="${receive.mem_nickname}" /></td> --%>
+<%-- 											<td><c:out value="${receive.post_read }" /></td> --%>
+<%-- 											<td><c:out value="${receive.post_regidate}" /></td> --%>
+
+<!-- 										</tr> -->
+<%-- 									</c:forEach> --%>
+<!-- 								</table> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 			

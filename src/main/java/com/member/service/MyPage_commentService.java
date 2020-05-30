@@ -34,6 +34,13 @@ public interface MyPage_commentService {
 	//수신 쪽지 목록 가져오기
 	List<Member_MessageListVo> receiveMsgList(int mem_no);
 	
+	//쪽지 읽기 여부 저장
+	int messageRead(int post_no);
+	
+	//쪽지 답변 여부 저장
+	int messageReply(int post_no);
+	
 	//쪽지 읽기
 	Member_MessageListVo messageDetail(Map map);
+	
 }

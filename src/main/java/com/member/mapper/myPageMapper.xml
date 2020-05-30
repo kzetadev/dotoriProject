@@ -96,19 +96,33 @@
 		       order by msg.post_no desc
 		)
 	</select>
+	<!-- 쪽지 읽기 여부 저장 -->
+	<update id="messageRead">
+		update member_message set post_read = 1 where post_no = #{post_no}
+	</update>
+	<!-- 쪽지 답변 여부 저장 -->
+	<update id="messageReply">
+		update member_message set post_reply = 1 where post_no = #{post_no}
+	</update>
 	<!-- 쪽지 읽기 -->
 	<select id="messageDetail" resultType="com.member.vo.Member_MessageListVo">
 		select rownum r, post_no, mem_no, mem_nickname, post_title
-		      , post_content, post_ref_no, post_regidate
+		      , post_content, post_ref_no, post_read, post_reply, post_regidate
 		  from(select msg.post_no, msgto.mem_no, msgfrom.mem_nickname, msg.post_title
-		            , msg.post_content, msg.post_ref_no, msg.post_regidate
+		            , msg.post_content, msg.post_ref_no, msg.post_read, msg.post_reply
+		            , msg.post_regidate
 		        from member_message msg
 		        inner join member_info msgfrom
 		                on msg.mem_no = msgfrom.mem_no
 		        inner join member_info msgto
 		                on msg.post_to = msgto.mem_no
-		       where msgto.mem_no = #{mem_no}
-		       		 and msg.post_no = #{post_no}
+		       where msg.post_no = #{post_no}
+		       <if test="msg_type != null and msg_type == 'send'">
+		       		 and msgfrom.mem_no = #{mem_no}
+		       </if>
+		       <if test="msg_type != null and msg_type == 'receive'">
+		       		 and msgto.mem_no = #{mem_no}
+		       </if>
 		      )
 	</select>
 </mapper>
