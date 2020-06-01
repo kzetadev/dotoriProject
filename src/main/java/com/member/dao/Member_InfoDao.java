@@ -1,5 +1,7 @@
 package com.member.dao;
 
+import java.util.Map;
+
 import com.member.vo.Member_InfoVo;
 
 public interface Member_InfoDao {
@@ -22,6 +24,14 @@ public interface Member_InfoDao {
 	//이메일 인증
 	int emailAuth(Member_InfoVo vo);
 	
+	//비밀번호 변경
+	public void pass_change(Map<String, Object>map, Member_InfoVo vo) throws Exception;
+	
+	//아이디 찾기
+	public String find_idCheck(Member_InfoVo vo);
+	
+	//비밀번호 찾기
+	public String find_pwdCheck(Member_InfoVo vo);
 	//비밀번호 체크
 //		boolean checkPwd(String mem_id, String mem_pwd);
 	

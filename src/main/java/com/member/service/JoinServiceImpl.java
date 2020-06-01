@@ -1,5 +1,7 @@
 package com.member.service;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -36,4 +38,6 @@ public class JoinServiceImpl implements JoinService {
 		// TODO Auto-generated method stub
 		return member_infoDao.emailAuth(vo);
 	}
+
+
 }

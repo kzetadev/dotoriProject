@@ -133,15 +133,21 @@ $(function(){
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<label class="font-weight-bold text-white"> 
+					
+					<!-- <label class="font-weight-bold text-white"> 
 						<a href="${pageContext.request.contextPath}/user/userSearch" id="find">계정찾기</a>
-					</label>  
+					</label>  -->
+					  
 					<div>
 						<button id="loginBtn" type="submit"	class="btn btn-primary btn-block">로그인</button>
 					</div>
 				</div>
 					<div class="form-group">
 						<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/joinForm.do">회원가입</a>
+					</div>
+					
+					<div class="form-group">
+						<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/findMem_id.do">계정찾기</a>
 					</div>
 					
 					<!-- <button class="btn btn-default" style="background-color:#EFEFEF; color:black;"></button> -->

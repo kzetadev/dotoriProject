@@ -61,7 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/member/joinForm.do", "/member/join.do"
 				, "/member/emailCheck.do", "/member/idCheck.do"
 				, "/member/nickCheck.do", "/css/**", "/fonts/**", "/img/**", "/js/**"
-				);
+				, "/member/findMem_id.do", "/member/findMem_pwd.do","/member/find_pwd.do","/member/find_id.do"
+				, "/member/find_id_result.do");
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
