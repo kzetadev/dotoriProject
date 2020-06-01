@@ -161,4 +161,28 @@
 			)
 		<![CDATA[ WHERE ROWNUM <= 5 ]]>
 	</select>
+	<!-- 갤러리. 이미지가 포함된 게시판 종류 조회 -->
+	<select id="galleryBoardkinds" resultType="java.util.Map">
+		select board_kinds "board_kinds"
+		    , case board_kinds
+		        when 1 then '자유게시판'
+		        when 2 then '후기'
+		        when 3 then '동행'
+		      end "board_kinds_str"
+		  from board_post
+		 where instr(board_content, 'data:image') > 0
+		 order by board_kinds
+	</select>
+	<!-- 갤러리. 게시판 별 글 제목, 대표 이미지 조회 -->
+	<select id="galleryBoardImage" resultType="com.board.vo.Board_PostVo">
+		select rownum r, board_no, board_title, board_content
+		  from (select board_no, board_title
+		            , substr(board_content, instr(board_content, 'data:image')
+		                , instr(substr(board_content, instr(board_content, 'data:image')), '"')) board_content 
+		          from board_post
+		         where board_kinds = #{board_kinds}
+		              and instr(board_content, 'data:image') > 0
+		         order by board_no desc
+		       )
+	</select>
 </mapper>

@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/",  "/member/login.do"
 					, "/main.do", "/unifiedSearch.do/**", "/getCondition.do/**", "/getBoardCondition.do/**"
 					, "/searchPlace.do/**", "/searchBoard.do/**", "/mailAuth.do"
-					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do"
+					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do", "/board/listBoard_Gallery.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
 			.anyRequest().authenticated();
 //		http.exceptionHandling().accessDeniedPage("/403");	//접근 거부 페이지 추가해야됨.

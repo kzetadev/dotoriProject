@@ -221,4 +221,16 @@ public class Board_PostDaoImpl implements Board_PostDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("unified_search.searchBoard", map);
 	}
+	// 갤러리. 이미지가 포함된 게시판 종류 조회
+	@Override
+	public List<Map> galleryBoardkinds() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("board_post.galleryBoardkinds");
+	}
+	// 갤러리. 이미지가 포함된 게시판 종류 조회
+	@Override
+	public List<Board_PostVo> galleryBoardImage(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("board_post.galleryBoardImage", map);
+	}
 }

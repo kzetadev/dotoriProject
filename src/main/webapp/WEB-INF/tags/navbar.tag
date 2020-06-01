@@ -64,6 +64,7 @@ $(document).ready(function(){
 							<li><a href="/board/listBoard_Post.do?str=1">자유 게시판</a></li>
 							<li><a href="/board/listBoard_Post.do?str=2">후기 게시판</a></li>
 							<li><a href="/board/listBoard_Post.do?str=3">동행 게시판</a></li>
+							<li><a href="/board/listBoard_Gallery.do">갤러리</a></li>
 						</ul>
 					</li>
 					<li><a href="/faq/listFaq.do">FAQ</a></li>

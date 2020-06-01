@@ -86,12 +86,8 @@
 						</table>
 					</div>
 					<div class="media-body">
+						<img src="${main.mem_img }" class="img-rounded" width="300" height="300">
 						<table>
-						<tr>
-								<td>
-									<img src="../img/basic.png" width="50" height="50">
-								</td>
-							</tr>
 							<tr>
 								<td>이름</td>
 								<td>${main.mem_name }</td>

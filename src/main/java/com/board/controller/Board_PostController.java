@@ -1,6 +1,8 @@
 package com.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -299,6 +301,19 @@ public class Board_PostController {
 		mav.addObject("mlist2", mlist2);
 		mav.addObject("mlist3", mlist3);
 		mav.addObject("mlist4", mlist4);
+		return mav;
+	}
+	
+	@RequestMapping("/board/listBoard_Gallery.do")
+	public ModelAndView listBoard_Gallery(@RequestParam(name="board_kinds", defaultValue="1")int board_kinds) {
+		ModelAndView mav = new ModelAndView();
+		Map map = new HashMap();
+		map.put("board_kinds", board_kinds);
+		mav.addObject("boards", board_postService.galleryBoardkinds());
+		List<Board_PostVo> imgList = board_postService.galleryBoardImage(map);
+		System.out.println(imgList);
+		mav.addObject("imgList", board_postService.galleryBoardImage(map));
+		mav.addObject("board_kinds", board_kinds);
 		return mav;
 	}
 }

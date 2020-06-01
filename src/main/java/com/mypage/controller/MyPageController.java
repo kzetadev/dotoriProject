@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.member.service.LoginService;
@@ -192,18 +193,18 @@ public class MyPageController {
 	
 	@RequestMapping(value = "/member/updateMem.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateMem(Model model, Member_InfoVo vo, HttpServletRequest request) {
+	public int updateMem(Model model,  Member_InfoVo vo, HttpServletRequest request) {
 		int re = -1;
 		re = myPage_commentService.updateMem(vo);
 		String oldFname = vo.getMem_img();
 		String fname = null;
 		
-		String path = request.getRealPath("img");
+		String path = request.getRealPath("member_img");
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(uploadFile != null) {
 			fname = uploadFile.getOriginalFilename();
 			if(fname != null && !fname.equals("")) {
-				vo.setMem_img(fname);
+				vo.setMem_img("/member_img/" + fname);
 				try {
 					byte[]data = uploadFile.getBytes();
 					FileOutputStream fos = new FileOutputStream(path + "/"+ fname);

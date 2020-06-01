@@ -48,12 +48,36 @@ a {
 <script type="text/javascript">
 	$(function(){
 		//닉네임 정규식
-		var file = $("<input type='file' />");
-		$(file).change(function(e){
-			console.log(e);
+		//https://developer.mozilla.org/ko/docs/Web/API/File/File
+		var sel_file = new File(['1'], 'default');						//선택된 파일 객체를 담는 전역 변수. 이미지 변경 없이 회원정보만 수정할 경우 기본값으로 사용하기 위해 의미없는 데이터와 파일명으로 생성 
+		var file = $("<input type='file' name='uploadFile' id='uploadFile' accept='image/*' />").css('visibility', 'hidden');	//파일 선택용 input 태그. 화면에 표시하지 않고 이미지를 클릭했을 때 동작하도록 변수로 선언.
+// 		$("#form1").append(file);
+		//https://greatps1215.tistory.com/4
+		$(file).change(function(el){		//파일이 선택되었을 때 동작하는 이벤트 재정의. el : input file tag 요소
+			console.log(el);
+			var files = el.target.files;		//input file tag에 선택된 파일들을 가져옴
+			console.log(files);
+			var filesArr = Array.prototype.slice.call(files);	//files에 담긴 파일들을 배열로 만듦
+			console.log(filesArr);
+			filesArr.forEach(function(f){					//filesArr에서 파일을 하나씩 꺼냄
+				if(!f.type.match("image.*")){				//파일 형태가 이미지 형태가 아니면 
+					alert("이미지 파일을 선택해 주세요.");			//경고메시지 출력
+					return;									//더 이상 진행하지 않도록 리턴시킴
+				}
+				sel_file =f;								//f는 이미지 파일로 간주하여 전역 변수인 sel_file에 담음
+				var reader = new FileReader();				//파일을 읽는 객체 선언
+				reader.readAsDataURL(f);					//파일 리더 객체에 이미지 파일(f)를 매개변수로 넘겨 파일을 읽음
+				reader.onload = function(e){				//파일이 로드될 때 동작하는 이벤트. e : 로드된 파일
+					console.log(e);							
+					$("#profile_img").attr("src", e.target.result);	//이미지 태그에 해당 이미지 파일을 적용. 
+																	//e.target.result : 파일의 바이너리 데이터. data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ.... 형태의 바이너리 데이터
+				}
+				console.log(sel_file);
+			});
+			
 		});
 		var nickJ = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,12}$/;
-		$("#mem_img").click(function(){
+		$("#profile_img").click(function(){
 			$(file).click();
 			console.log(file);
 		});
@@ -133,17 +157,35 @@ a {
 // 					mem_email : $("#mem_email").val(),
 // 					mem_content: $("#mem_content").val()
 // 						}
-				var mem_info = $("#form1").serialize();
-				console.log(mem_info);
+				//https://jechue.tistory.com/56
+				var form = $("#form1")[0];									//FormData를 생성할 때 form을 매개변수로 넘기려면 0번째 요소로 넘겨야 함. 
+// 				var mem_info = $("#form1").serialize();
+				var mem_info = new FormData(form);							//multipart/form-data로 넘기려면 form을 매개변수로 FormData를 생성해서 넘겨주어야 하는것 같음.  
+				mem_info.append('uploadFile', sel_file);					//Member_InfoVo의 MultipartFile형 uploadFile 필드에 값을 매핑하기 위해 추가
+				if(sel_file.name == 'default'){									//이미지를 변경하지 않은 경우
+					mem_info.append('mem_img', $("#profile_img").attr('src'));	//기존 이미지 경로를 넘김
+				}else{															//이미지를 변경한 경우
+					mem_info.append('mem_img', "/member_img/" + sel_file.name);	//Member_InfoVo의 String형 mem_img 필드에 값을 매핑하기 위해 추가
+				}
+// 				var mem_info = $("#form1").serialize();
+// 				mem_info['mem_img'] = sel_file;
+// 				console.log(mem_info);
 				$.ajax({
 					url: "/member/updateMem.do",
 					type:"POST",
+					dataType:'json',
+					processData:false,			//form태그의 enctype이 multipart/form-data인경우 설정해주어야 함.
+					contentType:false,			//form태그의 enctype이 multipart/form-data인경우 설정해주어야 함.
 					data:mem_info,
+// 					data:{
+// 						form:form
+// 						,mem_info:mem_info
+// 					},
 					success:function(result){
 						if(result == 1){
 							alert("회원수정이 완료 되었습니다")
 							console.log("updateMem : " + result );
-							alert(result)
+// 							alert(result)
 							location.href="/member/myPage.do";
 							}
 						}
@@ -173,7 +215,7 @@ a {
 						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
 						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
 						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="/member/myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="/member/myPage_updateMem.do">회원 수정</a></li>
 						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
 					</ul>
 				</div>
@@ -188,13 +230,13 @@ a {
 				<h2>회원수정</h2>
 					<div>
 <!-- 						<input type="file" name="uploadFile"> -->
-						<img id="mem_img" name="mem_img" src="${update.mem_img }">
+						<img id="profile_img" class="img-rounded" name="profile_img" src="${update.mem_img }" width="300" height="300">
 					</div>
-					<pre></pre>
+
 					<table>
 					<tr>
 						<td>이름</td>
-						<td><input type="text" name = "mem_name" value="${update.mem_name}" readonly="readonly"></td>
+						<td><input type="text" name="mem_name" value="${update.mem_name}" readonly="readonly"></td>
 					</tr>
 					
 					<tr>

@@ -35,4 +35,8 @@ public interface Board_PostService {
 	List<SearchConditionVo> unifiedBoardCondition(Map map);
 	// 게시판, 검색조건(제목, 본문, 댓글, 말머리)에 해당하는 게시글 리스트 가져오기
 	List<Board_PostSearchVo> searchBoard(Map map);
+	// 갤러리. 이미지가 포함된 게시판 종류 조회
+	List<Map> galleryBoardkinds();
+	// 갤러리. 이미지가 포함된 게시판 종류 조회
+	List<Board_PostVo> galleryBoardImage(Map map);
 }

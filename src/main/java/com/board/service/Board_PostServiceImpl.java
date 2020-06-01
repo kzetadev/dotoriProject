@@ -90,4 +90,16 @@ public class Board_PostServiceImpl implements Board_PostService {
 		// TODO Auto-generated method stub
 		return board_postDao.searchBoard(map);
 	}
+	// 갤러리. 이미지가 포함된 게시판 종류 조회
+	@Override
+	public List<Map> galleryBoardkinds() {
+		// TODO Auto-generated method stub
+		return board_postDao.galleryBoardkinds();
+	}
+	// 갤러리. 이미지가 포함된 게시판 종류 조회
+	@Override
+	public List<Board_PostVo> galleryBoardImage(Map map) {
+		// TODO Auto-generated method stub
+		return board_postDao.galleryBoardImage(map);
+	}
 }
