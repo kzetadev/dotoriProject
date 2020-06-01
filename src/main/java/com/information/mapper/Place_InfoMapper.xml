@@ -32,7 +32,7 @@
   				and ${searchColumn} like '%' || #{keyword} || '%'
   			</if> 
   			<if test="sortColumn != null">
-  			  	order by ${sortColumn} desc
+  			  	order by ${sortColumn}
   			</if>
   				)) where r between #{start} and #{end}
   </select>

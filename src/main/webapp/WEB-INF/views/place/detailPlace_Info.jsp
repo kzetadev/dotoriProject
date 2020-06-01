@@ -25,24 +25,38 @@
 
 			$("#btn").toggle(function(){ // 버튼을 눌렀을 때 
 				// Place_no는 속성으로 안보이게 처리
-				var cartList = $("#img").attr("place_no","place_no") // 사진 여러개를 cartList에 담음
-				alert(cartList)
+				var place = {'place_no':$("#h2").attr("place_no"), 'place_type':$("#h2").attr("place_type")}
+				$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
+					alert(r)
+					var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
+					if(re == true){
+						location.href="/myPage/myPage_Favorite.do"
+					}
+				}})
+// 				var cartList = $("#img").attr("place_no","place_no") // 사진 여러개를 cartList에 담음
+// 				alert(cartList)
 				
-				$.each(cartList, function(){ // 사진 각각마다 place_no를 부여해줌
-					var place = {"place_no":place_no, "place_type":place_type} 
+// 				$.each(cartList, function(){ // 사진 각각마다 place_no를 부여해줌
+// 					var place = {"place_no":place_no, "place_type":place_type} 
 					
-					$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
-						alert(r)
-						var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
-						if(re == true){
-							location.href="/myPage/myPage_Favorite.do"
+// 					$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
+// 						alert(r)
+// 						var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
+// 						if(re == true){
+// 							location.href="/myPage/myPage_Favorite.do"
+// 						}
+// 					}})
+// 				})
+			}, function(){ // 다시 버튼을 눌렀을 때
+				var favorite_no = $(this).attr("favorite_no")
+				var a = confirm("정말로 삭제하시겠습니까?")
+				if(a == true){
+					$.ajax({url:"/member/deleteMember_Favorite.do", data:{favorite_no:favorite_no}, success:function(result){
+						if(result == 1){
+							alert("찜목록에서 제거되었습니다.")
 						}
 					}})
-				})
-			}, function(){ // 다시 버튼을 눌렀을 때
-				$.ajax("/myPage/deleteMember_Favorite.do", {success:function(){
-					alert("찜목록에서 제거되었습니다.")
-				}})
+				}
 			});
 			
 			/*$.getJSON("/detailPlace_Info.do", function(arr){
@@ -90,7 +104,7 @@ dl, hr {
 	</div>
 	<br>
 
-	<h2 id="h2">
+	<h2 id="h2" place_no="${place_no }" place_type="${place_type.place_type }">
 		<b>${p.place_name } (조회수 - ${p.place_hit })</b>
 	</h2>
 

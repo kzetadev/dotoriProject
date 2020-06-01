@@ -30,7 +30,7 @@ public class Member_FavoriteController {
 	public ModelAndView InsertMember_Favorite(Member_FavoriteVo f) {
 		System.out.println("찜목록 추가 컨트롤러 동작함");
 		ModelAndView m = new ModelAndView();
-		
+		f.setMem_no(LoginUser.getMember_no());
 		int re = member_favoriteService.insertMember_Favorite(f);
 		System.out.println("찜목록에 담긴 상품번호 : " + f.getFavorite_no());
 		System.out.println(re);
@@ -77,7 +77,7 @@ public class Member_FavoriteController {
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@RequestMapping("/member/deleteMember_Favorite.do")
 	@ResponseBody
-	public int deleteMember_Favorite(int favorite_no, Model model) {
+	public int deleteMember_Favorite(int favorite_no) {
 		int re = member_favoriteService.deleteMember_Favorite(favorite_no);
 		// model.addAttribute("re", re);
 		System.out.println("찜 제거 컨트롤러");

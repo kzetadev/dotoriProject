@@ -53,9 +53,15 @@ $(document).ready(function(){
 					<li class="dropdown">
 						<a href="listPlace_Info.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">정보 게시판<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/place/listPlace_Info.do?place_type=0">명소</a></li>
-							<li><a href="/place/listPlace_Info.do?place_type=1">음식점</a></li>
-							<li><a href="/place/listPlace_Info.do?place_type=2">숙소</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=0&sortColumn=place_no">명소</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=1&sortColumn=place_no">음식</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=2&sortColumn=place_no">호텔</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=3&sortColumn=place_no">축제와 행사</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=4&sortColumn=place_no">쇼핑</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=5&sortColumn=place_no">자연과 공원</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=6&sortColumn=place_no">박물관과 미술관</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=7&sortColumn=place_no">엔터테인먼트</a></li>
+							<li><a href="/place/listPlace_Info.do?place_type=8&sortColumn=place_no">공연</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">

@@ -97,14 +97,14 @@
 	<!-- 내용  -->
 	<h1><strong>${pt.place_type_name }</strong></h1>
 	<br>
-	<img src="/img/main.jpg" width="100%" height="500">
+	<img src="/img/main_${pt.place_type }.jpg" width="100%" height="500">
 	<br><br><br><br>
 	
 	<!-- 정렬 -->
 	<ul class="nav nav-tabs">
-		<li><a href="listPlace_Info.do?sortColumn=place_no">번호순</a></li>
-		<li><a href="listPlace_Info.do?sortColumn=place_name">이름순</a></li>
-		<li><a href="listPlace_Info.do?sortColumn=place_hit">조회수순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_no&place_type=${place_type }">번호순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_name&place_type=${place_type }">이름순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_hit&place_type=${place_type }">조회수순</a></li>
 	</ul>
 				
 	<!-- 각 장소별 대표 이미지 리스트 -->

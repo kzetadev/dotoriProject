@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.information.service.Member_FavoriteService;
 import com.information.service.Place_InfoService;
 import com.information.service.Place_ThemeService;
 import com.information.vo.Place_ThemeVo;
@@ -123,7 +124,18 @@ public class Place_InfoController {
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", place_infoService.detailPlace_Info(place_no));
 		m.addObject("place_type", pt);
+		m.addObject("place_no", place_no);
 		return m;
 	}
+	
+//	// 상세화면에서 찜 제거
+//	@RequestMapping("/member/deleteMember_Favorite.do")
+//	@ResponseBody
+//	public int deleteMember_Favorite(int favorite_no) {
+//		int re = member_favoriteService.deleteMember_Favorite(favorite_no);
+//		// model.addAttribute("re", re);
+//		System.out.println("찜 제거 컨트롤러");
+//		return re;
+//	}
 	
 }
