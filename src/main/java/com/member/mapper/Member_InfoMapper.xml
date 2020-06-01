@@ -24,13 +24,24 @@
 	<delete id="delte"><!-- 회원 탈퇴 -->
 		delete from member_info where mem_no=#{mem_no}
 	</delete>
-	<!-- 비밀번호 찾기. 임시 비밀번호로 변경 -->
-	<update id="changeTempPwd">
-		update member_info set mem_pwd = #{mem_pwd} where mem_no = #{mem_no} and mem_email = #{mem_email}
+	
+	
+	<!-- 비밀번호 찾기 변경 관련 mapper -->
+	<update id="pass_change" parameterType="hashMap">
+		update member_info set mem_pwd = #{mem_pwd} where  mem_email = #{mem_email}
 	</update>
 	
+	<!-- 아이디 찾기 -->
+	<select id="find_id_check" parameterType="com.member.vo.Member_InfoVo" resultType="java.lang.String">
+		select mem_id from member_info where mem_email= #{mem_email}
+	</select>
 	
-	<!-- 아이디 중복 체크 -->
+	<!-- 비밀번호 찾기 -->
+	<select id="find_pwd_check" parameterType="com.member.vo.Member_InfoVo" resultType="String">
+		select mem_pwd from member_info mem_id = #{mem_id} and mem_email= #{mem_email}
+	</select>
+	
+	<!-- 아이디 중복 체크 --> 
 	<select id="checkOverId" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_id = #{mem_id}
 	</select>

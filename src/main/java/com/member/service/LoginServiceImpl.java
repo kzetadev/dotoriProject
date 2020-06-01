@@ -1,5 +1,7 @@
 package com.member.service;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -23,5 +25,20 @@ public class LoginServiceImpl implements LoginService {
 	
 	
 	}
+	@Override
+	public void pass_change(Map<String, Object> map, Member_InfoVo vo) throws Exception {
+		member_infoDao.pass_change(map, vo);		
+	}
+	@Override
+	public String find_idCheck(Member_InfoVo vo) {
+		String mem_id = member_infoDao.find_idCheck(vo);
+		return mem_id;
+	}
+	@Override
+	public String find_pwdCheck(Member_InfoVo vo) {
+		String mem_pwd = member_infoDao.find_pwdCheck(vo);
+		return mem_pwd;
+	}
+	
 	
 }

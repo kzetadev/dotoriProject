@@ -1,5 +1,7 @@
 package com.member.service;
 
+import java.util.Map;
+
 import com.member.vo.Member_InfoVo;
 
 public interface JoinService { 
@@ -13,4 +15,6 @@ public interface JoinService {
 	int checkOverEmail(String mem_email);
 	//이메일 인증
 	int emailAuth(Member_InfoVo vo);
+	
+	
 }

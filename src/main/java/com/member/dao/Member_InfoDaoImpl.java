@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,8 @@ import com.member.vo.Member_InfoVo;
 public class Member_InfoDaoImpl implements Member_InfoDao {
 	@Inject
 	protected SqlSessionTemplate sqlSessionTemplate;
+
+	
 	@Override
 	public Member_InfoVo login(Member_InfoVo vo) {
 		// TODO Auto-generated method stub
@@ -67,6 +70,26 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 	public int emailAuth(Member_InfoVo vo) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.update("mem_info.emailAuth", vo);
+	}
+	
+	//비밀번호 변경
+	@Override
+	public void pass_change(Map<String, Object> map, Member_InfoVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		map.get("mem_pwd");
+		map.get("mem_email");
+		
+		sqlSessionTemplate.update("mem_info.pass_change", map);
+	}
+	@Override
+	public String find_idCheck(Member_InfoVo vo) {
+		String mem_id = sqlSessionTemplate.selectOne("mem_info.find_id_check", vo);
+		return mem_id;
+	}
+	@Override
+	public String find_pwdCheck(Member_InfoVo vo) {
+		String mem_pwd = sqlSessionTemplate.selectOne("mem_info.find_pwd_check", vo);
+		return mem_pwd;
 	}
 	
 	
