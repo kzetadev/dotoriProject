@@ -37,7 +37,7 @@
 				if(a == true){
 					$.ajax({url:"/admin/adminDeleteMember.do", type:"POST", data:{mem_no:mem_no}, success:function(result){
 						if(result == 1){
-							location.href = '/adminListMember.do';
+							location.href = '/admin/adminListMember.do';
 						}
 					}});
 				}
@@ -51,7 +51,7 @@
 			            if(a == true){
 							$.ajax({url:"/board/deleteBoard.do", data:{board_no:board_no}, success:function(result){
 								if(result == 1){
-									alert("삭제했습니다!");
+									alert("삭제되었습니다.");
 						               location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
 								}
 							}})

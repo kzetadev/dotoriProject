@@ -51,7 +51,19 @@
 </style>
 <script type="text/javascript">
 	$(function(){
-			
+		$(".del").click(function(){
+			console.log($(this).attr("favorite_no"))
+			var favorite_no = $(this).attr("favorite_no")
+			var a = confirm("정말로 삭제하시겠습니까?")
+			if(a == true){
+				$.ajax({url:"/member/deleteMember_Favorite.do", data:{favorite_no:favorite_no}, success:function(result){
+					if(result == 1){
+						alert("삭제되었습니다.")
+						location.href = "/member/myPage_Favorite.do";
+					}
+				}})
+			}
+		})
 	})
 </script>
 </head>
@@ -114,6 +126,7 @@
 								</div>
 								<div class="media-body">
 									<h4 class="media-heading"><a href="/place/detailPlace_Info.do?place_no=${f.place_no }&place_type=${f.place_type }">${f.place_name }</a></h4>
+									<button class="del" favorite_no="${f.favorite_no }"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 								</div>
 							</div>
 						</div><hr>

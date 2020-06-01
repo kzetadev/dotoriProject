@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,10 +67,20 @@ public class Member_FavoriteController {
 	}
 	
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
+//	@RequestMapping(value="/member/deleteMember_Favorite.do", method=RequestMethod.GET)
+//	public ModelAndView deleteMember_FavoriteGet(int favorite_no) {
+//		ModelAndView m = new ModelAndView();
+//		m.addObject("favorite_no",favorite_no);
+//		return m;
+//	}
+	
+	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@RequestMapping("/member/deleteMember_Favorite.do")
-	public ModelAndView deleteMember_Favorite(int favorite_no) {
-		ModelAndView m = new ModelAndView();
-		m.setViewName("redirect:/myPage/listMember_Favorite");
-		return m;
+	@ResponseBody
+	public int deleteMember_Favorite(int favorite_no, Model model) {
+		int re = member_favoriteService.deleteMember_Favorite(favorite_no);
+		// model.addAttribute("re", re);
+		System.out.println("찜 제거 컨트롤러");
+		return re;
 	}
 }
