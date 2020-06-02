@@ -43,4 +43,14 @@
  	<delete id="delete">
   		delete from member_favorite where favorite_no = #{favorite_no}
   	</delete>
+  	
+  	<!-- 상세화면에서 찜 제거 -->
+  	<delete id="deleteDetail">
+  		delete from member_favorite where mem_no = #{mem_no} and place_no = #{place_no}
+  	</delete>
+  	
+  	<!-- 찜 개수는 1개만 들어와야함 -->
+  	<select id="onlyOne" resultType="java.lang.Integer">
+  		select count(*) from member_favorite where mem_no = #{mem_no} and place_no = #{place_no}
+  	</select>
 </mapper>

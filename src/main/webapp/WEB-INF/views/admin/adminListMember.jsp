@@ -22,7 +22,7 @@
   			float: none;
   			margin-left: -5px;
   		}
-  		form { 
+  		form {
         	margin: 0 auto; 
        		width:250px;
     	}    
@@ -31,7 +31,7 @@
 	<script type="text/javascript">
 		$(function(){
 			$(".del").click(function(){
-				console.log($(this).attr("mem_no"));
+				// console.log($(this).attr("mem_no"));
 				var mem_no = $(this).attr("mem_no");
 				var a = confirm("정말로 탈퇴처리를 하시겠습니까?")
 				if(a == true){

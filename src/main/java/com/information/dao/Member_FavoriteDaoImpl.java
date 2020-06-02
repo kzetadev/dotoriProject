@@ -32,10 +32,23 @@ public class Member_FavoriteDaoImpl implements Member_FavoriteDao {
 		return sqlSessionTemplate.selectOne("member_favorite.selectAllCount", place_type);
 	}
 	
+	
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	@Override
 	public int deleteMember_Favorite(int favorite_no) {
 		return sqlSessionTemplate.delete("member_favorite.delete", favorite_no);
+	}
+
+	// 상세화면에서 찜 제거
+	@Override
+	public int deleteDetailPlace_Info(Map map) {
+		return sqlSessionTemplate.delete("member_favorite.deleteDetail", map);
+	}
+
+	// 찜 개수는 1개만 들어와야함
+	@Override
+	public int onlyOne(Map map) {
+		return sqlSessionTemplate.selectOne("member_favorite.onlyOne", map);
 	}
 
 }

@@ -40,4 +40,16 @@ public class Member_FavoriteServiceImpl implements Member_FavoriteService {
 		return member_favoriteDao.deleteMember_Favorite(favorite_no);
 	}
 
+	// 상세화면에서 찜 제거
+	@Override
+	public int deleteDetailPlace_Info(Map map) {
+		return member_favoriteDao.deleteDetailPlace_Info(map);
+	}
+
+	// 찜 개수는 1개만 들어와야함
+	@Override
+	public int onlyOne(Map map) {
+		return member_favoriteDao.onlyOne(map);
+	}
+
 }

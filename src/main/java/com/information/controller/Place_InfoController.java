@@ -20,6 +20,7 @@ import com.information.service.Member_FavoriteService;
 import com.information.service.Place_InfoService;
 import com.information.service.Place_ThemeService;
 import com.information.vo.Place_ThemeVo;
+import com.security.config.LoginUser;
 @Controller
 public class Place_InfoController {
 	@Resource(name="place_infoService")
@@ -27,6 +28,9 @@ public class Place_InfoController {
 	
 	@Resource(name="place_themeService")
 	private Place_ThemeService place_themeService;
+	
+	@Resource(name="member_favoriteService")
+	private Member_FavoriteService member_favoriteService;
 	
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
 	public static int pageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
@@ -119,23 +123,39 @@ public class Place_InfoController {
 		System.out.println("컨트롤러 작동");
 		// 조회수 증가
 		place_infoService.updateHit(place_no);
+		
 		Place_ThemeVo pt = place_themeService.getPlace_Theme(place_type);
 		
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", place_infoService.detailPlace_Info(place_no));
 		m.addObject("place_type", pt);
+	
 		m.addObject("place_no", place_no);
+		m.addObject("mem_no", LoginUser.getMember_no());
+		
+		Map map = new HashMap();
+		map.put("place_no", place_no);
+		map.put("mem_no", LoginUser.getMember_no());
+		// 찜 개수는 1개만 들어와야함
+		int re = member_favoriteService.onlyOne(map);
+		m.addObject("re", re);
+		
 		return m;
 	}
 	
-//	// 상세화면에서 찜 제거
-//	@RequestMapping("/member/deleteMember_Favorite.do")
-//	@ResponseBody
-//	public int deleteMember_Favorite(int favorite_no) {
-//		int re = member_favoriteService.deleteMember_Favorite(favorite_no);
-//		// model.addAttribute("re", re);
-//		System.out.println("찜 제거 컨트롤러");
-//		return re;
-//	}
+	// 상세화면에서 찜 제거
+	@RequestMapping("/member/deleteDetailMember_Favorite.do")
+	@ResponseBody
+	public int deleteDetailMember_Favorite(int mem_no, int place_no) {
+		Map map = new HashMap();
+		map.put("mem_no", mem_no);
+		map.put("place_no", place_no);
+		
+		int re = member_favoriteService.deleteDetailPlace_Info(map);
+		System.out.println(re);
+		// model.addAttribute("re", re);
+		System.out.println("상세정보에서 찜 제거 컨트롤러");
+		return re;
+	}
 	
 }

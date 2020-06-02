@@ -20,44 +20,42 @@
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 <script type="text/javascript">
 		$(function(){
+			if($("#btn").attr("onlyOne") == 1){
+				$("#icon").addClass("glyphicon glyphicon-star");
+			}else{
+				$("#icon").addClass("glyphicon glyphicon-star-empty");
+			}
+			
 			// 찜목록 구현
-			// $("#h2").attr("place_no",place_no)
-
-			$("#btn").toggle(function(){ // 버튼을 눌렀을 때 
-				// Place_no는 속성으로 안보이게 처리
-				var place = {'place_no':$("#h2").attr("place_no"), 'place_type':$("#h2").attr("place_type")}
-				$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
-					alert(r)
-					var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
-					if(re == true){
-						location.href="/myPage/myPage_Favorite.do"
-					}
-				}})
-// 				var cartList = $("#img").attr("place_no","place_no") // 사진 여러개를 cartList에 담음
-// 				alert(cartList)
-				
-// 				$.each(cartList, function(){ // 사진 각각마다 place_no를 부여해줌
-// 					var place = {"place_no":place_no, "place_type":place_type} 
-					
-// 					$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
-// 						alert(r)
-// 						var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
-// 						if(re == true){
-// 							location.href="/myPage/myPage_Favorite.do"
-// 						}
-// 					}})
-// 				})
-			}, function(){ // 다시 버튼을 눌렀을 때
-				var favorite_no = $(this).attr("favorite_no")
-				var a = confirm("정말로 삭제하시겠습니까?")
-				if(a == true){
-					$.ajax({url:"/member/deleteMember_Favorite.do", data:{favorite_no:favorite_no}, success:function(result){
-						if(result == 1){
-							alert("찜목록에서 제거되었습니다.")
+			$("#btn").click(function(){
+				if($(this).attr("onlyOne") == 0){
+					// Place_no는 속성으로 안보이게 처리
+					var place = {'place_no':$("#h2").attr("place_no"), 'place_type':$("#h2").attr("place_type")}
+					$.ajax("/place/insertMember_Favorite.do", {data:place, success:function(r){
+						if(r == 1){
+							var re = confirm("찜목록에 추가되었습니다. 마이페이지로 이동하시겠습니까?")
+							if(re == true){
+								location.href="/member/myPage_Favorite.do"
+							}
+							$("#btn").attr("onlyOne", "1")
+							$("#icon").removeClass("glyphicon glyphicon-star-empty");
+							$("#icon").addClass("glyphicon glyphicon-star");
 						}
 					}})
+				}else{
+					var placeDelete = {'place_no':$("#h2").attr("place_no"), 'mem_no':$("#h2").attr("mem_no")}
+					var a = confirm("정말로 삭제하시겠습니까?")
+					if(a == true){
+						$.ajax("/member/deleteDetailMember_Favorite.do", {data:placeDelete, success:function(result){
+							if(result == 1){
+								alert("찜목록에서 제거되었습니다.")
+								location.href = "/place/detailPlace_Info.do?place_no=${place_no}&place_type=${place_type.place_type}"
+
+							}
+						}})
+					}
 				}
-			});
+			})
 			
 			/*$.getJSON("/detailPlace_Info.do", function(arr){
 				$.each(arr, function(idx, place){
@@ -81,30 +79,30 @@
 		})
 	</script>
 <style type="text/css">
-h2 {
-	text-align: center;
-}
-
-dl, hr {
-	padding-right: 200px;
-	padding-left: 200px;
-}
-
-#list {
-	text-align: center;
-}
+	h2 {
+		text-align: center;
+	}
+	
+	dl, hr {
+		padding-right: 200px;
+		padding-left: 200px;
+	}
+	
+	#list {
+		text-align: center;
+	}
 </style>
 </head>
 <body>
 	<!-- 찜 버튼 -->
 	<div class="b" align="center">
-		<button type="button" class="btn btn-default btn-lg" id="btn">
-			<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+		<button type="button" class="btn btn-default btn-lg" id="btn" onlyOne="${re }">
+			<span id="icon" aria-hidden="true"></span>
 		</button>
 	</div>
 	<br>
 
-	<h2 id="h2" place_no="${place_no }" place_type="${place_type.place_type }">
+	<h2 id="h2" place_no="${place_no }" place_type="${place_type.place_type }" mem_no="${mem_no }">
 		<b>${p.place_name } (조회수 - ${p.place_hit })</b>
 	</h2>
 

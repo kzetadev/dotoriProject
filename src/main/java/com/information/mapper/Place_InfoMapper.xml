@@ -72,9 +72,4 @@
    	]]> 		
   </select>
   
-  <!-- <select id="">
-  	select place_no, place_name from place_info where place_name like '%' || '강남' || '%';
-	select board_no, board_title from board_post where board_title like '%' || '강남' || '%';
-  </select> -->
-  
 </mapper>
