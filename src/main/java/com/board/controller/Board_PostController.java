@@ -94,6 +94,7 @@ public class Board_PostController {
 	      int listCount = 0;
 	      int curPage = 1;      // 현재페이지
 	      float pageSize = (float)pageSIZE;    
+	      int mem_no = 0;
 	      
 	      ModelAndView mav = new ModelAndView();
 	      // 해당 부분에 Member_Info 추가해야 함
@@ -160,6 +161,10 @@ public class Board_PostController {
 		      mav.addObject("sel1", sel1);
 		      mav.addObject("sel2", sel2);
 		      mav.addObject("headtag", head_tagService.listHead_Tag());
+		      if(LoginUser.isLogin()) {
+		    	  mem_no = LoginUser.getMember_no();
+		      }
+		      mav.addObject("login_mem_no", mem_no);
 	      }
 	      return mav;
 	   }

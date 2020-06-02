@@ -133,15 +133,27 @@ a {
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a href="/member/myPage.do">마이페이지</a>
+							<c:if test="${other_mem_no eq null }">
+								<a href="/member/myPage.do">마이페이지</a>
+							</c:if>
+							<c:if test="${other_mem_no ne null }">
+								<a href="/member/myPage.do?mem_no=${other_mem_no }">마이페이지</a>
+							</c:if>
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<c:if test="${other_mem_no eq null }">
+							<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						</c:if>
+						<c:if test="${other_mem_no ne null }">
+							<li class="list-group-item"><a href="/member/myPage_Contents.do?mem_no=${other_mem_no }" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						</c:if>
+						<c:if test="${other_mem_no eq null }">
 						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
 						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
 						<li class="list-group-item"><a href="/member/myPage_updateMem.do">회원 수정</a></li>
 						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

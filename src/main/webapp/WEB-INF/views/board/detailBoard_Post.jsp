@@ -64,6 +64,7 @@
 			, tabsize:2
 			, backColor:'white'
 			, toolbar:[]
+			, disableDragAndDrop:true
 		});
 		//시큐리티에서 csrf 토큰이 필요하여 ajax 통신 전 csrf를 header에 포함. 
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR){

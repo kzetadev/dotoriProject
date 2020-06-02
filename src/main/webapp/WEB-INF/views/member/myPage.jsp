@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <layoutTag:layout>
 
 <!DOCTYPE html>
@@ -62,15 +62,28 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<a href="/member/myPage.do">마이페이지</a>
+							<c:if test="${other_mem_no eq null }">
+								<a href="/member/myPage.do">마이페이지</a>
+							</c:if>
+							<c:if test="${other_mem_no ne null }">
+								<a href="/member/myPage.do?mem_no=${other_mem_no }">마이페이지</a>
+							</c:if>
 						</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						<c:if test="${other_mem_no eq null }">
+							<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						</c:if>
+						<c:if test="${other_mem_no ne null }">
+							<li class="list-group-item"><a href="/member/myPage_Contents.do?mem_no=${other_mem_no }" id="updateAccount">내가 쓴 글 & 댓글</a></li>
+						</c:if>
+						<%--other_mem_no가 null이면  로그인한 회원의 마이페이지로 간주. null이면 다른 회원의 마이페이지--%>
+						<c:if test="${other_mem_no eq null }">
 						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
 						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
 						<li class="list-group-item"><a href="/member/myPage_updateMem.do">회원 수정</a></li>
 						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>
@@ -91,7 +104,9 @@
 							<tr>
 								<td>이름</td>
 								<td>${main.mem_name }</td>
-							</tr>	
+							</tr>
+							<%--아이디, 이메일은 로그인한 회원만 표시 --%>
+							<c:if test="${other_mem_no eq null }">	
 							<tr>
 								<td>아이디</td>
 								<td>${main.mem_id }</td>
@@ -101,7 +116,7 @@
 								<td>이메일</td>
 								<td>${main.mem_email }</td>
 							</tr>
-							
+							</c:if>
 							<tr>
 								<td>닉네임</td>
 								<td>${main.mem_nickname }</td>

@@ -25,6 +25,7 @@
 // 	   var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
 // 	   $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
 	   //레이어
+	    var login_mem_no = ${login_mem_no};
 		var divContainer = $("<div id='popup_layer' class='container'/>").css({
 			'position':'absolute'
 			, 'top':100
@@ -37,7 +38,7 @@
 		//쪽지보내기 버튼
 		var btnMsg = $("<button type='button' class='btn btn-default'/>").text("쪽지보내기");
 		// 프로필보기 버튼
-		var btnProfile = $("<button type='button' class='btn btn-default'/>").text("프로필보기");
+		var btnProfile = $("<button type='button' class='btn btn-default'/>").text("마이페이지");
 		$(btnMsg).click(function(){
 // 			window.open("/member/sendMessage.do", "_blank", "width=400, height=300, menubar=no, toolbar=no, status=no").focus();
 			jQuery.noConflict();
@@ -47,6 +48,9 @@
 				alert("load was performed");
 				$("#modalMessage").modal();
 			});
+		});
+		$(btnProfile).click(function(){
+			location.href = "/member/myPage.do?mem_no=" + $(this).parent().attr('mem_no');
 		});
 		$(divBtnGroup).append(btnMsg, btnProfile);
 		$(divContainer).append(divBtnGroup);
@@ -69,6 +73,9 @@
 		$(".nickname").click(function(e){
 // 			var sWidth = window.innerWidth;
 // 			var sHeight = window.innerHeight;
+			if (login_mem_no == $(this).attr('mem_no')){
+				return;
+			}
 			$("#btnGroup").attr('mem_no', $(this).attr('mem_no'));
 			$("#btnGroup").attr('mem_nickname', $(this).text());
 			var oWidth = $("#popup_layer").width();

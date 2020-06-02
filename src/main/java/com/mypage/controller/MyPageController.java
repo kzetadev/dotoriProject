@@ -128,11 +128,12 @@ public class MyPageController {
 	
 	//내가 쓴 글 & 댓글
 	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
-	public ModelAndView list(HttpServletRequest request) throws Exception{
+	public ModelAndView list(HttpServletRequest request, @RequestParam(name="mem_no", defaultValue="0")int mem_no) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		logger.info("list");
-		int mem_no  = 0;
-		if(LoginUser.isLogin()) {
+		if(mem_no != 0 && mem_no != LoginUser.getMember_no()) {
+			mav.addObject("other_mem_no", mem_no);
+		}else if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
 		List<MyPage_PostVo> list_post = myPage_commentService.list_post(mem_no);
@@ -246,10 +247,14 @@ public class MyPageController {
 
 	// 내가 받은 쪽지 목록
 	@RequestMapping("/member/myPage_Message.do")
-	public ModelAndView myPage_Message(@RequestParam(name="msg_type", defaultValue="send")String msg_type) {
+	public ModelAndView myPage_Message(@RequestParam(name="msg_type", defaultValue="send")String msg_type, @RequestParam(name="mem_no", defaultValue="0")int mem_no) {
 		ModelAndView m = new ModelAndView();
 		System.out.println("/member/myPage_Message.do " + msg_type);
-		int mem_no = LoginUser.getMember_no();
+		if(mem_no != 0) {
+			m.addObject("other_mem_no", mem_no);
+		}else if(LoginUser.isLogin()) {
+			mem_no = LoginUser.getMember_no();
+		}
 		List<Member_MessageListVo> msgList = null;
 		if(msg_type.equals("send")) {
 			msgList = myPage_commentService.sendMsgList(mem_no);
@@ -266,17 +271,18 @@ public class MyPageController {
 	
 	// 마이페이지 메인
 	@RequestMapping("/member/myPage.do")
-	public ModelAndView myPage_Main() {
+	public ModelAndView myPage_Main(@RequestParam(name="mem_no", defaultValue="0")int mem_no) {
 		System.out.println("마이페이지 메인 컨트롤러");
-		int mem_no = 0;
+		
 		ModelAndView m = new ModelAndView();
 		logger.info("list");
-		if(LoginUser.isLogin()) {
+		if(mem_no != 0 && mem_no != LoginUser.getMember_no()) {
+			m.addObject("other_mem_no", mem_no);
+		}else if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
 		m.addObject("main", mypage_mainService.myPage_Main(mem_no));
 		System.out.println("마이페이지 메인 컨트롤러");
 		return m;
 	}
-	
 }
