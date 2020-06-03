@@ -41,6 +41,15 @@
 		select mem_pwd from member_info mem_id = #{mem_id} and mem_email= #{mem_email}
 	</select>
 	
+	<update id="upCode">
+		update member_info set mem_check_code =#{mem_check_code} where mem_id = #{mem_id}
+	</update>
+	
+	<!-- 인증번호 중복 체크 -->
+	<select id="checkCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from member_info where mem_check_code = #{mem_check_code}
+	</select>
+	
 	<!-- 아이디 중복 체크 --> 
 	<select id="checkOverId" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member_info where mem_id = #{mem_id}

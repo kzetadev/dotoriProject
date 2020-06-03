@@ -23,6 +23,7 @@ public class Member_InfoVo {
 	private String mem_img; // 프로필 사진
 	private String mem_role; // 사용자/관리자
 	private int mem_auth;	//인증여부
+	private int mem_check_code;
 	
 	private MultipartFile uploadFile;
 	

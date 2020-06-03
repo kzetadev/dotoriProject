@@ -18,7 +18,7 @@
 		<tr>
 			<td>
 			<div style="text-align:center">
-				<form action="/member/pass_change.do${mem_email }" method="post">
+				<form action="/member/pass_change.do ${member.mem_email }" method="post">
 			<div style="text-align:center">
 					<br>
 					<div>

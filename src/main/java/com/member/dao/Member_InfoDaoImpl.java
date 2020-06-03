@@ -66,10 +66,25 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("mem_info.checkOverEmail", mem_email);
 	}
+	
+	@Override
+	public int checkCode(int mem_check_code) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("mem_info.checkCode", mem_check_code);
+	}
 	@Override
 	public int emailAuth(Member_InfoVo vo) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.update("mem_info.emailAuth", vo);
+	}
+	
+	@Override
+	public int updateCode(Member_InfoVo vo) throws Exception {
+		
+		return sqlSessionTemplate.update("mem_info.upCode", vo);
+		
+		
+		
 	}
 	
 	//비밀번호 변경

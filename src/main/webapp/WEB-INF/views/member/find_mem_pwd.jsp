@@ -19,24 +19,31 @@ $(function(){
 	if(responseMsg != ""){
 		alert(responseMsg)
 	}
-
-	$("#submit")clcik(function(){
+	$("#form").submit(function(event){
+		event.preventDefault();
+//	$("#submit")clcik(function(){
 		var mem_info = {
-			mem_id: ${"#mem_id"}.val(),
-			mem_email:${"#mem_email"}.val() + ${"#mail2"}.val()
+			mem_id: $("#mem_id").val(),
+			mem_email:$("#mem_email").val() + $("#mail2").val()
 		}
 		console.log(mem_info);
 		console.log(mem_info.mem_email);
 		$.ajax({
-			url:"/member/find_pwd.do",
+			url:"/member/find_pass.do",
 			type:"POST",
-			beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-				xhr.setRequestHeader("${_csrf.headerName}","${_csrf.token}");
-			},
 			data:mem_info,
+// 			beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+// 				xhr.setRequestHeader("${_csrf.headerName}","${_csrf.token}");
+// 			},
+			
 			success:function(re){
 				console.log("find re : " + re);
-				alert(re);
+				if(re == 1){
+					alert("입력하신 이메일 주소에서 인증번호를 확인해주세요")
+					location.href = "/member/pass_email.do?mem_id="+$('#mem_id').val();
+				}else{
+					alert("다시 입력해주세요")
+				}
 			}
 		})
 	})
@@ -44,9 +51,12 @@ $(function(){
 
 </script>
 <body>
-	<form action="/member/findMem_pwd.do" method="post">
+	
 		<div style="text-align: center;"><br><br><br>
 			<span style="color: green; font-weight: bold;">비밀번호 찾기</span><br><br>
+		</div>
+		
+		<form id="form" action="/member/find_pass.do" method="post">
 			아이디 : <input type="text" name="mem_id" id="mem_id" placeholder="아이디를 입력하시오"><br><br>
 			이메일 : <input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50">@
 						<select id="mail2" name="mail2">
@@ -56,7 +66,7 @@ $(function(){
                             <option value="@nate.com">nate.com</option>                        
                         </select>
              <button type="submit" name="submit" id="submit">확인</button>
-		</div>
+		
 	 입력하신 이메일로 인증번호가 발송 됩니다. 받으신 인증번호를 입력해주세요
 	</form>
 </body>

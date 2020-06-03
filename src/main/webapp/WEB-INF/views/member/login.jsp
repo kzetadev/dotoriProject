@@ -150,6 +150,10 @@ $(function(){
 						<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/findMem_id.do">계정찾기</a>
 					</div>
 					
+					<div class="form-group">
+						<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/findMem_pwd.do">비번찾기</a>
+					</div>
+					
 					<!-- <button class="btn btn-default" style="background-color:#EFEFEF; color:black;"></button> -->
 
 				<%--스프링 시큐리티 제공 최근 발생한 인증 오류 메시지--%>
