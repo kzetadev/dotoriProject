@@ -20,13 +20,13 @@ $(document).ready(function(){
 	<div id="boards" class="container">
 		<ul class="nav nav-tabs">
 			<li class="boards" id="1">
-				<a class="board" type="1" href="/board/listBoard_Gallery.do?board_kinds=1">자유게시판</a>
+				<a class="board" type="1" href="/board/listBoard_Gallery.do?board_kinds=1">자유</a>
 			</li>
 			<li class="boards" id="2">
-				<a class="board" type="2" href="/board/listBoard_Gallery.do?board_kinds=2">후기게시판</a>
+				<a class="board" type="2" href="/board/listBoard_Gallery.do?board_kinds=2">후기</a>
 			</li>
 			<li class="boards" id="3">
-				<a class="board" type="3" href="/board/listBoard_Gallery.do?board_kinds=3">동행게시판</a>
+				<a class="board" type="3" href="/board/listBoard_Gallery.do?board_kinds=3">동행</a>
 			</li>
 		</ul>
 		<div class="container">
