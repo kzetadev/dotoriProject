@@ -15,8 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.member.service.JoinService;
 import com.member.service.LoginService;
 import com.member.vo.Member_InfoVo;
@@ -39,7 +42,8 @@ public class LoginController {
 	
 	@Inject
 	LoginService memberservice; //서비스를 호출하기 위해 의존성 투입
-	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	@Resource(name="loginService")
 	private LoginService loginService;
 	@RequestMapping("/member/loginCheck.do")
@@ -118,15 +122,21 @@ public class LoginController {
 	
 	
 	//비밀번호 찾기 처리(이메일 발송)
-	@RequestMapping(value="/member/find_pass.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/find_pass.do", method=RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public ModelAndView find_pass(HttpServletRequest request, String mem_id, String mem_email, HttpServletResponse response_email) throws IOException{
+	public int find_pass(HttpServletRequest request, String mem_id, String mem_email, HttpServletResponse response_email) throws IOException{
 		//랜덤 난수(인증번호)를 생성해서 이메일로 보내고 그 인증번호를 입력하면 비밀번호을 변경할 수 있는 페이지로 이동시킴
+		
+		Member_InfoVo vo = loginService.loginById(mem_id);
+		if(vo == null || !vo.getMem_email().equals(mem_email) ) {
+			
+			return 0;
+		}
 		
 		Random r = new Random();
 		int dice = r.nextInt(157211)+48271;
-		
-		String setFrom = "o_o3293@naver.com";
+		int re = 0;
+		String setFrom = "kzeta@naver.com";
 		String tomail = request.getParameter("mem_email");//받는 사람의 이메일
 		String title = "비밀번호 찾기 인증 이메일입니다"; //제목
 		String content =
@@ -150,46 +160,56 @@ public class LoginController {
 					messgeHelper.setText(content); //메일 내용
 					
 					mailSender.send(message);
+					vo.setMem_check_code(dice);
+					
+					
+					re = loginService.updateCode(vo);//업데이트를 실행 해줘야 함
 					
 				} catch (Exception e) {
 					System.out.println(e);
 					// TODO: handle exception
 				}
 				
-				ModelAndView mav = new ModelAndView(); //ModelAndView로 보낼 페이지 지정, 보낼 값을 지정
-				mav.setViewName("/member/pass_email"); //뷰 이름
-				mav.addObject("dice", dice);
-				mav.addObject("mem_email", mem_email);
-				
-				System.out.println("mav :" + mav);
-				
-				response_email.setContentType("text/html; charset=UTF-8"); 
-				PrintWriter out_email = response_email.getWriter();
-				out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-				out_email.flush();
-				
-				return mav;
-				
+
+//				String re = "";
+//				Map map = new HashMap();
+//				map.put("dice", dice);
+//				map.put("mem_email", mem_email);
+//				Gson gson = new Gson();
+//				re = gson.toJson(map);
+//				System.out.println(re);
+				return re;
 	}
-			//인증번호를 입력한 후에 확인 버튼을 누르면 자료가 넘어오는 컨트롤러
 		
-		@RequestMapping(value="/member/pass_injeung.do {dice},{mem_email", method = RequestMethod.POST)	
-		public ModelAndView pass_injeung(HttpServletRequest request, String pass_injeung,@PathVariable String dice, @PathVariable String mem_email,HttpServletResponse response_equals) throws IOException{
+	
+		@RequestMapping(value="/member/pass_email.do", method = RequestMethod.GET)
+		public ModelAndView getEmail(HttpServletRequest request, String mem_id) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("mem_id", mem_id);
+			
+			
+			return mav;
+			
+		}
+	
+		//인증번호를 입력한 후에 확인 버튼을 누르면 자료가 넘어오는 컨트롤러
+		@RequestMapping(value="/member/pass_injeung.do {mem_id}", method = RequestMethod.POST)	
+		public ModelAndView pass_injeung(HttpServletRequest request, int pass_injeung, @PathVariable String mem_id,HttpServletResponse response_equals) throws IOException{
 			System.out.println("마지막 : pass_injeung : " + pass_injeung);
-			System.out.println("마지막 : dice :" + dice );
+			
 			
 			ModelAndView mav = new ModelAndView();
 			
-			mav.setViewName("/member/pass_change");
-			mav.addObject("mem_email", mem_email);
+			Member_InfoVo vo = loginService.loginById(mem_id);
+			System.out.println("마지막 : check_code :" + vo.getMem_check_code() );
 			
 			
-			if (pass_injeung.equals(dice)) {
+			if (pass_injeung == vo.getMem_check_code()) {
 				
 				//만약 인증번호가 같다면 이메일을 비밀번호 변경 페이지로 넘기고, 활용할 수 있도록
 				
 				mav.setViewName("/member/pass_change");
-				mav.addObject("mem_email", mem_email);
+				mav.addObject("member" , vo);
 				
 				response_equals.setContentType("text/html; charset=UTF-8");
 				PrintWriter out_equals = response_equals.getWriter();
@@ -197,7 +217,7 @@ public class LoginController {
 				out_equals.flush();
 				
 				return mav;
-			}else if(pass_injeung != dice) {
+			}else {
 				ModelAndView mav2 = new ModelAndView();
 				mav2.setViewName("/member/pass_email");
 				
@@ -208,17 +228,18 @@ public class LoginController {
 				
 				return mav2;
 			}
-			return mav;
+			
 		}
 		//변경할 비밀번호를 입력한 후에 확인 버튼을 누르면 넘어오는 컨트롤러
 		@RequestMapping(value = "/member/pass_change.do {mem_email}", method = RequestMethod.POST)
-		public ModelAndView pass_change(HttpServletRequest request, @PathVariable String mem_email, Member_InfoVo vo, HttpServletResponse pass) throws Exception{
+		public String pass_change(HttpServletRequest request, @PathVariable String mem_email, Member_InfoVo vo, HttpServletResponse pass) throws Exception{
 		String mem_pwd = request.getParameter("mem_pwd");
 		
 		String mem_email1 = mem_email;
 		
 		vo.setMem_email(mem_email1);
-		vo.setMem_pwd(mem_pwd);
+		String encode_passwod = passwordEncoder.encode(mem_pwd);
+		vo.setMem_pwd(encode_passwod);
 		
 		//값을 여러개 담아야 하므로 해쉬맵을 사용해서 값을 저장함
 		
@@ -229,11 +250,11 @@ public class LoginController {
 		
 		memberservice.pass_change(map, vo);
 		
-		ModelAndView mav = new ModelAndView();
+		//ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("/member/find_pass_result");
+		//mav.setViewName("/member/find_pwd_result");
 		
-		return mav;
+		return mem_email;
 		}
 	
 }

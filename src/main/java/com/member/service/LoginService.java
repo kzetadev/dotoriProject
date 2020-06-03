@@ -17,8 +17,14 @@ public interface LoginService {
 	//비밀번호 변경
 	void pass_change(Map<String, Object> map, Member_InfoVo vo) throws Exception;
 	
+	
+	
 	String find_idCheck(Member_InfoVo vo); //아이디 찾기
 	
 	String find_pwdCheck(Member_InfoVo vo);//비밀번호 찾기
-
+	
+	int updateCode(Member_InfoVo vo) throws Exception;
+	
+	//인증코드 중복 체크
+	int checkCode(int mem_check_code);
 }

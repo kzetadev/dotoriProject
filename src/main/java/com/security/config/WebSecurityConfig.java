@@ -61,8 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/member/joinForm.do", "/member/join.do"
 				, "/member/emailCheck.do", "/member/idCheck.do"
 				, "/member/nickCheck.do", "/css/**", "/fonts/**", "/img/**", "/js/**"
-				, "/member/findMem_id.do", "/member/findMem_pwd.do","/member/find_pwd.do","/member/find_id.do"
-				, "/member/find_id_result.do");
+				, "/member/findMem_id.do","/member/find_pass.do","/member/find_id.do"
+				, "/member/find_id_result.do", "/member/findMem_pwd.do","/member/pass_email.do","/member/pass_injeung.do**","/member/pass_change.do**");
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/",  "/member/login.do"
 					, "/main.do", "/unifiedSearch.do/**", "/getCondition.do/**", "/getBoardCondition.do/**"
 					, "/searchPlace.do/**", "/searchBoard.do/**", "/mailAuth.do"
-					, "/board/mainBoard_Post.do", "/board/listBoard_Post.do", "/board/listBoard_Gallery.do"
+					, "/board/mainBoard_Post.do", "/member/findMem_pwd.do", "/board/listBoard_Post.do", "/board/listBoard_Gallery.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
 			.anyRequest().authenticated();
 //		http.exceptionHandling().accessDeniedPage("/403");	//접근 거부 페이지 추가해야됨.

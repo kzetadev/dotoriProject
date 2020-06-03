@@ -21,7 +21,7 @@ $(function(){
 	if(responseMsg != ""){
 		alert(responseMsg)
 	}
-// 	$("#submit")clcik(function(){
+
 	$("#form").submit(function(event){
 		event.preventDefault();
 		var mem_info = {
@@ -53,8 +53,10 @@ $(function(){
 </script>
 
 	<div style="text-align: center;"><br><br><br>
-		<span style="color:green; font-weight:bold;">아이디 찾기</span><br><br>
+		<span style="color:green; font-weight:bold;" id="find_id">아이디 찾기</span><br><br>
 	</div>
+	
+	
 	<!-- 아이디를 찾는 페이지(이메일을 입력하면 db에 연동 후, db에 저장된 아이디가 출력됨 -->
 	<form id="form" action="/member/find_id.do" method="post">
 	<div style="text-align: center;">

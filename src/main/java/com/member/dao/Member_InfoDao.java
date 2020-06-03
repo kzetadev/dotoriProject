@@ -21,6 +21,13 @@ public interface Member_InfoDao {
 	int checkOverNickName(String mem_nickname);
 	//이메일 중복 체크
 	int checkOverEmail(String mem_email);
+	
+	//인증코드 해당 id 인증코드에 업데이트
+	int updateCode(Member_InfoVo vo) throws Exception;
+	
+	//이메일 인증코드 중복 체크
+	int checkCode(int mem_check_code);
+	
 	//이메일 인증
 	int emailAuth(Member_InfoVo vo);
 	

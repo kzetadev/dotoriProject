@@ -40,5 +40,16 @@ public class LoginServiceImpl implements LoginService {
 		return mem_pwd;
 	}
 	
+	@Override
+	public int updateCode(Member_InfoVo vo) throws Exception {
+		return member_infoDao.updateCode(vo);
+		
+	}
+	//인증코드 중복 서비스
+	@Override
+	public int checkCode(int mem_check_code) {
+		// TODO Auto-generated method stub
+		return member_infoDao.checkCode(mem_check_code);
+	}
 	
 }

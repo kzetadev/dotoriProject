@@ -18,7 +18,7 @@
 		<tr>
 			<td>
 				<div>
-					<form action="/member/pass_injeung.do${dice },${mem_email}" method="post">
+					<form action="/member/pass_injeung.do ${mem_id }" method="post">
 						<div>
 							<br>
 							<div>
