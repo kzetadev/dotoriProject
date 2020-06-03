@@ -71,17 +71,29 @@ public class MyPage_commentDaoImpl implements MyPage_commentDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.insert("myPage.sendMessage", vo);
 	}
+	//발신 쪽지 레코드 카운트 가져오기
+	@Override
+	public int sendMsgRecordcount(int mem_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("myPage.sendMsgRecordcount", mem_no);
+	}
 	//발신 쪽지 목록 가져오기
 	@Override
-	public List<Member_MessageListVo> sendMsgList(int mem_no) {
+	public List<Member_MessageListVo> sendMsgList(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("myPage.sendMsgList", mem_no);
+		return sqlSessionTemplate.selectList("myPage.sendMsgList", map);
+	}
+	//수신 쪽지 레코드 카운트 가져오기
+	@Override
+	public int receiveMsgRecordcount(int mem_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("myPage.receiveMsgRecordcount", mem_no);
 	}
 	//수신 쪽지 목록 가져오기
 	@Override
-	public List<Member_MessageListVo> receiveMsgList(int mem_no) {
+	public List<Member_MessageListVo> receiveMsgList(Map map) {
 		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectList("myPage.receiveMsgList", mem_no);
+		return sqlSessionTemplate.selectList("myPage.receiveMsgList", map);
 	}
 	//쪽지 읽기 여부 저장
 	@Override

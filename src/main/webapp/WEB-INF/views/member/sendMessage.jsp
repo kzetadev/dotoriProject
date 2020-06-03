@@ -3,7 +3,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 
-<layoutTag:layout>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,4 +83,3 @@ $(document).ready(function(){
 	</div>
 </body>
 </html>
-</layoutTag:layout>

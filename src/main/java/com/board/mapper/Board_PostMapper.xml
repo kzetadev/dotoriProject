@@ -173,16 +173,26 @@
 		 where instr(board_content, 'data:image') > 0
 		 order by board_kinds
 	</select>
+	<!-- 각 게시판별 총 레코드 카운트 조회 -->
+	<select id="galleryBoardRecordCount" resultType="java.lang.Integer">
+		select count(board_no)
+		  from board_post
+		 where instr(board_content, 'data:image') > 0
+		 		and board_kinds = #{board_kinds}
+	</select>
 	<!-- 갤러리. 게시판 별 글 제목, 대표 이미지 조회 -->
 	<select id="galleryBoardImage" resultType="com.board.vo.Board_PostVo">
-		select rownum r, board_no, board_title, board_content
-		  from (select board_no, board_title
-		            , substr(board_content, instr(board_content, 'data:image')
-		                , instr(substr(board_content, instr(board_content, 'data:image')), '"')) board_content 
-		          from board_post
-		         where board_kinds = #{board_kinds}
-		              and instr(board_content, 'data:image') > 0
-		         order by board_no desc
-		       )
+		select r, board_no, board_title, board_content
+		  from (select rownum r, board_no, board_title, board_content
+				  from (select board_no, board_title
+				            , substr(board_content, instr(board_content, 'data:image')
+				                , instr(substr(board_content, instr(board_content, 'data:image')), '"')) board_content 
+				          from board_post
+				         where board_kinds = #{board_kinds}
+				              and instr(board_content, 'data:image') > 0
+				         order by board_no desc
+				       )
+				)
+		 where r between #{start_idx} and #{end_idx}
 	</select>
 </mapper>

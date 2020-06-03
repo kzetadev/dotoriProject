@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.PagingUtil;
 import com.member.service.LoginService;
 import com.member.service.MyPage_MainService;
 import com.member.service.MyPage_commentService;
@@ -247,22 +248,40 @@ public class MyPageController {
 
 	// 내가 받은 쪽지 목록
 	@RequestMapping("/member/myPage_Message.do")
-	public ModelAndView myPage_Message(@RequestParam(name="msg_type", defaultValue="send")String msg_type, @RequestParam(name="mem_no", defaultValue="0")int mem_no) {
+	public ModelAndView myPage_Message(@RequestParam(name="msg_type", defaultValue="send")String msg_type
+			, @RequestParam(name="mem_no", defaultValue="0")int mem_no
+			, @RequestParam(name="pageNum", defaultValue="1")int pageNum) {
 		ModelAndView m = new ModelAndView();
 		System.out.println("/member/myPage_Message.do " + msg_type);
+		int pageSize = 10;
+		int pageGroup = 10;
+		int totalRecord = 0;
 		if(mem_no != 0) {
 			m.addObject("other_mem_no", mem_no);
+			m.addObject("other_mem_no_str", "&mem_no=" + mem_no);
 		}else if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
 		List<Member_MessageListVo> msgList = null;
+		Map map = null;
 		if(msg_type.equals("send")) {
-			msgList = myPage_commentService.sendMsgList(mem_no);
+			totalRecord = myPage_commentService.sendMsgRecordcount(mem_no);
+			map = PagingUtil.pager(pageNum, totalRecord, pageSize, pageGroup);
+			map.put("mem_no", mem_no);
+			msgList = myPage_commentService.sendMsgList(map);
 		}else {
-			msgList = myPage_commentService.receiveMsgList(mem_no);
+			totalRecord = myPage_commentService.receiveMsgRecordcount(mem_no);
+			map = PagingUtil.pager(pageNum, totalRecord, pageSize, pageGroup);
+			map.put("mem_no", mem_no);
+			msgList = myPage_commentService.receiveMsgList(map);
 		}
+		m.addObject("msg_type_str", "&msg_type=" + msg_type);
 		m.addObject("msg_type", msg_type);
 		m.addObject("msgList", msgList);
+		m.addObject("start_page", map.get("start_page"));
+		m.addObject("end_page", map.get("end_page"));
+		m.addObject("page_num", pageNum);
+		m.addObject("total_page", map.get("total_page"));
 		
 //		m.addObject("sendMsg", myPage_commentService.sendMsgList(mem_no));
 //		m.addObject("receiveMsg", myPage_commentService.receiveMsgList(mem_no));

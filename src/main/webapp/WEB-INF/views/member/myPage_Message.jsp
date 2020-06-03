@@ -216,6 +216,29 @@ a {
 								</table>
 							</div>
 						</div>
+						
+						<!-- 페이징 처리 -->
+						<ul class="pagination pagination-lg">
+							<c:if test="${start_page > 1}">
+								<li>
+									<a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${start_page - 1}" aria-label="이전">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+							</c:if>
+							
+							<c:forEach var="i" begin="${start_page }" end="${end_page }">
+								<li><a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${i}">${i }</a></li>
+							</c:forEach>
+							
+							<c:if test="${end_page < total_page }">
+								<li>
+									<a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${end_page + 1}" aria-label="다음">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
+						</ul>
 <!-- 					</div> -->
 
 <!-- 					<div id="tab2" class="tabcontent"> -->

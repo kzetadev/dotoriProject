@@ -90,6 +90,12 @@ public class Board_PostServiceImpl implements Board_PostService {
 		// TODO Auto-generated method stub
 		return board_postDao.searchBoard(map);
 	}
+	//각 게시판별 총 레코드 카운트 조회
+	@Override
+	public int galleryBoardRecordCount(int board_kinds) {
+		// TODO Auto-generated method stub
+		return board_postDao.galleryBoardRecordCount(board_kinds);
+	}
 	// 갤러리. 이미지가 포함된 게시판 종류 조회
 	@Override
 	public List<Map> galleryBoardkinds() {

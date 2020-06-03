@@ -27,12 +27,18 @@ public interface MyPage_commentService {
 	
 	//쪽지 보내기
 	int sendMessage(Member_MessageVo vo);
-
+	
+	//발신 쪽지 레코드 카운트 가져오기
+	int sendMsgRecordcount(int mem_no);
+	
 	//발신 쪽지 목록 가져오기
-	List<Member_MessageListVo> sendMsgList(int mem_no);
+	List<Member_MessageListVo> sendMsgList(Map map);
+	
+	//수신 쪽지 레코드 카운트 가져오기
+	int receiveMsgRecordcount(int mem_no);
 	
 	//수신 쪽지 목록 가져오기
-	List<Member_MessageListVo> receiveMsgList(int mem_no);
+	List<Member_MessageListVo> receiveMsgList(Map map);
 	
 	//쪽지 읽기 여부 저장
 	int messageRead(int post_no);

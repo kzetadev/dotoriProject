@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.PagingUtil;
 import com.board.service.Board_CommentService;
 import com.board.service.Board_PostService;
 import com.board.service.Head_TagService;
@@ -310,15 +311,27 @@ public class Board_PostController {
 	}
 	
 	@RequestMapping("/board/listBoard_Gallery.do")
-	public ModelAndView listBoard_Gallery(@RequestParam(name="board_kinds", defaultValue="1")int board_kinds) {
+	public ModelAndView listBoard_Gallery(@RequestParam(name="board_kinds", defaultValue="1")int board_kinds
+			, @RequestParam(name="pageNum", defaultValue="1")int pageNum) {
 		ModelAndView mav = new ModelAndView();
-		Map map = new HashMap();
+		Map map = null;
+		int pageSize = 3;
+		int pageGroup = 5;
+		int totalRecord = 0;
+		totalRecord = board_postService.galleryBoardRecordCount(board_kinds);
+		map = PagingUtil.pager(pageNum, totalRecord, pageSize, pageGroup);
 		map.put("board_kinds", board_kinds);
 		mav.addObject("boards", board_postService.galleryBoardkinds());
-		List<Board_PostVo> imgList = board_postService.galleryBoardImage(map);
-		System.out.println(imgList);
+//		List<Board_PostVo> imgList = board_postService.galleryBoardImage(map);
+//		System.out.println(imgList);
 		mav.addObject("imgList", board_postService.galleryBoardImage(map));
 		mav.addObject("board_kinds", board_kinds);
+		mav.addObject("board_kinds_str", "board_kinds=" + board_kinds);
+		mav.addObject("start_page", map.get("start_page"));
+		mav.addObject("end_page", map.get("end_page"));
+		mav.addObject("page_num", pageNum);
+//		mav.addObject("page_num_str", "&pageNum=" + pageNum);
+		mav.addObject("total_page", map.get("total_page"));
 		return mav;
 	}
 }
