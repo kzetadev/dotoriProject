@@ -80,8 +80,8 @@ public class Board_PostController {
 	}
 	// 게시글 목록
 	   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
-	   public ModelAndView listBoard_Post(String str) {
-	      
+	   public ModelAndView listBoard_Post(@RequestParam(name="str", defaultValue="1")String str) {
+	      System.out.println("str : " + str);
 	      String stotalRecord = "";
 	      String sNum = "";
 	      String eMum = "";
@@ -89,7 +89,7 @@ public class Board_PostController {
 	      String sel1 = "";
 	      String sel2 = "";
 	      int boardKinds = 0;
-	      
+	      String board_kinds_str = "";
 	      int startNum = 0;
 	      int endNum = 0;
 	      int listCount = 0;
@@ -101,21 +101,25 @@ public class Board_PostController {
 	      // 해당 부분에 Member_Info 추가해야 함
 	      
 	      if("1".equals(str) || "2".equals(str) || "3".equals(str)) {
-	    	  
+	    	  boardKinds = Integer.parseInt(str);
 	      } else if ("".equals(str) || str == null){
-	    	  str = "0"; //기본값 설정
+	    	  str = "1"; //기본값 설정
+	    	  boardKinds = Integer.parseInt(str);
 	      } else {
 	    	  if(str != null) {
 	    		  String getStr[] = keyWord.split("@");
 	    		  for(int i=0; i<getStr.length; i++) {
 	    			  if(i == 0) {
-	    				  sel1 = getStr[0]; //말머리
+	    				  boardKinds = Integer.parseInt(getStr[0]);
 	    			  }
 	    			  if(i == 1) {
-	    				  sel2 = getStr[1];	//검색 키워드
+	    				  sel1 = getStr[0]; //말머리
 	    			  }
 	    			  if(i == 2) {
-	    				  curPage = Integer.parseInt(getStr[2]);
+	    				  sel2 = getStr[1];	//검색 키워드
+	    			  }
+	    			  if(i == 3) {			//페이지
+	    				  curPage = Integer.parseInt(getStr[3]);
 	    			  }
 	    		  }
 	    	  }
@@ -152,10 +156,22 @@ public class Board_PostController {
 		      
 		      totalPage = (int)Math.ceil(totalRecord / pageSIZE);
 		      
+		      switch (boardKinds) {
+			      case 1:
+			    	  board_kinds_str = "자유게시판";
+			    	  break;
+			      case 2:
+			    	  board_kinds_str = "후기게시판";
+			    	  break;
+			      case 3:
+			    	  board_kinds_str = "동행게시판";
+			    	  break;
+		      }
 		      mav.addObject("totalRecord", totalRecord);
 		      mav.addObject("totalPage", totalPage);
 		      mav.addObject("pageGroup", pageGroup);
 		      mav.addObject("boardKinds", boardKinds);
+		      mav.addObject("boardKinds_str", board_kinds_str);
 		      mav.addObject("curPage", curPage);
 		      mav.addObject("start", start);
 		      mav.addObject("end", end);
@@ -166,6 +182,20 @@ public class Board_PostController {
 		    	  mem_no = LoginUser.getMember_no();
 		      }
 		      mav.addObject("login_mem_no", mem_no);
+	      }else {
+	    	  switch (boardKinds) {
+		      case 1:
+		    	  board_kinds_str = "자유게시판";
+		    	  break;
+		      case 2:
+		    	  board_kinds_str = "후기게시판";
+		    	  break;
+		      case 3:
+		    	  board_kinds_str = "동행게시판";
+		    	  break;
+	    	  }
+	    	  mav.addObject("boardKinds", boardKinds);
+		      mav.addObject("boardKinds_str", board_kinds_str);
 	      }
 	      return mav;
 	   }

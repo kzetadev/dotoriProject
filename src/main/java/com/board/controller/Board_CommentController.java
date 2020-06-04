@@ -83,17 +83,17 @@ public class Board_CommentController {
 	
 	// x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함)
 	@RequestMapping("/board/updateBoard_Comment.do")
-	public ModelAndView updateBoard_Comment(Board_CommentVo vo) {
-		ModelAndView m = new ModelAndView();
+	@ResponseBody
+	public int updateBoard_Comment(Board_CommentVo vo) {
 		int re = board_commentService.updateBoard_Comment(vo);
-		return m;
+		return re;
 	}
 	
 	// x번 회원이 x번 게시글에 쓴 댓글을 삭제 (첨부파일 삭제는 고려 안함)
 	@RequestMapping("/board/deleteBoard_Comment.do")
-	public ModelAndView deleteBoard_Comment(Board_CommentVo vo) {
-		ModelAndView m = new ModelAndView();
+	@ResponseBody
+	public int deleteBoard_Comment(Board_CommentVo vo) {
 		int re = board_commentService.deleteBoard_Comment(vo);
-		return m;
+		return re;
 	}
 }

@@ -152,39 +152,102 @@
 						console.log(comment);
 						var li = $("<li/>");
 						//댓글 노드 만들기
-						var div = $("<div class='comment' comment_no='" + comment['comment_no'] + "' board_ref='" + comment['board_ref'] + "' board_level='" + comment['board_level'] + "'/>");
+						var div = $("<div class='comment' comment_del='" + comment['comment_del'] + "' board_no='" + $("#board_no").val() + "' comment_no='" + comment['comment_no'] + "' board_ref='" + comment['board_ref'] + "' board_level='" + comment['board_level'] + "'/>");
 						var divNickname = $("<span class='commentDetail' width='50'/>").text(comment['mem_nickname']);
-						var divContent = $("<span class='commentDetail' width='400'/>").text(comment['comment_content']);
+						var divBtn = $("<div class='text-right'/>");
+						var btnEdit = $("<button type='button' class='btn btn-default reply-edit' edit-state='0'/>").text("수정");
+						var btnDel = $("<button type='button' class='btn btn-default  reply-del'/>").text("삭제");
+						var divContent = $("<textarea readonly='readonly' class='form-control reply-content' rows='3' width='400'/>").text(comment['comment_content']);
+						var spanDelComment = $("<span width='100'/>").text("삭제된 댓글입니다.");
 						var divDate = $("<span class='commentDetail' width='100'/>").text(comment['comment_date']);
+						//edit-state - 0 : 수정	1 : 수정완료		전환용도
+						$(btnEdit).click(function(){
+							if($(this).attr('edit-state') == 0){	//수정할 떄. textarea readonly를 해제하여 입력 가능하게 변경
+								$(this).parent().parent().find(".reply-content").removeAttr('readonly');
+								$(this).attr('edit-state', '1');
+								$(this).text("수정완료");
+							}else{									//수정완료 할 때. 댓글 테이블에 해당 내용으로 수정.
+								var comment = {
+									comment_no:$(this).parent().parent().attr('comment_no')
+									, board_no:$("#board_no").val()
+									, mem_no:${mem_no}
+									, comment_content:$(this).parent().parent().find(".reply-content").val()
+								}
+								console.log(comment);
+								$.ajax({
+									url:"/board/updateBoard_Comment.do"
+									, type:"post"
+									, data:comment
+									, success:function(result){
+										if(result == 1){
+											alert("댓글이 수정되었습니다.");
+										}else{
+											alert("댓글 수정에 실패하였습니다.");
+										}
+										refreshComments();
+									}
+								});
+							}
+							console.log($(this).parent().parent().attr('board_no'));
+						});
+						$(btnDel).click(function(){
+							console.log($(this).parent().parent().attr('board_no'));
+							console.log($(this).parent().parent().attr('comment_no'));
+						});
+// 						$(btnEdit).toggle(function(){
+// 							console.log('1');
+// 							console.log($(this).parent().parent().attr('board_no'));
+// 							console.log($(this).parent().parent().attr('comment_no'));
+
+// 							console.log($(this).parent().parent().find(".reply-content").removeAttr('readonly'));
+// 							console.log($(this).parent().parent().find(".reply-content").text());
+// 							$(this).text("수정완료");
+// 						}, function(){
+// 							console.log('a');
+// 						});
+// 						$(btnEdit).toggle(function(){
+// 							console.log('a');
+// 						}, function(){
+// 							console.log('b');
+// 						});
+						$(divBtn).append(btnEdit, btnDel);
 						//해당 댓글 노드가 상위 노드(board_level == 1 이면 상위 댓글)이면
 						//클릭 시 댓글 작성란을 하단에 표시 
 						if(parseInt($(div).attr('board_level')) == 1){
-							$(div).click(function(){
-								console.log($(this).text());
-								console.log('board_level : ' + $(this).attr('board_level'));
-// 								console.log($(this).siblings().length);
-	// 							if($(this).next().find('#commentReplyArea').length == 0){
-	
-								//해당 댓글의 형제노드(댓글 작성란 노드)가 없으면, 댓글 작성란 노드를 해당 댓글 형제노드로 붙임. siblings : 형제노드들
-								if($(this).siblings().length == 0){
-	// 								console.log($(this).attr("board_level"));
-									//댓글을 작성할 상위 댓글 노드의 참조 인덱스(board_ref)를 저장. board_level은 댓글들에 대한 계층 표현. 1 : 상위댓글	2 : 하위 댓글  
-									$(commentReplyArea).attr('board_ref', $(this).attr('comment_no'));
-									$(commentReplyArea).attr('board_level', parseInt($(this).attr('board_level')) + 1);
-									$(commentReplyArea).attr('board_step', parseInt($(this).attr('board_level')) + 1);
-									//다른 상위 댓글 노드를 클릭해서 댓글 작성란 노드가 표시되어 있을 수 있으므로
-									//댓글 작성란 노드를 분리하여 숨김처리함. 
-									var temp = $(commentReplyArea).detach();
-									//현재 클릭된 상위 댓글 노드에 댓글 작성란 노드를 형제노드로 붙임.
-									//append로 추가 시 commentReplyArea 클릭이 div 클릭에 포함되어 after로 변경
-									$(this).after(temp);
-								}else{	//현재 클릭된 상위 댓글 노드에 댓글 작성란 노드가 형제 노드로 붙어 있다고 간주. 숨김처리 해야 하므로 detach 시킴.
-									$(commentReplyArea).detach();
+							
+							$(div).click(function(e){
+								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') && !$(this).attr('comment_del') == 0){
+									console.log($(this).text());
+									console.log('board_level : ' + $(this).attr('board_level'));
+	// 								console.log($(this).siblings().length);
+		// 							if($(this).next().find('#commentReplyArea').length == 0){
+		
+									//해당 댓글의 형제노드(댓글 작성란 노드)가 없으면, 댓글 작성란 노드를 해당 댓글 형제노드로 붙임. siblings : 형제노드들
+									if($(this).siblings().length == 0){
+		// 								console.log($(this).attr("board_level"));
+										//댓글을 작성할 상위 댓글 노드의 참조 인덱스(board_ref)를 저장. board_level은 댓글들에 대한 계층 표현. 1 : 상위댓글	2 : 하위 댓글  
+										$(commentReplyArea).attr('board_ref', $(this).attr('comment_no'));
+										$(commentReplyArea).attr('board_level', parseInt($(this).attr('board_level')) + 1);
+										$(commentReplyArea).attr('board_step', parseInt($(this).attr('board_level')) + 1);
+										//다른 상위 댓글 노드를 클릭해서 댓글 작성란 노드가 표시되어 있을 수 있으므로
+										//댓글 작성란 노드를 분리하여 숨김처리함. 
+										var temp = $(commentReplyArea).detach();
+										//현재 클릭된 상위 댓글 노드에 댓글 작성란 노드를 형제노드로 붙임.
+										//append로 추가 시 commentReplyArea 클릭이 div 클릭에 포함되어 after로 변경
+										$(this).after(temp);
+									}else{	//현재 클릭된 상위 댓글 노드에 댓글 작성란 노드가 형제 노드로 붙어 있다고 간주. 숨김처리 해야 하므로 detach 시킴.
+										$(commentReplyArea).detach();
+									}
 								}
 							});
 						}
+						
 						//댓글 노드 만들기
-						$(div).append(divNickname, divContent, divDate);
+						if(comment['comment_del'] == 0){
+							$(div).append(divNickname, divBtn, divContent, divDate);
+						}else{
+							$(div).append(divNickname, divBtn, spanDelComment, divDate);
+						}
 						//해당 댓글 노드가 대댓글이면 이미지로 대댓글임을 표시/
 						if(parseInt(comment['board_level']) > 1){
 // 							var reply = $("<span/>").text("▶");

@@ -21,6 +21,7 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+    var board_kinds = ${boardKinds};
    $(function() {
 // 	   var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
 // 	   $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
@@ -103,8 +104,8 @@
       $("#btnSelect").click(function() {
          var sel1 = document.getElementById("sel1").value;
          var sel2 = document.getElementById("sel2").value;
-         var keyword = sel1+"@"+sel2;
-         location.href = "/board/listBoard_Post.do?str="+encodeURI(keyword);
+         var keyword = board_kinds + "@" + sel1 + "@" + sel2;
+         location.href = "/board/listBoard_Post.do?str=" + encodeURI(keyword);
       });
    });
 
@@ -133,18 +134,18 @@
       var totalPage = $('input[name=totalPage]').val();
       var sel1 = document.getElementById("sel1").value;
       var sel2 = document.getElementById("sel2").value;
-      var keyword = sel1+"@"+sel2+"@"+numberChk;
-      location.href = "/board/listBoard_Post.do?str="+encodeURI(keyword);
+      var keyword = board_kinds + "@" + sel1 + "@" + sel2 + "@" + numberChk;
+      location.href = "/board/listBoard_Post.do?str=" + encodeURI(keyword);
 //      var totalPage = document.getElementById("totalPage").value;
 //      var tdTT = totalPage.innerText | totalPage.textContent;
    }   
 </script>
 </head>
 <body>
-	<h2>전체</h2>
+	<h2>${boardKinds_str }</h2>
 	
 	<div class="container">
-		<form id="form" action="/board/listBoard_Info.do">
+<!-- 		<form id="form"> -->
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="input-group">
@@ -167,7 +168,7 @@
 					</button>
 				</div>
 			</div>
-		</form>
+<!-- 		</form> -->
 	
 		<table  class="table table-hover">
 			<tr>

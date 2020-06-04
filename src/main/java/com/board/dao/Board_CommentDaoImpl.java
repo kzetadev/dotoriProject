@@ -46,9 +46,10 @@ public class Board_CommentDaoImpl implements Board_CommentDao {
 	}
 
 	// x번 회원이 x번 게시글에 쓴 댓글을 삭제 (첨부파일 삭제는 고려 안함)
+	//삭제된 댓글임을 표시하기 위해 delete문이 아닌 update문으로 논리삭제 시킴
 	@Override
 	public int deleteBoard_Comment(Board_CommentVo vo) {
-		return sqlSessionTemplate.delete("board_comment.delete", vo);
+		return sqlSessionTemplate.update("board_comment.delete", vo);
 	}
 	@Override
 	public int selectNextCommentNo(int board_no) {

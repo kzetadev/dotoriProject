@@ -33,29 +33,32 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	      if("1".equals(str) || "2".equals(str) || "3".equals(str)) {
 	    	  str5 = str;
 	      
-	      map.put("str3", str3);
-	      map.put("str4", str4);
-	      map.put("str5", str5);
-	      return sqlSessionTemplate.selectList("board_post.select", map);
+		      map.put("str3", str3);
+		      map.put("str4", str4);
+		      map.put("str5", str5);
+		      return sqlSessionTemplate.selectList("board_post.select", map);
 	      
 	      } else {
 	    	  if(str != null) {
 	    		  String getStr[] = keyWord.split("@");
 	    		  for(int i=0; i<getStr.length; i++) {
-	    			  if( i == 0 ) {
-	    				  str1 = getStr[0];
+    				  if(i == 0 ) {			//게시판종류
+    					  str5 = getStr[0];
+    				  }
+	    			  if( i == 1 ) {		//검색옵션
+	    				  str1 = getStr[1];
 	    			  }
 	    			  
-	    			  if( i == 1 ) {
-	    				  str2 = getStr[1];
+	    			  if( i == 2 ) {		//키워드
+	    				  str2 = getStr[2];
 	    			  }
 	    			  
-	    			  if( i == 2 ) {
-	    				  if(getStr[2].equals("1")) {
+	    			  if( i == 3 ) {		//페이지번호
+	    				  if(getStr[3].equals("1")) {
 	    					  str3 = Integer.toString(0);
 	    					  str4 = Integer.toString(10);
 	    				  }else {
-	    					  str3 = getStr[2];
+	    					  str3 = getStr[3];
 	    					  int str3int = Integer.parseInt(str3) - 1; 
 	    					  
 	    					  int startPage = str3int * 10;
@@ -66,9 +69,6 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	    				  }
 	    			  }
 	    			  
-	    			  if(i == 3 ) {
-	    				  str5 = getStr[3];
-	    			  }
 	    		  }
 	    		  map.put("str1", str1);
 	    		  map.put("str3", str3);
@@ -83,69 +83,70 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	    		  return sqlSessionTemplate.selectList("board_post.select",map);  
 	    	  } else {
 	    		  
-	    	  map.put("str3", str3);
-	    	  map.put("str4", str4);
-	    	  map.put("str5", str5);
-	    	  
-	    	  List<Board_PostListVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);
+		    	  map.put("str3", str3);
+		    	  map.put("str4", str4);
+		    	  map.put("str5", str5);
+		    	  
+		    	  List<Board_PostListVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);
+		    	  return sqlSessionTemplate.selectList("board_post.select",map);
 	    	  }
 	      }
 	      
-	      if(str != null) {
-	         String getStr[] = keyWord.split("@");
-	         for(int i=0; i<getStr.length; i++) {
-	            
-	            if(i == 0) {
-	               str1 = getStr[0];   
-	            }
-	            
-	            if(i == 1) {
-	               str2 = getStr[1];
-	            }
-	            
-	            if(i == 2) {
-	               
-	               if(getStr[2].equals("1")) {
- 
-	                  str3 = Integer.toString(0);
-	                  str4 = Integer.toString(10);
-	                  
-	               }else {
-
-	                  str3 = getStr[2];
-	                  int startPage = Integer.parseInt(str3) * 10;
-	                  int EndPage = startPage + 10;
-	                  
-	                  str3 = Integer.toString(startPage);
-	                  str4 = Integer.toString(EndPage);
-	               }
-	                              
-	            }
-	         }
-	         
-	         map.put("str1", str1);
-	         map.put("str3", str3);
-	         map.put("str4", str4);
-	         
-	         if(!"".equals(str2)) {
-	            map.put("str2", str2);
-	            System.out.println("Board_PostDaoImpl 체크포인트4 map.get() : "+ map.get("str1") + " : " + map.get("str2"));
-	         }
-	         
-	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
-	         System.out.println("Board_PostDaoImpl 쿼리결과#1 : " + aaa);
-	         return sqlSessionTemplate.selectList("board_post.select", map);         
-	         
-	      }else {
-
-	         map.put("str3", str3);
-	         map.put("str4", str4);
-	         
-	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
-	         System.out.println("Board_PostDaoImpl 쿼리결과#2 : " + aaa);
-	         return sqlSessionTemplate.selectList("board_post.select", map);            
-	         
-	      }
+//	      if(str != null) {
+//	         String getStr[] = keyWord.split("@");
+//	         for(int i=0; i<getStr.length; i++) {
+//	            
+//	            if(i == 0) {				//게시판 종류
+//	               str1 = getStr[0];   
+//	            }
+//	            
+//	            if(i == 1) {				//검색옵션
+//	               str2 = getStr[1];
+//	            }
+//	            
+//	            if(i == 2) {				//키워드
+//	               
+//	               if(getStr[2].equals("1")) {
+// 
+//	                  str3 = Integer.toString(0);
+//	                  str4 = Integer.toString(10);
+//	                  
+//	               }else {
+//
+//	                  str3 = getStr[2];
+//	                  int startPage = Integer.parseInt(str3) * 10;
+//	                  int EndPage = startPage + 10;
+//	                  
+//	                  str3 = Integer.toString(startPage);
+//	                  str4 = Integer.toString(EndPage);
+//	               }
+//	                              
+//	            }
+//	         }
+//	         
+//	         map.put("str1", str1);
+//	         map.put("str3", str3);
+//	         map.put("str4", str4);
+//	         
+//	         if(!"".equals(str2)) {
+//	            map.put("str2", str2);
+//	            System.out.println("Board_PostDaoImpl 체크포인트4 map.get() : "+ map.get("str1") + " : " + map.get("str2"));
+//	         }
+//	         
+//	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
+//	         System.out.println("Board_PostDaoImpl 쿼리결과#1 : " + aaa);
+//	         return sqlSessionTemplate.selectList("board_post.select", map);         
+//	         
+//	      }else {
+//
+//	         map.put("str3", str3);
+//	         map.put("str4", str4);
+//	         
+//	         List<Board_PostVo> aaa = sqlSessionTemplate.selectList("board_post.select", map);      
+//	         System.out.println("Board_PostDaoImpl 쿼리결과#2 : " + aaa);
+//	         return sqlSessionTemplate.selectList("board_post.select", map);            
+//	         
+//	      }
 
 	   }
 

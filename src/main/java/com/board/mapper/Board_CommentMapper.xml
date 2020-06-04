@@ -9,6 +9,7 @@
 		SELECT bc.comment_no, bc.board_ref, bc.board_level, bc.board_step, m.mem_no
 				, m.mem_nickname, bc.board_no, bc.comment_content
 				, to_char(bc.comment_date, 'YYYY-MM-DD HH:MI:SS') comment_date
+				, bc.comment_del
 		FROM board_comment bc, board_post bp, member_info m
 		WHERE bc.board_no = bp.board_no 
 			AND m.mem_no = bc.mem_no
@@ -43,11 +44,15 @@
 
 	<!-- x번 회원이 x번 게시글에 쓴 댓글을 수정 (첨부파일 수정은 고려 안함) -->
   <update id="update">
-	update board_comment set comment_content = #{comment_content}, comment_secret = #{comment_secret} where comment_no = #{comment_no}
+	update board_comment set comment_content = #{comment_content}, comment_secret = #{comment_secret} 
+	where comment_no = #{comment_no} and board_no = #{board_no} 
   </update>
   
   	<!-- 댓글번호가 x인 (x번 회원이 x번 게시글에 쓴) 댓글을 삭제 (첨부파일 삭제는 고려 안함) -->
-  <delete id="delete">
-	delete from board_comment where comment_no = #{comment_no}
-  </delete>
+  	<!-- 삭제된 댓글임을 표시하기 위해 delete문이 아닌 update문으로 논리삭제 시킴 -->
+  	<!-- comment_del - 0 : 삭제되지 않음	1 : 삭제됨 -->
+  <update id="delete">
+	update board_comment set comment_del = 1
+	where comment_no = #{comment_no} and board_no = #{board_no}
+  </update>
 </mapper>

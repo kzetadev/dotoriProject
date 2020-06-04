@@ -21,4 +21,5 @@ public class Board_CommentVo {
 	private int board_ref;    //리댓글시 참조되는 댓글번호
 	private int board_level;     //리댓글 넘버
 	private int board_step;     //댓글 순서
+	private int comment_del;	//댓글 삭제 여부
 }
