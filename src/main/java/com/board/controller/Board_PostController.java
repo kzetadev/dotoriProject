@@ -155,7 +155,15 @@ public class Board_PostController {
 		      mav.addObject("totalRecord", totalRecord);
 		      mav.addObject("totalPage", totalPage);
 		      mav.addObject("pageGroup", pageGroup);
-		      mav.addObject("boardKinds", boardKinds);
+		      System.out.println(boardKinds);
+		      // mav.addObject("boardKinds", boardKinds);
+		      if(boardKinds == 1) {
+		    	  mav.addObject("자유 게시판", boardKinds);
+		      }else if(boardKinds == 2){
+		    	  mav.addObject("후기 게시판", boardKinds);
+		      }else if(boardKinds == 3){
+		    	  mav.addObject("동행 게시판", boardKinds);
+		      }
 		      mav.addObject("curPage", curPage);
 		      mav.addObject("start", start);
 		      mav.addObject("end", end);
@@ -234,6 +242,7 @@ public class Board_PostController {
 //		mav.addObject("clist", clist);
 		return mav;
 	}
+	
 	@RequestMapping(value="/board/getBoardPost.do/{board_no}", method=RequestMethod.GET)
 	@ResponseBody
 	public String getBoardPost(@PathVariable("board_no")int board_no) {

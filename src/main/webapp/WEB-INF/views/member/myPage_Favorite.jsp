@@ -100,20 +100,27 @@
 				
 				<!-- 탭 부분 (전체와 place_type으로 구분) -->
 				<ul class="nav nav-tabs">
-				  <li role="presentation" class="active">
+				  <li role="presentation" id="all" class="active">
 				  	<a href="/member/myPage_Favorite.do">전체</a>
 				  </li>
 				  <li role="presentation" id="place">
 				  	<a href="/member/myPage_Favorite.do?place_type=0">명소</a>
 				  </li>
 				  <li role="presentation" id="restaurant">
-				  	<a href="/member/myPage_Favorite.do?place_type=1">음식점</a>
+				  	<a href="/member/myPage_Favorite.do?place_type=1">음식</a>
 				  </li>
 				  <li role="presentation" id="hotel">
 				  	<a href="/member/myPage_Favorite.do?place_type=2">숙소</a>
 				  </li>
 				</ul>
 				
+				<script type="text/javascript">
+					$(function(){
+						$(".all").click(function(){
+							
+						})
+					})
+				</script>
 				
 				<div class="panel panel-primary">
 					<div class="panel-heading">

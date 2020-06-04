@@ -133,19 +133,19 @@
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>
-				<a href="/place/listPlace_Info.do?sortColumn=${sortColumn }&place_type=${place_type }&pageNUM=${startPage-1 }${searchColumn}${keyword}" aria-label="이전">
+				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${startPage-1 }${sortColumn}${searchColumn}${keyword}" aria-label="이전">
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
 		</c:if>
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<li><a href="/place/listPlace_Info.do?sortColumn=${sortColumn }&place_type=${place_type }&pageNUM=${i }${searchColumn}${keyword}">${i }</a></li>
+			<li><a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${i }&sortColumn=${sortColumn}${searchColumn}${keyword}">${i }</a></li>
 		</c:forEach>
 		
 		<c:if test="${endPage < totalPage }">
 			<li>
-				<a href="/place/listPlace_Info.do?sortColumn=${sortColumn }&place_type=${place_type }&pageNUM=${endPage+1 }${searchColumn}${keyword}" aria-label="다음">
+				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${endPage+1 }${sortColumn}${searchColumn}${keyword}" aria-label="다음">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>

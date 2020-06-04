@@ -94,6 +94,10 @@
 </style>
 </head>
 <body>
+	<h2 id="h2" place_no="${place_no }" place_type="${place_type.place_type }" mem_no="${mem_no }">
+		<b>${p.place_name } (조회수 - ${p.place_hit })</b>
+	</h2>
+	
 	<!-- 찜 버튼 -->
 	<div class="b" align="center">
 		<button type="button" class="btn btn-default btn-lg" id="btn" onlyOne="${re }">
@@ -101,10 +105,6 @@
 		</button>
 	</div>
 	<br>
-
-	<h2 id="h2" place_no="${place_no }" place_type="${place_type.place_type }" mem_no="${mem_no }">
-		<b>${p.place_name } (조회수 - ${p.place_hit })</b>
-	</h2>
 
 	<!-- 이미지 슬라이더 -->
 	<div class="your-class" align="center" id="img">

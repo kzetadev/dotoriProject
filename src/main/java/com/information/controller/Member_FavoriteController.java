@@ -25,18 +25,18 @@ public class Member_FavoriteController {
 	@Resource(name="member_favoriteService")
 	private Member_FavoriteService member_favoriteService;
 
-//	// 마이페이지에 담기 (detailPlace_Info에서 처리함)
-//	@RequestMapping("/place/insertMember_Favorite.do")
-//	@ResponseBody
-//	public int InsertMember_Favorite(Member_FavoriteVo f) {
-//		f.setMem_no(LoginUser.getMember_no());
-//		
-//		int re = member_favoriteService.insertMember_Favorite(f);
-//		
-//		System.out.println("찜목록에 담긴 상품번호 : " + f.getFavorite_no());
-//		System.out.println(re);
-//		return re;
-//	}
+	// 마이페이지에 담기 (detailPlace_Info에서 처리함)
+	@RequestMapping("/place/insertMember_Favorite.do")
+	@ResponseBody
+	public int InsertMember_Favorite(Member_FavoriteVo f) {
+		f.setMem_no(LoginUser.getMember_no());
+		
+		int re = member_favoriteService.insertMember_Favorite(f);
+		
+		System.out.println("찜목록에 담긴 상품번호 : " + f.getFavorite_no());
+		System.out.println(re);
+		return re;
+	}
 	
 	// 마이페이지 찜 전체 리스트
 	@RequestMapping("/member/myPage_Favorite.do")

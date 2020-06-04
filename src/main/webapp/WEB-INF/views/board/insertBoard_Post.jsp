@@ -14,6 +14,18 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="/js/summernote-lite.js"></script>
 <script src="/js/summernote-ko-KR.js"></script>
+<style type="text/css">
+	h2, #text-align{
+		text-align:center;
+	}
+	body{
+		padding:0px;
+		margin:0px;
+	}
+	.container{
+		padding-left:150px;
+	}
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#board_content").summernote({
@@ -95,7 +107,7 @@
 				, dataType:'JSON'
 				, success:function(result){
 					$("#head_tag_div").empty();
-					var select = $("<select id='head_tag_no' name='head_tag_no' />");
+					var select = $("<select id='head_tag_no' class='form-control' name='head_tag_no' />");
 					$.each(result, function(idx, headtag){
 						var option = $("<option/>").val(headtag['head_tag_no']).text(headtag['head_tag_name']);
 						$(select).append(option);
@@ -185,60 +197,70 @@
 // 		        msg += form.c.value + "\n";
 // 	        alert(msg);
 // 		}
+
+		$("#btnList").click(function(){
+			location.href="/board/listBoard_Post.do?str=1"
+		})
+		
+		$("#btnReset").click(function(){
+			
+		})
 	});
 </script>
 </head>
 <body>
 	<h2>글쓰기</h2>
-	<form id="f" name="f" action="/board/insertBoard_Post.do" method="post">
-	<input type="hidden" id="mem_no" name="mem_no" value="${member.mem_no }">
-	<table border="1">
-<!-- 		select-option 변경 예시 -->
-<!-- 		<select id="select1" onchange="itemChange()"> -->
-<!-- 			<option>키보드</option> -->
-<!-- 			<option>마우스</option> -->
-<!-- 			<option></option> -->
-<!-- 		</select> -->
-		 
-<!-- 		<select id="select2"> -->
-<!-- 		</select> -->
-
-		<tr>
-			<td>
-				<select id="board_kinds" name="board_kinds">
-					<option value="1">자유</option>
-					<option value="2">후기</option>
-					<option value="3">동행</option>
-				</select>
-			</td>
-			<td>
-				<div id="head_tag_div">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>제목</td>
-			<td><input type="text" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required"></td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td><input type="text" name="mem_nickname" id="mem_nickname" readonly="readonly" value="${member.mem_nickname }"></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><div name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required"></div></td>
-<%-- 		<textarea name="editordata" id="summernote" value="${board_content }"></textarea><br> --%>
-<!-- 		<form name="cc"> -->
-<!-- 			복사 가능<input type="checkbox" name="c" value="복사 가능"><br> -->
-<!-- 		</form> -->
-		</tr>
-	</table>
-		<div style="width:650px; text-align: center;">
-			<button type="submit" id="btnSave">등록</button>
-			<button type="reset">취소</button>
-			<a href="/board/listBoard_Post.do">목록으로</a>
-		</div>
-	</form>
+	
+	<div class="container">
+		<form id="f" name="f" class="navbar-form" action="/board/insertBoard_Post.do" method="post" class="text-align">
+		<input type="hidden" id="mem_no" name="mem_no" value="${member.mem_no }">
+			<table border="1">
+	<!-- 		select-option 변경 예시 -->
+	<!-- 		<select id="select1" onchange="itemChange()"> -->
+	<!-- 			<option>키보드</option> -->
+	<!-- 			<option>마우스</option> -->
+	<!-- 			<option></option> -->
+	<!-- 		</select> -->
+	<!-- 		<select id="select2"> -->
+	<!-- 		</select> -->
+				<tr>
+					<td id="text-align">
+						<select id="board_kinds" class="form-control" name="board_kinds">
+							<option value="1">자유</option>
+							<option value="2">후기</option>
+							<option value="3">동행</option>
+						</select>
+					</td>
+					<td>
+						<div id="head_tag_div">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td id="text-align">제목</td>
+					<td><input type="text" class="form-control" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required"></td>
+				</tr>
+				<tr>
+					<td id="text-align">작성자</td>
+					<td><input type="text" class="form-control" name="mem_nickname" id="mem_nickname" readonly="readonly" value="${member.mem_nickname }"></td>
+				</tr>
+				<tr>
+					<td id="text-align">내용</td>
+					<td><div name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required"></div></td>
+		<%-- 		<textarea name="editordata" id="summernote" value="${board_content }"></textarea><br> --%>
+		<!-- 		<form name="cc"> -->
+		<!-- 			복사 가능<input type="checkbox" name="c" value="복사 가능"><br> -->
+		<!-- 		</form> -->
+				</tr>
+			</table>
+			<br>
+			<div class="button-group" role="group" class="text-align">
+				<button type="submit" id="btnSave" class="btn btn-default">등록</button>
+				<button type="reset" class="btn btn-default" class="btnReset">취소</button>
+				<button type="button" class="btn btn-default" id="btnList">글목록</button> 
+			</div>
+		</form>
+	</div>
 </body>
 </html>
 

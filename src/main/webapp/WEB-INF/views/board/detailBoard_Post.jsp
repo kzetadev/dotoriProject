@@ -30,9 +30,8 @@
 	.comment_li{
 		list-style: none;
 	}
-	#btnUpdate, btnDelete {
+	#btnUpdate, #btnDelete {
 		position: relative;
-		margin-left: 500px;
 	}
 	.note-editor.note-frame .note-editing-area .note-editable[contenteditable="false"], .note-editor.note-airframe .note-editing-area .note-editable[contenteditable="false"] {
 		background-color: #ffffff;
@@ -117,7 +116,6 @@
 				var board_ref = $(this).parent().attr('board_ref');
 				var board_level = $(this).parent().attr('board_level');
 				var board_step = $(this).parent().attr('board_step');
-				console.log('commentReplyArea board_ref : ' + board_ref);
 				console.log('commentReplyArea board_level : ' + board_level);
 				console.log('commentReplyArea board_step : ' + board_step);
 				//대댓글 객체 만들기
@@ -213,7 +211,7 @@
 		refreshComments();
 		
 		$("#btnList").click(function() {
-			location.href="/board/listBoard_Post.do";
+			location.href="/board/listBoard_Post.do?str=1";
 		});
 		$("#btnAnswer").click(function() {
 			var comment = {
@@ -277,11 +275,12 @@
 				</div>
 			</div>
 		</div>
-		
 	</form>
-	<button id="btnUpdate">수정</button>
-	<button id="btnDelete">삭제</button>
 	
+	<div class="text-center" role="group">
+  		<button type="button" class="btn btn-default" id="btnUpdate">수정</button>
+		<button type="button" class="btn btn-default" id="btnDelete">삭제</button>
+	</div>
 	<hr>
 	
 	<!-- 댓글 -->
@@ -303,10 +302,11 @@
 <!-- 			</ul> -->
 		</div>
 		<button class="btn btn-default" id="btnWrite">글쓰기</button>
-		<button class="btn btn-default" id="btnAnswer">답글</button>	
+		<button class="btn btn-default" id="btnAnswer">댓글쓰기</button>	
 		<button class="btn btn-default" id="btnList">글목록</button>			
 	</div>
+	<br>
 </body>
 </html>
-</layoutTag:layout>
 
+</layoutTag:layout>

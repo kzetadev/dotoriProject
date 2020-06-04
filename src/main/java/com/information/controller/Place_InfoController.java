@@ -104,13 +104,17 @@ public class Place_InfoController {
 		if(endPage > totalPage) {
 			endPage = totalPage;
 		}
+		// 검색창에 아무것도 없을 때
 		m.addObject("startPage", startPage);
 		m.addObject("endPage", endPage);
 		m.addObject("place_type", place_type);
 		m.addObject("sortColumn", sortColumn);
+
+		// 검색창에 키워드가 있을때
 		if(keyword != null && !keyword.equals("")) {
 			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
 			m.addObject("keyword", "&keyword=" + keyword);
+			// m.addObject("sortColumn", "&sortColumn=" + sortColumn);
 		}
 		m.addObject("pt", pt);
 		//theme
