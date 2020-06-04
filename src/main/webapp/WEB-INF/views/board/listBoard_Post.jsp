@@ -197,6 +197,7 @@ word-break:break-all;
 	
 
 	<div class="container">
+
 <!-- 		<form id="form" action="/board/listBoard_Info.do"> -->
 			<div class="row">
 				<div class="col-sm-2">

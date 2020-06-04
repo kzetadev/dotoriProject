@@ -248,6 +248,7 @@ public class Board_PostController {
 	 * board_postService.updateHit(board_no); return mav; }
 	 */
 
+	
 	// 게시글 상세
 	@RequestMapping(value = "/board/detailBoard_Post.do")
 	@Transactional

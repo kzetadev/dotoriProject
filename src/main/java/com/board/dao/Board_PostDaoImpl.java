@@ -36,6 +36,7 @@ public class Board_PostDaoImpl implements Board_PostDao {
 		      map.put("str3", str3);
 		      map.put("str4", str4);
 		      map.put("str5", str5);
+		      
 		      return sqlSessionTemplate.selectList("board_post.select", map);
 	      
 	      } else {

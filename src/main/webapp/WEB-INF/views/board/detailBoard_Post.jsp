@@ -154,7 +154,7 @@
 						var divNickname = $("<span class='commentDetail' width='50'/>").text(comment['mem_nickname']);
 						var divBtn = $("<div class='text-right'/>");
 						var btnEdit = $("<button type='button' class='btn btn-default reply-edit' edit-state='0'/>").text("수정");
-						var btnDel = $("<button type='button' class='btn btn-default  reply-del'/>").text("삭제");
+						var btnDel = $("<button type='button' class='btn btn-default reply-del'/>").text("삭제");
 						var divContent = $("<textarea readonly='readonly' class='form-control reply-content' rows='3' width='400'/>").text(comment['comment_content']);
 						var spanDelComment = $("<span width='100'/>").text("삭제된 댓글입니다.");
 						var divDate = $("<span class='commentDetail' width='100'/>").text(comment['comment_date']);
@@ -191,6 +191,24 @@
 						$(btnDel).click(function(){
 							console.log($(this).parent().parent().attr('board_no'));
 							console.log($(this).parent().parent().attr('comment_no'));
+							var comment = {
+								comment_no:$(this).parent().parent().attr('comment_no')
+								, board_no:$("#board_no").val()
+								, mem_no:${mem_no}
+// 								, comment_content:$(this).parent().parent().find(".reply-content").val()
+							}
+							console.log(comment);
+							$.ajax({
+								url:"/board/deleteBoard_Comment.do"
+								, type:"post"
+								, data:comment
+								, success:function(result){
+									if(confirm("해당 댓글을 삭제하시겠습니까?")){
+										alert("댓글이 삭제되었습니다.");
+										refreshComments();
+									}
+								}
+							});
 						});
 // 						$(btnEdit).toggle(function(){
 // 							console.log('1');
@@ -212,9 +230,9 @@
 						//해당 댓글 노드가 상위 노드(board_level == 1 이면 상위 댓글)이면
 						//클릭 시 댓글 작성란을 하단에 표시 
 						if(parseInt($(div).attr('board_level')) == 1){
-							
 							$(div).click(function(e){
-								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') && !$(this).attr('comment_del') == 0){
+								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') 
+										&& $(this).attr('comment_del') == 0){
 									console.log($(this).text());
 									console.log('board_level : ' + $(this).attr('board_level'));
 	// 								console.log($(this).siblings().length);
@@ -242,9 +260,13 @@
 						
 						//댓글 노드 만들기
 						if(comment['comment_del'] == 0){
-							$(div).append(divNickname, divBtn, divContent, divDate);
+							if(${mem_no} == comment['mem_no']){
+								$(div).append(divNickname, divBtn, divContent, divDate);
+							}else{
+								$(div).append(divNickname, divContent, divDate);
+							}
 						}else{
-							$(div).append(divNickname, divBtn, spanDelComment, divDate);
+							$(div).append(spanDelComment);
 						}
 						//해당 댓글 노드가 대댓글이면 이미지로 대댓글임을 표시/
 						if(parseInt(comment['board_level']) > 1){
