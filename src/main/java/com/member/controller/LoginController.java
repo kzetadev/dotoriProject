@@ -86,13 +86,13 @@ public class LoginController {
 	public String findMem_pwd(HttpServletRequest request) {
 		return "/member/find_mem_pwd";
 	}
-	@RequestMapping(value="/member/find_id_result.do", method = RequestMethod.GET)
-	
-	public String id_result(HttpServletRequest request, String mem_id, Model model) {
-		model.addAttribute("mem_id", mem_id);
-		return "/member/find_id_result";
-		
-	}
+//	@RequestMapping(value="/member/find_id_result.do", method = RequestMethod.GET)
+//	
+//	public String id_result(HttpServletRequest request, String mem_id, Model model) {
+//		model.addAttribute("mem_id", mem_id);
+//		return "/member/find_id_result";
+//		
+//	}
 	//아이디 찾기 처리
 	@RequestMapping(value="/member/find_id.do", method = RequestMethod.POST)
 	@ResponseBody
