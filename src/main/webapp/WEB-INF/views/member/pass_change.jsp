@@ -11,14 +11,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" width="300" height="300" align="center">
+
 <div style="text-align:center">
 <span style="color: green; font-weight: bold;">변경할 비밀번호를 입력해주세요</span><br><br><br><br>
 	<div sytle="text-align:center;">
+	<table border="1" width="300" height="300" align="center">
 		<tr>
 			<td>
 			<div style="text-align:center">
-				<form action="/member/pass_change.do ${member.mem_email }" method="post">
+				<form action="/member/pass_change.do ${member.mem_email }" method="post"></form>
+			</div>
 			<div style="text-align:center">
 					<br>
 					<div>
@@ -29,11 +31,12 @@
 					</div>
 				</td>
 			</tr>
-				</div>
-			</table>
-		</form>
+				
+			
+		
+		</table>
+		</div>
 	</div>
-
 
 </body>
 </html>

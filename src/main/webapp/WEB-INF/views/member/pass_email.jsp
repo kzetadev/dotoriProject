@@ -15,9 +15,7 @@
 <div style="text-align:center">
 <span sytle="color: green; font-weight bold;">인증번호를 입력하시오</span><br><br><br><br>
 	<div style="text-align:center">
-		<tr>
-			<td>
-				<div>
+		
 					<form action="/member/pass_injeung.do ${mem_id }" method="post">
 						<div>
 							<br>
@@ -28,8 +26,7 @@
 						</div>
 					</form>
 				</div>
-			</td>
-		</tr>
+			
 	</div>
 </div>
 </table>
