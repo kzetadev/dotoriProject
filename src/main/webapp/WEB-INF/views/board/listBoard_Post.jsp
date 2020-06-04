@@ -193,6 +193,7 @@ word-break:break-all;
 	</header>
 	<br>
 	
+	
 	<div class="container">
 		<form id="form" action="/board/listBoard_Info.do">
 			<div class="row">
