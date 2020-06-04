@@ -28,33 +28,17 @@ import com.security.config.LoginUser;
 
 @RestController
 public class Board_PostController {
-	@Resource(name="board_postService")
+	@Resource(name = "board_postService")
 	private Board_PostService board_postService;
-	@Resource(name="head_tagService")
+	@Resource(name = "head_tagService")
 	private Head_TagService head_tagService;
 //	@Resource(name="member_infoService")
 //	private Member_InfoService member_infoService;
-	@Resource(name="board_commentService")
+	@Resource(name = "board_commentService")
 	private Board_CommentService board_commentService;
-	
-	@Resource(name="loginService")
+
+	@Resource(name = "loginService")
 	private LoginService loginService;
-	
-//	// 게시글 목록
-//	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
-//	public ModelAndView listBoard_Post() {
-//		List<Board_PostVo> list = board_postService.listBoard_Post();
-//		ModelAndView mav = new ModelAndView();
-//		// 해당 부분에 Member_Info 추가해야 함
-//		mav.setViewName("listBoard_Post");
-//		mav.addObject("list", list);
-//		mav.addObject("headtag", head_tagService.listHead_Tag());
-//		return mav;
-//	}
-	public static int totalRecord = 0; //전체 레코드 수를 저장하기 위한 변수
-	public static int pageSIZE = 10; //한 화면에 보여줄 레코드 수를 제한하기 위한 변수
-	public static int totalPage = 1; //전체 페이지 수를 저장하기 위한 변수
-	public static int pageGroup = 10; //한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 
 //	// 게시글 목록
 //	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
@@ -67,138 +51,155 @@ public class Board_PostController {
 //		mav.addObject("headtag", head_tagService.listHead_Tag());
 //		return mav;
 //	}
-	
-	//게시판 구분에 따른 말머리 목록
-	@RequestMapping(value="/board/listHead_Tag.do/{board_kinds}", method=RequestMethod.GET)
+	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
+	public static int pageSIZE = 10; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
+	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
+	public static int pageGroup = 10; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
+
+//	// 게시글 목록
+//	@RequestMapping(value = "/listBoard_Post.do", method = RequestMethod.GET)
+//	public ModelAndView listBoard_Post() {
+//		List<Board_PostVo> list = board_postService.listBoard_Post();
+//		ModelAndView mav = new ModelAndView();
+//		// 해당 부분에 Member_Info 추가해야 함
+//		mav.setViewName("listBoard_Post");
+//		mav.addObject("list", list);
+//		mav.addObject("headtag", head_tagService.listHead_Tag());
+//		return mav;
+//	}
+
+	// 게시판 구분에 따른 말머리 목록
+	@RequestMapping(value = "/board/listHead_Tag.do/{board_kinds}", method = RequestMethod.GET)
 	@ResponseBody
-	public String listHead_Tag(@PathVariable("board_kinds")int board_kinds) {
+	public String listHead_Tag(@PathVariable("board_kinds") int board_kinds) {
 		String headTagList = "";
 		System.out.println(board_kinds);
 		headTagList = (new Gson()).toJson(head_tagService.listHead_TagByBoard_Kinds(board_kinds));
 		System.out.println(headTagList);
 		return headTagList;
 	}
+
 	// 게시글 목록
-	   @RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
-	   public ModelAndView listBoard_Post(@RequestParam(name="str", defaultValue="1")String str) {
-	      System.out.println("str : " + str);
-	      String stotalRecord = "";
-	      String sNum = "";
-	      String eMum = "";
-	      String keyWord = str;
-	      String sel1 = "";
-	      String sel2 = "";
-	      int boardKinds = 0;
-	      String board_kinds_str = "";
-	      int startNum = 0;
-	      int endNum = 0;
-	      int listCount = 0;
-	      int curPage = 1;      // 현재페이지
-	      float pageSize = (float)pageSIZE;    
-	      int mem_no = 0;
-	      
-	      ModelAndView mav = new ModelAndView();
-	      // 해당 부분에 Member_Info 추가해야 함
-	      
-	      if("1".equals(str) || "2".equals(str) || "3".equals(str)) {
-	    	  boardKinds = Integer.parseInt(str);
-	      } else if ("".equals(str) || str == null){
-	    	  str = "1"; //기본값 설정
-	    	  boardKinds = Integer.parseInt(str);
-	      } else {
-	    	  if(str != null) {
-	    		  String getStr[] = keyWord.split("@");
-	    		  for(int i=0; i<getStr.length; i++) {
-	    			  if(i == 0) {
-	    				  boardKinds = Integer.parseInt(getStr[0]);
-	    			  }
-	    			  if(i == 1) {
-	    				  sel1 = getStr[0]; //말머리
-	    			  }
-	    			  if(i == 2) {
-	    				  sel2 = getStr[1];	//검색 키워드
-	    			  }
-	    			  if(i == 3) {			//페이지
-	    				  curPage = Integer.parseInt(getStr[3]);
-	    			  }
-	    		  }
-	    	  }
-	      }
-	      
-	      List<Board_PostListVo> list = board_postService.listBoard_Post(str);
-	      
-	      mav.setViewName("/board/listBoard_Post");
-	      mav.addObject("list", list);
-	      if(list.size() > 0) {
-		      sNum = list.get(0).getRnum();
-		      sNum = sNum.substring(0,1);
-		      startNum = Integer.parseInt(sNum);
-		      listCount = list.size();
-		      stotalRecord = list.get(0).getTotcnt();
-		      totalRecord = Integer.parseInt(stotalRecord);
-		      boardKinds = list.get(0).getBoard_kinds();
-		      
-		      int devide = 0;
-		      
-		      if(curPage % 10 == 0) {
-		    	  devide = (int)Math.ceil(((float)(curPage)/(float)pageGroup));
-		      } else {
-		    	  devide = (int)Math.ceil(((float)(curPage+1)/(float)pageGroup));
-		      }
-		      
-		      int start = ((devide)*pageGroup) - (pageGroup-1);
-		      int end = ((devide)*pageGroup);
-		      int pgCnt = (int)Math.floor(totalRecord/pageSize);
-		      
-		      if(end > pgCnt) {
-		    	  end = pgCnt;
-		      }
-		      
-		      totalPage = (int)Math.ceil(totalRecord / pageSIZE);
-		      
-		      switch (boardKinds) {
-			      case 1:
-			    	  board_kinds_str = "자유게시판";
-			    	  break;
-			      case 2:
-			    	  board_kinds_str = "후기게시판";
-			    	  break;
-			      case 3:
-			    	  board_kinds_str = "동행게시판";
-			    	  break;
-		      }
-		      mav.addObject("totalRecord", totalRecord);
-		      mav.addObject("totalPage", totalPage);
-		      mav.addObject("pageGroup", pageGroup);
-		      mav.addObject("boardKinds", boardKinds);
-		      mav.addObject("boardKinds_str", board_kinds_str);
-		      mav.addObject("curPage", curPage);
-		      mav.addObject("start", start);
-		      mav.addObject("end", end);
-		      mav.addObject("sel1", sel1);
-		      mav.addObject("sel2", sel2);
-		      mav.addObject("headtag", head_tagService.listHead_Tag());
-		      if(LoginUser.isLogin()) {
-		    	  mem_no = LoginUser.getMember_no();
-		      }
-		      mav.addObject("login_mem_no", mem_no);
-	      }else {
-	    	  switch (boardKinds) {
-		      case 1:
-		    	  board_kinds_str = "자유게시판";
-		    	  break;
-		      case 2:
-		    	  board_kinds_str = "후기게시판";
-		    	  break;
-		      case 3:
-		    	  board_kinds_str = "동행게시판";
-		    	  break;
-	    	  }
-	    	  mav.addObject("boardKinds", boardKinds);
-		      mav.addObject("boardKinds_str", board_kinds_str);
-	      }
-	      return mav;
-	   }
+	@RequestMapping(value = "/board/listBoard_Post.do", method = RequestMethod.GET)
+	public ModelAndView listBoard_Post(@RequestParam(name = "str", defaultValue = "1") String str) {
+		System.out.println("str : " + str);
+		String stotalRecord = "";
+		String sNum = "";
+		String eMum = "";
+		String keyWord = str;
+		String sel1 = "";
+		String sel2 = "";
+		int boardKinds = 0;
+		String board_kinds_str = "";
+		int startNum = 0;
+		int endNum = 0;
+		int listCount = 0;
+		int curPage = 1; // 현재페이지
+		float pageSize = (float) pageSIZE;
+		int mem_no = 0;
+
+		ModelAndView mav = new ModelAndView();
+		// 해당 부분에 Member_Info 추가해야 함
+
+		if ("1".equals(str) || "2".equals(str) || "3".equals(str)) {
+			boardKinds = Integer.parseInt(str);
+		} else if ("".equals(str) || str == null) {
+			str = "1"; // 기본값 설정
+			boardKinds = Integer.parseInt(str);
+		} else {
+			if (str != null) {
+				String getStr[] = keyWord.split("@");
+				for (int i = 0; i < getStr.length; i++) {
+					if (i == 0) {
+						boardKinds = Integer.parseInt(getStr[0]);
+					}
+					if (i == 1) {
+						sel1 = getStr[0]; // 말머리
+					}
+					if (i == 2) {
+						sel2 = getStr[1]; // 검색 키워드
+					}
+					if (i == 3) { // 페이지
+						curPage = Integer.parseInt(getStr[3]);
+					}
+				}
+			}
+		}
+
+		List<Board_PostListVo> list = board_postService.listBoard_Post(str);
+
+		mav.setViewName("/board/listBoard_Post");
+		mav.addObject("list", list);
+		if (list.size() > 0) {
+			sNum = list.get(0).getRnum();
+			sNum = sNum.substring(0, 1);
+			startNum = Integer.parseInt(sNum);
+			listCount = list.size();
+			stotalRecord = list.get(0).getTotcnt();
+			totalRecord = Integer.parseInt(stotalRecord);
+			boardKinds = list.get(0).getBoard_kinds();
+
+			int devide = 0;
+
+			if (curPage % 10 == 0) {
+				devide = (int) Math.ceil(((float) (curPage) / (float) pageGroup));
+			} else {
+				devide = (int) Math.ceil(((float) (curPage + 1) / (float) pageGroup));
+			}
+
+			int start = ((devide) * pageGroup) - (pageGroup - 1);
+			int end = ((devide) * pageGroup);
+			int pgCnt = (int) Math.floor(totalRecord / pageSize);
+
+			if (end > pgCnt) {
+				end = pgCnt;
+			}
+
+			totalPage = (int) Math.ceil(totalRecord / pageSIZE);
+
+			switch (boardKinds) {
+			case 1:
+				board_kinds_str = "자유게시판";
+				break;
+			case 2:
+				board_kinds_str = "후기게시판";
+				break;
+			case 3:
+				board_kinds_str = "동행게시판";
+				break;
+			}
+			mav.addObject("totalRecord", totalRecord);
+			mav.addObject("totalPage", totalPage);
+			mav.addObject("pageGroup", pageGroup);
+			mav.addObject("boardKinds", boardKinds);
+			mav.addObject("boardKinds_str", board_kinds_str);
+			mav.addObject("curPage", curPage);
+			mav.addObject("start", start);
+			mav.addObject("end", end);
+			mav.addObject("sel1", sel1);
+			mav.addObject("sel2", sel2);
+			mav.addObject("headtag", head_tagService.listHead_Tag());
+			if (LoginUser.isLogin()) {
+				mem_no = LoginUser.getMember_no();
+			}
+			mav.addObject("login_mem_no", mem_no);
+		} else {
+			switch (boardKinds) {
+			case 1:
+				board_kinds_str = "자유게시판";
+				break;
+			case 2:
+				board_kinds_str = "후기게시판";
+				break;
+			case 3:
+				board_kinds_str = "동행게시판";
+				break;
+			}
+			mav.addObject("boardKinds", boardKinds);
+			mav.addObject("boardKinds_str", board_kinds_str);
+		}
+		return mav;
+	}
 
 //	// 게시글 등록
 //	@RequestMapping("/insertBoard_Post.do")
@@ -208,18 +209,18 @@ public class Board_PostController {
 //		mav.addObject("insert", board_postService.insertBoard_Post(vo));
 //		return mav;
 //	}
-	
+
 	// 게시글 작성 폼
 	@RequestMapping(value = "/board/insertBoard_Post.do", method = RequestMethod.GET)
 	public ModelAndView insertBoard_PostForm(@RequestParam(value = "board_no", defaultValue = "0") int board_no) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board_no", board_no);
-		if(LoginUser.isLogin()) {
+		if (LoginUser.isLogin()) {
 			mav.addObject("member", loginService.loginById(LoginUser.getMember_InfoVo().getMem_id()));
 		}
 		return mav;
 	}
-	
+
 	// 게시글 작성
 	@RequestMapping(value = "/board/insertBoard_Post.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -236,19 +237,17 @@ public class Board_PostController {
 //		mav.addObject("re", re);
 		return re;
 	}
-	
+
 	/*
-	// 게시글 상세
-	@RequestMapping(value = "/detailBoard_Post.do")
-	public ModelAndView detailBoard_Post(int board_no) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("detailBoard_Post");
-		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
-		board_postService.updateHit(board_no);
-		return mav;
-	}
-	*/
-	
+	 * // 게시글 상세
+	 * 
+	 * @RequestMapping(value = "/detailBoard_Post.do") public ModelAndView
+	 * detailBoard_Post(int board_no) { ModelAndView mav = new ModelAndView();
+	 * mav.setViewName("detailBoard_Post"); mav.addObject("detail",
+	 * board_postService.detailBoard_Post(board_no));
+	 * board_postService.updateHit(board_no); return mav; }
+	 */
+
 	// 게시글 상세
 	@RequestMapping(value = "/board/detailBoard_Post.do")
 	@Transactional
@@ -256,7 +255,7 @@ public class Board_PostController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/detailBoard_Post");
 		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
-		if(LoginUser.isLogin()) {
+		if (LoginUser.isLogin()) {
 			mav.addObject("mem_no", LoginUser.getMember_no());
 		}
 		board_postService.updateHit(board_no);
@@ -264,9 +263,10 @@ public class Board_PostController {
 //		mav.addObject("clist", clist);
 		return mav;
 	}
-	@RequestMapping(value="/board/getBoardPost.do/{board_no}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/board/getBoardPost.do/{board_no}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getBoardPost(@PathVariable("board_no")int board_no) {
+	public String getBoardPost(@PathVariable("board_no") int board_no) {
 		String board_str = "";
 //		System.out.println("/board/getBoardPost.do/" + board_no);
 		board_str = (new Gson()).toJson(board_postService.detailBoard_Post(board_no));
@@ -281,7 +281,7 @@ public class Board_PostController {
 //		mav.addObject("update", board_postService.updateBoard_Post(vo));
 //		return mav;
 //	}
-	
+
 	// 게시글 수정 폼
 	@RequestMapping(value = "/board/updateBoard_Post.do", method = RequestMethod.GET)
 	public ModelAndView updateBoard_PostForm(Board_PostVo vo) {
@@ -289,7 +289,7 @@ public class Board_PostController {
 		mav.addObject("update", board_postService.detailBoard_Post(vo.getBoard_no()));
 		return mav;
 	}
-	
+
 	// 게시글 수정
 	@RequestMapping(value = "/board/updateBoard_Post.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -302,7 +302,7 @@ public class Board_PostController {
 //		}
 		return re;
 	}
-	
+
 //	// 게시글 삭제
 //	@RequestMapping("/deleteBoard_Post.do")
 //	public ModelAndView deleteBoard_Post(Board_PostVo vo) {
@@ -311,7 +311,7 @@ public class Board_PostController {
 //		mav.addObject("delete", board_postService.deleteBoard_Post(vo));
 //		return mav;
 //	}
-	
+
 	// 게시글 삭제
 	@RequestMapping("/board/deleteBoard_Post.do")
 	public ModelAndView deleteBoard_Post(Board_PostVo vo) {
@@ -323,8 +323,8 @@ public class Board_PostController {
 		mav.addObject("re", re);
 		return mav;
 	}
-	
-	//커뮤니티 메인 / 1.최신글  2.인기글  3.후기  4.동행
+
+	// 커뮤니티 메인 / 1.최신글 2.인기글 3.후기 4.동행
 	@RequestMapping("/board/mainBoard_Post.do")
 	public ModelAndView mainBoard_Post1(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView();
@@ -339,10 +339,10 @@ public class Board_PostController {
 		mav.addObject("mlist4", mlist4);
 		return mav;
 	}
-	
+
 	@RequestMapping("/board/listBoard_Gallery.do")
-	public ModelAndView listBoard_Gallery(@RequestParam(name="board_kinds", defaultValue="1")int board_kinds
-			, @RequestParam(name="pageNum", defaultValue="1")int pageNum) {
+	public ModelAndView listBoard_Gallery(@RequestParam(name = "board_kinds", defaultValue = "1") int board_kinds,
+			@RequestParam(name = "pageNum", defaultValue = "1") int pageNum) {
 		ModelAndView mav = new ModelAndView();
 		Map map = null;
 		int pageSize = 3;
@@ -365,4 +365,3 @@ public class Board_PostController {
 		return mav;
 	}
 }
-

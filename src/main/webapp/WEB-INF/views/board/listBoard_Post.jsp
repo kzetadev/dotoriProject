@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 
 <layoutTag:layout>
@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style type="text/css">
 	ul {
 		list-style: none;
@@ -18,6 +19,46 @@
 	h2{
 		text-align:center;
 	}
+	#word{
+		padding-botton: 50px;
+	}
+	.w3-image{
+		height:200px;
+	}
+	#trth{
+		background-color: black;
+		color: white;
+	}
+	form { 
+        margin: 0 auto; 
+        width:250px;
+    }
+	@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
+
+/*
+body {margin:0;padding:0;background-color:#fff;}
+hr {display:none;clear:both;}
+img,fieldset {border:0 none;}
+h1,h2,h3,h4,h5,dl,dt,dd,ul,li,ol,th,td,p,blockquote,form,fieldset,legend {margin:0;padding:0;}
+table {border-collapse:collapse;border:0 none;}
+form, p {margin: 0px;}
+button {margin:0;padding:0;border:0 none;background:transparent;*overflow:visible;cursor:pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a:link {color:#3366cc;text-decoration:none;}
+a:visited {color:#3366cc;text-decoration:none;}
+a:active {color:#3366cc;text-decoration:none;}
+a:hover {color:#2850a2;text-decoration:none;}
+body,table,th,td,input,select,textarea,div {
+font-family: "굴림","verdana";
+font-size: 12px;
+color: #333;
+font-style: normal;
+line-height:18px;
+margin:0;
+word-spacing:-1pt;
+word-break:break-all;
+} */
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -144,25 +185,34 @@
 </head>
 <body>
 	<h2>${boardKinds_str }</h2>
+	<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;">
+  		<img class="w3-image" src="/img/board.jpg" width="100%">
+  		<div class="w3-display-middle w3-margin-top w3-center">
+    		<h1 class="w3-xxlarge">
+    		<span class="w3-hide-small w3-text-light-black" id="word">자유 게시판</span></h1>
+  		</div>
+	</header>
+	<br>
+	
+	
+
 	<div class="container">
-<!-- 		<form id="form"> -->
+<!-- 		<form id="form" action="/board/listBoard_Info.do"> -->
 			<div class="row">
-				<div class="col-sm-5">
-					<div class="input-group">
-						<label for="sel1"></label> 
-						<select id="sel1" class="form-control">
-							<option value="1">전체</option>
-							<option value="2">제목</option>
-							<option value="3">내용</option>
-						</select>
-					</div>
-				</div>
-	
-				<div class="col-sm-5">
-					<input type="text" size="20" id="sel2" class="form-control">
-				</div>
-	
 				<div class="col-sm-2">
+					<label for="sel1"></label> 
+					<select id="sel1" class="form-control" style="width: 100%">
+						<option value="1">전체</option>
+						<option value="2">제목</option>
+						<option value="3">내용</option>
+					</select>
+				</div>
+		
+				<div class="col-sm-8">
+					<input type="text" size="20" id="sel2" class="form-control" style="width: 100%">
+				</div>
+				
+				<div class="col-sm-2">	
 					<button class="btn btn-default" id="btnSelect" type="submit">
 						<i class="glyphicon glyphicon-search"></i> 검색
 					</button>
@@ -170,11 +220,11 @@
 			</div>
 <!-- 		</form> -->
 	
-		<table  class="table table-hover">
-			<tr>
+		<table class="table table-hover">
+			<tr id="trth">
 				<th>글번호</th>
 				<th>말머리</th>
-				<th>글제목</th>
+				<th width="200">글제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
@@ -183,7 +233,8 @@
 				<tr>
 					<td>${v.board_no}</td>
 					<td>${v.head_tag_name}</td>
-					<td><a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+					<td>
+						<a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
 					</td>
 					<td><a class="nickname" mem_no="${v.mem_no }">${v.mem_nickname}</a></td>
 					<td>${v.board_date}</td>
@@ -203,17 +254,19 @@
 			<div style='display: inline-block'>
 				<ul class="pagination">
 					<!--맨 첫페이지로 이동기능-->
-					<li list-style-type:none-style><a href="#"
-						onclick='moveLeft(1)'> <span> << </span>
-					</a> <!--이전페이지 기능--> <a onclick="moveLeft(${curPage-1})"> <span>
-								< </span>
-					</a> <!--페이지 선택--> <c:forEach var="i" begin="${start}" end="${end}"
-							step="1">
-							<a onclick="movePage(${i})">${i}</a>
-						</c:forEach> <!--다음페이지 기능--> <a href="#" onclick='moveRight(${curPage+1})'>
-							<span>></span>
-					</a> <!--맨 마지막 페이지로 이동기능--> <a href="#"
-						onclick='moveRight(${totalPage})'> <span>>></span>
+					<li list-style-type:none-style><a href="#" onclick='moveLeft(1)'> <span> << </span></a> 
+					
+					<!--이전페이지 기능--> 
+					<a onclick="moveLeft(${curPage-1})"> <span> < </span></a> 
+					
+					<!--페이지 선택--> 
+					<c:forEach var="i" begin="${start}" end="${end}" step="1">
+						<a onclick="movePage(${i})">${i}</a>
+					</c:forEach> 
+					
+					<!--다음페이지 기능--> 
+					<a href="#" onclick='moveRight(${curPage+1})'> <span> > </span></a> 
+					<!--맨 마지막 페이지로 이동기능--> <a href="#" onclick='moveRight(${totalPage})'> <span> >> </span>
 					</a></li>
 				</ul>
 			</div>
