@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체게시판 글 목록</title>
+<title>커뮤니티</title>
 <style type="text/css">
 	ul {
 		list-style: none;
@@ -26,7 +26,7 @@
 // 	   var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
 // 	   $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
 	   //레이어
-	    var login_mem_no = ${login_mem_no};
+	   var login_mem_no = ${login_mem_no};
 		var divContainer = $("<div id='popup_layer' class='container'/>").css({
 			'position':'absolute'
 			, 'top':100
@@ -53,6 +53,7 @@
 		$(btnProfile).click(function(){
 			location.href = "/member/myPage.do?mem_no=" + $(this).parent().attr('mem_no');
 		});
+		
 		$(divBtnGroup).append(btnMsg, btnProfile);
 		$(divContainer).append(divBtnGroup);
 		$('body').append(divContainer);
@@ -143,7 +144,6 @@
 </head>
 <body>
 	<h2>${boardKinds_str }</h2>
-	
 	<div class="container">
 <!-- 		<form id="form"> -->
 			<div class="row">

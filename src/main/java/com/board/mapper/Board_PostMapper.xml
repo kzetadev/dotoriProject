@@ -109,7 +109,7 @@
 	
 	<!-- 말머리 목록 -->
 	<select id="selectHead_Tag" resultType="com.board.vo.Head_TagVo">
-		select * from head_tag
+		select * from head_tag order by head_tag_no
 	</select>
 	<!-- 게시판 구분에 따른 말머리 목록 -->
 	<select id="selectHead_TagByBoard_Kinds" resultType="com.board.vo.Head_TagVo">
