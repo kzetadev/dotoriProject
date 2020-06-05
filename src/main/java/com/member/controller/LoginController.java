@@ -210,7 +210,7 @@ public class LoginController {
 				
 				mav.setViewName("/member/pass_change");
 				mav.addObject("member" , vo);
-				
+				System.out.println(vo);
 				response_equals.setContentType("text/html; charset=UTF-8");
 				PrintWriter out_equals = response_equals.getWriter();
 				out_equals.println("<script>alert('인증번호가 일치하였습니다. 비밀번호 변경창으로 이동합니다.');</script>");
@@ -219,7 +219,7 @@ public class LoginController {
 				return mav;
 			}else {
 				ModelAndView mav2 = new ModelAndView();
-				mav2.setViewName("/member/pass_email");
+				mav2.setViewName("/member/find_mem_id");
 				
 				response_equals.setContentType("text/html; charset=UTF-8");
 				PrintWriter out_equals = response_equals.getWriter();
@@ -232,22 +232,26 @@ public class LoginController {
 		}
 		//변경할 비밀번호를 입력한 후에 확인 버튼을 누르면 넘어오는 컨트롤러
 		@RequestMapping(value = "/member/pass_change.do {mem_email}", method = RequestMethod.POST)
-		public String pass_change(HttpServletRequest request, @PathVariable String mem_email, Member_InfoVo vo, HttpServletResponse pass) throws Exception{
-		String mem_pwd = request.getParameter("mem_pwd");
+		public String pass_change(HttpServletRequest request,String mem_pwd,  @PathVariable String mem_email, Member_InfoVo vo, HttpServletResponse pass) throws Exception{
+	//	String mem_pwd = request.getParameter("mem_pwd");
+		System.out.println("컨트롤러 동작");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/pass_change");
+		mav.addObject("mem_email", loginService.loginById(mem_email));
 		
-		String mem_email1 = mem_email;
-		
-		vo.setMem_email(mem_email1);
+		//String mem_email1 = mem_email;
+
+		vo.setMem_email(mem_email);
 		String encode_passwod = passwordEncoder.encode(mem_pwd);
 		vo.setMem_pwd(encode_passwod);
-		
+
 		//값을 여러개 담아야 하므로 해쉬맵을 사용해서 값을 저장함
 		
 		Map<String, Object> map = new HashMap<>();
-		
-		map.put("mem_email", vo.getMem_email());
+
+		// map.put("mem_email", vo.getMem_email());
 		map.put("mem_pwd", vo.getMem_pwd());
-		
+
 		memberservice.pass_change(map, vo);
 		
 		//ModelAndView mav = new ModelAndView();
@@ -256,5 +260,4 @@ public class LoginController {
 		
 		return mem_email;
 		}
-	
 }
