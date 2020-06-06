@@ -251,6 +251,7 @@ public class LoginController {
 
 		// map.put("mem_email", vo.getMem_email());
 		map.put("mem_pwd", vo.getMem_pwd());
+		map.put("mem_email", mem_email);
 
 		memberservice.pass_change(map, vo);
 		

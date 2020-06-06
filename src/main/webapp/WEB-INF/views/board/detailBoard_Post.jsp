@@ -362,10 +362,12 @@
 		</div>
 	</form>
 	
-	<div class="text-center" role="group">
-  		<button type="button" class="btn btn-default" id="btnUpdate">수정</button>
-		<button type="button" class="btn btn-default" id="btnDelete">삭제</button>
-	</div>
+	<c:if test="${mem_no eq detail.mem_no }">
+		<div class="text-center" role="group">
+	  		<button type="button" class="btn btn-default" id="btnUpdate">수정</button>
+			<button type="button" class="btn btn-default" id="btnDelete">삭제</button>
+		</div>
+	</c:if>
 	<hr>
 	
 	<!-- 댓글 -->
