@@ -32,7 +32,7 @@ public interface Member_InfoDao {
 	int emailAuth(Member_InfoVo vo);
 	
 	//비밀번호 변경
-	public void pass_change(Map<String, Object>map, Member_InfoVo vo) throws Exception;
+	public int pass_change(Map<String, Object>map) throws Exception;
 	
 	//아이디 찾기
 	public String find_idCheck(Member_InfoVo vo);

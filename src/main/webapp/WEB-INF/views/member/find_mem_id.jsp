@@ -198,6 +198,7 @@ $(function(){
 				//	location.href = "/member/pass_email.do?mem_id="+$('#mem_id1').val();
 // 					location.href = "/member/find_pass.do?mem_id="+$('#mem_id1').val();
 					$("#injeung_form").attr("action","/member/pass_injeung.do "+ $("#mem_id1").val());		
+					
 		
 					$("#popupModal").modal();
 				}else{

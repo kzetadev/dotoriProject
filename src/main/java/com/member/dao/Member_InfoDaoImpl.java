@@ -89,12 +89,12 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 	
 	//비밀번호 변경
 	@Override
-	public void pass_change(Map<String, Object> map, Member_InfoVo vo) throws Exception {
+	public int pass_change(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		map.get("mem_pwd");
-		map.get("mem_email");
+//		map.get("mem_pwd");
+//		map.get("mem_email");
 		
-		sqlSessionTemplate.update("mem_info.pass_change", map);
+		return sqlSessionTemplate.update("mem_info.pass_change", map);
 	}
 	@Override
 	public String find_idCheck(Member_InfoVo vo) {
