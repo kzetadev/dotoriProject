@@ -50,6 +50,12 @@ public class Board_CommentServiceImpl implements Board_CommentService{
 	public int deleteBoard_Comment(Board_CommentVo vo) {
 		return board_commentDao.deleteBoard_Comment(vo);
 	}
+	// 글 삭제 시 해당 글에 대한 댓글 전부 삭제 
+	@Override
+	public int deleteBoard_Comment(int board_no) {
+		// TODO Auto-generated method stub
+		return board_commentDao.deleteBoard_Comment(board_no);
+	}
 	// 글에 작성할 다음 댓글 번호 가져오기
 	@Override
 	public int selectNextCommentNo(int board_no) {

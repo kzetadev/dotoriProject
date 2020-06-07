@@ -129,18 +129,43 @@ public class MyPageController {
 	
 	//내가 쓴 글 & 댓글
 	@RequestMapping(value = "/member/myPage_Contents.do", method = RequestMethod.GET)
-	public ModelAndView list(HttpServletRequest request, @RequestParam(name="mem_no", defaultValue="0")int mem_no) throws Exception{
+	public ModelAndView list(HttpServletRequest request
+			, @RequestParam(name="mem_no", defaultValue="0")int mem_no
+			, @RequestParam(name="content_type", defaultValue="board")String content_type
+			, @RequestParam(name="pageNum", defaultValue="1")int pageNum) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		logger.info("list");
 		if(mem_no != 0 && mem_no != LoginUser.getMember_no()) {
 			mav.addObject("other_mem_no", mem_no);
+			mav.addObject("other_mem_no_str", "&mem_no=" + mem_no);
 		}else if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
-		List<MyPage_PostVo> list_post = myPage_commentService.list_post(mem_no);
-		mav.addObject("list_post", list_post);
-		List<MyPage_CommentVo> list = myPage_commentService.list(mem_no);
-		mav.addObject("list", list);
+		int totalRecord = 0;
+		int pageSize = 10;
+		int pageGroup = 10;
+		if(content_type.equals("board")) {
+			totalRecord = myPage_commentService.list_post_count(mem_no);
+		}else {
+			totalRecord = myPage_commentService.list_comment_count(mem_no);
+		}
+		Map map = null;
+		map = PagingUtil.pager(pageNum, totalRecord, pageSize, pageGroup);
+		map.put("mem_no", mem_no);
+		if(content_type.equals("board")) {
+			List<MyPage_PostVo> list_post = myPage_commentService.list_post(map);
+			mav.addObject("list", list_post);
+		}else {
+			List<MyPage_CommentVo> list = myPage_commentService.list(map);
+			mav.addObject("list", list);
+		}
+		mav.addObject("content_type", content_type);
+		mav.addObject("content_type_str", "content_type=" + content_type);
+		mav.addObject("start_page", map.get("start_page"));
+		mav.addObject("end_page", map.get("end_page"));
+		mav.addObject("page_num", pageNum);
+		mav.addObject("total_page", map.get("total_page"));
+		
 		return mav;
 	}
 	
@@ -152,7 +177,8 @@ public class MyPageController {
 		if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
-		model.addAttribute("list", myPage_commentService.list(mem_no));
+		Map map = null;
+		model.addAttribute("list", myPage_commentService.list(map));
 		return "member/myPage_Contents";
 	}
 	
@@ -164,7 +190,8 @@ public class MyPageController {
 		if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
-		model.addAttribute("list_post", myPage_commentService.list_post(mem_no));
+		Map map = null;
+		model.addAttribute("list_post", myPage_commentService.list_post(map));
 		return "member/myPage_Contents";
 	}
   //회원정보 수정을 클릭하면 비밀번호 입력창으로 넘어감

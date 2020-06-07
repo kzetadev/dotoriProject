@@ -64,8 +64,6 @@ word-break:break-all;
 <script type="text/javascript">
     var board_kinds = ${boardKinds};
    $(function() {
-// 	   var bootstrapButton = $.fn.button.noConflict() // return $.fn.button to previously assigned value
-// 	   $.fn.bootstrapBtn = bootstrapButton            // give $().bootstrapBtn the Bootstrap functionality
 	   //레이어
 	   var login_mem_no = ${login_mem_no};
 		var divContainer = $("<div id='popup_layer' class='container'/>").css({
@@ -79,23 +77,22 @@ word-break:break-all;
 		var divBtnGroup = $("<div id='btnGroup' class='btn-group-vertical'/>");
 		//쪽지보내기 버튼
 		var btnMsg = $("<button type='button' class='btn btn-default'/>").text("쪽지보내기");
-		// 프로필보기 버튼
-		var btnProfile = $("<button type='button' class='btn btn-default'/>").text("마이페이지");
+		// 마이페이지 버튼
+		var btnMypage = $("<button type='button' class='btn btn-default'/>").text("마이페이지");
 		$(btnMsg).click(function(){
 // 			window.open("/member/sendMessage.do", "_blank", "width=400, height=300, menubar=no, toolbar=no, status=no").focus();
 			jQuery.noConflict();
 			$("#modalMessage .modal-content")
 				.load("/member/sendMessage.do?mem_no=" + $(this).parent().attr('mem_no') 
 					+ "&mem_nickname=" + $(this).parent().attr('mem_nickname'), function(){
-				alert("load was performed");
 				$("#modalMessage").modal();
 			});
 		});
-		$(btnProfile).click(function(){
+		$(btnMypage).click(function(){
 			location.href = "/member/myPage.do?mem_no=" + $(this).parent().attr('mem_no');
 		});
 		
-		$(divBtnGroup).append(btnMsg, btnProfile);
+		$(divBtnGroup).append(btnMsg, btnMypage);
 		$(divContainer).append(divBtnGroup);
 		$('body').append(divContainer);
 		$("#btnInsert").click(function() {
@@ -126,12 +123,7 @@ word-break:break-all;
 			
 			var divLeft = e.clientX + 10;
 			var divTop = e.clientY;
-			
-// 			if(divLeft + oWidth > sWidth) divLeft -= oWidth;
-// 			if(divTop + oHeight > sHeight) divTop -= oHeight;
-			
-// 			if(divLeft < 0) divLeft = 0;
-// 			if(divTop < 0) divTop = 0;
+		
 		
 			$("#popup_layer").css({
 			    "top":divTop
@@ -175,8 +167,8 @@ word-break:break-all;
       var totalRecord = $('input[name=totalRecord]').val();
       var totalPage = $('input[name=totalPage]').val();
       var sel1 = document.getElementById("sel1").value;
-      var sel2 = document.getElementById("sel2").value;
-      var keyword = board_kinds + "@" + sel1 + "@" + sel2 + "@" + numberChk;
+//       var sel2 = document.getElementById("sel2").value;
+      var keyword = board_kinds + "@" + sel1 + "@" + '${sel2}' + "@" + numberChk;
       location.href = "/board/listBoard_Post.do?str=" + encodeURI(keyword);
 //      var totalPage = document.getElementById("totalPage").value;
 //      var tdTT = totalPage.innerText | totalPage.textContent;

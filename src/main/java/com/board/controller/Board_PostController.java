@@ -114,10 +114,10 @@ public class Board_PostController {
 						boardKinds = Integer.parseInt(getStr[0]);
 					}
 					if (i == 1) {
-						sel1 = getStr[0]; // 말머리
+						sel1 = getStr[1]; // 말머리
 					}
 					if (i == 2) {
-						sel2 = getStr[1]; // 검색 키워드
+						sel2 = getStr[2]; // 검색 키워드
 					}
 					if (i == 3) { // 페이지
 						curPage = Integer.parseInt(getStr[3]);
@@ -149,13 +149,16 @@ public class Board_PostController {
 
 			int start = ((devide) * pageGroup) - (pageGroup - 1);
 			int end = ((devide) * pageGroup);
-			int pgCnt = (int) Math.floor(totalRecord / pageSize);
+//			Math.ceil 은 소수값이 존재할 때 값을 올리는 역할을 하는 함수이며,
+//			Math.floor 는 소수값이 존재할 때 소수값을 버리는 역할을 하는 함수이며,
+//			Math.round 는 소수값에 따라 올리거나 버리는 역할을 하는 반올림 함수입니다.
+			int pgCnt = (int) Math.ceil(totalRecord / pageSize);
 
 			if (end > pgCnt) {
 				end = pgCnt;
 			}
 
-			totalPage = (int) Math.ceil(totalRecord / pageSIZE);
+			totalPage = (int) Math.ceil(totalRecord / (double)pageSIZE);
 
 			switch (boardKinds) {
 			case 1:
@@ -256,9 +259,12 @@ public class Board_PostController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/detailBoard_Post");
 		mav.addObject("detail", board_postService.detailBoard_Post(board_no));
+
+		int mem_no = 0;
 		if (LoginUser.isLogin()) {
-			mav.addObject("mem_no", LoginUser.getMember_no());
+			mem_no = LoginUser.getMember_no();
 		}
+		mav.addObject("login_mem_no", mem_no);
 		board_postService.updateHit(board_no);
 //		List<Board_CommentVo> clist = board_commentService.listComment(board_no);
 //		mav.addObject("clist", clist);
@@ -315,9 +321,11 @@ public class Board_PostController {
 
 	// 게시글 삭제
 	@RequestMapping("/board/deleteBoard_Post.do")
+	@Transactional
 	public ModelAndView deleteBoard_Post(Board_PostVo vo) {
 		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
-		int re = board_postService.deleteBoard_Post(vo);
+		int re = board_commentService.deleteBoard_Comment(vo.getBoard_no());	//글 삭제 시 해당 글에 등록된 댓글 전부 삭제. 댓글 테이블이 글 테이블의 하위 레코드로 존재하므로 댓글을 먼저 삭제해야함.
+		re = board_postService.deleteBoard_Post(vo);
 //		if(re > 0) {
 //			mav.setViewName("redirect:/listBoard_Post.do");
 //		}

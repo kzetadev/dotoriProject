@@ -24,16 +24,26 @@ public class MyPage_commentDaoImpl implements MyPage_commentDao {
 	
 	@Inject
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	// 내가 쓴 댓글 목록 레코드 카운트 가져오기
 	@Override
-	public List<MyPage_CommentVo> list(int mem_no) {
+	public int list_comment_count(int mem_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("myPage.list", mem_no);
+		return sqlSession.selectOne("myPage.list_comment_count", mem_no);
 	}
-
 	@Override
-	public List<MyPage_PostVo> list_post(int mem_no) {
-		return sqlSession.selectList("myPage.myList", mem_no);
+	public List<MyPage_CommentVo> list(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("myPage.list", map);
+	}
+	// 내가 쓴 글 목록 레코드 카운트 가져오기
+	@Override
+	public int list_post_count(int mem_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("myPage.list_post_count", mem_no);
+	}
+	@Override
+	public List<MyPage_PostVo> list_post(Map map) {
+		return sqlSession.selectList("myPage.myList", map);
 	}
 
 	// 회원정보수정

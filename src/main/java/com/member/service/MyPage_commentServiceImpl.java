@@ -18,18 +18,28 @@ import com.member.vo.MyPage_PostVo;
 public class MyPage_commentServiceImpl implements MyPage_commentService {
 	@Inject
 	private MyPage_commentDao myPage_commentDao;
-
+	// 내가 쓴 댓글 목록 레코드 카운트 가져오기
+	@Override
+	public int list_comment_count(int mem_no) {
+		// TODO Auto-generated method stub
+		return myPage_commentDao.list_comment_count(mem_no);
+	}
 	// 내가 쓴 댓글 목록
 	@Override
-	public List<MyPage_CommentVo> list(int mem_no) throws Exception {
+	public List<MyPage_CommentVo> list(Map map) throws Exception {
 		// TODO Auto-generated method stub
-		return myPage_commentDao.list(mem_no);
+		return myPage_commentDao.list(map);
 	}
-
+	// 내가 쓴 글 목록 레코드 카운트 가져오기
+	@Override
+	public int list_post_count(int mem_no) {
+		// TODO Auto-generated method stub
+		return myPage_commentDao.list_post_count(mem_no);
+	}
 	// 내가 쓴 글 목록
 	@Override
-	public List<MyPage_PostVo> list_post(int mem_no) throws Exception {
-		return myPage_commentDao.list_post(mem_no);
+	public List<MyPage_PostVo> list_post(Map map) throws Exception {
+		return myPage_commentDao.list_post(map);
 	}
 
 	@Override

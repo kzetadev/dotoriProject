@@ -52,6 +52,66 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		var login_mem_no = ${login_mem_no};
+		var divContainer = $("<div id='popup_layer' class='container'/>").css({
+			'position':'absolute'
+			, 'top':100
+			, 'left':100
+			, 'z-index':1
+			, 'visibility':'hidden'
+		});
+		//버튼 그룹
+		var divBtnGroup = $("<div id='btnGroup' class='btn-group-vertical'/>");
+		//쪽지보내기 버튼
+		var btnMsg = $("<button type='button' class='btn btn-default'/>").text("쪽지보내기");
+		// 마이페이지 버튼
+		var btnMypage = $("<button type='button' class='btn btn-default'/>").text("마이페이지");
+		$(btnMsg).click(function(){
+// 			window.open("/member/sendMessage.do", "_blank", "width=400, height=300, menubar=no, toolbar=no, status=no").focus();
+			jQuery.noConflict();
+			$("#modalMessage .modal-content")
+				.load("/member/sendMessage.do?mem_no=" + $(this).parent().attr('mem_no') 
+					+ "&mem_nickname=" + $(this).parent().attr('mem_nickname'), function(){
+				$("#modalMessage").modal();
+			});
+		});
+		$(btnMypage).click(function(){
+			location.href = "/member/myPage.do?mem_no=" + $(this).parent().attr('mem_no');
+		});
+		
+		$(divBtnGroup).append(btnMsg, btnMypage);
+		$(divContainer).append(divBtnGroup);
+		$('body').append(divContainer);
+
+		//닉네임 클릭 시 레이어 표시
+		$("#nickname").click(function(e){
+			if (login_mem_no == $(this).attr('mem_no')){
+				return;
+			}
+			$("#btnGroup").attr('mem_no', $(this).attr('mem_no'));
+			$("#btnGroup").attr('mem_nickname', $(this).text());
+			var oWidth = $("#popup_layer").width();
+			var oHeight = $("#popup_layer").height();
+			
+			var divLeft = e.clientX + 10;
+			var divTop = e.clientY;
+		
+			$("#popup_layer").css({
+			    "top":divTop
+			    , "left":divLeft
+			    , "position":"absolute"
+				, 'visibility':'visible'
+			});
+		});
+		//화면 내 특정영역(닉네임)을 제외한 부분 클릭 시 레이어 숨김
+		$('html').click(function(e){
+			if(!$(e.target).hasClass('nickname')){
+				$("#popup_layer").css({
+					'visibility':'hidden'
+				});
+				$("#btnGroup").attr('mem_no', '');
+			}
+		});
 		var comments;
 		$("#content").summernote({
 	 		height:400
@@ -122,7 +182,7 @@
 				var comment = {
 					board_ref:board_ref
 					, board_level:board_level
-					, mem_no:${mem_no}
+					, mem_no:login_mem_no
 					, board_no:$("#board_no").val()
 					, comment_content:$("#comment_reply_content").val()
 				}
@@ -168,7 +228,7 @@
 								var comment = {
 									comment_no:$(this).parent().parent().attr('comment_no')
 									, board_no:$("#board_no").val()
-									, mem_no:${mem_no}
+									, mem_no:login_mem_no
 									, comment_content:$(this).parent().parent().find(".reply-content").val()
 								}
 								console.log(comment);
@@ -189,13 +249,10 @@
 							console.log($(this).parent().parent().attr('board_no'));
 						});
 						$(btnDel).click(function(){
-							console.log($(this).parent().parent().attr('board_no'));
-							console.log($(this).parent().parent().attr('comment_no'));
 							var comment = {
 								comment_no:$(this).parent().parent().attr('comment_no')
 								, board_no:$("#board_no").val()
-								, mem_no:${mem_no}
-// 								, comment_content:$(this).parent().parent().find(".reply-content").val()
+								, mem_no:login_mem_no
 							}
 							console.log(comment);
 							$.ajax({
@@ -210,22 +267,6 @@
 								}
 							});
 						});
-// 						$(btnEdit).toggle(function(){
-// 							console.log('1');
-// 							console.log($(this).parent().parent().attr('board_no'));
-// 							console.log($(this).parent().parent().attr('comment_no'));
-
-// 							console.log($(this).parent().parent().find(".reply-content").removeAttr('readonly'));
-// 							console.log($(this).parent().parent().find(".reply-content").text());
-// 							$(this).text("수정완료");
-// 						}, function(){
-// 							console.log('a');
-// 						});
-// 						$(btnEdit).toggle(function(){
-// 							console.log('a');
-// 						}, function(){
-// 							console.log('b');
-// 						});
 						$(divBtn).append(btnEdit, btnDel);
 						//해당 댓글 노드가 상위 노드(board_level == 1 이면 상위 댓글)이면
 						//클릭 시 댓글 작성란을 하단에 표시 
@@ -233,14 +274,9 @@
 							$(div).click(function(e){
 								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') 
 										&& $(this).attr('comment_del') == 0){
-									console.log($(this).text());
-									console.log('board_level : ' + $(this).attr('board_level'));
-	// 								console.log($(this).siblings().length);
-		// 							if($(this).next().find('#commentReplyArea').length == 0){
-		
+
 									//해당 댓글의 형제노드(댓글 작성란 노드)가 없으면, 댓글 작성란 노드를 해당 댓글 형제노드로 붙임. siblings : 형제노드들
 									if($(this).siblings().length == 0){
-		// 								console.log($(this).attr("board_level"));
 										//댓글을 작성할 상위 댓글 노드의 참조 인덱스(board_ref)를 저장. board_level은 댓글들에 대한 계층 표현. 1 : 상위댓글	2 : 하위 댓글  
 										$(commentReplyArea).attr('board_ref', $(this).attr('comment_no'));
 										$(commentReplyArea).attr('board_level', parseInt($(this).attr('board_level')) + 1);
@@ -260,7 +296,7 @@
 						
 						//댓글 노드 만들기
 						if(comment['comment_del'] == 0){
-							if(${mem_no} == comment['mem_no']){
+							if(login_mem_no == comment['mem_no']){
 								$(div).append(divNickname, divBtn, divContent, divDate);
 							}else{
 								$(div).append(divNickname, divContent, divDate);
@@ -274,14 +310,6 @@
 							var img = $("<img src='${pageContext.request.contextPath}/reply.png' width='15' height='15'/>");
 							$(div).prepend(img);
 						}
-// 						if(parseInt(comment['board_level']) > 1){
-// 							var reply = $("<span/>").text("▶");
-// 							$(div).prepend(reply);
-// 							$(ul).children().last().find("[comment_no='" + comment['board_ref'] + "']").append(div);
-// 						}else{
-// 							$(li).append(div);
-// 							$(ul).append(li);
-// 						}
 						//리스트에 댓글 노드 추가
 						$(li).append(div);
 						//ul에 리스트 추가
@@ -300,7 +328,7 @@
 		});
 		$("#btnAnswer").click(function() {
 			var comment = {
-				mem_no:${mem_no}
+				mem_no:login_mem_no
 				, board_no:$("#board_no").val()
 				, board_level:1
 				, board_step:1
@@ -333,7 +361,7 @@
 			</div>
 			<div>
 			 	<label for="write">작성자 : </label>
-			 	<a href="/myPage/myPage.do">
+			 	<a class="nickname" id="nickname" mem_no="${detail.mem_no }">
 					${detail.mem_nickname}  
 <!-- 					회원 프로필 사진 아이콘 넣기 -->
 				</a>
@@ -393,6 +421,12 @@
 		<button class="btn btn-default" id="btnList">글목록</button>			
 	</div>
 	<br>
+	<div class="modal fade" id="modalMessage" tabindex="-1" role="dialog"
+		aria-labelledby="historyModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content"></div>
+		</div>
+	</div>
 </body>
 </html>
 

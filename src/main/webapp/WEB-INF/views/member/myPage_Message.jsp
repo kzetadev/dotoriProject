@@ -117,31 +117,8 @@ a {
 				.load("/member/myPage_MessageDetail.do?post_no=" + parseInt($(this).attr('post_ref_no')) 
 					+ "&mem_no=" + parseInt($(this).attr('mem_no'))
 					+ "&msg_type=" + $(this).attr('msg_type'), function(){
-				alert("load was performed");
 				$("#modalMessage").modal();
-// 				$("#modalMessage").modal('hide');
 			});
-// 			$.ajax({
-// 				url:"/member/myPage_MessageDetail.do"
-// 				, type:"post"
-// 				, data:{
-// 					post_no:parseInt($(this).attr('post_ref_no'))
-// 				}
-// 				, beforeSend:function(xhr){
-// 					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-// 				}
-// 				, success:function(result){
-// 				}
-// 			});
-// 			jQuery.noConflict();
-// 			$("#modalMessage .modal-content")
-// 				.load("/member/sendReplyMessage.do?mem_no=" + $(this).attr('mem_no') 
-// 					+ "&mem_nickname=" + $(this).attr('mem_nickname')
-// 					+ "&post_ref_no=" + $(this).attr('post_ref_no'), function(){
-// 				alert("load was performed");
-// 				$("#modalMessage").modal();
-// 			});
-		});
 	});
 </script>
 </head>

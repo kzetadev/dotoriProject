@@ -10,11 +10,16 @@ import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
 
 public interface MyPage_commentService {
+	// 내가 쓴 댓글 목록 레코드 카운트 가져오기
+	int list_comment_count(int mem_no);
+		
 	// 내가 쓴 댓글 목록
-	List<MyPage_CommentVo> list(int mem_no) throws Exception;
+	List<MyPage_CommentVo> list(Map map) throws Exception;
 
+	// 내가 쓴 글 목록 레코드 카운트 가져오기
+	int list_post_count(int mem_no);
 	// 내가 쓴 글 목록
-	List<MyPage_PostVo> list_post(int mem_no) throws Exception;
+	List<MyPage_PostVo> list_post(Map map) throws Exception;
 
 	// 회원정보수정
 	int updateMem(Member_InfoVo vo);

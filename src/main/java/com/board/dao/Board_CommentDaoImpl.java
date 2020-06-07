@@ -51,6 +51,12 @@ public class Board_CommentDaoImpl implements Board_CommentDao {
 	public int deleteBoard_Comment(Board_CommentVo vo) {
 		return sqlSessionTemplate.update("board_comment.delete", vo);
 	}
+	// 글 삭제 시 해당 글에 대한 댓글 전부 삭제 
+	@Override
+	public int deleteBoard_Comment(int board_no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.delete("board_comment.deleteWithBoard", board_no);
+	}
 	@Override
 	public int selectNextCommentNo(int board_no) {
 		// TODO Auto-generated method stub

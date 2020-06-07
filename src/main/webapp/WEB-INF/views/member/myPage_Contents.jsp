@@ -113,6 +113,7 @@ a {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$("#${content_type}").addClass("active");
 		$('ul.tab li').click(function() {
 			var activeTab = $(this).attr('data-tab');
 			$('ul.tab li').removeClass('current');
@@ -161,54 +162,43 @@ a {
 			<!-- 내용 -->
 			
 			<div class="col-sm-10 text-left">
-		
 				<hr>
-
-				<ul class="tab">
-					<li data-tab="tab2"><a href="#">내가 쓴 글</a></li>
-					<li data-tab="tab3"><a href="#">내가 쓴 댓글</a></li>
+				<ul class="nav nav-tabs">
+					<c:if test="${other_mem_no eq null }">
+						<li role="presentation" id="board"><a href="/member/myPage_Contents.do?content_type=board">내가 쓴 글</a></li>
+						<li role="presentation" id="comment"><a href="/member/myPage_Contents.do?content_type=comment">내가 쓴 댓글</a></li>
+					</c:if>
+					<c:if test="${other_mem_no ne null }">
+						<li role="presentation" id="board"><a href="/member/myPage_Contents.do?content_type=board${other_mem_no_str }">내가 쓴 글</a></li>
+						<li role="presentation" id="comment"><a href="/member/myPage_Contents.do?content_type=comment${other_mem_no_str }">내가 쓴 댓글</a></li>
+					</c:if>
 				</ul>
 
-				<div id="tab2" class="tabcontent">
+<!-- 				<div class="tabcontent"> -->
 					<div class="container">
 						<div class="table-responsive">
 							<table class="table">
+							<c:if test="${content_type eq 'board' }">
 								<thead>
-									<tr  style="border-bottom: 2px double #dddddd;">
+									<tr style="border-bottom: 2px double #dddddd;">
 										<th>글 번호</th>
 										<th>제목</th>
 										<th>닉네임</th>
 										<th>작성일</th>
 										<th>조회수</th>
 									</tr>
-									
 								</thead>
-								
-				
-								
-				 			  <c:forEach var="post" items="${list_post}">
-				 						<tr style="border-bottom: 1px double #dddddd;">
-											<td><c:out value="${post.board_no}"/></td>
-											<td><c:out value="${post.board_title}"/></td>
-											<td><c:out value="${post.mem_nickname}"/></td>
-											<td><fmt:formatDate value="${post.board_date}" pattern="yyyy-MM-dd" /></td>
-											<td><c:out value="${post.board_hit}"/></td>
-											
-										</tr>
+				 			  <c:forEach var="post" items="${list}">
+		 						<tr style="border-bottom: 1px double #dddddd;">
+									<td><c:out value="${post.board_no}"/></td>
+									<td><a href="/board/detailBoard_Post.do?board_no=${post.board_no}"><c:out value="${post.board_title}"/></a></td>
+									<td><c:out value="${post.mem_nickname}"/></td>
+									<td><fmt:formatDate value="${post.board_date}" pattern="yyyy-MM-dd" /></td>
+									<td><c:out value="${post.board_hit}"/></td>
+								</tr>
 								</c:forEach>
-										
-							</table>
-						</div>
-					</div>
-				</div>
-			
-
-
-
-				<div id="tab3" class="tabcontent">
-					<div class="container">
-						<div class="table-responsive">
-							<table class="table">
+							</c:if>
+							<c:if test="${content_type eq 'comment' }">
 								<thead>
 									<tr style="border-bottom: 2px double #dddddd;">
 										<th>댓글 번호</th>
@@ -217,18 +207,67 @@ a {
 										<th>댓글 작성일</th>
 									</tr>
 								</thead>
-						 	<c:forEach var="list" items="${list}">
-								<tr style="border-bottom: 1px double #dddddd;">
-									<td><c:out value="${list.comment_no}"/></td>
-									<td><c:out value="${list.comment_content}"/></td>
-									<td><c:out value="${list.mem_nickname}"/></td>
-									<td><fmt:formatDate value="${list.comment_date}" pattern="yyyy-MM-dd" /></td>
-								</tr>
-							</c:forEach>
+							 	<c:forEach var="list" items="${list}">
+									<tr style="border-bottom: 1px double #dddddd;">
+										<td><c:out value="${list.comment_no}"/></td>
+										<td><a href="/board/detailBoard_Post.do?board_no=${list.board_no}"><c:out value="${list.comment_content}"/></a></td>
+										<td><c:out value="${list.mem_nickname}"/></td>
+										<td><fmt:formatDate value="${list.comment_date}" pattern="yyyy-MM-dd" /></td>
+									</tr>
+								</c:forEach>
+							</c:if>
 							</table>
 						</div>
 					</div>
-				</div>
+					
+					<!-- 페이징 처리 -->
+					<ul class="pagination pagination-lg">
+						<c:if test="${start_page > 1}">
+							<li>
+								<a href="/member/myPage_Contents.do?${content_type_str}${other_mem_no_str}&pageNum=${start_page - 1}" aria-label="이전">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+						</c:if>
+						
+						<c:forEach var="i" begin="${start_page }" end="${end_page }">
+							<li><a href="/member/myPage_Contents.do?${content_type_str}${other_mem_no_str}&pageNum=${i}">${i }</a></li>
+						</c:forEach>
+						
+						<c:if test="${end_page < total_page }">
+							<li>
+								<a href="/member/myPage_Contents.do?${content_type_str}${other_mem_no_str}&pageNum=${end_page + 1}" aria-label="다음">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</c:if>
+					</ul>
+<!-- 				</div> -->
+			
+<!-- 				<div id="tab3" class="tabcontent"> -->
+<!-- 					<div class="container"> -->
+<!-- 						<div class="table-responsive"> -->
+<!-- 							<table class="table"> -->
+<!-- 								<thead> -->
+<!-- 									<tr style="border-bottom: 2px double #dddddd;"> -->
+<!-- 										<th>댓글 번호</th> -->
+<!-- 										<th>댓글 내용</th> -->
+<!-- 										<th>닉네임</th> -->
+<!-- 										<th>댓글 작성일</th> -->
+<!-- 									</tr> -->
+<!-- 								</thead> -->
+<%-- 						 	<c:forEach var="list" items="${list}"> --%>
+<!-- 								<tr style="border-bottom: 1px double #dddddd;"> -->
+<%-- 									<td><c:out value="${list.comment_no}"/></td> --%>
+<%-- 									<td><c:out value="${list.comment_content}"/></td> --%>
+<%-- 									<td><c:out value="${list.mem_nickname}"/></td> --%>
+<%-- 									<td><fmt:formatDate value="${list.comment_date}" pattern="yyyy-MM-dd" /></td> --%>
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+<!-- 							</table> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 		</div>
