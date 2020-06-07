@@ -15,18 +15,26 @@
 		$("#form1").submit(function(event) {
 			event.preventDefault();
 			var mem_info = {
+				mem_email : "${member.mem_email}",
 				mem_pwd : $("#mem_pwd").val()
 			}
 			console.log(mem_info);
 			console.log("${member.mem_email}");
 			$.ajax({
-				url : "/member/pass_change.do " + "${member.mem_email}",
+//				url : "/member/pass_change.do " + "${member.mem_email}",
+				url : "/member/pass_change.do ",
 				type : "POST",
 				data : mem_info,
 				success : function(re) {
 
 					console.log("find re : " + re);
-
+					if(re ==1 ){
+						alert("비밀번호가 변경 되었습니다")
+						location.href ="/member/login.do"
+// 						$("#form1").attr("action","/member/login.do")
+					}else{
+						alert("변경 실패")
+					}
 				}
 
 			})
@@ -47,7 +55,7 @@
 					<td>
 						<div style="text-align: center"></div>
 						<div style="text-align: center">
-							<form id="form1" action="/member/pass_change.do" method="post">
+							<form id="form1">
 								<div>
 									변경할 비밀번호 입력 : <input type="text" name="mem_pwd" id="mem_pwd"
 										placeholder="비밀번호를 입력하시오">

@@ -26,8 +26,8 @@ public class LoginServiceImpl implements LoginService {
 	
 	}
 	@Override
-	public void pass_change(Map<String, Object> map, Member_InfoVo vo) throws Exception {
-		member_infoDao.pass_change(map, vo);		
+	public int pass_change(Map<String, Object> map) throws Exception {
+		return member_infoDao.pass_change(map);		
 	}
 	@Override
 	public String find_idCheck(Member_InfoVo vo) {

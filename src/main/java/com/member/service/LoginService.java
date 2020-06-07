@@ -15,8 +15,8 @@ public interface LoginService {
 //	boolean checkPwd(String mem_id, String mem_pwd);
 	
 	//비밀번호 변경
-	void pass_change(Map<String, Object> map, Member_InfoVo vo) throws Exception;
-	
+	int pass_change(Map<String, Object> map) throws Exception;
+	//void
 	
 	
 	String find_idCheck(Member_InfoVo vo); //아이디 찾기

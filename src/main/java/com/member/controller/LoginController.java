@@ -193,6 +193,7 @@ public class LoginController {
 		}
 	
 		//인증번호를 입력한 후에 확인 버튼을 누르면 자료가 넘어오는 컨트롤러
+		
 		@RequestMapping(value="/member/pass_injeung.do {mem_id}", method = RequestMethod.POST)	
 		public ModelAndView pass_injeung(HttpServletRequest request, int pass_injeung, @PathVariable String mem_id,HttpServletResponse response_equals) throws IOException{
 			System.out.println("마지막 : pass_injeung : " + pass_injeung);
@@ -231,9 +232,12 @@ public class LoginController {
 			
 		}
 		//변경할 비밀번호를 입력한 후에 확인 버튼을 누르면 넘어오는 컨트롤러
-		@RequestMapping(value = "/member/pass_change.do {mem_email}", method = RequestMethod.POST)
-		public String pass_change(HttpServletRequest request,String mem_pwd,  @PathVariable String mem_email, Member_InfoVo vo, HttpServletResponse pass) throws Exception{
+		@RequestMapping(value = "/member/pass_change.do", method = RequestMethod.POST)
+//		@RequestMapping(value = "/member/pass_change.do {mem_email}", method = RequestMethod.POST)
+		@ResponseBody
+		public int pass_change(HttpServletRequest request,String mem_pwd, String mem_email, Member_InfoVo vo, HttpServletResponse pass) throws Exception{
 	//	String mem_pwd = request.getParameter("mem_pwd");
+		int re = -1;
 		System.out.println("컨트롤러 동작");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/member/pass_change");
@@ -253,12 +257,14 @@ public class LoginController {
 		map.put("mem_pwd", vo.getMem_pwd());
 		map.put("mem_email", mem_email);
 
-		memberservice.pass_change(map, vo);
+		re = memberservice.pass_change(map);
 		
 		//ModelAndView mav = new ModelAndView();
 		
 		//mav.setViewName("/member/find_pwd_result");
 		
-		return mem_email;
+		
+		
+		return re;
 		}
 }
