@@ -32,11 +32,8 @@ public class Board_PostController {
 	private Board_PostService board_postService;
 	@Resource(name = "head_tagService")
 	private Head_TagService head_tagService;
-//	@Resource(name="member_infoService")
-//	private Member_InfoService member_infoService;
 	@Resource(name = "board_commentService")
 	private Board_CommentService board_commentService;
-
 	@Resource(name = "loginService")
 	private LoginService loginService;
 
@@ -250,8 +247,6 @@ public class Board_PostController {
 	 * board_postService.detailBoard_Post(board_no));
 	 * board_postService.updateHit(board_no); return mav; }
 	 */
-
-	
 	// 게시글 상세
 	@RequestMapping(value = "/board/detailBoard_Post.do")
 	@Transactional
@@ -326,9 +321,6 @@ public class Board_PostController {
 		ModelAndView mav = new ModelAndView("redirect:/board/listBoard_Post.do");
 		int re = board_commentService.deleteBoard_Comment(vo.getBoard_no());	//글 삭제 시 해당 글에 등록된 댓글 전부 삭제. 댓글 테이블이 글 테이블의 하위 레코드로 존재하므로 댓글을 먼저 삭제해야함.
 		re = board_postService.deleteBoard_Post(vo);
-//		if(re > 0) {
-//			mav.setViewName("redirect:/listBoard_Post.do");
-//		}
 		mav.addObject("re", re);
 		return mav;
 	}
@@ -361,8 +353,6 @@ public class Board_PostController {
 		map = PagingUtil.pager(pageNum, totalRecord, pageSize, pageGroup);
 		map.put("board_kinds", board_kinds);
 		mav.addObject("boards", board_postService.galleryBoardkinds());
-//		List<Board_PostVo> imgList = board_postService.galleryBoardImage(map);
-//		System.out.println(imgList);
 		mav.addObject("imgList", board_postService.galleryBoardImage(map));
 		mav.addObject("board_kinds", board_kinds);
 		mav.addObject("board_kinds_str", "board_kinds=" + board_kinds);
