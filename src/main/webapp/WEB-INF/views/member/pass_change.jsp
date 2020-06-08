@@ -57,7 +57,7 @@
 						<div style="text-align: center">
 							<form id="form1">
 								<div>
-									변경할 비밀번호 입력 : <input type="text" name="mem_pwd" id="mem_pwd"
+									변경할 비밀번호 입력 : <input type="password" name="mem_pwd" id="mem_pwd"
 										placeholder="비밀번호를 입력하시오">
 								</div>
 								<br> <br> <br>

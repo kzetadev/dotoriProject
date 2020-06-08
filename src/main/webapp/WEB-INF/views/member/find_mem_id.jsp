@@ -32,10 +32,10 @@
 }
 #menu1 ul.tabs > [data-tab] {
 <%--	float: left; --%>
-	width: 25%;
+	width: 50%;
 	height: 50px;
 	text-align: center;
-	background: #98E0AD
+	background: #98E0AD;
 }
 #menu1 ul li a{
 <%--	display: block; --%>
@@ -49,6 +49,7 @@
 }
 
 #menu1 ul li a:hover{
+
 	background: #138535;
 	color: #fff;
 }
@@ -102,7 +103,7 @@ ul.tab li.current {
 	<%--background-color: rgb(0, 154, 200); --%>
 	
 	 display:  inline-block;
-  width:20%; 
+  <%--width:20%; --%> 
   float:left;  
   text-align:center; 
   background :#f9f9f9;
@@ -110,8 +111,6 @@ ul.tab li.current {
 
 .tabcontent.current {
 	display: block;
-}
-<%-- Remove the navbar's default margin-bottom and rounded borders --%>
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
@@ -259,8 +258,8 @@ $(function(){
 	<!-- 아이디를 찾는 페이지(이메일을 입력하면 db에 연동 후, db에 저장된 아이디가 출력됨 -->
 	<div class="container-fluid text-center">
 	<div style="text-align: center;" class="col-sm-10 text-left">
-	<hr>
 	
+	<div style="border:1px;">
 	<div id="menu1">
 	<ul class="tab">
 			<li data-tab="tab2" id="find_ID"><a href="#">아이디 찾기</a></li>
@@ -268,31 +267,33 @@ $(function(){
 		</ul>
 	</div>
 	<br><br><br>
-	
 	<div id="tab2" class="tabcontent">
 		<form id="form" action="/member/find_id.do" method="post">
 		<div class="container">
+		<div id="emailDiv" style="font-size: 30px;">이메일을 입력해주세요</div>
 			<div class="table-responsive">
-			<h2>이메일을 입력해주세요</h2>
-		
-			<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50">
-		<div style="float: left;">@</div>
-		<select id="mail2" name="mail2" style="float: left;">
-                            <option value="@naver.com">naver.com</option>
-                            <option value="@daum.net">daum.net</option>
-                            <option value="@gmail.com">gmail.com</option>
-                            <option value="@nate.com">nate.com</option>                        
-                        </select>
+			
+		<table style="margin-left: auto; margin-right: auto; ">
+		<tr>
+		<th style="width: 25%; float: left;height: 4%;font-size: 20px; ">
+		<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50" ></th>
+		<th style="float: left; height: 4%; padding: 6px 12px; font-size: 20px;"><div>@</div></th>
+		<th style="float: left; border: 0; height: 4%;font-size: 20px;"><select id="mail2" name="mail2">
+                            <option value="@naver.com" style="border: 0;font-size: 20px;">naver.com</option>
+                            <option value="@daum.net" style="border: 0;font-size: 20px;">daum.net</option>
+                            <option value="@gmail.com" style="border: 0;font-size: 20px;">gmail.com</option>
+                            <option value="@nate.com" style="border: 0;font-size: 20px;">nate.com</option>                        
+                        </select></th>
 <!-- 		<div style="float: left;">@</div> -->
-						
-             
-           <br><br>
+				</tr>		
+             </table>
+           
              <button type="submit" name="submit" id="submit" style="float:left;">확인</button>
 		</div>
 		</div>
 		</form>
 		</div>
-		
+		</div>
 	
 	
 	<div id="tab3" class="tabcontent">
