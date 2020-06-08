@@ -51,7 +51,7 @@ $(document).ready(function(){
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">소개<span class="sr-only"></span></a></li>
 					<li class="dropdown">
-						<a href="listPlace_Info.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">정보 게시판<span class="caret"></span></a>
+						<a href="listPlace_Info.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">여행 정보<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/place/listPlace_Info.do?place_type=0&sortColumn=place_no">명소</a></li>
 							<li><a href="/place/listPlace_Info.do?place_type=1&sortColumn=place_no">음식</a></li>

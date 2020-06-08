@@ -202,6 +202,17 @@ $(function(){
 		}
 	})
 	
+	//이름에 특수문자가 들어가지 않도록 설정
+	$("#mem_nickname").blur(function(){
+		if(nickJ.test($(this).val())){
+			console.log(nameJ.test($(this).val()));
+			$("#mem_nickname").text("");
+		}else{
+			$("#mem_nickname").text("닉네임을 다시 확인해주세요");
+			$("#mem_nickname").css("color","red");
+		}
+	})
+	
 	//비밀번호 유효성 검사
 	//1-1 정규식 체크
 	$("#mem_pwd").blur(function(event){
@@ -320,7 +331,7 @@ $(function(){
 			});
 			
 		}else{
-			console.log("입력한 정보들을 다시 한 번 확인 해주세요")
+			alert("입력한 정보들을 다시 한 번 확인 해주세요");
 		}
 	});
 // 	})

@@ -42,57 +42,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	console.log("A");
-// 	console.log("_csrf.parameterName : " + ${_csrf.parameterName});
-// 	console.log("_csrf.token : " + "${_csrf.token}");
-//로그인 id /pwd 유효성 검사
-// 	$.ajaxPrefilter(function (options){
-// 		var headerName = "${_csrf.headerName}";
-// 		var token = "${_csrf.token}";
-// 		console.log(headerName);
-// 		console.log(token);
-// 		console.log(options.method);
-// 		console.log(options);
-// 		alert(options);
-// 		if(options.type === "post"){
-// 			options.headers = options.headers || {};
-// 			options.headers[headerName] = token;
-// 			console.log(options.headers[headerName]);
-// 			alert(options.headers[headerName]);
-// 		}
-// 	});
-// 	$.ajaxPrefilter(function(options, originalOptions, jqXHR){
-// 		var token = "${_csrf.token}";
-// 		jqXHR.setRequestHeader('X-CSRF-Token', token);
-// 	});
-// 	$('#loginBtn').click(function() {
-// 		var id = $('#username').val();
-// 		var pwd = $('#password').val();
-// 		var remember_us = $('#remember_us').is(':checked');
-// 		$.ajax({
-// 			type : 'post', // 비밀번호의 값이 url에 표시되면 안 되기 때문에 보안을 위해 POST 방법으로 값을 보낸다
-// 			url : '${pageContext.request.contextPath}/login.do',
-// 			data : {
-// 				mem_id : id,
-// 				mem_pwd : pwd,
-// 				remember_memId : remember_us
-// 			},
-// 			success : function(data) {
-// 				console.log(data);
-// 				if (data == 0) { //로그인 실패시
-// 					console.log(data);
-// 					$('#spanLoginCheck').text('로그인 정보를 정확히 입력해주세요.');					
-// 				}else if (data == -2) { // 아이디가 사용중이라면?
-// 				  console.log(data);
-// 				  location.href = '${pageContext.request.contextPath}/redundant.do?mem_id=' + id + '&mem_pwd=' + pwd + '&remember_memId=' + remember_us;						
-// 				}else { //로그인 성공시
-// 					console.log("로그인 성공");
-// 					alert("로그인 성공")
-// 					//location.href = '${pageContext.request.contextPath}/user/storeChoice';
-// 				}
-// 			}
-// 		});
-// 	});
 })
 </script>
 </head>
@@ -124,9 +73,9 @@ $(function(){
 					<span class="font-weight-bold text-white bg-dark" id="spanLoginCheck"></span>
 				</div>
 				<div class="form-group">
-					<label class="font-weight-bold text-white"> 
-						<input type="checkbox" id="remember_us" name="remember_memId" ${checked}> 아이디 기억하기
-					</label>
+<!-- 					<label class="font-weight-bold text-white">  -->
+<%-- 						<input type="checkbox" id="remember_us" name="remember_memId" ${checked}> 아이디 기억하기 --%>
+<!-- 					</label> -->
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
