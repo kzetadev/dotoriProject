@@ -147,6 +147,9 @@ $(function(){
 						$("#id_check").text("아이디를 입력해주세요");
 						$("#reg_submit").attr("disabled", true);				
 						$("#id_check").css({"color":"red", "display":""});
+					}else{
+						$("#id_check").text("아이디를 다시 확인해주세요");
+						$("#id_check").css({"color":"red", "display":""});
 					}
 				}
 				},error : function(error){
@@ -207,7 +210,16 @@ $(function(){
 			$("#name_check").css("color","red");
 		}
 	})
-	
+	//이름에 특수문자가 들어가지 않도록 설정
+	$("#mem_id").blur(function(){
+		if(idJ.test($(this).val())){
+			console.log(idJ.test($(this).val()));
+			$("#id_check").text("");
+		}else{
+			$("#id_check").text("아이디를 다시 확인해주세요");
+			$("#id_check").css("color","red");
+		}
+	})
 	
 	//이름에 특수문자가 들어가지 않도록 설정
 	$("#mem_nickname").blur(function(){
