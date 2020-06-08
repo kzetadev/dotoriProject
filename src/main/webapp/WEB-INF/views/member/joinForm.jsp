@@ -201,7 +201,7 @@ $(function(){
 			$("#name_check").css("color","red");
 		}
 	})
-	
+	 
 	//이름에 특수문자가 들어가지 않도록 설정
 	$("#mem_nickname").blur(function(){
 		if(nickJ.test($(this).val())){
