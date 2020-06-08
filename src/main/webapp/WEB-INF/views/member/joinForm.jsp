@@ -86,7 +86,9 @@ $(function(){
 					
 					console.log("닉네임 중복")
 					//1: 닉네임 중복되는 문구 
-					alert("사용중인 닉네임입니다")
+// 					alert("사용중인 닉네임입니다")
+					$("#nickname_check").text("사용중인 닉네임입니다");
+					$("#nickname_check").css({"color":"red", "display":""});
 				}else{
 					console.log("닉네임 중복 아님")
 					if(nickJ.test(mem_nickname)){
@@ -128,23 +130,24 @@ $(function(){
 
 					console.log("아이디 중복")
 					
-					alert("사용중인 아이디입니다")
-	
+// 					alert("사용중인 아이디입니다")
+					$("#id_check").text("사용중인 아이디입니다");
+					$("#reg_submit").attr("disabled", true);				
+					$("#id_check").css({"color":"red", "display":""});
 				}else{
 					console.log("아이디 중복 아님")
 					if(idJ.test(mem_id)){
 						// 0 : 아이디 길이 / 문자열 검사
 						$("#id_check").text("사용가능한 아이디입니다");
 						$("#reg_submit").attr("disabled", false);
+						$("#id_check").css({"color":"green", "display":""});
 			
 					} else if(mem_id == ""){
 						
 						$("#id_check").text("아이디를 입력해주세요");
-//						$("#id_check").css("color", "red");
 						$("#reg_submit").attr("disabled", true);				
-						
+						$("#id_check").css({"color":"red", "display":""});
 					}
-					$("#id_check").css({"color":"green", "display":""});
 				}
 				},error : function(error){
 					console.log("실패!!!!!!!!!!!!!!")
@@ -169,8 +172,10 @@ $(function(){
 				if(data != 0){
 					console.log("이메일 중복")
 					//1: 이메일이 중복되는 문구 
-					alert("사용중인 이메일입니다")
-	
+// 					alert("사용중인 이메일입니다")
+					$("#email_check").text("사용중인 이메일입니다");
+					$("#email_check").css({"color":"red", "display":""});
+					$("#reg_submit").attr("disabled", true);
 				}else{
 					console.log("이메일 중복 아님")
 					console.log()
@@ -178,14 +183,14 @@ $(function(){
 						// 0 : 이메일 길이 / 문자열 검사
 						$("#email_check").text("사용가능한 이메일입니다");
 						$("#reg_submit").attr("disabled", false);
+						$("#email_check").css({"color":"green", "display":""});
 					} else if(mem_email == ""){
 						
 						$("#email_check").text("이메일을 입력해주세요");
-//						$("#email_check").css({"color":"red", "display":""});
+						$("#email_check").css({"color":"red", "display":""});
 						$("#reg_submit").attr("disabled", true);				
 						
 					}
-					$("#email_check").css({"color":"green", "display":""});
 				}
 				},error : function(error){
 					console.log("실패!!!!!!!!!!!!!!")
