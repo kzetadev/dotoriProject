@@ -31,6 +31,18 @@ public class MainController {
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	
+//	@RequestMapping("/pageNotFound")
+//	public void pageNotFound() {
+//		
+//	}
+//	@RequestMapping("/errorPage")
+//	public void errorPage() {
+//		
+//	}
+	@RequestMapping("/access_denied")
+	public String access_denied() throws Exception{
+		return "/access_denied";
+	}
 	@RequestMapping({"/", "/main.do"})
 	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("main");

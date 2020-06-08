@@ -62,7 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				, "/member/emailCheck.do", "/member/idCheck.do"
 				, "/member/nickCheck.do", "/css/**", "/fonts/**", "/img/**", "/js/**"
 				, "/member/findMem_id.do","/member/find_pass.do","/member/find_id.do"
-				, "/member/find_id_result.do", "/member/findMem_pwd.do","/member/pass_email.do","/member/pass_injeung.do**","/member/pass_change.do");
+				, "/member/find_id_result.do", "/member/findMem_pwd.do","/member/pass_email.do"
+				,"/member/pass_injeung.do**","/member/pass_change.do"
+				, "/error", "/not-found.png", "/dead_monitor.png");
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -77,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					, "/board/mainBoard_Post.do", "/member/findMem_pwd.do", "/board/listBoard_Post.do", "/board/listBoard_Gallery.do"
 					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
 			.anyRequest().authenticated();
-//		http.exceptionHandling().accessDeniedPage("/403");	//접근 거부 페이지 추가해야됨.
+		http.exceptionHandling().accessDeniedPage("/access_denied");	//접근 거부 페이지 추가해야됨.
 		http.formLogin()
 			.loginPage("/member/login.do")						//사용자정의 로그인 페이지명 설정
 			.usernameParameter("mem_id")				//로그인 페이지에서 사용할 username 파라미터명을 다른 식별자로 사용(사용자 정의 로그인 페이지에 설정한 아이디 필드의 식별자)
