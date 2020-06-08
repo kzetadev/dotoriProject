@@ -205,10 +205,10 @@ $(function(){
 	$("#mem_nickname").blur(function(){
 		if(nickJ.test($(this).val())){
 			console.log(nameJ.test($(this).val()));
-			$("#mem_nickname").text("");
+			$("#nickname_check").text("");
 		}else{
-			$("#mem_nickname").text("닉네임을 다시 확인해주세요");
-			$("#mem_nickname").css("color","red");
+			$("#nickname_check").text("닉네임을 다시 확인해주세요");
+			$("#nickname_check").css("color","red");
 		}
 	})
 	
