@@ -93,14 +93,17 @@ $(function(){
 						// 0 : 닉네임 길이 / 문자열 검사
 						$("#nickname_check").text("사용가능한 닉네임입니다");
 						$("#reg_submit").attr("disabled", false);
+						$("#nickname_check").css({"color":"green", "display":""});
 					} else if(mem_nickname == ""){
 						
 						$("#nickname_check").text("닉네임을 입력해주세요");
-// 						$("#nickname_check").css({"color":"red", "display":""});
+						$("#nickname_check").css({"color":"red", "display":""});
 						$("#reg_submit").attr("disabled", true);				
 						
+					}else{
+						$("#nickname_check").text("닉네임을 다시 확인해주세요");
+						$("#nickname_check").css({"color":"red", "display":""});
 					}
-					$("#nickname_check").css({"color":"green", "display":""});
 				}
 				},error : function(error){
 					console.log("실패!!!!!!!!!!!!!!")
@@ -219,35 +222,38 @@ $(function(){
 		$("#pwd_check").css({ "display":"none"});
 		if(pwdJ.test($("#mem_pwd").val())){
 			console.log("true!!");
+			$("#pwd_check").css({ "display":""});
 			$("#pwd_check").text("사용가능한 비밀번호입니다");
-//			$("#pwd_check").css("color","green");
+			$("#pwd_check").css("color","green");
 			$("reg_submit").attr("disabled",false);
 		}else{
-			console.log("false!!");
-			$("#pwd_check").text("");
+// 			console.log("false!!");
+			$("#pwd_check").css({ "display":""});
+			$("#pwd_check").text("사용 불가한 비밀번호입니다");
+			$("#pwd_check").css("color","red");
 			$("reg_submit").attr("disabled",false);
 
 		}	
-		$("#mem_pwd").css({"color":"green", "display":""});
+// 		$("#mem_pwd").css({"color":"green", "display":""});
 	})
 	//1-2 비밀번호 일치 확인
 	$("#mem_pwdcheck").blur(function(event){
 		event.preventDefault();
 		$("#pwd2_check").css({ "display":"none"})
 		if($("#mem_pwd").val() == $(this).val()){
-			
+			$("#pwd2_check").css({ "display":""})
 			$("#pwd2_check").text("비밀번호가 일치합니다");
 			$("#reg_submit").attr("disabled", false);
 			$("#pwd2_check").css("color","green");
 			
 		}else{
-			alert("비밀번호가 불일치 합니다")
+// 			alert("비밀번호가 불일치 합니다")
+			$("#pwd2_check").css({ "display":""})
+			$("#pwd2_check").text("비밀번호가 불일치합니다");
 			
-			//$("#pwd2_check").text("비밀번호가 불일치합니다");
-			
-			//$("#pwd2_check").css("color","red");
+			$("#pwd2_check").css("color","red");
 		}
-		$("#pwd2_check").css({"color":"green", "display":""});
+// 		$("#pwd2_check").css({"color":"green", "display":""});
 	})
 	
 	
