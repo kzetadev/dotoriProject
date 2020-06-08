@@ -17,6 +17,41 @@
   font-size:15px; 
   line-height:1.3;
 }
+#menu1{
+
+	margin:0;
+	padding:0;
+}
+#menu1 ul{
+	width: 50%;
+	margin: 0 auto;
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+ float: right;
+}
+#menu1 ul.tabs > [data-tab] {
+<%--	float: left; --%>
+	width: 25%;
+	height: 50px;
+	text-align: center;
+	background: #98E0AD
+}
+#menu1 ul li a{
+<%--	display: block; --%>
+	display: inline-block;
+	color: #000;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 16px;
+	font-size: 17px;
+	transition: 0.3s;
+}
+
+#menu1 ul li a:hover{
+	background: #138535;
+	color: #fff;
+}
 th,td {
 	text-align: center;
 }
@@ -26,12 +61,12 @@ th,td {
 	text-align: center;
 }
 
-.tab {
+<%--.tab {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-}
+} --%>
 <%--select{
 	-webkit-appearance: none;  
 	-moz-appearance: none; 
@@ -41,10 +76,11 @@ th,td {
 } --%>
 
 <%-- Float the list items side by side --%>
+
 .tab li {
 	float: left;
 }
-<%-- Style the links inside the list items --%>
+<%-- Style the links inside the list items 
 .tab li a {
 	display: inline-block;
 	color: #000;
@@ -53,7 +89,7 @@ th,td {
 	padding: 14px 16px;
 	font-size: 17px;
 	transition: 0.3s;
-}
+} --%>
 <%-- Style the tab content --%>
 .tabcontent {
 	display: none;
@@ -103,6 +139,8 @@ ul.tab li.current {
 		height: auto;
 	}
 }
+
+
 
 a {
 	
@@ -222,23 +260,34 @@ $(function(){
 	<div class="container-fluid text-center">
 	<div style="text-align: center;" class="col-sm-10 text-left">
 	<hr>
+	
+	<div id="menu1">
 	<ul class="tab">
 			<li data-tab="tab2" id="find_ID"><a href="#">아이디 찾기</a></li>
 			<li data-tab="tab3" id="find_PWD"><a href="#">비밀번호 찾기</a></li>
 		</ul>
-		
+	</div>
+	<br><br><br>
+	
 	<div id="tab2" class="tabcontent">
 		<form id="form" action="/member/find_id.do" method="post">
 		<div class="container">
 			<div class="table-responsive">
-		이메일을 입력해주세요<br><br> <input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50" style="width: 50%; float: left;">
-		<div style="float: left;">@</div>
-						<select id="mail2" name="mail2" style="float: left;">
+			<h2>이메일을 입력해주세요</h2>
+			<table>
+			
+			<th><input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50"></th>
+		<th><div style="float: left;">@</div></th>
+		<th><select id="mail2" name="mail2" style="float: left;">
                             <option value="@naver.com">naver.com</option>
                             <option value="@daum.net">daum.net</option>
                             <option value="@gmail.com">gmail.com</option>
                             <option value="@nate.com">nate.com</option>                        
-                        </select>
+                        </select></th>
+<!-- 		<div style="float: left;">@</div> -->
+						
+             
+             </table><br><br>
              <button type="submit" name="submit" id="submit" style="float:left;">확인</button>
 		</div>
 		</div>
@@ -261,11 +310,7 @@ $(function(){
                         </select>
              <button type="submit" name="submit2" id="submit2">확인</button>
 	</div>
-	</div>
-	
-	
-
-					
+	</div>		
 	</form>
 		<!-- ------------------------------------------------------------------------- -->
 	<a href="#" class="aPopupModal" data-target="#popupModal" data-title="WOW POPUP"></a>
