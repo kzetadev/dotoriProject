@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
-
 <layoutTag:layout>
-
 <!DOCTYPE html>
 <html>
 <head>
