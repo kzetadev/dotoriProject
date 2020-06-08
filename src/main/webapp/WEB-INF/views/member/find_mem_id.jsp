@@ -216,7 +216,7 @@ $(function(){
 //	$("#submit")clcik(function(){
 		var mem_info = {
 			mem_id: $("#mem_id1").val(),
-			mem_email:$("#mem_email2").val() + $("#mail2").val()
+			mem_email:$("#mem_email2").val() + $("#mail3").val()
 		}
 		console.log(mem_info);
 		console.log(mem_info.mem_email);
@@ -274,20 +274,19 @@ $(function(){
 		<div class="container">
 			<div class="table-responsive">
 			<h2>이메일을 입력해주세요</h2>
-			<table>
-			
-			<th><input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50"></th>
-		<th><div style="float: left;">@</div></th>
-		<th><select id="mail2" name="mail2" style="float: left;">
+		
+			<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50">
+		<div style="float: left;">@</div>
+		<select id="mail2" name="mail2" style="float: left;">
                             <option value="@naver.com">naver.com</option>
                             <option value="@daum.net">daum.net</option>
                             <option value="@gmail.com">gmail.com</option>
                             <option value="@nate.com">nate.com</option>                        
-                        </select></th>
+                        </select>
 <!-- 		<div style="float: left;">@</div> -->
 						
              
-             </table><br><br>
+           <br><br>
              <button type="submit" name="submit" id="submit" style="float:left;">확인</button>
 		</div>
 		</div>
@@ -302,7 +301,7 @@ $(function(){
 	<div class="table-responsive">
 			아이디 : <input type="text" name="mem_id" id="mem_id1" placeholder="아이디를 입력하시오"><br><br>
 			이메일 : <input type="text" class="form-control" name="mem_email" id="mem_email2" placeholder="E-mail" maxlength="50">@
-						<select id="mail2" name="mail2" style="border: 0px;">
+						<select id="mail3" name="mail3" style="border: 0px;">
                             <option value="@naver.com">naver.com</option>
                             <option value="@daum.net">daum.net</option>
                             <option value="@gmail.com">gmail.com</option>
