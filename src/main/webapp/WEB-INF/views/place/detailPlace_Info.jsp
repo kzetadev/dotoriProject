@@ -79,7 +79,7 @@
 		})
 	</script>
 <style type="text/css">
-	h2 {
+	h2, h4 {
 		text-align: center;
 	}
 	
@@ -94,8 +94,10 @@
 </style>
 </head>
 <body>
+	<h4>조회수 : ${p.place_hit }</h4>
+	
 	<h2 id="h2" place_no="${place_no }" place_type="${place_type.place_type }" mem_no="${mem_no }">
-		<b>${p.place_name } (조회수 - ${p.place_hit })</b>
+		<b>${p.place_name }</b>
 	</h2>
 	
 	<!-- 찜 버튼 -->

@@ -111,16 +111,24 @@
 	<div class="row">
 		<c:forEach var="p" items="${list }">
 			<div class="col-md-3">
-				<div class="thumbnail">	
+				<div class="thumbnail" style="height:300px !important">	
 					<a href="detailPlace_Info.do?place_no=${p.place_no}&place_type=${p.place_type}">
-						<img src="/img/${fn:split(p.place_img, '|')[0]}" width="300" height="300" id="img"> 
+						<img src="/img/${fn:split(p.place_img, '|')[0]}" width="300" height="200" id="img"> 
 						<div class="caption">
-							<b>${p.place_name} - 조회수 : ${p.place_hit }</b>
-							<br>
+							<p>
+								<!-- 
+								<c:set var="title" value="${p.place_name }"/>
+								<b>${fn:substring(title, 0, 10) } ...</b> 
+								-->
+								<b>${p.place_name }</b>
+							</p>
+							
 							<p>
 								<c:set var="string" value="${p.place_detail}"/>
-								${fn:substring(string, 0, 30)} ...
+								${fn:substring(string, 0, 20)} ...
 							</p>
+							
+							<p>조회수 : ${p.place_hit }</p>
 						</div>
 					</a>
 				</div>
@@ -133,7 +141,7 @@
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>
-				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${startPage-1 }${sortColumn}${searchColumn}${keyword}" aria-label="이전">
+				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${startPage-1 }&sortColumn=${sortColumn}${searchColumn}${keyword}" aria-label="이전">
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
@@ -145,7 +153,7 @@
 		
 		<c:if test="${endPage < totalPage }">
 			<li>
-				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${endPage+1 }${sortColumn}${searchColumn}${keyword}" aria-label="다음">
+				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${endPage+1 }&sortColumn=${sortColumn}${searchColumn}${keyword}" aria-label="다음">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>

@@ -176,12 +176,12 @@ word-break:break-all;
 </script>
 </head>
 <body>
-	<h2>${boardKinds_str }</h2>
+	<!-- <h2>${boardKinds_str }</h2> -->
 	<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;">
   		<img class="w3-image" src="/img/board.jpg" width="100%">
   		<div class="w3-display-middle w3-margin-top w3-center">
     		<h1 class="w3-xxlarge">
-    		<span class="w3-hide-small w3-text-light-black" id="word">자유 게시판</span></h1>
+    		<span class="w3-hide-small w3-text-light-black" id="word">${boardKinds_str }</span></h1>
   		</div>
 	</header>
 	<br>
@@ -189,7 +189,6 @@ word-break:break-all;
 	
 
 	<div class="container">
-
 <!-- 		<form id="form" action="/board/listBoard_Info.do"> -->
 			<div class="row">
 				<div class="col-sm-2">

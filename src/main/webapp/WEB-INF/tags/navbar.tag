@@ -49,7 +49,6 @@ $(document).ready(function(){
 			<div class="collapsed navbar-collapse" id="bs-example-navbar-collapse-1">
 				<!-- 상단 메뉴바 -->
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">소개<span class="sr-only"></span></a></li>
 					<li class="dropdown">
 						<a href="listPlace_Info.do" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">여행 정보<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -74,7 +73,6 @@ $(document).ready(function(){
 						</ul>
 					</li>
 					<li><a href="/faq/listFaq.do">FAQ</a></li>
-					<li><a href="/admin/adminListMember.do?pageNUM=1">관리자 페이지</a>
 				</ul>
 				<!-- 검색창 구현 -->
 				<form class="navbar-form navbar-left" action="/detailPlace_Info.do?">
