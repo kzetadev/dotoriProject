@@ -85,7 +85,7 @@
 						<c:if test="${other_mem_no eq null }">
 						<li class="list-group-item"><a href="/member/myPage_Favorite.do">찜목록</a></li>
 						<li class="list-group-item"><a href="/member/myPage_Message.do">쪽지함</a></li>
-						<li class="list-group-item"><a href="/member/myPage_update.do">회원 수정</a></li>
+						<li class="list-group-item"><a href="/member/myPage_updateMem.do">회원 수정</a></li>
 						<li class="list-group-item"><a href="/member/pwd_update.do">비밀번호 변경</a></li>
 						</c:if>
 					</ul>
