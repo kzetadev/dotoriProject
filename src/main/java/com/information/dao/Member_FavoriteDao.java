@@ -13,7 +13,7 @@ public interface Member_FavoriteDao {
 	List<Member_FavoriteVo> listMember_Favorite(Map map);
 	
 	// 마이페이지 찜 전체 리스트의 개수
-	int listAllCount(int place_type);
+	int listAllCount(Map map);
 	
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택
 	int deleteMember_Favorite(int favorite_no);

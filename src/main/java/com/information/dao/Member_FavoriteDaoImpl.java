@@ -28,8 +28,8 @@ public class Member_FavoriteDaoImpl implements Member_FavoriteDao {
 	
 	// 마이페이지 찜 전체 리스트의 개수
 	@Override
-	public int listAllCount(int place_type) {
-		return sqlSessionTemplate.selectOne("member_favorite.selectAllCount", place_type);
+	public int listAllCount(Map map) {
+		return sqlSessionTemplate.selectOne("member_favorite.selectAllCount", map);
 	}
 	
 	

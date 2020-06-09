@@ -109,8 +109,15 @@
 				}
 				, success:function(data, jqXHR, textStatus){
 					if(data == 1){
-						alert("수정되었습니다.");
-						location.href = "/board/listBoard_Post.do";
+						alert("글이 수정되었습니다.");
+						var boardKinds = $("#board_kinds").val();
+						if(boardKinds == 1){
+							location.href = "/board/listBoard_Post.do?str=1";
+						}else if(boardKinds == 2){
+							location.href = "/board/listBoard_Post.do?str=2";
+						}else{
+							location.href = "/board/listBoard_Post.do?str=3";
+						}
 					}
 				}
 			});

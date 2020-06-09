@@ -31,10 +31,12 @@
   	
   	<!-- 마이페이지 찜 전체 리스트의 개수 -->
   	<select id="selectAllCount" resultType="java.lang.Integer">
-  		SELECT count(*) FROM member_favorite mf, place_info pi, place_theme pt
+  		SELECT count(*) FROM member_info mi, member_favorite mf, place_info pi, place_theme pt
   			WHERE pi.place_type = pt.place_type
   				AND pi.place_no = mf.place_no
-  				<if test="place_type > -1">
+  				AND mi.mem_no = mf.mem_no
+  				AND mi.mem_no = #{mem_no}
+  				<if test="place_type != null and place_type > -1">
   					AND pi.place_type = #{place_type}
   				</if>
   	</select>

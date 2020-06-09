@@ -324,7 +324,7 @@
 		refreshComments();
 		
 		$("#btnList").click(function() {
-			location.href="/board/listBoard_Post.do?str=1";
+			location.href="/board/listBoard_Post.do?str=3";
 		});
 		$("#btnAnswer").click(function() {
 			var comment = {

@@ -30,8 +30,8 @@ public class Member_FavoriteServiceImpl implements Member_FavoriteService {
 	
 	// 마이페이지 찜 전체 리스트의 개수
 	@Override
-	public int listAllCount(int place_type) {
-		return member_favoriteDao.listAllCount(place_type);
+	public int listAllCount(Map map) {
+		return member_favoriteDao.listAllCount(map);
 	}
 	
 	// 마이페이지 찜 리스트중에서 삭제하고 싶은 것 선택

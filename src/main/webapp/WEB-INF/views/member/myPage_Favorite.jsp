@@ -64,6 +64,8 @@
 				}})
 			}
 		})
+
+		$("#${number}").addClass("active")
 	})
 </script>
 </head>
@@ -100,18 +102,15 @@
 				
 				<!-- 탭 부분 (전체와 place_type으로 구분) -->
 				<ul class="nav nav-tabs">
-				  <li role="presentation" id="all" class="active">
+				  <li role="presentation" id="-1">
 				  	<a href="/member/myPage_Favorite.do">전체</a>
 				  </li>
-				  <li role="presentation" id="place">
-				  	<a href="/member/myPage_Favorite.do?place_type=0">명소</a>
-				  </li>
-				  <li role="presentation" id="restaurant">
-				  	<a href="/member/myPage_Favorite.do?place_type=1">음식</a>
-				  </li>
-				  <li role="presentation" id="hotel">
-				  	<a href="/member/myPage_Favorite.do?place_type=2">숙소</a>
-				  </li>
+				  <c:forEach var="p" items="${theme }">
+					  <li role="presentation" id="${p.place_type }">
+					  	<a href="/member/myPage_Favorite.do?place_type=${p.place_type }">${p.place_type_name }</a>
+					  </li>
+					  
+				  </c:forEach>
 				</ul>
 				
 				<script type="text/javascript">

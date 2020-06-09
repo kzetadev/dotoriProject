@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.information.service.Member_FavoriteService;
+import com.information.service.Place_ThemeService;
 import com.information.vo.Member_FavoriteVo;
 import com.security.config.LoginUser;
 
@@ -24,6 +25,9 @@ public class Member_FavoriteController {
 	
 	@Resource(name="member_favoriteService")
 	private Member_FavoriteService member_favoriteService;
+	
+	@Resource(name="place_themeService")
+	private Place_ThemeService place_themeService;
 
 	// 마이페이지에 담기 (detailPlace_Info에서 처리함)
 	@RequestMapping("/place/insertMember_Favorite.do")
@@ -61,8 +65,12 @@ public class Member_FavoriteController {
 		map.put("mem_no", mem_no);
 		m.addObject("favorite_list", member_favoriteService.listMember_Favorite(map));
 		// 총 개수 구함
-		int AllCount = member_favoriteService.listAllCount(place_type);
+		int AllCount = member_favoriteService.listAllCount(map);
 		m.addObject("AllCount",AllCount);
+		
+		m.addObject("theme", place_themeService.listPlace_Theme());
+		
+		m.addObject("number", place_type);
 		System.out.println("마이페이지 찜리스트 컨트롤러 종료");
 		return m;
 	}
