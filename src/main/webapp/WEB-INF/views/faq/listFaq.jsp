@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
-
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <layoutTag:layout>
 
 <!DOCTYPE html>
@@ -40,9 +40,11 @@
 <body>
 	<div class="wrapper">
 		<h2>FAQ</h2>
-		<button type="button" class="btn btn-default" id="btnAdd">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-		</button>
+		<sec:authorize access="hasRole('ADMIN')">
+			<button type="button" class="btn btn-default" id="btnAdd">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
+		</sec:authorize>
 		
 		<div class="container">
 			<table class="table mytable">
@@ -52,12 +54,14 @@
 							aria-hidden="true"></span></td>
 						<td><a class="showmore">${f.faq_question }</a></td>
 						<td colspan="6">
-							<button type="button" class="btn btn-default btnUpdate" faq_no="${f.faq_no }">
-								<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-default btnDelete" faq_no="${f.faq_no }">
-								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-							</button>
+							<sec:authorize access="hasRole('ADMIN')">
+								<button type="button" class="btn btn-default btnUpdate" faq_no="${f.faq_no }">
+									<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btnDelete" faq_no="${f.faq_no }">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</sec:authorize>
 						</td>
 					</tr>
 

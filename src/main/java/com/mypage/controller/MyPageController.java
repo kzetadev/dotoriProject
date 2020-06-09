@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -32,17 +33,21 @@ import com.member.vo.Member_MessageVo;
 import com.member.vo.MyPage_CommentVo;
 import com.member.vo.MyPage_PostVo;
 import com.security.config.LoginUser;
+import com.security.config.UserDetailsServiceImpl;
 
 @Controller
 public class MyPageController {
 	
 	Logger logger = Logger.getLogger(this.getClass());
-
+	@Autowired
+	UserDetailsServiceImpl userDetailsServiceImpl;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
 	@Resource(name="loginService")
 	private LoginService loginService;
+	@Inject
+	LoginService memberservice; //서비스를 호출하기 위해 의존성 투입
 
 	@Resource(name="myPage_commentService")
 	private MyPage_commentService myPage_commentService;
@@ -313,6 +318,51 @@ public class MyPageController {
 //		m.addObject("sendMsg", myPage_commentService.sendMsgList(mem_no));
 //		m.addObject("receiveMsg", myPage_commentService.receiveMsgList(mem_no));
 		return m;
+	}
+	@RequestMapping(value="/member/pwd_update.do", method=RequestMethod.GET)
+	public void pwd_update() {
+		
+	}
+	
+	@RequestMapping(value="/member/oldPassCheck.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int oldPassCheck(String mem_pwd) {
+		int re = -1;
+		System.out.println("mem_pwd : " + mem_pwd);
+		Member_InfoVo vo = LoginUser.getMember_InfoVo();
+		
+		if(passwordEncoder.matches(mem_pwd, vo.getMem_pwd())) {
+			re = 1;
+		}
+		
+		System.out.println("/member/oldPassCheck.do " + re);
+		return re;
+	}
+	@RequestMapping(value="/member/pass_update.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int pass_update(String mem_pwd) throws Exception {
+		int re = -1;
+		
+		System.out.println("update mem_pwd : " + mem_pwd);
+		Member_InfoVo vo = LoginUser.getMember_InfoVo();
+		String encode_passwod = passwordEncoder.encode(mem_pwd);
+		vo.setMem_pwd(encode_passwod);
+
+		//값을 여러개 담아야 하므로 해쉬맵을 사용해서 값을 저장함
+		
+		Map<String, Object> map = new HashMap<>();
+
+		// map.put("mem_email", vo.getMem_email());
+		map.put("mem_pwd", vo.getMem_pwd());
+		map.put("mem_email", vo.getMem_email());
+
+		re = memberservice.pass_change(map);
+		
+		vo = loginService.loginById(vo.getMem_id());
+		
+		userDetailsServiceImpl.loadUserByUsername(vo.getMem_id());
+		
+		return re;
 	}
 	
 	// 마이페이지 메인
