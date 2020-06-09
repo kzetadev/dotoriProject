@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
@@ -12,47 +11,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-*{
-  margin:0; padding:0;
-  font-size:15px; 
+
+<%-- *{
+  margin:0; 
+  padding:0;
+<%--  font-size:15px; 
   line-height:1.3;
-}
-#menu1{
+}--%>
 
-	margin:0;
-	padding:0;
-}
-#menu1 ul{
-	width: 50%;
-	margin: 0 auto;
-	overflow: hidden;
-	list-style: none;
-	padding: 0;
- float: right;
-}
-#menu1 ul.tabs > [data-tab] {
-<%--	float: left; --%>
-	width: 50%;
-	height: 50px;
-	text-align: center;
-	background: #98E0AD;
-}
-#menu1 ul li a{
-<%--	display: block; --%>
-	display: inline-block;
-	color: #000;
-	text-align: center;
-	text-decoration: none;
-	padding: 14px 16px;
-	font-size: 17px;
-	transition: 0.3s;
-}
-
-#menu1 ul li a:hover{
-
-	background: #138535;
-	color: #fff;
-}
 th,td {
 	text-align: center;
 }
@@ -62,26 +28,19 @@ th,td {
 	text-align: center;
 }
 
-<%--.tab {
+.tab {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-} --%>
-<%--select{
-	-webkit-appearance: none;  
-	-moz-appearance: none; 
-	appearance: none;
-
-
-} --%>
+} 
 
 <%-- Float the list items side by side --%>
 
 .tab li {
 	float: left;
 }
-<%-- Style the links inside the list items 
+<%-- Style the links inside the list items --%>
 .tab li a {
 	display: inline-block;
 	color: #000;
@@ -90,23 +49,22 @@ th,td {
 	padding: 14px 16px;
 	font-size: 17px;
 	transition: 0.3s;
-} --%>
+} 
 <%-- Style the tab content --%>
 .tabcontent {
 	display: none;
 <%--	background-color: rgb(0, 154, 200); --%>
-	padding: 6px 12px;
+<%--	padding: 6px 12px;--%>
 
 }
 
 ul.tab li.current {
 	<%--background-color: rgb(0, 154, 200); --%>
-	
-	 display:  inline-block;
-  <%--width:20%; --%> 
-  float:left;  
-  text-align:center; 
-  background :#f9f9f9;
+	display:  inline-block;
+	<%--width:20%; --%> 
+	float:left;  
+	text-align:center; 
+	background :#f9f9f9;
 }
 
 .tabcontent.current {
@@ -132,7 +90,7 @@ ul.tab li.current {
 @media screen and (max-width: 767px) {
 	.sidenav {
 		height: auto;
-		padding: 15px;
+<%--		padding: 15px;  --%>
 	}
 	.row.content {
 		height: auto;
@@ -145,6 +103,9 @@ a {
 	
 	text-decoration: none;
 }
+
+
+
 </style>
 <!-- <link -->
 <!-- 	href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext" -->
@@ -254,64 +215,105 @@ $(function(){
 </script>
 </head>
 <body>
-
 	<!-- 아이디를 찾는 페이지(이메일을 입력하면 db에 연동 후, db에 저장된 아이디가 출력됨 -->
-	<div class="container-fluid text-center">
-	<div style="text-align: center;" class="col-sm-10 text-left">
-	
-	<div style="border:1px;">
-	<div id="menu1">
-	<ul class="tab">
-			<li data-tab="tab2" id="find_ID"><a href="#">아이디 찾기</a></li>
-			<li data-tab="tab3" id="find_PWD"><a href="#">비밀번호 찾기</a></li>
-		</ul>
+<div class="container-fluid text-center" style="display: table; width:500px; height:500px; border:1px solid #000; text-align:center;">
+	<div class="col-sm-10 text-left" style="display: table-cell; vertical-align: middle; margin: 0 auto; padding-left: 15%; padding-right: -15%">
+ 	<div id="menu1">
+		<table id="findMem" style="margin: 0 auto;" >
+			<tr id="ulli">
+				<th>
+					<ul class="tab"> 
+					<li data-tab="tab2" id="find_ID"><a href="#">아이디 찾기</a></li>
+					<li data-tab="tab3" id="find_PWD"><a href="#">비밀번호 찾기</a></li>
+					</ul>
+				</th>
+			</tr>	
+		</table>		
 	</div>
-	<br><br><br>
+
 	<div id="tab2" class="tabcontent">
 		<form id="form" action="/member/find_id.do" method="post">
-		<div class="container">
-		<div id="emailDiv" style="font-size: 30px;">이메일을 입력해주세요</div>
-			<div class="table-responsive">
-			
-		<table style="margin-left: auto; margin-right: auto; ">
-		<tr>
-		<th style="width: 25%; float: left;height: 4%;font-size: 20px; ">
-		<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50" ></th>
-		<th style="float: left; height: 4%; padding: 6px 12px; font-size: 20px;"><div>@</div></th>
-		<th style="float: left; border: 0; height: 4%;font-size: 20px;"><select id="mail2" name="mail2">
-                            <option value="@naver.com" style="border: 0;font-size: 20px;">naver.com</option>
-                            <option value="@daum.net" style="border: 0;font-size: 20px;">daum.net</option>
-                            <option value="@gmail.com" style="border: 0;font-size: 20px;">gmail.com</option>
-                            <option value="@nate.com" style="border: 0;font-size: 20px;">nate.com</option>                        
-                        </select></th>
-<!-- 		<div style="float: left;">@</div> -->
-				</tr>		
-             </table>
-           
-             <button type="submit" name="submit" id="submit" style="float:left;">확인</button>
-		</div>
-		</div>
+<!-- 			<div class="container" style="padding:0px;"> -->
+	<!-- 		<div id="emailDiv" style="font-size: 30px;">이메일을 입력해주세요</div> -->
+<!-- 				<div class="table-responsive"> -->
+					<table id="findId">
+						<tr id="idTr">
+							<th id="emailIdTh" >
+								<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50" >
+							</th>
+							
+							<th id="golIdTh">
+								<div>@</div>
+							</th>
+						
+							<th id="mail2Th">
+								<select id="mail2" name="mail2">
+									<option value="@naver.com">naver.com</option>
+									<option value="@daum.net">daum.net</option>
+									<option value="@gmail.com">gmail.com</option>
+									<option value="@nate.com">nate.com</option>                        
+								</select>
+							</th>
+				         </tr>
+						
+				         <tr id="findIdBtn">      
+							<td id="findIdPwdTd">
+								<button type="submit" name="submit" id="submit" style="float:left;">확인</button>
+							</td>
+						</tr>                        
+				<!-- 		<div style="float: left;">@</div> -->
+					</table>
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</form>
-		</div>
-		</div>
-	
-	
-	<div id="tab3" class="tabcontent">
-		<form id="form1" action="/member/find_pass.do" method="post">
-	<div class="container">
-	<div class="table-responsive">
-			아이디 : <input type="text" name="mem_id" id="mem_id1" placeholder="아이디를 입력하시오"><br><br>
-			이메일 : <input type="text" class="form-control" name="mem_email" id="mem_email2" placeholder="E-mail" maxlength="50">@
-						<select id="mail3" name="mail3" style="border: 0px;">
-                            <option value="@naver.com">naver.com</option>
-                            <option value="@daum.net">daum.net</option>
-                            <option value="@gmail.com">gmail.com</option>
-                            <option value="@nate.com">nate.com</option>                        
-                        </select>
-             <button type="submit" name="submit2" id="submit2">확인</button>
 	</div>
-	</div>		
+		
+	
+	
+<div id="tab3" class="tabcontent">
+	<form id="form1" action="/member/find_pass.do" method="post">
+<!-- 		<div class="container" > -->
+<!-- 			<div class="table-responsive" > -->
+				<table id="findPwd" >
+					<tr id="pwdTr">
+						<th id="pwdIdTh">아이디 </th>
+						
+						<th id="pwdIdInputTh"> 
+							<input type="text" name="mem_id" id="mem_id1" placeholder="아이디를 입력하시오">
+						</th>
+					</tr> 	
+		
+					<tr id="findPwdEmailTr">
+						<th id="findPwdEmailTh">이메일</th>
+						 
+						<th id="findPwdInputTh"> 
+							<input type="text" class="form-control" name="mem_email" id="mem_email2" placeholder="E-mail" maxlength="50">
+						</th>
+			
+						<th id="findPwdGol">
+							<div>@</div>
+						</th>
+			
+						<th id="findPwdSelectTh">
+							<select id="mail3" name="mail3" style="border: 0px;">
+	                            <option value="@naver.com">naver.com</option>
+	                            <option value="@daum.net">daum.net</option>
+	                            <option value="@gmail.com">gmail.com</option>
+	                            <option value="@nate.com">nate.com</option>                        
+	                        </select>
+             			</th>
+		 			</tr>
+          
+			         <tr id="findPwdBtnTr">     
+			              <td id="findPwdTd">
+			             <button type="submit" name="submit2" id="submit2">확인</button>
+			             </td>
+					</tr>
+				</table>
+<!-- 			</div> -->
+<!-- 		</div>		 -->
 	</form>
+	</div>
 		<!-- ------------------------------------------------------------------------- -->
 	<a href="#" class="aPopupModal" data-target="#popupModal" data-title="WOW POPUP"></a>
 	<div class="modal" tabindex="-1" role="dialog" id="popupModal">
@@ -348,7 +350,7 @@ $(function(){
 <!-- ---------------------------------------------------------------------------------------------------- -->
 	</div>
 	</div>
-	</div>
+<!-- 	</div> -->
 </body>
 </html>
 </layoutTag:layout>
