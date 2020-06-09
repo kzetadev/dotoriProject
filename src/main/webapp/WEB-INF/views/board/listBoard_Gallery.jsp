@@ -33,11 +33,11 @@ $(document).ready(function(){
 			<div class="row">
 				<c:forEach var="img" items="${imgList }">
 					<div class="col-md-4">
-						<div class="thumbnail" style="width:200px;height:200px;">
+						<div class="thumbnail" style="width:300px;height:300px;">
 							<a href="/board/detailBoard_Post.do?board_no=${img.board_no }">
-								<img src="${img.board_content }" style="width:150px;height:150px;">
-								<div class="caption">
-									<p>${img.board_title }</p>
+								<img src="${img.board_content }" style="width:250px;height:250px;">
+								<div class="caption" style="text-align:center;">
+									<p><b>${img.board_title }</b></p>
 								</div>
 							</a> 
 						</div>

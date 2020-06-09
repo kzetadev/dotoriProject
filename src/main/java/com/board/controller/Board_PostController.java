@@ -346,7 +346,7 @@ public class Board_PostController {
 			@RequestParam(name = "pageNum", defaultValue = "1") int pageNum) {
 		ModelAndView mav = new ModelAndView();
 		Map map = null;
-		int pageSize = 3;
+		int pageSize = 6;
 		int pageGroup = 5;
 		int totalRecord = 0;
 		totalRecord = board_postService.galleryBoardRecordCount(board_kinds);

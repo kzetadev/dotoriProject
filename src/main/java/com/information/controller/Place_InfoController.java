@@ -116,6 +116,9 @@ public class Place_InfoController {
 			m.addObject("keyword", "&keyword=" + keyword);
 			// m.addObject("sortColumn", "&sortColumn=" + sortColumn);
 		}
+		if(sortColumn != null && !sortColumn.equals("")) {
+			m.addObject("sortColumn", "&sortColumn=" + sortColumn);
+		}
 		m.addObject("pt", pt);
 		//theme
 		return m;

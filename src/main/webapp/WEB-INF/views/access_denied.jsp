@@ -9,6 +9,9 @@
 <title>접근할 수 있는 권한이 없습니다.</title>
 </head>
 <body>
+	<div style="text-align:center;">
+		<img src="${pageContext.request.contextPath}/notify_img/monitor_lock.png" width="400" height="400"/>
+	</div>
 	<div class="panel panel-default">
 <!-- 		<div class="panel-body"> -->
 <!-- 			<div class="alert alert-warning"> -->

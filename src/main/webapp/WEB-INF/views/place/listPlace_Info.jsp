@@ -102,9 +102,9 @@
 	
 	<!-- 정렬 -->
 	<ul class="nav nav-tabs">
-		<li><a href="listPlace_Info.do?sortColumn=place_no&place_type=${place_type }">번호순</a></li>
-		<li><a href="listPlace_Info.do?sortColumn=place_name&place_type=${place_type }">이름순</a></li>
-		<li><a href="listPlace_Info.do?sortColumn=place_hit&place_type=${place_type }">조회수순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_no&place_type=${place_type }${searchColumn}${keyword}">번호순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_name&place_type=${place_type }${searchColumn}${keyword}">이름순</a></li>
+		<li><a href="listPlace_Info.do?sortColumn=place_hit&place_type=${place_type }${searchColumn}${keyword}">조회수순</a></li>
 	</ul>
 				
 	<!-- 각 장소별 대표 이미지 리스트 -->
@@ -141,19 +141,19 @@
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>
-				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${startPage-1 }&sortColumn=${sortColumn}${searchColumn}${keyword}" aria-label="이전">
+				<a href="/place/listPlace_Info.do?place_type=${place_type }&pageNUM=${startPage-1 }${sortColumn}${searchColumn}${keyword}" aria-label="이전">
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
 		</c:if>
 		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<li><a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${i }&sortColumn=${sortColumn}${searchColumn}${keyword}">${i }</a></li>
+			<li><a href="/place/listPlace_Info.do?place_type=${place_type }&pageNUM=${i }${sortColumn}${searchColumn}${keyword}">${i }</a></li>
 		</c:forEach>
 		
 		<c:if test="${endPage < totalPage }">
 			<li>
-				<a href="/place/listPlace_Info.do?&place_type=${place_type }&pageNUM=${endPage+1 }&sortColumn=${sortColumn}${searchColumn}${keyword}" aria-label="다음">
+				<a href="/place/listPlace_Info.do?place_type=${place_type }&pageNUM=${endPage+1 }${sortColumn}${searchColumn}${keyword}" aria-label="다음">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>

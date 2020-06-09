@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				, "/member/findMem_id.do","/member/find_pass.do","/member/find_id.do"
 				, "/member/find_id_result.do", "/member/findMem_pwd.do","/member/pass_email.do"
 				,"/member/pass_injeung.do**","/member/pass_change.do"
-				, "/error", "/not-found.png", "/dead_monitor.png");
+				, "/error", "/notify_img/**");
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

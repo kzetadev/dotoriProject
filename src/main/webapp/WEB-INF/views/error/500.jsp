@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div style="text-align:center;">
-		<img src="${pageContext.request.contextPath}/dead_monitor.png" width="400" height="400"/>
+		<img src="${pageContext.request.contextPath}/notify_img/monitor_500.png" width="400" height="400"/>
 	</div>
 	<div class="panel panel-default">
 <!-- 		<div class="panel-body"> -->
