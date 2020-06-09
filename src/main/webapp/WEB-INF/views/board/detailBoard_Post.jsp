@@ -390,7 +390,7 @@
 		</div>
 	</form>
 	
-	<c:if test="${mem_no eq detail.mem_no }">
+	<c:if test="${login_mem_no eq detail.mem_no }">
 		<div class="text-center" role="group">
 	  		<button type="button" class="btn btn-default" id="btnUpdate">수정</button>
 			<button type="button" class="btn btn-default" id="btnDelete">삭제</button>
