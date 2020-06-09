@@ -42,7 +42,7 @@ $(document).ready(function(){
 	</div>
 	<div class="modal-body">
 	    <div class="table-responsive">
-	        <div class="container">
+	        <div class="header">
 				<h2>제목</h2>
 				<div class="well well-sm">${message.post_title }</div>
 				<h2>내용</h2>
