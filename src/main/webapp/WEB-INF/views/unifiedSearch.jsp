@@ -109,7 +109,7 @@ $(document).ready(function(){
 						$.each(list, function(idx, place){
 							var divColMd4 = $("<div class='col-md-4'/>");
 							var divThumbnail = $("<div class='thumbnail'/>");
-							var a = $("<a/>").attr('href', '/place/detailPlace_Info.do?place_no=' + place['place_no']);
+							var a = $("<a/>").attr('href', '/place/detailPlace_Info.do?place_no=' + place['place_no'] + '&place_type=' + place['place_type']);
 							var img = $("<img class='place_info'/>").attr('src', '/img/' + place['place_img'].split('|')[0]);
 							var divCaption = $("<div class='caption'/>");
 							var p = $("<p/>").text(place['place_name']);
@@ -262,7 +262,7 @@ $(document).ready(function(){
 
 <body>
 <!-- 정보게시판 영역 -->
-	<h2 style="text-align:center;">정보게시판 검색 결과</h2>
+	<h2 style="text-align:center;">여행정보 검색 결과</h2>
 	<div id="themeArea" class="container">
 		<ul class="nav nav-tabs">
 		<c:forEach var="t" items="${tList }">
