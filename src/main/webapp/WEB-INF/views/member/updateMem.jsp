@@ -43,6 +43,9 @@ a {
 	color: #337ab7;
 	text-decoration: none;
 }
+h1{
+	text-align:left;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -222,47 +225,53 @@ a {
 			</div>
 
 			<!-- 내용 -->
+			<h1>회원수정</h1>
+			<hr>
 			
 			<div class="col-sm-10 text-left">
-				<form id="form1" method="post" action="myPage.jsp" enctype="multipart/form-data">
+				<form id="form1" name="form1" class="navbar-form" method="post" action="myPage.jsp" enctype="multipart/form-data">
 				<input type="hidden" name="mem_no" id="mem_no" value="${update.mem_no }" readonly="readonly">
-				
-				<h1>회원수정</h1>
+		
 					<div>
-<!-- 						<input type="file" name="uploadFile"> -->
+						<!-- <input type="file" name="uploadFile"> -->
 						<img id="profile_img" class="img-rounded" name="profile_img" src="${update.mem_img }" width="300" height="300">
 					</div>
-
-					<table>
-					<tr>
-						<td>이름</td>
-						<td><input type="text" name="mem_name" value="${update.mem_name}" readonly="readonly"></td>
-					</tr>
 					
-					<tr>
-						<td>아이디</td>
-						<td><input type="text" name="mem_id" value="${update.mem_id }" readonly="readonly"></td>
-					</tr>
-					
-					<tr>
-						<td>이메일</td>
-						<td><input type="text" name="mem_email" value="${update.mem_email}" readonly="readonly"></td>
-					</tr>
-					
-					<tr>
-						<td>닉네임</td>
-						<td><input type= "text" class = "form-control" name="mem_nickname" id="mem_nickname" value="${update.mem_nickname }" ></td>
-						<td><button id="nickName_overlap">중복확인</button>
+					<table class="table">
+						<tr>
+							<td><label for="mem_name">이름 : </label></td>
+							<td><input type="text" name="mem_name" id="mem_name" class="form-control" value="${update.mem_name}" readonly="readonly"></td>
+						</tr>
+	
+						<tr>
+							<td><label for="mem_id">아이디 : </label></td>
+							<td><input type="text" name="mem_id" id="mem_id" class="form-control" value="${update.mem_id }" readonly="readonly"></td>
+						</tr>
+	
+						<tr>
+							<td><label for="mem_email">이메일 : </label></td>
+							<td><input type="text" name="mem_email" id="mem_email" class="form-control" value="${update.mem_email}" readonly="readonly"></td>
+						</tr>
+	
+						<tr>
+							<td><label for="mem_nickname">닉네임 : </label></td>
+							<td><input type="text" class="form-control" name="mem_nickname" id="mem_nickname" value="${update.mem_nickname }">
+							<button id="nickName_overlap" class="btn btn-info">중복 확인</button>
 							<div class="check_font" id="nickname_check"></div></td>
-					</tr>
-					<tr>
-						<td>자기소개</td>
-						<td><textarea name="mem_content" id="mem_content" placeholder="내용을 입력해주세요." cols="30" rows="20" >${update.mem_content}</textarea></td>
-					</tr>
-					<!-- <input type= "text" name="password" value="${login.mem_password }"> -->
+						</tr>
+						
+						<tr>
+							<td><label for="mem_content">자기 소개 : </label></td>
+							<td><textarea name="mem_content" id="mem_content" class="form-control" placeholder="내용을 입력해주세요." cols="40" rows="5">${update.mem_content}</textarea></td>
+						</tr>
 					</table>
-					<input type="button" value="수정 하기" id="updateBtn">
-					<input type="button" value="회원 탈퇴" id="delBtn">
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" id="updateBtn" class="btn btn-danger">수정</button>
+					<!-- <input type="button" value="회원 탈퇴" id="delBtn"> -->
 				</form>
 			</div>
 		</div>

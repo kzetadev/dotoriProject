@@ -12,26 +12,42 @@
 	h2{
 		text-align:center;
 	}
+	body{
+		padding:0px;
+		margin:0px;
+	}
+	#container{
+		text-align:center;
+	}
+	#f{
+		padding-left:200px;
+		padding-right:200px;
+	}
 </style>
 </head>
 <body>
 	<h2>FAQ 수정</h2>
 	<br>
-	<form action="/faq/updateFaq.do" method="post">
-		<input type="hidden" id="faq_no" name="faq_no" value="${f.faq_no }">
-		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-		<table border="1">
-			<tr>
-				<td><label for="faq_question">질문을 추가해주세요 : </label></td>
-				<td><input type="text" id="faq_question" name="faq_question" value="${f.faq_question }"></td>
-			</tr>
-			<tr>
-				<td><label for="faq_answer">답변을 추가해주세요 : </label></td>
-				<td><input type="text" id="faq_answer" name="faq_answer" value="${f.faq_answer }"></td>
-			</tr>
-		</table>
-		<input type="submit" value="수정">
-	</form>
+	
+	<div id="container">
+		<form action="/faq/updateFaq.do" method="post" id="f" name="f" class="navbar-form" class="text-align">
+			<input type="hidden" id="faq_no" name="faq_no" value="${f.faq_no }">
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+			
+			<label for="faq_question">질문 : </label>
+			<input type="text" id="faq_question" class="form-control" name="faq_question" value="${f.faq_question }" style="width:500px;">
+			<br>
+		
+			<label for="faq_answer">답변 : </label>
+			<input type="text" id="faq_answer" class="form-control" name="faq_answer" value="${f.faq_answer }" style="width:500px;">
+			<br>
+			<br>
+		
+			<button type="submit" class="btn btn-default" id="insert" aria-label="Left Align">
+			  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
+		</form>
+	</div>
 </body>
 </html>
 

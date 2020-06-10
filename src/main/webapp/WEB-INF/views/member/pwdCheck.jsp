@@ -45,13 +45,6 @@ a {
 	text-decoration: none;
 }
 
-#checkId{
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
 </style>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -103,16 +96,14 @@ a {
 				</div>
 			</div>
 
-	<form id="form"><br>
-	<h3 id="checkId" style="border-bottom: 2px double #dddddd;">비밀번호 확인</h3><br>
-	<table>
-		<tr >
-			<td>
-				비밀번호 <input type="password" name="mem_pwd" id="mem_pwd">
-				<button type="submit" id="btn">회원정보 수정하기</button>
-			</td>
-		</tr>
-	</table>
+	<h1>비밀번호 확인</h1>
+	<hr>
+	
+	<form id="form" name="form" class="navbar-form">
+		<label for="mem_pwd">비밀번호 : </label>		
+		<input type="password" id="mem_pwd" class="form-control" name="mem_pwd" style="width:200px;">
+
+		<button type="submit" id="btn" class="btn btn-info">회원정보 수정하기</button>
 	</form>
 </body>
 	</html>

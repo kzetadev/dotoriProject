@@ -13,6 +13,21 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/js/summernote-lite.js"></script>
 <script src="/js/summernote-ko-KR.js"></script>
+<style type="text/css">
+	h2, #text-align{
+		text-align:center;
+	}
+	
+	body{
+		padding:0px;
+		margin:0px;
+	}
+	
+	#f{
+		padding-left:100px;
+		padding-right:100px;
+	}
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#board_content").summernote({
@@ -122,34 +137,40 @@
 				}
 			});
 		});
+
+		$("#btnList").click(function(){
+			location.href="/board/listBoard_Post.do?str=3"
+		})
 	});
 </script>
 </head>
 <body>
-	<h2>수정</h2>
-	<form id="f" action="/board/insertBoard_Post.do" method="post">
-		<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
-		
-		<table border="1">
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}"></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="mem_nickname" readonly="readonly" value="${update.mem_nickname }"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><div name="board_content" id="board_content" placeholder="내용을 입력해주세요."required="required" rows="30%" cols="80%" ></div></td>
-			</tr>
-		</table>
-		<div style="width:650px; text-align: center;">
-			<button type="submit" id="btnUpdate">수정</button>
-			<button type="reset">취소</button>
-			<a href="/board/listBoard_Post.do">목록으로</a>
-		</div>
-	</form>
+	<h2>글수정</h2>
+	
+	<div class="container">
+		<form id="f" name="f" class="navbar-form" action="/board/insertBoard_Post.do" method="post" class="text-align">
+			<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
+			
+			<label for="board_title">제목 : </label>
+			<input type="text" class="form-control" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}">
+			<br>
+	
+			<label for="mem_nickname">작성자 : </label>
+			<input type="text" class="form-control" name="mem_nickname" readonly="readonly" value="${update.mem_nickname }">
+			<br>		
+					
+			<label for="board_content"></label>
+			<div name="board_content" id="board_content" placeholder="내용을 입력해주세요."required="required">
+			</div>
+			<br>
+
+			<div class="button-group" role="group" class="text-align">
+				<button type="submit" id="btnUpdate" class="btn btn-default">수정</button>
+				<button type="reset" class="btn btn-default" class="btnReset">취소</button>
+				<button type="button" class="btn btn-default" id="btnList">글목록</button>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
 

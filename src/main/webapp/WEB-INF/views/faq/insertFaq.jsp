@@ -12,11 +12,16 @@
 	h2{
 		text-align:center;
 	}
+	body{
+		padding:0px;
+		margin:0px;
+	}
 	#container{
 		text-align: center;
 	}
-	#t{
-		margin-left:420px;
+	#f{
+		padding-left:200px;
+		padding-right:200px;
 	}
 </style>
 <script type="text/javascript">
@@ -32,23 +37,20 @@
 <body>
 	<h2>FAQ 추가</h2>
 	<br>
+	
 	<div id="container">	
-		<form action="/faq/insertFaq.do" method="post">
+		<form action="/faq/insertFaq.do" method="post" id="f" name="f" class="navbar-form" class="text-align">
 			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-			<table border="1" id="t">
-				<tr>
-					<td><label for="q">질문 : </label></td>
-					<td><input type="text" id="faq_question" name="faq_question" width="500"></td>
-				</tr>
-					
-				<tr>
-					<td><label for="a">답변 : </label></td>
-					<td><input type="text" id="faq_answer" name="faq_answer" width="500"></td>
-				</tr>
-				
-			</table>
-			
+
+			<label for="faq_question">질문 : </label>
+			<input type="text" id="faq_question" class="form-control" name="faq_question" style="width:500px;">
 			<br>
+
+			<label for="faq_answer">답변 : </label>
+			<input type="text" id="faq_answer" class="form-control" name="faq_answer" style="width:500px;">
+			<br>
+			<br>
+			
 			<button type="submit" class="btn btn-default" id="insert" aria-label="Left Align">
 			  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 			</button>

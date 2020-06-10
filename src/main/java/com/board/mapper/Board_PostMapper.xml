@@ -29,7 +29,7 @@
                     , m.mem_no
                     , m.mem_nickname
                     , b.board_kinds
-                    , to_char(b.board_date, 'YYYYMMDD') AS board_date
+                    , to_char(b.board_date, 'YYYY/MM/DD') AS board_date
                     , b.board_hit
                from board_post b, member_info m, head_tag h
                where b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no  
