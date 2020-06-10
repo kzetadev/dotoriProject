@@ -1,5 +1,7 @@
 package com.member.util;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -48,11 +50,22 @@ public class MailSenderService {
 					encMem_id = encMem_id.replace("&", "%26").replace("+", "%2b");
 					encUUIDStr = encUUIDStr.replace("&", "%26").replace("+", "%2b");
 					System.out.println("uuidStr : " + uuidStr + "\tdecoded uuidStr : " + aes256.aesDecode(encUUIDStr) + "\tencUUIDStr : " + encUUIDStr);
+					
 				}catch(Exception e) {
 					System.out.println(e);
 				}
-				
-				String authLink = "http://localhost:8088/mailAuth.do?mem_id=" + encMem_id + "&key=" + encUUIDStr;
+				//서버주소 가져오기
+				String server_ip = "";
+				InetAddress local = null;
+				try {
+					local = InetAddress.getLocalHost();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println(e);
+				}
+				server_ip = local.getHostAddress();
+				System.out.println("ip : " + server_ip);
+				String authLink = "http://" + server_ip + ":8088/mailAuth.do?mem_id=" + encMem_id + "&key=" + encUUIDStr;
 				System.out.println(authLink);
 				contents += "<a href='" + authLink + "'>" + authLink + "</a>";
 				message.setFrom("kzeta@naver.com");
