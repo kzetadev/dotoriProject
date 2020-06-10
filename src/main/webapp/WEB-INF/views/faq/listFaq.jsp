@@ -105,7 +105,7 @@
 				location.href = "/faq/insertFaq.do"
 			})
 			$(".btnUpdate").click(function() {
-				location.href = "/faq/updateFaq.do"
+				location.href = "/faq/updateFaq.do?faq_no=" + $(this).attr('faq_no');
 			})
 			$(".btnDelete").click(function() {
 				var faq_no = $(this).attr("faq_no")

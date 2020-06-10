@@ -15,6 +15,9 @@
 	#container{
 		text-align: center;
 	}
+	#t{
+		margin-left:420px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -32,17 +35,23 @@
 	<div id="container">	
 		<form action="/faq/insertFaq.do" method="post">
 			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-			<table border="1">
+			<table border="1" id="t">
 				<tr>
-					<td><label for="faq_question">질문 : &nbsp;</label></td>
-					<td><textarea rows="2" cols="80" id="faq_question" name="faq_question"></textarea></td>
+					<td><label for="q">질문 : </label></td>
+					<td><input type="text" id="faq_question" name="faq_question" width="500"></td>
 				</tr>
+					
 				<tr>
-					<td><label for="faq_answer">답변 : &nbsp;</label></td>
-					<td><textarea rows="2" cols="80" type="text" id="faq_answer" name="faq_answer"></textarea></td>
+					<td><label for="a">답변 : </label></td>
+					<td><input type="text" id="faq_answer" name="faq_answer" width="500"></td>
 				</tr>
+				
 			</table>
-			<input type="submit" value="등록" id="insert">
+			
+			<br>
+			<button type="submit" class="btn btn-default" id="insert" aria-label="Left Align">
+			  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
 		</form>
 	</div>
 </body>

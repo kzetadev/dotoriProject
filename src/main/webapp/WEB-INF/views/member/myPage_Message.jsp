@@ -150,7 +150,7 @@ a {
 
 			<!-- 내용 -->
 			<div class="col-sm-10 text-left">
-				<h1>나의 쪽지함</h1>
+				<h1>쪽지함</h1>
 				<hr>
 				<div class="col-sm-10 text-left">
 					<hr>

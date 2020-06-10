@@ -227,7 +227,7 @@ a {
 				<form id="form1" method="post" action="myPage.jsp" enctype="multipart/form-data">
 				<input type="hidden" name="mem_no" id="mem_no" value="${update.mem_no }" readonly="readonly">
 				
-				<h2>회원수정</h2>
+				<h1>회원수정</h1>
 					<div>
 <!-- 						<input type="file" name="uploadFile"> -->
 						<img id="profile_img" class="img-rounded" name="profile_img" src="${update.mem_img }" width="300" height="300">

@@ -44,12 +44,7 @@
 		color: #337ab7;
 		text-decoration: none;
 	}
-	
-	h1{
-		text-align:center;
-	}
-	
-	
+
 </style>
 </head>
 <body>
@@ -100,30 +95,30 @@
 					</div>
 					<div class="media-body">
 						<img src="${main.mem_img }" class="img-rounded" width="300" height="300">
-						<table>
+						<table class="table" id="t">
 							<tr>
-								<td>이름</td>
+								<th>이름</th>
 								<td>${main.mem_name }</td>
 							</tr>
 							<%--아이디, 이메일은 로그인한 회원만 표시 --%>
 							<c:if test="${other_mem_no eq null }">	
 							<tr>
-								<td>아이디</td>
+								<th>아이디</th>
 								<td>${main.mem_id }</td>
 							</tr>
 							
 							<tr>
-								<td>이메일</td>
+								<th>이메일</th>
 								<td>${main.mem_email }</td>
 							</tr>
 							</c:if>
 							<tr>
-								<td>닉네임</td>
+								<th>닉네임</th>
 								<td>${main.mem_nickname }</td>
 							</tr>
 							<tr>
-							<td>자기소개</td>
-							<td><textarea rows="20" cols="30" readonly="readonly">${main.mem_content }</textarea></td>
+								<th>자기소개</th>
+								<td><textarea rows="5" cols="30" readonly="readonly">${main.mem_content }</textarea></td>
 							</tr>
 						</table>
 					</div>

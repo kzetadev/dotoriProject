@@ -101,6 +101,9 @@ a {
 	color: #337ab7;
 	text-decoration: none;
 }
+h1{
+	text-align:left;
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext"
@@ -160,6 +163,8 @@ a {
 			</div>
 
 			<!-- 내용 -->
+			<h1>내가 쓴 글 & 댓글</h1>
+			<hr>
 			
 			<div class="col-sm-10 text-left">
 				<hr>

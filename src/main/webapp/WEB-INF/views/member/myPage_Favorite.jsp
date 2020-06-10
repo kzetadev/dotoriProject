@@ -44,9 +44,6 @@
 		color: #337ab7;
 		text-decoration: none;
 	}
-	h1{
-		text-align:center;
-	}
 	
 </style>
 <script type="text/javascript">

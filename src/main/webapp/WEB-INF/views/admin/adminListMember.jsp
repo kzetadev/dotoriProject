@@ -26,7 +26,7 @@
         	margin: 0 auto; 
        		width:250px;
     	}    
-		@using (Html.BeginForm("Index", "Join", FormMethod.Post, new { @style = "margin: 0 auto; width: 250px" }))
+
 	</style>
 	<script type="text/javascript">
 		$(function(){
@@ -42,22 +42,6 @@
 					}});
 				}
 			})
-
-
-			   $("#btnDelete").click(function() {
-			        console.log(board_no);
-			        var board_no = $(this).attr("board_no");
-			        var a = confirm("삭제하시겠습니까?");
-			            if(a == true){
-							$.ajax({url:"/board/deleteBoard.do", data:{board_no:board_no}, success:function(result){
-								if(result == 1){
-									alert("삭제되었습니다.");
-						               location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
-								}
-							}})
-			            }
-			          }
-			     });
 		})
 	</script>
 </head>
