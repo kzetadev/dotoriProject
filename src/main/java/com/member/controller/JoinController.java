@@ -59,6 +59,7 @@ public class JoinController {
 		System.out.println(vo.getMem_pwd());
 		System.out.println(vo.getMem_email());
 		String encode_passwod = passwordEncoder.encode(vo.getMem_pwd());
+		vo.setMem_img("/member_img/basic.png");
 		vo.setMem_pwd(encode_passwod);
 		// 회원가입 메소드
 		int re = joinService.joinMember(vo); //저장된 객체 그대로 DB로 보낸다

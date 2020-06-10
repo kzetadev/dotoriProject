@@ -197,6 +197,7 @@ public class Board_PostController {
 			}
 			mav.addObject("boardKinds", boardKinds);
 			mav.addObject("boardKinds_str", board_kinds_str);
+			mav.addObject("login_mem_no", mem_no);
 		}
 		return mav;
 	}
