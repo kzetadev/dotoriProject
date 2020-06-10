@@ -84,7 +84,7 @@
 		$('body').append(divContainer);
 
 		//닉네임 클릭 시 레이어 표시
-		$("#nickname").click(function(e){
+		$(".nickname").click(function(e){
 			if (login_mem_no == $(this).attr('mem_no')){
 				return;
 			}
@@ -211,8 +211,29 @@
 						var li = $("<li/>");
 						//댓글 노드 만들기
 						var div = $("<div class='comment' comment_del='" + comment['comment_del'] + "' board_no='" + $("#board_no").val() + "' comment_no='" + comment['comment_no'] + "' board_ref='" + comment['board_ref'] + "' board_level='" + comment['board_level'] + "'/>");
-						var divNickname = $("<span class='commentDetail' width='50'/>").text(comment['mem_nickname']);
+						var divNickname = $("<span class='commentDetail' width='50'/>");
+						var aNickname = $("<a class='nickname' mem_no='" + comment['mem_no'] + "'/>").text(comment['mem_nickname']);
 						var divBtn = $("<div class='text-right'/>");
+						$(divNickname).append(aNickname);
+						$(aNickname).click(function(e){
+							if (login_mem_no == $(this).attr('mem_no')){
+								return;
+							}
+							$("#btnGroup").attr('mem_no', $(this).attr('mem_no'));
+							$("#btnGroup").attr('mem_nickname', $(this).text());
+							var oWidth = $("#popup_layer").width();
+							var oHeight = $("#popup_layer").height();
+							
+							var divLeft = e.pageX + 10;
+							var divTop = e.pageY;
+						
+							$("#popup_layer").css({
+							    "top":divTop
+							    , "left":divLeft
+							    , "position":"absolute"
+								, 'visibility':'visible'
+							});
+						});
 						var btnEdit = $("<button type='button' class='btn btn-default reply-edit' edit-state='0'/>").text("수정");
 						var btnDel = $("<button type='button' class='btn btn-default reply-del'/>").text("삭제");
 						var divContent = $("<textarea readonly='readonly' class='form-control reply-content' rows='3' width='400'/>").text(comment['comment_content']);
@@ -273,7 +294,8 @@
 						if(parseInt($(div).attr('board_level')) == 1){
 							$(div).click(function(e){
 								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') 
-										&& $(this).attr('comment_del') == 0){
+										&& $(this).attr('comment_del') == 0
+										&& !$(e.target).hasClass('nickname')){
 
 									//해당 댓글의 형제노드(댓글 작성란 노드)가 없으면, 댓글 작성란 노드를 해당 댓글 형제노드로 붙임. siblings : 형제노드들
 									if($(this).siblings().length == 0){
