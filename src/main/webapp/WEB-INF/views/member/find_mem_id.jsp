@@ -216,53 +216,51 @@ $(function(){
 </head>
 <body>
 	<!-- 아이디를 찾는 페이지(이메일을 입력하면 db에 연동 후, db에 저장된 아이디가 출력됨 -->
-<div class="container-fluid text-center" style="display: table; width:500px; height:500px; border:1px solid #000; text-align:center;">
-	<div class="col-sm-10 text-left" style="display: table-cell; vertical-align: middle; margin: 0 auto; padding-left: 15%; padding-right: -15%">
- 	<div id="menu1">
-		<table id="findMem" style="margin: 0 auto;" >
-			<tr id="ulli">
-				<th>
+<div class="container-fluid text-center" style="display: table; width:500px; height:500px; /*border:1px solid #000*/; text-align:center; margin: 5% auto 5% auto;">
+	<div class="col-sm-10 text-left" style="display: table-cell; vertical-align: middle; margin: 0 auto; padding-left: 15%; padding-right: -15%; padding-top: 35%;">
+	<div>
+ 	<div id="menu1" style="padding-bottom: 10%; width: 110%;">
 					<ul class="tab"> 
 					<li data-tab="tab2" id="find_ID"><a href="#">아이디 찾기</a></li>
 					<li data-tab="tab3" id="find_PWD"><a href="#">비밀번호 찾기</a></li>
 					</ul>
-				</th>
-			</tr>	
-		</table>		
+	</div>
 	</div>
 
 	<div id="tab2" class="tabcontent">
-		<form id="form" action="/member/find_id.do" method="post">
+		<form id="form" action="/member/find_id.do" method="post" style="width: 110%;">
 <!-- 			<div class="container" style="padding:0px;"> -->
 	<!-- 		<div id="emailDiv" style="font-size: 30px;">이메일을 입력해주세요</div> -->
 <!-- 				<div class="table-responsive"> -->
-					<table id="findId">
-						<tr id="idTr">
-							<th id="emailIdTh" >
-								<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50" >
-							</th>
-							
-							<th id="golIdTh">
-								<div>@</div>
-							</th>
+
+					
+					
 						
-							<th id="mail2Th">
-								<select id="mail2" name="mail2">
+								<input type="text" class="form-control" name="mem_email" id="mem_email" placeholder="E-mail" maxlength="50" >
+							
+							
+							
+								<div style="padding-left: 5px;padding-right: 5px; float:left;">@</div>
+							
+								<select id="mail2" name="mail2" style="float:left;">
 									<option value="@naver.com">naver.com</option>
 									<option value="@daum.net">daum.net</option>
 									<option value="@gmail.com">gmail.com</option>
 									<option value="@nate.com">nate.com</option>                        
 								</select>
+<!-- 							
+								<button type="submit" name="submit" id="submit" style="float:left;">확인</button>
 							</th>
+							
 				         </tr>
 						
-				         <tr id="findIdBtn">      
-							<td id="findIdPwdTd">
-								<button type="submit" name="submit" id="submit" style="float:left;">확인</button>
-							</td>
-						</tr>                        
+<!-- 				         <tr id="findIdBtn" style="float:left;">       -->
+<!-- 							<th id="findIdPwdTd"> -->
+<!-- 								<button type="submit" name="submit" id="submit" style="float:left;">확인</button> -->
+<!-- 							</th> -->
+<!-- 						</tr>                         -->
 				<!-- 		<div style="float: left;">@</div> -->
-					</table>
+					
 <!-- 				</div> -->
 <!-- 			</div> -->
 		</form>
