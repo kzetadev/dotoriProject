@@ -10,6 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#form1{
+		padding-right:400px;
+		padding-left:400px;
+	}
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#form1").submit(function(event) {
@@ -46,25 +52,20 @@
 	<div style="text-align: center">
 		<span style="color: green; font-weight: bold;">변경할 비밀번호를 입력해주세요</span><br>
 		<br> <br> <br>
-		<div sytle="text-align:center;">
+		<div style="text-align:center;">
 
-			<table border="1" width="300" height="300" align="center">
-				<tr>
-					<td>
-						<div style="text-align: center"></div>
-						<div style="text-align: center">
-							<form id="form1">
-								<div>
-									변경할 비밀번호 입력 : <input type="password" name="mem_pwd" id="mem_pwd"
-										placeholder="비밀번호를 입력하시오">
-								</div>
-								<br> <br> <br>
-								<button type="submit" name="submit">비밀번호 변경</button>
-							</form>
-						</div>
-					</td>
-				</tr>
-			</table>
+			<div style="text-align: center"></div>
+			<div style="text-align: center">
+				<form id="form1">
+					<table class="table">
+						<tr>
+							<td><label for="mem_pwd">변경할 비밀번호 : </label></td>
+							<td><input type="password" class="form-control" name="mem_pwd" id="mem_pwd" placeholder="비밀번호를 입력하시오"></td>
+						</tr>
+					</table>
+					<button type="submit" class="btn btn-info" name="submit">비밀번호 변경</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>
