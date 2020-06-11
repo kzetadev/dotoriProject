@@ -26,7 +26,8 @@ $(document).ready(function(){
 			}
 			, success:function(result){
 				alert("쪽지를 보냈습니다.");
-				$(".modal-header").hide();
+				$("#close").click();
+				location.href="/member/myPage_Message.do?msg_type=receive";
 			}
 		});
 	});
@@ -66,7 +67,7 @@ $(document).ready(function(){
 	</div>
 	<div class="modal-footer">
 <!-- 	    <button class="ui-button ui-widget ui-corner-all" id="send" type="button" data-dismiss="modal">보내기</button> -->
-	    <button class="ui-button ui-widget ui-corner-all" type="button" data-dismiss="modal">닫기</button>
+	    <button id="close" class="ui-button ui-widget ui-corner-all" type="button" data-dismiss="modal">닫기</button>
 	</div>
 	<form>
 		

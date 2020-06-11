@@ -30,7 +30,8 @@ public class SearchController {
 	@Resource(name="board_postService")
 	private Board_PostService board_postService;
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
-	public static int pageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
+	public static int placePageSIZE = 9; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
+	public static int boardPageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
 	@RequestMapping(value="/unifiedSearch.do/{keyword}", method=RequestMethod.GET)
@@ -86,8 +87,8 @@ public class SearchController {
 		if (pageNUM > total_page) {
 			pageNUM = total_page;
 		}
-		int start = (pageNUM - 1) * pageSIZE + 1;
-		int end = start + pageSIZE - 1;
+		int start = (pageNUM - 1) * placePageSIZE + 1;
+		int end = start + placePageSIZE - 1;
 		if(end > total_record) {
 			end = total_record;
 		}
@@ -130,8 +131,8 @@ public class SearchController {
 		if (pageNUM > total_page) {
 			pageNUM = total_page;
 		}
-		int start = (pageNUM - 1) * pageSIZE + 1;
-		int end = start + pageSIZE - 1;
+		int start = (pageNUM - 1) * boardPageSIZE + 1;
+		int end = start + boardPageSIZE - 1;
 		if(end > total_record) {
 			end = total_record;
 		}

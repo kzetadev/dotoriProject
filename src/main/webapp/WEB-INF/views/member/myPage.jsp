@@ -44,7 +44,6 @@
 		color: #337ab7;
 		text-decoration: none;
 	}
-
 </style>
 </head>
 <body>
@@ -84,7 +83,7 @@
 			</div>
 
 			<!-- 내용 -->
-			<div class="col-sm-10 text-left">
+			<div class="col-sm-10 text-left" style="text-align:center;">
 				<h1>${main.mem_nickname }님의 마이페이지</h1>
 				<hr>
 				<div class="media">
@@ -93,8 +92,9 @@
 							
 						</table>
 					</div>
-					<div class="media-body">
+					<div class="media-body" style="text-align:center;">
 						<img src="${main.mem_img }" class="img-rounded" width="300" height="300">
+						<br>
 						<table class="table" id="t">
 							<tr>
 								<th>이름</th>
@@ -118,7 +118,7 @@
 							</tr>
 							<tr>
 								<th>자기소개</th>
-								<td><textarea rows="5" cols="30" readonly="readonly">${main.mem_content }</textarea></td>
+								<td><textarea class="form-control" rows="5" cols="30" readonly="readonly" style="background-color:white;">${main.mem_content }</textarea></td>
 							</tr>
 						</table>
 					</div>

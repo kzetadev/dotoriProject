@@ -14,7 +14,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var totalRecord = 0;
-	var pageSIZE = 8;
+	var placePageSIZE = 9;
+	var boardPageSIZE = 8;
 	var totalPage = 1;
 	var pageGroup = 5;
 	var startPage = 0;
@@ -75,7 +76,7 @@ $(document).ready(function(){
 	function showPlacePageList(col_span, page){
 		$("#placePageArea").empty();
 		var tot_cnt = parseInt($(col_span).attr('tot_cnt'));
-		var tot_page = Math.ceil(tot_cnt / pageSIZE);	//1	  2	  3   4
+		var tot_page = Math.ceil(tot_cnt / placePageSIZE);	//1	  2	  3   4
 		startPage = ((page - 1) * pageGroup) + 1;		//1   6  11  16
 		endPage = (page * pageGroup);					//5  10  15  20
 		if(endPage > tot_page){
@@ -88,6 +89,7 @@ $(document).ready(function(){
 			$(li).append(span);
 			$(li).click(function(){
 				showPlacePageList(col_span, page - 1);
+				$(".place_page[page=" + $(this).attr('page') + "]").click();
 			});
 			$(ul).append(li);
 		}
@@ -110,9 +112,9 @@ $(document).ready(function(){
 							var divColMd4 = $("<div class='col-md-4'/>");
 							var divThumbnail = $("<div class='thumbnail'/>");
 							var a = $("<a/>").attr('href', '/place/detailPlace_Info.do?place_no=' + place['place_no'] + '&place_type=' + place['place_type']);
-							var img = $("<img class='place_info'/>").attr('src', '/img/' + place['place_img'].split('|')[0]);
-							var divCaption = $("<div class='caption'/>");
-							var p = $("<p/>").text(place['place_name']);
+							var img = $("<img class='place_info' style='width:300px;height:200px;'/>").attr('src', '/img/' + place['place_img'].split('|')[0]);
+							var divCaption = $("<div class='caption' style='text-align:center;'/>");
+							var p = $("<p/>").append($("<b/>").text(place['place_name']));
 							$(divCaption).append(p);
 							$(a).append(img, divCaption);
 							$(divThumbnail).append(a);
@@ -132,6 +134,7 @@ $(document).ready(function(){
 			$(li).append(span);
 			$(li).click(function(){
 				showPlacePageList(col_span, page + 1);
+				$(".place_page[page=" + $(this).attr('page') + "]").click();
 			});
 			$(ul).append(li);
 		}
@@ -182,7 +185,7 @@ $(document).ready(function(){
 		$("#boardPostPageArea").empty();
 		var column = parseInt($(col_span).attr('column'));
 		var tot_cnt = parseInt($(col_span).attr('tot_cnt'));
-		var tot_page = Math.ceil(tot_cnt / pageSIZE);	//1	  2	  3   4
+		var tot_page = Math.ceil(tot_cnt / boardPageSIZE);	//1	  2	  3   4
 		startPage = ((page - 1) * pageGroup) + 1;		//1   6  11  16
 		endPage = (page * pageGroup);					//5  10  15  20
 		if(endPage > tot_page){
@@ -195,6 +198,7 @@ $(document).ready(function(){
 			$(li).append(span);
 			$(li).click(function(){
 				showBoardPageList(col_span, page - 1);
+				$(".board_page[page=" + $(this).attr('page') + "]").click();
 			});
 			$(ul).append(li);
 		}
@@ -248,6 +252,7 @@ $(document).ready(function(){
 			$(li).append(span);
 			$(li).click(function(){
 				showBoardPageList(col_span, page + 1);
+				$(".board_page[page=" + $(this).attr('page') + "]").click();
 			});
 			$(ul).append(li);
 		}
