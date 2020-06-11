@@ -3,6 +3,11 @@
 
 <!-- 상단 -->
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> -->
+<style>
+.container, .row.content{
+	min-height: 576px;
+}
+</style>
 <script>
 $(document).ready(function(){
 	$("#btnUnifiedSearch").click(function(event){
