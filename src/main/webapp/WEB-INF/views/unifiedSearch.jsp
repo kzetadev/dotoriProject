@@ -307,6 +307,7 @@ $(document).ready(function(){
 	<hr>
 	<div id="boardPostPageArea" class="container">
 	</div>
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 </layoutTag:layout>

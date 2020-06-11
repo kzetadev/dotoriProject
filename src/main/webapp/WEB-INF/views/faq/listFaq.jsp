@@ -133,6 +133,8 @@
 			})
 		});
 	</script>
+	
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 

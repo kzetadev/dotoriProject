@@ -14,6 +14,10 @@
 	<span style="color: green; font-weight: bold;">아이디 찾기 결과</span>
 
 <body>
-회원님의 아이디는 ${mem_id }입니다</body>
+	회원님의 아이디는 ${mem_id }입니다
+	
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
+</body>
+
 </html>
 </layoutTag:layout>

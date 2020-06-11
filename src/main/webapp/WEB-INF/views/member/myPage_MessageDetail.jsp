@@ -67,7 +67,7 @@ $(document).ready(function(){
 	</div>
 	<div class="modal-footer">
 <!-- 	    <button class="ui-button ui-widget ui-corner-all" id="send" type="button" data-dismiss="modal">보내기</button> -->
-	    <button id="close" class="ui-button ui-widget ui-corner-all" type="button" data-dismiss="modal">닫기</button>
+	    <button id="close" class="ui-button ui-widget ui-corner-all btn btn-info" type="button" data-dismiss="modal">닫기</button>
 	</div>
 	<form>
 		
@@ -88,5 +88,6 @@ $(document).ready(function(){
 		<!-- 		</div> -->
 		<!-- 		<button type="submit" class="btn btn-default">Submit</button> -->
 	</form>
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>

@@ -189,6 +189,7 @@
 			<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 		</button>
 	</div>
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 	</html>
 

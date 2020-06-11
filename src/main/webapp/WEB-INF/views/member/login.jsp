@@ -42,18 +42,10 @@
     	color: white;
     	border-color: #ccc;
 	}
-
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-
-	})
-</script>
 </head>
 <body>
-	
-	
 <!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
 	<c:if test="${not empty cookie.user_check}">
 		<c:set value="checked" var="checked"/>
@@ -113,6 +105,12 @@
 			</div>
 		</div>
 	</form>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 

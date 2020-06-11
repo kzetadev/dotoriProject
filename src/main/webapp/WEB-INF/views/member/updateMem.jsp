@@ -314,6 +314,7 @@ h1{
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 </layoutTag:layout>

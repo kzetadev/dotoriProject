@@ -148,6 +148,8 @@
 	   		</c:forEach>
   		</div>
 	</div><br>
+	
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 </layoutTag:layout>

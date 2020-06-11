@@ -452,7 +452,15 @@ $(function(){
 			</div>
 <!-- 		</form> -->
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<%@ include file="/WEB-INF/tags/footer.jsp" %>
 	</body>
+	
 </html>
 
 </layoutTag:layout>

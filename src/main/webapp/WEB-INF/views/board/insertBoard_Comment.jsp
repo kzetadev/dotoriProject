@@ -25,6 +25,8 @@
 	<hr>
 	<textarea rows="10" cols="80" id="textarea"></textarea>
 	<button id="btn">댓글 추가</button>
+	
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 

@@ -74,6 +74,8 @@ $(document).ready(function(){
 <!-- 			</li> -->
 <%-- 		</c:forEach> --%>
 	</div>
+	
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 </layoutTag:layout>

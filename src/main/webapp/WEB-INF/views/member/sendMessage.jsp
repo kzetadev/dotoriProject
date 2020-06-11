@@ -77,8 +77,9 @@ $(document).ready(function(){
 	
 	</div>
 	<div class="modal-footer">
-	    <button class="ui-button ui-widget ui-corner-all" id="send" type="button" data-dismiss="modal">보내기</button>
-	    <button class="ui-button ui-widget ui-corner-all" type="button" data-dismiss="modal">취소</button>
+	    <button class="ui-button ui-widget ui-corner-all btn btn-info" id="send" type="button" data-dismiss="modal">보내기</button>
+	    <button class="ui-button ui-widget ui-corner-all btn btn-info" type="button" data-dismiss="modal">취소</button>
 	</div>
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>

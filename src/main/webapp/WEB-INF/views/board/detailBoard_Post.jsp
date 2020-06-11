@@ -455,6 +455,8 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
+	
+	<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 

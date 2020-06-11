@@ -57,6 +57,8 @@
 		</c:forEach>
 	</ul>
 </div>
+
+<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 

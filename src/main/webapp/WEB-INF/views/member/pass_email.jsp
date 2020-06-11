@@ -30,6 +30,7 @@
 	</div>
 </div>
 </table>
+<%@ include file="/WEB-INF/tags/footer.jsp" %>
 </body>
 </html>
 </layoutTag:layout>
