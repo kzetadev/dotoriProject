@@ -26,6 +26,9 @@
 		padding-left:100px;
 		padding-right:100px;
 	}
+	#btnGroup{
+		padding-left:82px;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -247,14 +250,15 @@
 				</tr>
 		
 				<tr>
-					<td><label for="board_content"></label></td>
+					<td><label for="board_content">내용 : </label></td>
 					<td>
 						<div name="board_content" id="board_content" placeholder="내용을 입력해주세요." required="required">
 						</div>
 					</td>
 				</tr>
 			</table>
-			<div class="button-group" role="group" class="text-align">
+			
+			<div class="button-group" role="group" class="text-align" id="btnGroup">
 				<button type="submit" id="btnSave" class="btn btn-default">등록</button>
 				<button type="reset" class="btn btn-default" class="btnReset">취소</button>
 				<button type="button" class="btn btn-default" id="btnList">글목록</button> 

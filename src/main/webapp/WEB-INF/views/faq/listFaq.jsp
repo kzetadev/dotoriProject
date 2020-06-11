@@ -40,6 +40,7 @@
 <body>
 	<div class="wrapper">
 		<h2>FAQ</h2>
+		<br>
 		<sec:authorize access="hasRole('ADMIN')">
 			<button type="button" class="btn btn-default" id="btnAdd">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

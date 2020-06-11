@@ -27,6 +27,9 @@
 		padding-left:100px;
 		padding-right:100px;
 	}
+	#btnGroup{
+		padding-left:82px;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -151,20 +154,27 @@
 		<form id="f" name="f" class="navbar-form" action="/board/insertBoard_Post.do" method="post" class="text-align">
 			<input type="hidden" id="board_no" name="board_no" value="${update.board_no}">
 			
-			<label for="board_title">제목 : </label>
-			<input type="text" class="form-control" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}">
-			<br>
-	
-			<label for="mem_nickname">작성자 : </label>
-			<input type="text" class="form-control" name="mem_nickname" readonly="readonly" value="${update.mem_nickname }">
-			<br>		
-					
-			<label for="board_content"></label>
-			<div name="board_content" id="board_content" placeholder="내용을 입력해주세요."required="required">
-			</div>
-			<br>
+			<table class="table">
+				<tr>
+					<td><label for="board_title">제목 : </label></td>
+					<td><input type="text" class="form-control" name="board_title" id="board_title" size="80" placeholder="제목을 입력해주세요." required="required" value="${update.board_title}"></td>
+				<tr>
+		
+				<tr>
+					<td><label for="mem_nickname">작성자 : </label></td>
+					<td><input type="text" class="form-control" name="mem_nickname" readonly="readonly" value="${update.mem_nickname }"></td>
+				</tr>
+						
+				<tr>
+					<td><label for="board_content">내용 : </label></td>
+					<td>
+						<div name="board_content" id="board_content" placeholder="내용을 입력해주세요."required="required">
+						</div>
+					</td>
+				</tr>
+			</table>
 
-			<div class="button-group" role="group" class="text-align">
+			<div class="button-group" role="group" class="text-align" id="btnGroup">
 				<button type="submit" id="btnUpdate" class="btn btn-default">수정</button>
 				<button type="reset" class="btn btn-default" class="btnReset">취소</button>
 				<button type="button" class="btn btn-default" id="btnList">글목록</button>

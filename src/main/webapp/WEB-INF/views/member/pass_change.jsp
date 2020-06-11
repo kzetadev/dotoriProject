@@ -36,9 +36,7 @@
 						alert("변경 실패")
 					}
 				}
-
 			})
-
 		})
 	})
 </script>
@@ -66,13 +64,9 @@
 						</div>
 					</td>
 				</tr>
-
-
-
 			</table>
 		</div>
 	</div>
-
 </body>
 	</html>
 </layoutTag:layout>

@@ -151,7 +151,7 @@ a {
 			<!-- 내용 -->
 			<div class="col-sm-10 text-left">
 				<h1>쪽지함</h1>
-				<hr>
+
 				<div class="col-sm-10 text-left">
 					<hr>
 					<!-- 탭 부분 (전체와 place_type으로 구분) -->

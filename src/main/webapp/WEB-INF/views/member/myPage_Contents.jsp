@@ -167,7 +167,6 @@ h1{
 			<hr>
 			
 			<div class="col-sm-10 text-left">
-				<hr>
 				<ul class="nav nav-tabs">
 					<c:if test="${other_mem_no eq null }">
 						<li role="presentation" id="board"><a href="/member/myPage_Contents.do?content_type=board">내가 쓴 글</a></li>

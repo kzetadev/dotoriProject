@@ -44,7 +44,7 @@
 			<br>
 		
 			<button type="submit" class="btn btn-default" id="insert" aria-label="Left Align">
-			  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			  	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 			</button>
 		</form>
 	</div>

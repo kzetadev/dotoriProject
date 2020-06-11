@@ -45,6 +45,12 @@ a {
 	text-decoration: none;
 }
 
+h1, #form{
+	text-align:left;
+}
+#form{
+	
+}
 </style>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -76,7 +82,9 @@ a {
 </script>
 </head>
 <body>
-
+	<div class="container-fluid text-center">
+		<br>
+		<div class="row content">
 			<!-- 좌측 메뉴 -->
 			<div class="col-sm-2 sidenav">
 				<!-- 사이드바 메뉴목록 -->
@@ -96,15 +104,17 @@ a {
 				</div>
 			</div>
 
-	<h1>비밀번호 확인</h1>
-	<hr>
+			<h1>비밀번호 확인</h1>
+			<hr>
 	
-	<form id="form" name="form" class="navbar-form">
-		<label for="mem_pwd">비밀번호 : </label>		
-		<input type="password" id="mem_pwd" class="form-control" name="mem_pwd" style="width:200px;">
+			<form id="form" name="form" class="navbar-form">
+				<label for="mem_pwd">비밀번호 : </label>		
+				<input type="password" id="mem_pwd" class="form-control" name="mem_pwd" style="width:200px;">
 
-		<button type="submit" id="btn" class="btn btn-info">회원정보 수정하기</button>
-	</form>
+				<button type="submit" id="btn" class="btn btn-info">회원정보 수정하기</button>
+			</form>
+		</div>
+	</div>
 </body>
 	</html>
 </layoutTag:layout>
