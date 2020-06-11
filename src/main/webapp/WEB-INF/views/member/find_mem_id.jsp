@@ -103,9 +103,6 @@ a {
 	
 	text-decoration: none;
 }
-
-
-
 </style>
 <!-- <link -->
 <!-- 	href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext" -->
@@ -216,7 +213,7 @@ $(function(){
 </head>
 <body>
 	<!-- 아이디를 찾는 페이지(이메일을 입력하면 db에 연동 후, db에 저장된 아이디가 출력됨 -->
-<div class="container-fluid text-center" style="display: table; width:600px; height:400px; /*border:1px solid #000*/; text-align:center; margin: 5% auto 5% auto;">
+<div class="container-fluid text-center" style="display: table; width:600px; height:400px; /*border:1px solid #000*/; text-align:center;">
 	<div class="col-sm-10 text-left" style="display: table-cell; vertical-align: middle; margin: 0 auto; padding-left: 15%; padding-right: -15%; padding-top: 35%;">
  	<div id="menu1" style="padding-bottom: 5%;">
 		<table id="findMem" style="margin: 0 auto;" >
@@ -247,8 +244,8 @@ $(function(){
 								<div style="padding-left: 5px;padding-right: 5px;">@</div>
 							</th>
 						
-							<th id="mail2Th"  >
-								<select id="mail2" name="mail2" style="border: 0px; padding-right: 10px;">
+							<th id="mail2Th">
+								<select class="form-control" id="mail2" name="mail2" style="border: 0px; padding-right: 10px;">
 									<option value="@naver.com">naver.com</option>
 									<option value="@daum.net">daum.net</option>
 									<option value="@gmail.com">gmail.com</option>
@@ -257,7 +254,7 @@ $(function(){
 							</th>
 							
 							<th id="findIdBtn" style="padding: 8px;">
-								<button type="submit" name="submit" id="submit" style="float:left;">확인</button>
+								<button type="submit" class="btn btn-info" name="submit" id="submit" style="float:left;">확인</button>
 							</th>
 							
 				         </tr>
@@ -280,25 +277,24 @@ $(function(){
 	<form id="form1" action="/member/find_pass.do" method="post">
 <!-- 		<div class="container" > -->
 <!-- 			<div class="table-responsive" > -->
-				<table id="findPwd" >
-					<tr id="pwdTr" >
-						<th id="pwdIdTh" style="padding-bottom: 10px;">아이디 </th>
-						
+				<table id="findPwd" class="table">
+					<tr id="pwdTr">
+						<th id="pwdIdTh" style="padding-bottom: 10px;">
+							<label for="mem_id1">아이디 </label>
+						</th>
 						<th id="pwdIdInputTh" style="padding-bottom: 10px;"> 
-							<input type="text" name="mem_id" id="mem_id1" placeholder="아이디를 입력하시오">
+							<input type="text" class="form-control" name="mem_id" id="mem_id1" placeholder="아이디를 입력하시오" style="width:250px;">
 						</th>
 					</tr>
+					
 					<tr id="findPwdEmailTr">
 						<th id="findPwdEmailTh">이메일</th>
-						 
 						<th id="findPwdInputTh"> 
 							<input type="text" class="form-control" name="mem_email" id="mem_email2" placeholder="E-mail" maxlength="50">
 						</th>
-			
 						<th id="findPwdGol">
 							<div style="padding-left: 5px;padding-right: 5px;">@</div>
 						</th>
-			
 						<th id="findPwdSelectTh">
 							<select id="mail3" name="mail3" style="border: 0px; padding-right: 10px;">
 	                            <option value="@naver.com">naver.com</option>
@@ -309,9 +305,9 @@ $(function(){
              			</th>
 		 			</tr>
           
-			         <tr id="findPwdBtnTr" >     
-			              <td id="findPwdTd" style="padding-top: 10px;">
-			             <button  type="submit" name="submit2" id="submit2">확인</button>
+			         <tr id="findPwdBtnTr">   
+			             <td id="findPwdTd" style="padding-top: 10px;">
+			             	<button class="btn btn-info" type="submit" name="submit2" id="submit2">확인</button>
 			             </td>
 					</tr>
 				</table>
@@ -325,7 +321,7 @@ $(function(){
 	  <div class="modal-dialog" role="document" >
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title">인증번호를 입력하세요</h5>
+	        <h4 class="modal-title"><b>인증번호를 입력하세요</b></h4>
 <!-- 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
 <!-- 	          <span aria-hidden="true">&times;</span> -->
 <!-- 	        </button> -->
@@ -334,9 +330,14 @@ $(function(){
 				<form id="injeung_form" action="/member/pass_injeung.do" method="post">
 	     			<div>
 						<br>
-						<div>
-							인증번호 입력 : <input type="number" name="pass_injeung" placeholder="인증번호 입력">
-						</div><br><br>
+						<table class="table">
+							<tr>
+								<td><label for="pass_injeung">인증번호 입력 : </label></td>
+								<td><input type="number" class="form-control" id="pass_injeung" name="pass_injeung" placeholder="인증번호 입력"></td>
+							</tr>
+						</table>
+						<br>
+						<br>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary" name="submit3">비밀번호 변경</button>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
