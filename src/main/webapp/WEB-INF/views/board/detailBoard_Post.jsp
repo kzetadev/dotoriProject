@@ -52,6 +52,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		
 		var login_mem_no = ${login_mem_no};
 		var divContainer = $("<div id='popup_layer' class='container'/>").css({
 			'position':'absolute'
@@ -159,11 +160,11 @@
 		});
 
 		$("#btnWrite").click(function() {
-			location.href = "/board/insertBoard_Post.do";
+			location.href = "/board/insertBoard_Post.do?board_kinds=${detail.board_kinds}";
 		});
 		
 		//댓글 목록 새로고침
-		function refreshComments(){
+		function refreshComments(comment_changed){
 			//댓글에 작성할 수 있는 댓글란
 			var btnReplyAnswer = $("<button class='btn btn-default' id='btnReplyAnswer'>답글</button>"); 
 			var commentReplyArea = $("<div id='commentReplyArea'/>")
@@ -193,7 +194,7 @@
 					, data:comment
 					, success:function(result){
 						alert("댓글이 등록되었습니다.");
-						refreshComments();
+						refreshComments(true);
 					}
 				});
 			});
@@ -212,9 +213,10 @@
 						//댓글 노드 만들기
 						var div = $("<div class='comment' comment_del='" + comment['comment_del'] + "' board_no='" + $("#board_no").val() + "' comment_no='" + comment['comment_no'] + "' board_ref='" + comment['board_ref'] + "' board_level='" + comment['board_level'] + "'/>");
 						var divNickname = $("<span class='commentDetail' width='50'/>");
+						var imgMember = $("<img src='" + comment['mem_img'] + "' style='width:30px; height:30px;'/>");
 						var aNickname = $("<a class='nickname' mem_no='" + comment['mem_no'] + "'/>").text(comment['mem_nickname']);
 						var divBtn = $("<div class='text-right'/>");
-						$(divNickname).append(aNickname);
+						$(divNickname).append(imgMember, aNickname);
 						$(aNickname).click(function(e){
 							if (login_mem_no == $(this).attr('mem_no')){
 								return;
@@ -263,7 +265,7 @@
 										}else{
 											alert("댓글 수정에 실패하였습니다.");
 										}
-										refreshComments();
+										refreshComments(true);
 									}
 								});
 							}
@@ -283,7 +285,7 @@
 								, success:function(result){
 									if(confirm("해당 댓글을 삭제하시겠습니까?")){
 										alert("댓글이 삭제되었습니다.");
-										refreshComments();
+										refreshComments(true);
 									}
 								}
 							});
@@ -339,14 +341,17 @@
 					});
 					//댓글란 노드에 ul 추가
 					$("#commentList").append(ul);
+					if(location.href.indexOf('commentList') > 0 || comment_changed){
+						location.href = "#commentList";
+					}
 				}
 			});
 		}
 		//처음 화면 로딩시  댓글 목록 가져오기 실행.
-		refreshComments();
+		refreshComments(false);
 		
 		$("#btnList").click(function() {
-			location.href="/board/listBoard_Post.do?str=3";
+			location.href="/board/listBoard_Post.do?str=${detail.board_kinds}";
 		});
 		$("#btnAnswer").click(function() {
 			var comment = {
@@ -363,7 +368,7 @@
 				, success:function(result){
 					if(result == 1){
 						alert("댓글이 등록되었습니다.");
-						refreshComments();
+						refreshComments(true);
 					}
 				}
 			});
@@ -383,7 +388,7 @@
 			</div>
 			<div>
 			 	<label for="write">작성자 : </label>
-			 	<a class="nickname" id="nickname" mem_no="${detail.mem_no }">
+			 	<img src="${detail.mem_img }" style="width:30px; height:30px;"><a class="nickname" id="nickname" mem_no="${detail.mem_no }">
 					${detail.mem_nickname}  
 <!-- 					회원 프로필 사진 아이콘 넣기 -->
 				</a>
@@ -424,7 +429,8 @@
 	<div class="form-comment-group">
 		<div>
 			<label for="comment_content">댓글</label>
-			<textarea id="comment_content" class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>	
+			<textarea id="comment_content" class="form-control" rows="3" placeholder="댓글을 적어주세요." style="background-color: white"></textarea><br>
+			<button class="btn btn-default" id="btnAnswer">댓글쓰기</button>	
 		</div>
 		<div class="commentList" id="commentList">
 <!-- 			<ul> -->
@@ -439,7 +445,7 @@
 <!-- 			</ul> -->
 		</div>
 		<button class="btn btn-default" id="btnWrite">글쓰기</button>
-		<button class="btn btn-default" id="btnAnswer">댓글쓰기</button>	
+		
 		<button class="btn btn-default" id="btnList">글목록</button>			
 	</div>
 	<br>

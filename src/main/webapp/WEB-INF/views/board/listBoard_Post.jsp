@@ -121,8 +121,8 @@ word-break:break-all;
 			var oWidth = $("#popup_layer").width();
 			var oHeight = $("#popup_layer").height();
 			
-			var divLeft = e.clientX + 10;
-			var divTop = e.clientY;
+			var divLeft = e.pageX + 10;
+			var divTop = e.pageY;
 		
 		
 			$("#popup_layer").css({
@@ -227,8 +227,11 @@ word-break:break-all;
 					<td>${v.head_tag_name}</td>
 					<td>
 						<a href="detailBoard_Post.do?board_no=${v.board_no}">${v.board_title}</a>
+						<c:if test="${v.comment_cnt > 0 }">
+							<a style="color:blue;" href="detailBoard_Post.do?board_no=${v.board_no}#commentList">[${v.comment_cnt }]</a>
+						</c:if>
 					</td>
-					<td><a class="nickname" mem_no="${v.mem_no }">${v.mem_nickname}</a></td>
+					<td><img src="${v.mem_img }" style="width:20px; height:20px;"><a class="nickname" mem_no="${v.mem_no }">${v.mem_nickname}</a></td>
 					<td>${v.board_date}</td>
 					<td>${v.board_hit}</td>
 				</tr>
