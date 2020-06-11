@@ -21,8 +21,8 @@
 
 	}
 	#container, .form-comment-group{
-		padding-left: 100px;
-		padding-right: 100px;
+		padding-left: 300px;
+		padding-right: 300px;
 	}
 	h2{
 		text-align:center;

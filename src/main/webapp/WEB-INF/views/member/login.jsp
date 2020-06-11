@@ -17,7 +17,7 @@
 	.container{
 		max-width: 300px;
 		width: 100%; 
-		height: 100vh; 
+		padding-top:100px;
 		display: -webkit-box; 
 		display: -ms-flexbox; 
 		display: flex; 
@@ -37,12 +37,18 @@
 	#find{
 		text-align: right;
 	}
-	
+	.btn-block{
+		background-color: black;
+    	color: white;
+    	border-color: #ccc;
+	}
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
-})
+	$(function(){
+
+	})
 </script>
 </head>
 <body>
@@ -76,27 +82,22 @@ $(function(){
 <!-- 					<label class="font-weight-bold text-white">  -->
 <%-- 						<input type="checkbox" id="remember_us" name="remember_memId" ${checked}> 아이디 기억하기 --%>
 <!-- 					</label> -->
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<br>
 					
 					<!-- <label class="font-weight-bold text-white"> 
 						<a href="${pageContext.request.contextPath}/user/userSearch" id="find">계정찾기</a>
 					</label>  -->
 					  
 					<div>
-						<button id="loginBtn" type="submit"	class="btn btn-primary btn-block">로그인</button>
+						<button id="loginBtn" type="submit"	class="btn btn-default btn-block">로그인</button>
 					</div>
 				</div>
 					<div class="form-group">
-						<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/joinForm.do">회원가입</a>
+						<a class="btn btn-default btn-block" href="${pageContext.request.contextPath}/member/joinForm.do">회원가입</a>
 					</div>
 					
 					<div class="form-group">
-						<a class="btn btn-deep-orange btn-block" href="${pageContext.request.contextPath}/member/findMem_id.do">계정찾기</a>
+						<a class="btn btn-default btn-block" href="${pageContext.request.contextPath}/member/findMem_id.do">계정찾기</a>
 					</div>
 								
 					<!-- <button class="btn btn-default" style="background-color:#EFEFEF; color:black;"></button> -->
