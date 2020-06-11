@@ -93,7 +93,7 @@
 						</table>
 					</div>
 					<div class="media-body" style="text-align:center;">
-						<img src="${main.mem_img }" class="img-rounded" width="300" height="300">
+						<img src="${main.mem_img }" class="img-rounded" width="400">
 						<br>
 						<table class="table" id="t">
 							<tr>
@@ -118,7 +118,7 @@
 							</tr>
 							<tr>
 								<th>자기소개</th>
-								<td><textarea class="form-control" rows="5" cols="30" readonly="readonly" style="background-color:white;">${main.mem_content }</textarea></td>
+								<td><textarea class="form-control" rows="10" cols="100" readonly="readonly" style="background-color:white;">${main.mem_content }</textarea></td>
 							</tr>
 						</table>
 					</div>

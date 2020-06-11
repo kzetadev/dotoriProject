@@ -74,7 +74,7 @@
 			})
 
 			$("#btnList").click(function(){
-				location.href = "/place/listPlace_Info.do?place_type=0"
+				location.href = "/place/listPlace_Info.do?place_type=${place_type.place_type }"
 			})
 		})
 	</script>

@@ -213,12 +213,14 @@ public class Board_PostController {
 
 	// 게시글 작성 폼
 	@RequestMapping(value = "/board/insertBoard_Post.do", method = RequestMethod.GET)
-	public ModelAndView insertBoard_PostForm(@RequestParam(value = "board_no", defaultValue = "0") int board_no) {
+	public ModelAndView insertBoard_PostForm(@RequestParam(value = "board_no", defaultValue = "0") int board_no
+				, @RequestParam(name="board_kinds", defaultValue="1")int board_kinds) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("board_no", board_no);
 		if (LoginUser.isLogin()) {
 			mav.addObject("member", loginService.loginById(LoginUser.getMember_InfoVo().getMem_id()));
 		}
+		mav.addObject("board_kinds", board_kinds);
 		return mav;
 	}
 

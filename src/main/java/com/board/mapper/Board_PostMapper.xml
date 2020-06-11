@@ -28,9 +28,11 @@
                     , b.BOARD_CONTENT
                     , m.mem_no
                     , m.mem_nickname
+                    , m.mem_img
                     , b.board_kinds
                     , to_char(b.board_date, 'YYYY/MM/DD') AS board_date
                     , b.board_hit
+                    , (select count(comment_no) cnt from board_comment where board_no = b.board_no and comment_del = 0) comment_cnt
                from board_post b, member_info m, head_tag h
                where b.mem_no = m.mem_no and b.head_tag_no = h.head_tag_no  
               
@@ -82,7 +84,7 @@
 
 	<!-- 게시글 상세 -->
 	<select id="detail" resultType="com.board.vo.Board_PostVo">
-		SELECT b.board_no, b.mem_no, mi.mem_nickname, h.head_tag_name, b.board_kinds, b.board_title, to_char(b.board_date, 'YYYY-MM-DD HH:MI:SS') board_date, b.board_hit
+		SELECT b.board_no, b.mem_no, mi.mem_nickname, mi.mem_img, h.head_tag_name, b.board_kinds, b.board_title, to_char(b.board_date, 'YYYY-MM-DD HH:MI:SS') board_date, b.board_hit
 		    , b.board_content, b.board_copy
 		  FROM board_post b, member_info mi, head_tag h
 		 WHERE b.mem_no = mi.mem_no

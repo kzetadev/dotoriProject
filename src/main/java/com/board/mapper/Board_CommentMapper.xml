@@ -7,7 +7,7 @@
 	<!-- 게시글 상세보기 하단 댓글 목록 -->
 	<select id="selectDetail" resultType="com.board.vo.Board_CommentVo">
 		SELECT bc.comment_no, bc.board_ref, bc.board_level, bc.board_step, m.mem_no
-				, m.mem_nickname, bc.board_no, bc.comment_content
+				, m.mem_nickname, m.mem_img, bc.board_no, bc.comment_content
 				, to_char(bc.comment_date, 'YYYY-MM-DD HH:MI:SS') comment_date
 				, bc.comment_del
 		FROM board_comment bc, board_post bp, member_info m
@@ -16,7 +16,13 @@
 			AND bc.board_no = #{bc.board_no}
 		ORDER BY board_ref, board_level, board_step
 	</select>
-
+   <!-- 게시판 목록에서 보여지는 글의 댓글 카운트 -->
+   <select id="commentCount" resultType="java.lang.Integer">
+   		select count(comment_no) cnt 
+   			from board_comment
+   		 where board_no = #{board_no}
+   		 		and comment_del = 0 
+   </select>
 	<!-- 마이페이지에서 회원id가 #{mem_id}인 사람이 쓴 댓글들 보기 -->
   <select id="selectAll" resultType="com.board.vo.Board_CommentVo">
     select * from board_comment where mem_no = 

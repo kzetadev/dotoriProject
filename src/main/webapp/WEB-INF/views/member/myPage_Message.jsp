@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="layoutTag" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <layoutTag:layout>
 
 <!DOCTYPE html>
@@ -188,7 +189,7 @@ a {
 											<td><c:out value="${msg.post_content}" /></td>
 											<td><c:out value="${msg.mem_nickname}" /></td>
 											<td><c:out value="${msg.post_read }" /></td>
-											<td><c:out value="${msg.post_regidate}" /></td>
+											<td><fmt:formatDate value="${msg.post_regidate}" pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
 								</table>
