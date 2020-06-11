@@ -7,6 +7,10 @@
 $(document).ready(function(){
 	$("#btnUnifiedSearch").click(function(event){
 		event.preventDefault();
+		if($("#keyword").val() == ''){
+			alert("검색어를 입력해 주세요.");
+			return false;
+		}
 		location.href = "/unifiedSearch.do/" + $("#keyword").val();
 	});
 // 	var a = $("#logout");
