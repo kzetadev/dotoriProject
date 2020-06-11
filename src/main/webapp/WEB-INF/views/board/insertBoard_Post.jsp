@@ -32,6 +32,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		$("#board_kinds").val("${board_kinds}").prop("selected", true);
 		$("#board_content").summernote({
 			height:300
 			, minHeight:null

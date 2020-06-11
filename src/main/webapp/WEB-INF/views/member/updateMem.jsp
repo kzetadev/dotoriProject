@@ -46,6 +46,47 @@ a {
 h1{
 	text-align:left;
 }
+.container {
+  position: relative;
+  width: 400px;
+  padding-left:0px;
+  padding-right:0px;
+}
+
+.image {
+/*   opacity: 1;  */
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  text-align: center;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -228,48 +269,45 @@ h1{
 			<h1>회원수정</h1>
 			<hr>
 			
-			<div class="col-sm-10 text-left">
-				<form id="form1" name="form1" class="navbar-form" method="post" action="myPage.jsp" enctype="multipart/form-data">
+			<div class="col-sm-10 text-left" style="text-align:center;">
+				<form id="form1" name="form1" class="navbar-form" method="post" action="myPage.jsp" enctype="multipart/form-data" >
 				<input type="hidden" name="mem_no" id="mem_no" value="${update.mem_no }" readonly="readonly">
-		
-					<div>
+					<div class="container">
 						<!-- <input type="file" name="uploadFile"> -->
-						<img id="profile_img" class="img-rounded" name="profile_img" src="${update.mem_img }" width="300" height="300">
+						<img id="profile_img" class="img-rounded image" name="profile_img" src="${update.mem_img }">
+						<div class="overlay">
+						    <span class="glyphicon glyphicon-camera" style="font-size:xx-large;"></span>
+						  </div>
 					</div>
 					
 					<table class="table">
 						<tr>
-							<td><label for="mem_name">이름 : </label></td>
+							<th><label for="mem_name">이름</label></th>
 							<td><input type="text" name="mem_name" id="mem_name" class="form-control" value="${update.mem_name}" readonly="readonly"></td>
 						</tr>
 	
 						<tr>
-							<td><label for="mem_id">아이디 : </label></td>
+							<th><label for="mem_id">아이디</label></th>
 							<td><input type="text" name="mem_id" id="mem_id" class="form-control" value="${update.mem_id }" readonly="readonly"></td>
 						</tr>
 	
 						<tr>
-							<td><label for="mem_email">이메일 : </label></td>
+							<th><label for="mem_email">이메일</label></th>
 							<td><input type="text" name="mem_email" id="mem_email" class="form-control" value="${update.mem_email}" readonly="readonly"></td>
 						</tr>
 	
 						<tr>
-							<td><label for="mem_nickname">닉네임 : </label></td>
+							<th><label for="mem_nickname">닉네임</label></th>
 							<td><input type="text" class="form-control" name="mem_nickname" id="mem_nickname" value="${update.mem_nickname }">
 							<button id="nickName_overlap" class="btn btn-info">중복 확인</button>
 							<div class="check_font" id="nickname_check"></div></td>
 						</tr>
 						
 						<tr>
-							<td><label for="mem_content">자기 소개 : </label></td>
-							<td><textarea name="mem_content" id="mem_content" class="form-control" placeholder="내용을 입력해주세요." cols="40" rows="5">${update.mem_content}</textarea></td>
+							<th><label for="mem_content">자기 소개</label></th>
+							<td><textarea name="mem_content" id="mem_content" class="form-control" placeholder="내용을 입력해주세요." cols="100" rows="10">${update.mem_content}</textarea></td>
 						</tr>
 					</table>
-					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" id="updateBtn" class="btn btn-danger">수정</button>
 					<!-- <input type="button" value="회원 탈퇴" id="delBtn"> -->
 				</form>

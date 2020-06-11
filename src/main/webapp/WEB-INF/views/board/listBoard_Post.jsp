@@ -96,7 +96,7 @@ word-break:break-all;
 		$(divContainer).append(divBtnGroup);
 		$('body').append(divContainer);
 		$("#btnInsert").click(function() {
-			location.href = "/board/insertBoard_Post.do";
+			location.href = "/board/insertBoard_Post.do?board_kinds=" + board_kinds;
 		});
 		//https://chobokkiri.tistory.com/67
 		//화면 내 특정영역(닉네임)을 제외한 부분 클릭 시 레이어 숨김

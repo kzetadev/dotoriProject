@@ -77,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					, "/main.do", "/unifiedSearch.do/**", "/getCondition.do/**", "/getBoardCondition.do/**"
 					, "/searchPlace.do/**", "/searchBoard.do/**", "/mailAuth.do"
 					, "/board/mainBoard_Post.do", "/member/findMem_pwd.do", "/board/listBoard_Post.do", "/board/listBoard_Gallery.do"
-					, "/place/listPlace_Info.do", "/main/mainTop.do").permitAll()
+					, "/place/listPlace_Info.do", "/main/mainTop.do", "/faq/**").permitAll()
 			.anyRequest().authenticated();
 		http.exceptionHandling().accessDeniedPage("/access_denied");	//접근 거부 페이지 추가해야됨.
 		http.formLogin()
