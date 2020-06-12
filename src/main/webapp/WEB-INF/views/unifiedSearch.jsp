@@ -247,6 +247,7 @@ $(document).ready(function(){
 				});
 			});
 			$(ul).append(li);
+			$(".container").css({"min-height": "100px"});
 		}
 		if(endPage < tot_page){
 			var li = $("<li class='board_page' page='" + (endPage + 1) + "'/>");
