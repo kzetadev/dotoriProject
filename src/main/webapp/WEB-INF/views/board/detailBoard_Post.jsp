@@ -155,7 +155,7 @@
 			var re = confirm("삭제하시겠습니까?");
 			if(re == true){
 				location.href = "/board/deleteBoard_Post.do?board_no="+board_no;
-				alert("삭제했습니다!");
+// 				alert("삭제했습니다!");
 			}
 		});
 
@@ -193,7 +193,7 @@
 					, type:"post"
 					, data:comment
 					, success:function(result){
-						alert("댓글이 등록되었습니다.");
+// 						alert("댓글이 등록되었습니다.");
 						refreshComments(true);
 					}
 				});
@@ -260,11 +260,11 @@
 									, type:"post"
 									, data:comment
 									, success:function(result){
-										if(result == 1){
-											alert("댓글이 수정되었습니다.");
-										}else{
-											alert("댓글 수정에 실패하였습니다.");
-										}
+// 										if(result == 1){
+// 											alert("댓글이 수정되었습니다.");
+// 										}else{
+// 											alert("댓글 수정에 실패하였습니다.");
+// 										}
 										refreshComments(true);
 									}
 								});
@@ -284,7 +284,7 @@
 								, data:comment
 								, success:function(result){
 									if(confirm("해당 댓글을 삭제하시겠습니까?")){
-										alert("댓글이 삭제되었습니다.");
+// 										alert("댓글이 삭제되었습니다.");
 										refreshComments(true);
 									}
 								}
@@ -367,7 +367,7 @@
 				, data:comment
 				, success:function(result){
 					if(result == 1){
-						alert("댓글이 등록되었습니다.");
+// 						alert("댓글이 등록되었습니다.");
 						refreshComments(true);
 					}
 				}

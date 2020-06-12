@@ -30,6 +30,7 @@ $(document).ready(function(){
 	var board_kinds;
 
 	var clickedTheme;
+	
 	$(".theme").click(function(){
 		$(".theme").removeClass('active');
 		$(this).addClass('active');
@@ -127,6 +128,7 @@ $(document).ready(function(){
 				});
 			});
 			$(ul).append(li);
+			$(".container").css({"min-height": "100px"});
 		}
 		if(endPage < tot_page){
 			var li = $("<li class='place_page' page='" + (endPage + 1) + "'/>");

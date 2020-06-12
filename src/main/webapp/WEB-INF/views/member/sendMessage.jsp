@@ -10,6 +10,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(".container").css({"min-height": "100px"});
 	$("#send").click(function(){
 		var message = {
 			post_to:parseInt($("#historyModalLabel").attr('post_to'))
