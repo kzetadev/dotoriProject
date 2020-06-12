@@ -31,6 +31,7 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$(".container").css({"min-height": "100px"});
 		$(".slider").slick({
 			dots: true
 	        , infinite: true

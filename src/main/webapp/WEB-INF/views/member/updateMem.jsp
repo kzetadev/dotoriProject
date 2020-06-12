@@ -92,6 +92,7 @@ h1{
 <script type="text/javascript">
 	$(function(){
 		//닉네임 정규식
+		$(".container").css({"min-height": "100px"});
 		//https://developer.mozilla.org/ko/docs/Web/API/File/File
 		var sel_file = new File(['1'], 'default');						//선택된 파일 객체를 담는 전역 변수. 이미지 변경 없이 회원정보만 수정할 경우 기본값으로 사용하기 위해 의미없는 데이터와 파일명으로 생성 
 		var file = $("<input type='file' name='uploadFile' id='uploadFile' accept='image/*' />").css('visibility', 'hidden');	//파일 선택용 input 태그. 화면에 표시하지 않고 이미지를 클릭했을 때 동작하도록 변수로 선언.
