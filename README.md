@@ -30,7 +30,7 @@
   
 
 # 시연
-Youtube : [쉼표, Seoul Travel Helper](https://www.youtube.com/, "쉼표, Seoul Travel Helper")  
+Youtube : <https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/>
 
 
 
