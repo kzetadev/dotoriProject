@@ -4,6 +4,8 @@
 
 <img src="/img/N 서울타워_2.jpg" width="40%" height="30%" alt="쉼표, Seoul Travel Helper"></img><br/>
 
+
+
 # 개요
 
 서울에는 다양한 볼거리와 먹거리 등 즐길 것이 많이 있습니다.<br/>
@@ -25,7 +27,6 @@
 * Jsoup <br/>
 
 # 시연
-Youtube : <https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/> <br/>
 Youtube : [쉼표, Seoul Travel Helper](https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/)
 
 
