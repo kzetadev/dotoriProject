@@ -33,45 +33,42 @@ public class Member_FavoriteController {
 	@RequestMapping("/place/insertMember_Favorite.do")
 	@ResponseBody
 	public int InsertMember_Favorite(Member_FavoriteVo f) {
+		// 로그인한 회원 번호를 f에 담음
 		f.setMem_no(LoginUser.getMember_no());
-		
 		int re = member_favoriteService.insertMember_Favorite(f);
 		
-		System.out.println("찜목록에 담긴 상품번호 : " + f.getFavorite_no());
-		System.out.println(re);
+		// System.out.println("찜목록에 담긴 상품번호 : " + f.getFavorite_no());
 		return re;
 	}
 	
 	// 마이페이지 찜 전체 리스트
 	@RequestMapping("/member/myPage_Favorite.do")
 	public ModelAndView listMember_Favorite(@RequestParam(name="place_type", defaultValue="-1")int place_type) {
-
 		Map map = new HashMap();
 		//place_type이 -1이면 파라미터에 place_type이 없이 defaultValue로 지정된것으로 간주.
 		//전체 목록을 조회함으로 판단
 		if(place_type > -1) {
 			map.put("place_type", place_type);
 		}
-		System.out.println("마이페이지 찜리스트 컨트롤러 동작함");
 		// Place_ThemeVo pt = place_themeService.getPlace_Theme(place_type);
 		
 		ModelAndView m = new ModelAndView();
 //		logger.info("list");
 		int mem_no = 0;
+		// 0이었다가 로그인을 했으면 mem_no는 자신이 로그인한 회원 번호가 됨
 		if(LoginUser.isLogin()) {
 			mem_no = LoginUser.getMember_no();
 		}
-		
 		map.put("mem_no", mem_no);
+		// 마이페이지 리스트를 m에 넣어줌
 		m.addObject("favorite_list", member_favoriteService.listMember_Favorite(map));
 		// 총 개수 구함
 		int AllCount = member_favoriteService.listAllCount(map);
 		m.addObject("AllCount",AllCount);
-		
+		// 장소 카테고리 리스트를 (명소, 식당, 호텔 등 리스트) m에 넣어줌
 		m.addObject("theme", place_themeService.listPlace_Theme());
-		
+		// 장소 카테고리 번호를 (명소, 식당, 호텔 등의 테마 번호) m에 넣어줌. 명소 : 0, 식당 : 1, 호텔 : 2, ...
 		m.addObject("number", place_type);
-		System.out.println("마이페이지 찜리스트 컨트롤러 종료");
 		return m;
 	}
 	
@@ -89,7 +86,6 @@ public class Member_FavoriteController {
 	public int deleteMember_Favorite(int favorite_no) {
 		int re = member_favoriteService.deleteMember_Favorite(favorite_no);
 		// model.addAttribute("re", re);
-		System.out.println("찜 제거 컨트롤러");
 		return re;
 	}
 }

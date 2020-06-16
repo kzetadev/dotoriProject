@@ -41,12 +41,14 @@
 	<div class="wrapper">
 		<h2>FAQ</h2>
 		<br>
+		<!-- 스프링 시큐리티로 관리자에게만 추가 권한 주기 -->
 		<sec:authorize access="hasRole('ADMIN')">
 			<button type="button" class="btn btn-default" id="btnAdd">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 			</button>
 		</sec:authorize>
 		
+		<!-- faq 목록 -->
 		<div class="container">
 			<table class="table mytable">
 				<c:forEach var="f" items="${f_list }">
@@ -55,6 +57,7 @@
 							aria-hidden="true"></span></td>
 						<td><a class="showmore">${f.faq_question }</a></td>
 						<td colspan="6">
+							<!-- 스프링 시큐리티로 관리자에게만 수정, 삭제 권한 주기 -->
 							<sec:authorize access="hasRole('ADMIN')">
 								<button type="button" class="btn btn-default btnUpdate" faq_no="${f.faq_no }">
 									<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>

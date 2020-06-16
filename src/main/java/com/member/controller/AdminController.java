@@ -18,7 +18,7 @@ import com.member.service.AdminService;
 
 @Controller
 public class AdminController {
-	@Resource(name="adminService")
+	@Resource(name="adminService") 
 	private AdminService adminService;
 	
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
@@ -28,10 +28,7 @@ public class AdminController {
 
 	// 관리자 - 회원 목록 (페이징 + 검색 + 정렬)
 	@RequestMapping("/admin/adminListMember.do") 
-	public ModelAndView allMemberList(HttpServletRequest request, @RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session, String keyword, String searchColumn, String sortColumn) {
-		System.out.println("컨트롤러 동작함");
-		System.out.println("검색어 : " + keyword);
-		
+	public ModelAndView allMemberList(HttpServletRequest request, @RequestParam(value="pageNUM", defaultValue="1") int pageNUM, HttpSession session, String keyword, String searchColumn, String sortColumn) {		
 		ModelAndView m = new ModelAndView();
 		Map map = new HashMap();
 		map.put("sortColumn", sortColumn);
@@ -39,8 +36,8 @@ public class AdminController {
 		map.put("searchColumn", searchColumn);
 		
 		totalRecord = adminService.totalRecord(map);
+		// 전체 페이지수 구하기
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
-		System.out.println("전체 페이지 수 : " + totalPage);
 		if(pageNUM > totalPage) {
 			pageNUM = totalPage;
 		}
@@ -51,12 +48,9 @@ public class AdminController {
 		}
 		map.put("start", start);
 		map.put("end", end);
-//		System.out.println(map);
 		
 		m.addObject("list", adminService.listMemberAll(map));
-		System.out.println(map);
 		m.addObject("totalPage", totalPage);
-		System.out.println("전체 페이지 수 : " + totalPage);
 		
 		int startPage = (pageNUM - 1) / pageGroup * pageGroup + 1;
 		int endPage = startPage + pageGroup - 1;
@@ -66,6 +60,7 @@ public class AdminController {
 		m.addObject("startPage", startPage);
 		m.addObject("endPage", endPage);
 		
+		// keyword값이 있으면
 		if(keyword != null && !keyword.equals("")) {
 			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
 			m.addObject("keyword", "&keyword=" + keyword);
@@ -81,7 +76,6 @@ public class AdminController {
 		m.addObject("mem_no",mem_no);
 		return m;
 	}
-	
 	// 관리자 - 회원 강퇴
 	@RequestMapping(value="/admin/adminDeleteMember.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -93,4 +87,5 @@ public class AdminController {
 //		}
 		return re;
 	}
+	
 }

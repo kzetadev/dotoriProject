@@ -13,20 +13,22 @@ import com.member.vo.Member_InfoVo;
 public class AdminServiceImpl implements AdminService {
 	@Resource(name="adminDao")
 	protected AdminDao adminDao;
+	
+	// 관리자 - 모든 회원 리스트 출력 + 페이징 처리 + 검색 + 정렬
 	@Override
 	public List<Member_InfoVo> listMemberAll(Map map) {
-		// TODO Auto-generated method stub
 		return adminDao.listMemberAll(map);
 	}
 
+	// 관리자 - 회원 강퇴
 	@Override
 	public int deleteMember(int mem_no) {
-		// TODO Auto-generated method stub
 		return adminDao.deleteMember(mem_no);
 	}
+	
+	// 총 페이지 수 구하기
 	@Override
 	public int totalRecord(Map map) {
-		// TODO Auto-generated method stub
 		return adminDao.totalRecord(map);
 	}
 }

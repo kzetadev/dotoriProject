@@ -31,6 +31,7 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		// 이미지 슬라이드 기능 설정
 		$(".container").css({"min-height": "100px"});
 		$(".slider").slick({
 			dots: true
@@ -46,6 +47,7 @@
 </script>
 </head>
 <body>
+	<!-- 대문짝만한 메인 사진 -->
 	<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;">
   		<img class="w3-image" src="/img/seoulMain.jpg" width="100%" height="600">
   		<div class="w3-display-middle w3-margin-top w3-center">
@@ -55,12 +57,12 @@
   		</div>
 	</header>
 	
-	<!-- 중단 이미지 슬라이드 -->
+	<!-- 이미지 슬라이드 -->
 	<div class="slider autoplay slick-slider slick-dotted" role="toolbar">
 		<c:forEach var="p" items="${list }">
 			<div>
 				<a href="/place/detailPlace_Info.do?place_no=${p.place_no }&place_type=${p.place_type}" class="thumbnail">
-					<img src="/img/${fn:split(p.place_img, '|')[0]}" height="30%">
+					<img src="/img/${fn:split(p.place_img, '|')[0]}" height="30%"> <!-- |를 구분자로 하여 잘라서 각각의 이미지를 보여줌 -->
 				</a>
 			</div>
 		</c:forEach>
@@ -69,6 +71,7 @@
 	</div>
 	<br>
 	
+	<!-- 유튜브 컨텐츠 -->
 	<div class="row">
 		<div class="col-md-4">
 			<div class="youtubebox">
@@ -133,7 +136,7 @@
 		</script>
 	</div> -->
    
-    
+    <!-- 조회수가 가장 높은 장소 6개를 추출하여 이미지와 장소명을 보여줌 -->
   	<div class="container text-center">    
   	<h3>인기 서울 장소 TOP 6</h3>
   	<br>

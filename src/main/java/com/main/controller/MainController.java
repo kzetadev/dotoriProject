@@ -26,6 +26,7 @@ public class MainController {
 	private Place_InfoService place_infoService;
 	@Resource(name="place_themeService")
 	private Place_ThemeService place_themeService;
+	
 	public static int totalRecord = 0; // 전체 레코드 수를 저장하기 위한 변수
 	public static int pageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
@@ -42,12 +43,11 @@ public class MainController {
 		int place_type = 0;
 
 		Map map = new HashMap();
-
 		map.put("place_type", place_type);
 		
 		totalRecord = place_infoService.getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
-		System.out.println("전체 페이지 수 : " + totalPage);
+		// 페이지 번호가 전체 페이지 수보다 크다면
 		if (pageNUM > totalPage) {
 			pageNUM = totalPage;
 		}
@@ -56,20 +56,14 @@ public class MainController {
 		if(end > totalRecord) {
 			end = totalRecord;
 		}
-	
 		map.put("start", start);
 		map.put("end", end);
-		System.out.println(map);
-
-
-		mav.addObject("list", place_infoService.listPlace_InfoPage(map));
-
-		System.out.println(map);
-		System.out.println("전체 페이지 수 : " + totalPage);
-		mav.addObject("totalPage", totalPage);
 		
+		mav.addObject("list", place_infoService.listPlace_InfoPage(map));
+		mav.addObject("totalPage", totalPage);
 		// 메인 페이지 인기 서울 명소 TOP 6
 		mav.addObject("top", place_infoService.mainTop());
 		return mav;
 	}
+	
 }

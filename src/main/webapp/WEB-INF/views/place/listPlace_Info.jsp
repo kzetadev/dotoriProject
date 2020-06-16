@@ -107,7 +107,7 @@
 		<li><a href="listPlace_Info.do?sortColumn=place_hit&place_type=${place_type }${searchColumn}${keyword}">조회수순</a></li>
 	</ul>
 				
-	<!-- 각 장소별 대표 이미지 리스트 -->
+	<!-- 각 장소별 대표 이미지 리스트 (한 페이지에 8개) -->
 	<div class="row">
 		<c:forEach var="p" items="${list }">
 			<div class="col-md-3">
@@ -137,7 +137,7 @@
 	</div>
 	
 	
-	<!-- 페이징 처리 -->
+	<!-- 페이징 처리 & 정렬 및 검색 상태유지 -->
 	<ul class="pagination pagination-lg">
 		<c:if test="${startPage > 1}">
 			<li>

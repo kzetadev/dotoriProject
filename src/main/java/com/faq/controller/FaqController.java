@@ -36,6 +36,7 @@ public class FaqController {
 		ModelAndView m = new ModelAndView();
 		fv.setMem_no(LoginUser.getMember_no());
 		int re = faqService.insertFaq(fv);
+		// 관리자) 질문 답변 등록을 완료했으면 faq 목록으로 이동  
 		if(re > 0) {
 			m.setViewName("redirect:/faq/listFaq.do");
 		}
@@ -53,6 +54,7 @@ public class FaqController {
 	public ModelAndView updateFaqSubmit(FaqVo fv) {
 		ModelAndView m = new ModelAndView();
 		int re = faqService.updateFaq(fv);
+		// 관리자) 질문 답변 등록을 수정했으면 faq 목록으로 이동 
 		if(re > 0) {
 			m.setViewName("redirect:/faq/listFaq.do");
 		}
@@ -71,14 +73,6 @@ public class FaqController {
 	public int deleteFaqSubmit(int faq_no) {
 		int re = faqService.deleteFaq(faq_no);
 		return re;
-	}
-	
-	// FAQ (자주 묻는 질문들)
-	@RequestMapping("/faq.do")
-	public ModelAndView faq() {
-		System.out.println("컨트롤러");
-		ModelAndView m = new ModelAndView();
-		return m;
 	}
 	
 }

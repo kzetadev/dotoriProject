@@ -29,6 +29,7 @@ public class SearchController {
 	private Place_ThemeService place_themeService;
 	@Resource(name="board_postService")
 	private Board_PostService board_postService;
+	
 	public static int totalRecord = 0; 		// 전체 레코드 수를 저장하기 위한 변수
 	public static int placePageSIZE = 9; 	// 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int boardPageSIZE = 8; 	// 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
@@ -39,9 +40,9 @@ public class SearchController {
 	@RequestMapping(value="/unifiedSearch.do/{keyword}", method=RequestMethod.GET)
 	public ModelAndView unifiedSearch(@PathVariable("keyword")String keyword) {
 		ModelAndView mav = new ModelAndView("unifiedSearch");
-		System.out.println("unifiedSearch " + keyword);
 		Map map = new HashMap();
 		map.put("keyword", keyword);
+		
 		mav.addObject("keyword", keyword);
 		mav.addObject("tList", place_themeService.unifiedSearchTheme(map));		//검색어로 조회된 테마 리스트(명소, 음식, 숙소, ...)
 		mav.addObject("bList", board_postService.unifiedBoardSearch(map));		//검색어로 조회된 게시판 종류 리스트(자유, 후기, 동행)
@@ -52,16 +53,16 @@ public class SearchController {
 	@RequestMapping(value="/getCondition.do/{keyword}/{place_type}", method=RequestMethod.GET)
 	@ResponseBody
 	public String unifiedSearch(@PathVariable("keyword")String keyword, @PathVariable("place_type")int place_type) {
-		System.out.println("unifiedSearch " + keyword + "\t" + place_type);
 		String result = "";
 		Map map = new HashMap();
 		map.put("keyword", keyword);								//검색어
 		map.put("place_type", place_type);							//테마번호
 		List<SearchConditionVo> scList = place_infoService.unifiedSearchCondition(map);
+		
 		result = (new Gson()).toJson(scList);
-		System.out.println(result);
 		return result;
 	}
+	
 	//테마, 검색조건으로 여행장소 목록을 조회하는 메소드
 	//"/searchPlace.do/" + keyword + "/" + type + "/" + column + "/" + parseInt($(this).attr('page')) + "/" + tot_cnt
 	//										검색어	  테마번호		    검색조건	페이지번호	  총 레코드 카운트	총 페이지 카운트
@@ -71,7 +72,7 @@ public class SearchController {
 			, @PathVariable("column")int column, @PathVariable("pageNUM")int pageNUM, @PathVariable("total_record")int total_record
 			, @PathVariable("total_page")int total_page) {
 		String result = "";
-		System.out.println("전체 페이지 수 : " + totalPage);
+		// 페이지 번호가 전체 페이지 수보다 크다면
 		if (pageNUM > total_page) {
 			pageNUM = total_page;
 		}
@@ -87,13 +88,12 @@ public class SearchController {
 		map.put("column", column);								//검색조건(장소명, 주소, 설명)
 		map.put("start", start);								//시작 레코드 번호
 		map.put("end", end);									//마지막 레코드 번호
-		System.out.println("keyword " + keyword + "\tplace_type " + place_type + "\tcolumn " + column + "\tpageNUM " + pageNUM + "\ttotal_record " + total_record + "\ttotal_page " + total_page + "\tstart " + start + "\tend " + end);
 		List<Place_InfoVo> pList = place_infoService.searchPlace(map);
-		result = (new Gson()).toJson(pList);
-		System.out.println(pList);
-		return result;
 		
+		result = (new Gson()).toJson(pList);
+		return result;
 	}
+	
 	//게시판 종류 클릭 후 검색 조건을 조회하기 위한 메소드
 	//										검색어		게시판 종류
 	@RequestMapping("/getBoardCondition.do/{keyword}/{board_kinds}")
@@ -105,6 +105,7 @@ public class SearchController {
 		map.put("keyword", keyword);				//검색어
 		map.put("board_kinds", board_kinds);		//게시판 종류
 		List<SearchConditionVo> scList = board_postService.unifiedBoardCondition(map);
+		
 		result = (new Gson()).toJson(scList);
 		return result;
 	}
@@ -116,7 +117,7 @@ public class SearchController {
 			, @PathVariable("column")int column, @PathVariable("pageNUM")int pageNUM, @PathVariable("total_record")int total_record
 			, @PathVariable("total_page")int total_page) {
 		String result = "";
-		System.out.println("전체 페이지 수 : " + totalPage);
+		// 페이지 번호가 전체 페이지 수보다 크다면
 		if (pageNUM > total_page) {
 			pageNUM = total_page;
 		}
@@ -132,11 +133,10 @@ public class SearchController {
 		map.put("column", column);					//검색 조건
 		map.put("start", start);					//시작 레코드 번호
 		map.put("end", end);						//마지막 레코드 번호
-		System.out.println("keyword " + keyword + "\tboard_kinds " + board_kinds + "\tcolumn " + column + "\tpageNUM " + pageNUM + "\ttotal_record " + total_record + "\ttotal_page " + total_page + "\tstart " + start + "\tend " + end);
 		List<Board_PostSearchVo> bList = board_postService.searchBoard(map);
-		result = (new Gson()).toJson(bList);
-		System.out.println(bList);
-		return result;
 		
+		result = (new Gson()).toJson(bList);
+		return result;
 	}
+	
 }

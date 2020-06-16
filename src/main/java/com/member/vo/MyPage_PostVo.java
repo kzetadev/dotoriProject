@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyPage_PostVo {
-	private int board_no;
-	private String board_title;
-	private String mem_nickname;
-	private Date board_date;
-	private int board_hit;
+	private int board_no; // 글번호
+	private String board_title; // 글제목
+	private String mem_nickname; // 닉네임
+	private Date board_date; // 게시일
+	private int board_hit; // 조회수
 	
-
 }

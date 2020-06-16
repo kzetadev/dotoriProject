@@ -20,6 +20,7 @@
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d24b45a0cda3b0e29fc1ea1a3fa5d8f1"></script>
 <script type="text/javascript">
 		$(function(){
+			// 1이면 검은별, 그 이외면 하얀별
 			if($("#btn").attr("onlyOne") == 1){
 				$("#icon").addClass("glyphicon glyphicon-star");
 			}else{
@@ -50,7 +51,6 @@
 							if(result == 1){
 								alert("찜목록에서 제거되었습니다.")
 								location.href = "/place/detailPlace_Info.do?place_no=${place_no}&place_type=${place_type.place_type}"
-
 							}
 						}})
 					}
@@ -66,13 +66,14 @@
 				})
 			})*/
 
-			// 이미지 슬라이더
+			// 이미지 슬라이드 기능 수정
 			$(".your-class").slick({
 				dots: true, infinite: true,
 				speed: 500, fade: true, cssEase: 'linear',
 				autoplay: true, autoplaySpeed: 750
 			})
 
+			// 지도 밑에 있는 리스트 아이콘 누를시 여행 정보 리스트 화면으로 이동 
 			$("#btnList").click(function(){
 				location.href = "/place/listPlace_Info.do?place_type=${place_type.place_type }"
 			})

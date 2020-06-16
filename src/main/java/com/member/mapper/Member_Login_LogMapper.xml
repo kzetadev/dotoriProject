@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member_login_log">
 	<!-- 로그인시 로그가 기록됨 -->
-  	<insert id="logInsert">
+  	<!-- <insert id="logInsert">
     	insert into member_login_log(log_no, mem_no, mem_ip, login_datetime, login_result) values(
     	1, 1, '111.111.111.11', sysdate, '성공하였습니다.');
-  	</insert>
+  	</insert> -->
   	
 </mapper>
 

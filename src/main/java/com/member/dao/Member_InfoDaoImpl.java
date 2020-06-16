@@ -84,7 +84,7 @@ public class Member_InfoDaoImpl implements Member_InfoDao {
 	//아이디 찾기
 	@Override
 	public String find_idCheck(Member_InfoVo vo) {
-		String mem_id = sqlSessionTemplate.selectOne("mem_info.find_id_check", vo);
+		String mem_id = sqlSessionTemplate.selectOne("mem_info.find_id_checkㅇ", vo);
 		return mem_id;
 	}
 	//비밀번호 찾기

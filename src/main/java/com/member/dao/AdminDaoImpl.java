@@ -25,9 +25,9 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.delete("admin.deleteMember", mem_no);
 	}
+	// 총 페이지 수 구하기
 	@Override
 	public int totalRecord(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("admin.totalRecord", map);
 	}
 

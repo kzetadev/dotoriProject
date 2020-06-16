@@ -23,12 +23,13 @@ import com.information.vo.Place_ThemeVo;
 import com.security.config.LoginUser;
 @Controller
 public class Place_InfoController {
+	// 여행 장소 리스트
 	@Resource(name="place_infoService")
 	private Place_InfoService place_infoService;
-	
+	// 여행 장소 카테고리 (테마)
 	@Resource(name="place_themeService")
 	private Place_ThemeService place_themeService;
-	
+	// 찜목록
 	@Resource(name="member_favoriteService")
 	private Member_FavoriteService member_favoriteService;
 	
@@ -50,25 +51,22 @@ public class Place_InfoController {
 	
 	// place_type별 정보 리스트 보기 + 페이징 처리 + 검색 + 정렬
 	@RequestMapping("/place/listPlace_Info.do")	// null이면 1을 바로 설정, 올 때 int pageNUM으로 받는다는 뜻
-	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, @RequestParam(value="place_type", defaultValue="0") int place_type, String keyword, String searchColumn, String sortColumn, HttpSession session) {
-		System.out.println("컨트롤러 동작함");
-		System.out.println("검색어 : " + keyword);
+	public ModelAndView listPlace_InfoPage(@RequestParam(value="pageNUM", defaultValue="1") int pageNUM, 
+			@RequestParam(value="place_type", defaultValue="0") int place_type, String keyword, 
+			String searchColumn, String sortColumn, HttpSession session) {
 		Place_ThemeVo pt = place_themeService.getPlace_Theme(place_type);
 		
 		ModelAndView m = new ModelAndView();
 		Map map = new HashMap();
 		
-		//매퍼에서 사용할 맵 객체
+		//매퍼에서 사용할 맵 객체 - 검색 키워드, 검색 분류, 정렬, 여행장소 테마 번호
 		map.put("keyword", keyword);
 		map.put("searchColumn", searchColumn);
 		map.put("sortColumn", sortColumn);
 		map.put("place_type", place_type);
 		
-		System.out.println(sortColumn);
-		
 		totalRecord = place_infoService.getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
-		System.out.println("전체 페이지 수 : " + totalPage);
 		//페이지번호가 총 페이지 수보다 크면 페이지번호를 총 페이지 수로 변경
 		if (pageNUM > totalPage) {
 			pageNUM = totalPage;
@@ -81,13 +79,10 @@ public class Place_InfoController {
 		if(end > totalRecord) {
 			end = totalRecord;
 		}
-	
-		map.put("start", start);
-		map.put("end", end);
-
+		map.put("start", start); // 시작 레코드번호 map에 담음
+		map.put("end", end); // 마지막 레코드번호 map에 담음
 		m.addObject("list", place_infoService.listPlace_InfoPage(map));
-		System.out.println(map);
-		System.out.println("전체 페이지 수 : " + totalPage);
+		
 		m.addObject("totalPage", totalPage);
 		//페이지 그룹에서 사용되는 시작 페이지 번호 계산
 		int startPage = (pageNUM - 1) / pageGroup * pageGroup + 1;
@@ -113,15 +108,14 @@ public class Place_InfoController {
 		if(sortColumn != null && !sortColumn.equals("")) {
 			m.addObject("sortColumn", "&sortColumn=" + sortColumn);		//view에서 url에 이어 붙일 변수 넘겨주기
 		}
+		// theme 여행장소 카테고리 리스트를 m에 담음
 		m.addObject("pt", pt);
-		//theme
 		return m;
 	}
 	
 	// 여행장소번호가 x번인걸 눌렀을때 상세화면으로 이동
 	@RequestMapping("/place/detailPlace_Info.do")
 	public ModelAndView detailPlace_Info(int place_no, int place_type) {
-		System.out.println("컨트롤러 작동");
 		// 조회수 증가
 		place_infoService.updateHit(place_no);
 		
@@ -129,18 +123,18 @@ public class Place_InfoController {
 		
 		ModelAndView m = new ModelAndView();
 		m.addObject("p", place_infoService.detailPlace_Info(place_no));
-		m.addObject("place_type", pt);
+		m.addObject("place_type", pt); // 여행 장소 테마 리스트를 place_type란 이름으로 m에 담음
 	
 		m.addObject("place_no", place_no);
-		m.addObject("mem_no", LoginUser.getMember_no());
+		m.addObject("mem_no", LoginUser.getMember_no()); // 로그인 한 번호를 mem_no로 지정하고, m에 담음
 		
 		Map map = new HashMap();
 		map.put("place_no", place_no);
-		map.put("mem_no", LoginUser.getMember_no());
+		map.put("mem_no", LoginUser.getMember_no()); // 로그인 한 번호를 mem_no로 지정하고, map에 담음
 		// 찜 개수는 1개만 들어와야함
 		int re = member_favoriteService.onlyOne(map);
+		// 찜 개수가 성공적으로 들어왔으면 re는 1, 그렇지 않다면  re는 0
 		m.addObject("re", re);
-		
 		return m;
 	}
 	
@@ -149,13 +143,13 @@ public class Place_InfoController {
 	@ResponseBody
 	public int deleteDetailMember_Favorite(int mem_no, int place_no) {
 		Map map = new HashMap();
+		// 회원 번호와 여행 장소 번호가 고려됨
 		map.put("mem_no", mem_no);
 		map.put("place_no", place_no);
 		
+		// 성공적으로 지워졌으면 re는 1, 그렇지 않다면 re는 0
 		int re = member_favoriteService.deleteDetailPlace_Info(map);
-		System.out.println(re);
 		// model.addAttribute("re", re);
-		System.out.println("상세정보에서 찜 제거 컨트롤러");
 		return re;
 	}
 	

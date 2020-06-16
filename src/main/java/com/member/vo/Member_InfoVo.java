@@ -25,6 +25,6 @@ public class Member_InfoVo {
 	private int mem_auth;			// 이메일 인증여부
 	private int mem_check_code;		// 비밀번호 찾기 인증번호
 	
-	private MultipartFile uploadFile;
+	private MultipartFile uploadFile; // 파일의 내용을 
 	
 }
