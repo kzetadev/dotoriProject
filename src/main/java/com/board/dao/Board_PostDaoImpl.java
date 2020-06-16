@@ -30,6 +30,7 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	      
 	      Map map = new HashMap();
 	      
+	      //헤더에서 게시판종류를 클릭했을 때. 해당 게시판의 메인으로 간주.
 	      if("1".equals(str) || "2".equals(str) || "3".equals(str)) {
 	    	  str5 = str;
 	      
@@ -39,9 +40,9 @@ public class Board_PostDaoImpl implements Board_PostDao {
 		      
 		      return sqlSessionTemplate.selectList("board_post.select", map);
 	      
-	      } else {
+	      } else {		//검색어가 있거나, 다른 페이지번호를 클릭했을 경우. str=1(게시판종류)@1(검색조건)@검색어@2(페이지번호)
 	    	  if(str != null) {
-	    		  String getStr[] = keyWord.split("@");
+	    		  String getStr[] = keyWord.split("@");			//@문자로 쪼개서 배열로 만듦.
 	    		  for(int i=0; i<getStr.length; i++) {
     				  if(i == 0 ) {			//게시판종류
     					  str5 = getStr[0];
@@ -55,36 +56,36 @@ public class Board_PostDaoImpl implements Board_PostDao {
 	    			  }
 	    			  
 	    			  if( i == 3 ) {		//페이지번호
-	    				  if(getStr[3].equals("1")) {
-	    					  str3 = Integer.toString(0);
-	    					  str4 = Integer.toString(10);
-	    				  }else {
+	    				  if(getStr[3].equals("1")) {				//페이지번호가 1페이지이면
+	    					  str3 = Integer.toString(0);			//시작 레코드번호를 0으로 변경
+	    					  str4 = Integer.toString(10);			//마지막 레코드번호를 10으로 변경
+	    				  }else {									//페이지번호가 1이 아니면
 	    					  str3 = getStr[3];
-	    					  int str3int = Integer.parseInt(str3) - 1; 
+	    					  int str3int = Integer.parseInt(str3) - 1; 	//페이지 번호에서 1을 뻄
 	    					  
-	    					  int startPage = str3int * 10;
-	    					  int EndPage = startPage + 10;
+	    					  int startPage = str3int * 10;					//시작 레코드 번호. 페이지 번호에 10을 곱함
+	    					  int EndPage = startPage + 10;					//마지막 레코드 번호.
 	    					  
-	    					  str3 = Integer.toString(startPage);
-	    					  str4 = Integer.toString(EndPage);
+	    					  str3 = Integer.toString(startPage);			//매퍼에서 사용하는 변수. 시작 레코드 번호.	
+	    					  str4 = Integer.toString(EndPage);				//매퍼에서 사용하는 변수. 마지막 레코드 번호.
 	    				  }
 	    			  }
 	    			  
 	    		  }
-	    		  map.put("str1", str1);
-	    		  map.put("str3", str3);
-	    		  map.put("str4", str4);
-	    		  map.put("str5", str5);
+	    		  map.put("str1", str1);									//매퍼에서 사용하는 변수. 검색 옵션
+	    		  map.put("str3", str3);									//매퍼에서 사용하는 변수. 시작 레코드 번호
+	    		  map.put("str4", str4);									//매퍼에서 사용하는 변수. 마지막 레코드 번호
+	    		  map.put("str5", str5);									//매퍼에서 사용하는 변수. 게시판 종류
 	    		  
-	    		  if(!"".equals(str2)) {
-	    			  map.put("str2", str2);
+	    		  if(!"".equals(str2)) {									//검색 키워드 값이 있으면
+	    			  map.put("str2", str2);								//매퍼에서 사용하는 변수. 검색 키워드
 	    		  }
 	    		  
 	    		  List<Board_PostListVo> aaa = sqlSessionTemplate.selectList("board_post.select",map);
 	    		  return sqlSessionTemplate.selectList("board_post.select",map);  
-	    	  } else {
+	    	  } else {														//파라미터가 null이면
 	    		  
-		    	  map.put("str3", str3);
+		    	  map.put("str3", str3);									
 		    	  map.put("str4", str4);
 		    	  map.put("str5", str5);
 		    	  

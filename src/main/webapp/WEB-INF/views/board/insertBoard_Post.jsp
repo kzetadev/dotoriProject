@@ -32,6 +32,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		//글작성 버튼을 클릭한 게시글 목록의 게시판 종류로 클릭시킴
 		$("#board_kinds").val("${board_kinds}").prop("selected", true);
 		$("#board_content").summernote({
 			height:300
@@ -43,77 +44,22 @@
 			, tabsize:2
 // 			, airMode:true
 		});
-// 		// 써머노트
-// 		$("#content").summernote({
-// 			disableDragAndDrop : true,
-// 			height: 700,
-// 			minHeight: null,
-// 			maxHeight: null,
-// 			focus: true,
-// 			lang: "ko-KR",
-// 			placeholder: "본문 내용을 입력해주세요.",
-// 			toolbar: [
-// 			    ['style', ['style']],
-// 			    ['font', ['fontsize','bold', 'italic', 'underline', 'clear']],
-// 			    ['color', ['color']],
-// 			    ['insert', ['picture','video']],
-// 			    ['para', ['ul', 'ol', 'paragraph']],
-// 			    ['table', ['table']]
-			    
-// 			 ],
-// 			callbacks: {
-// 				onImageUpload : function(files){
-// 					console.log(files);
-// 					$.each(files, function(idx, file){
-// 						uploadSummernoteImageFile(file, $("#content"));
-// 						console.log(file);
-// 					});
-// 				}	
-// 			}
-// 		})
-
-//		// select-option 변경 function 예시
-// 	function itemChange(){
-		 
-// 		var keyboard = ["갈축","청축","적축"];
-// 		var mouse = ["광마우스","유선마우스","비싼마우스","미키마우스"];
-// 		var monitor = ["17인치","22인치","24인치","26인치"];
-		 
-// 		var selectItem = $("#select1").val();
-		 
-// 		var changeItem;
-		  
-// 		if(selectItem == "키보드"){
-// 		  changeItem = keyboard;
-// 		}
-// 		else if(selectItem == "마우스"){
-// 		  changeItem = mouse;
-// 		}
-// 		else if(selectItem == "모니터"){
-// 		  changeItem =  monitor;
-// 		}
-		 
-// 		$('#select2').empty();
-		 
-// 		for(var count = 0; count < changeItem.size(); count++){                
-// 		                var option = $("<option>"+changeItem[count]+"</option>");
-// 		                $('#select2').append(option);
-// 		            }
-		 
-// 		}
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
 			var token = "${_csrf.token}";
 			jqXHR.setRequestHeader('X-CSRF-Token', token);
 		});
+		//게시판 종류 클릭에 따른 말머리 목록 가져오기
 		function showHeadTag(idx){
 			$.ajax({
 				url:'/board/listHead_Tag.do/' + idx
 				, type:'get'
 				, dataType:'JSON'
 				, success:function(result){
+					//말머리 콤보박스 내용 초기화
 					$("#head_tag_div").empty();
 					var select = $("<select id='head_tag_no' class='form-control' name='head_tag_no' />");
 					$.each(result, function(idx, headtag){
+						//클릭한 게시판에 해당하는 말머리 목록 만들기
 						var option = $("<option/>").val(headtag['head_tag_no']).text(headtag['head_tag_name']);
 						$(select).append(option);
 					});
@@ -121,8 +67,9 @@
 				}
 			})
 		}
+		//페이지가 처음 로드될 때 선택되어있는 게시판으로 말머리 목록 만들기
 		showHeadTag($("#board_kinds").val());
-		
+		//게시판 클릭할 떄 마다 말머리 목록 새로고침
 		$("#board_kinds").change(function(){
 			showHeadTag($(this).val());
 		});
@@ -130,6 +77,7 @@
 		$("#f").submit(function(event){
 			event.preventDefault();
 			var board_title = $("#board_title").val();
+			//썸머노트 함수를 사용해서 본문에 있는 태그들을 가져옴. 글 상세보기, 글 수정에서 바로 사용할 수 있도록 해당 구문으로 사용.
 			var board_content = $("#board_content").summernote('code');
 			if(board_title == "") {
 				alert("제목을 입력하세요.");
@@ -143,9 +91,10 @@
 			};
 // 			var board = $("#f").serialize();
 // 			console.log(board);
+			//본문에 포함된 평문(board_content는 태그들과 같이 저장) 내용 만드는 부분. 글 검색할 때 사용.
 			var board_plain_content = "";
-			$(".note-editing-area p").each(function(idx, item){
-				board_plain_content = board_plain_content + $(item).text() + '\n';
+			$(".note-editing-area p").each(function(idx, item){		//보통 p 태그로 감싸져 있으므로 p 태그만 다 가져와서 텍스트만 추출
+				board_plain_content = board_plain_content + $(item).text() + '\n';		//$(item).text() -> p 태그의 텍스트		\n -> 줄바꿈
 			});
 			console.log(board_plain_content);
 			var board = {
@@ -178,20 +127,6 @@
 				}
 			});
 		});
-// 		$("#btnSave").click(function() {
-// 			var board_title = $("#board_title").val();
-// 			var board_content = $("#board_content").val();
-// 			if(board_title == "") {
-// 				alert("제목을 입력하세요.");
-// 				document.f.board_title.focus();
-// 				return;
-// 			};
-// 			if(board_content == "") {
-// 				alert("내용을 입력하세요.");
-// 				document.f.board_content.focus();
-// 				return;
-// 			};
-// 		});
 
 // 		// 복사기능 체크
 // 		function CheckCopy("form") {

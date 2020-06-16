@@ -31,13 +31,13 @@ import com.member.vo.Member_InfoVo;
 @Controller
 public class JoinController {
 	@Autowired
-	AES256Util aes256;
+	AES256Util aes256;							//암호화를 위한 빈
 	@Resource(name="loginService")
 	private LoginService loginService;
 	@Resource(name="mailSenderService")
-	MailSenderService mailSenderService;
+	MailSenderService mailSenderService;		//메일 발송을 위한 서비스
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;			//회원가입 시 평문 비밀번호를 암호화하는 빈
 	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	@Resource(name="joinService")
 	private JoinService joinService;
@@ -59,14 +59,16 @@ public class JoinController {
 		System.out.println(vo.getMem_pwd());
 		System.out.println(vo.getMem_email());
 		String encode_passwod = passwordEncoder.encode(vo.getMem_pwd());
-		vo.setMem_img("/member_img/basic.png");
+		vo.setMem_img("/member_img/basic.png");					//회원 가입 화면은 프로필 이미지를 선택하는 부분이 없으므로 기본 이미지를 표시해야하기 때문에 기본 이미지 경로를 저장
 		vo.setMem_pwd(encode_passwod);
 		// 회원가입 메소드
 		int re = joinService.joinMember(vo); //저장된 객체 그대로 DB로 보낸다
 		System.out.println("re : " + re);
+		//회원 테이블에 저장되었으면
 		if (re > 0) {
 			mav.setViewName("joinSuccess");
 			mav.addObject("ok", vo.getMem_name());
+			//인증 메일 발송 시 mem_id와 고유키(UUID) 값을 암호화 하기 위한 변수
 			AES256Util aes256 = null;
 			try {
 				aes256 = new AES256Util();
@@ -74,6 +76,7 @@ public class JoinController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//인증 메일 발송
 			mailSenderService.sendAuthMail(vo.getMem_id(), vo.getMem_email(), request.getServletContext(), aes256);
 		}
 		return Integer.toString(re);

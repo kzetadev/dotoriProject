@@ -18,12 +18,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+//xml파일 대체 Configuration 클래스
 @Configuration
-@PropertySource("classpath:com/db/config/db.properties")
+@PropertySource("classpath:com/db/config/db.properties")	//db.properties 파일을 로드
 //@ComponentScan(basePackages = {"com.example.demo.dao", "com.example.demo.config"},
 //		excludeFilters = @ComponentScan.Filter(Controller.class))
-@MapperScan(basePackages = {"*.*.mapper"})
+@MapperScan(basePackages = {"*.*.mapper"})					//매퍼파일을 스캔할 경로 설정
 //@ComponentScan(basePackages= {"com.config"})
 public class RootConfig {
 	@Value("${driver}")

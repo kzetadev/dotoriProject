@@ -36,12 +36,15 @@ public class Board_CommentController {
 		return m;
 	}
 	
+	//글 상세보기 화면에서 글 번호에 해당하는 댓글 목록 가져오기
 	@RequestMapping("/board/listBoardComment.do/{board_no}")
 	@ResponseBody
 	public String listBoardComment(@PathVariable("board_no")int board_no) {
 		String commentList = "";
+		//댓글 목록을 Json 문자열로 변환
 		commentList = (new Gson()).toJson(board_commentService.listComment(board_no));
 		System.out.println(commentList);
+		//Json문자열 반환
 		return commentList;
 	}
 	
@@ -73,7 +76,9 @@ public class Board_CommentController {
 		if(vo.getBoard_ref() != 0) {
 			board_ref = vo.getBoard_ref();
 		}
+		//vo에 다음에 저장할 댓글번호 넣기
 		vo.setComment_no(nextCommentNo);
+		//vo에 참조되는 댓글번호 넣기
 		vo.setBoard_ref(board_ref);
 		
 		int re = -1; 

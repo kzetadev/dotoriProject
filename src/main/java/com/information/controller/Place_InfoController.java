@@ -54,21 +54,11 @@ public class Place_InfoController {
 		System.out.println("컨트롤러 동작함");
 		System.out.println("검색어 : " + keyword);
 		Place_ThemeVo pt = place_themeService.getPlace_Theme(place_type);
-//		if(keyword == null) {
-//			keyword = (String)session.getAttribute("keyword");
-//			searchColumn = (String)session.getAttribute("searchColumn");
-//		}
-		
-//		if(all != null) {
-//			keyword = null;
-//			searchColumn = null;
-//		}
-		// 조회수 증가
-		// place_infoService.updateHit(place_no);
 		
 		ModelAndView m = new ModelAndView();
 		Map map = new HashMap();
 		
+		//매퍼에서 사용할 맵 객체
 		map.put("keyword", keyword);
 		map.put("searchColumn", searchColumn);
 		map.put("sortColumn", sortColumn);
@@ -79,28 +69,31 @@ public class Place_InfoController {
 		totalRecord = place_infoService.getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord / (double)pageSIZE);
 		System.out.println("전체 페이지 수 : " + totalPage);
+		//페이지번호가 총 페이지 수보다 크면 페이지번호를 총 페이지 수로 변경
 		if (pageNUM > totalPage) {
 			pageNUM = totalPage;
 		}
+		//시작 레코드번호 계산
 		int start = (pageNUM - 1) * pageSIZE + 1;
+		//마지막 레코드번호 계산
 		int end = start + pageSIZE - 1;
+		//마지막 레코드번호가 총 레코드 수보다 크면 총 레코드 수로 변경
 		if(end > totalRecord) {
 			end = totalRecord;
 		}
 	
 		map.put("start", start);
 		map.put("end", end);
-//		System.out.println(map);
-//		session.setAttribute("keyword", keyword);
-//		session.setAttribute("searchColumn", searchColumn);
 
 		m.addObject("list", place_infoService.listPlace_InfoPage(map));
 		System.out.println(map);
 		System.out.println("전체 페이지 수 : " + totalPage);
 		m.addObject("totalPage", totalPage);
-		
+		//페이지 그룹에서 사용되는 시작 페이지 번호 계산
 		int startPage = (pageNUM - 1) / pageGroup * pageGroup + 1;
+		//페이지 그룹에서 사용되는 마지막 페이지 번호 계산
 		int endPage = startPage + pageGroup - 1;
+		//마지막 페이지 번호가 총 페이지 수보다 크면 총 페이지 수로 변경
 		if(endPage > totalPage) {
 			endPage = totalPage;
 		}
@@ -112,12 +105,13 @@ public class Place_InfoController {
 
 		// 검색창에 키워드가 있을때
 		if(keyword != null && !keyword.equals("")) {
-			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
+			m.addObject("searchColumn", "&searchColumn=" + searchColumn);//view에서 url에 이어 붙일 변수 넘겨주기
 			m.addObject("keyword", "&keyword=" + keyword);
 			// m.addObject("sortColumn", "&sortColumn=" + sortColumn);
 		}
+		// 정렬값이 있으면
 		if(sortColumn != null && !sortColumn.equals("")) {
-			m.addObject("sortColumn", "&sortColumn=" + sortColumn);
+			m.addObject("sortColumn", "&sortColumn=" + sortColumn);		//view에서 url에 이어 붙일 변수 넘겨주기
 		}
 		m.addObject("pt", pt);
 		//theme

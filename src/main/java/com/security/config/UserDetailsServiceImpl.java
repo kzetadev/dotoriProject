@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (vo.getMem_auth() != 1) {
 			throw new EmailNotAuthenticationException("이메일 인증되지 않은 회원입니다.");
 		}
-		User_InfoVo user = new User_InfoVo(vo);
+		User_InfoVo user = new User_InfoVo(vo);	//UserDetails 인터페이스를 구현한 User_Info 클래스에 vo를 넘겨서 mem_role, mem_pwd, mem_id를 사용
 		return user;
 	}
 

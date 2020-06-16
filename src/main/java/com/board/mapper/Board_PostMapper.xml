@@ -51,14 +51,14 @@
             </if>   
 
 
-            <if test="str1 == 3"> <!-- 제목 -->
+            <if test="str1 == 3"> <!-- 내용 -->
                <if test="str2 != null and str2 != ''"> <!-- 검색조건 -->
                   and b.BOARD_PLAIN_CONTENT LIKE '%'||#{str2,jdbcType=VARCHAR}||'%'
                </if>
             </if>   
             
             
-               <if test="str5 != null and str5 != ''"> <!-- 검색조건 -->
+               <if test="str5 != null and str5 != ''"> <!-- 게시판 종류 -->
                   and b.board_kinds LIKE '%'||#{str5,jdbcType=VARCHAR}||'%'
                </if>            
                 order by board_no desc
@@ -172,26 +172,27 @@
 		        when 3 then '동행'
 		      end "board_kinds_str"
 		  from board_post
-		 where instr(board_content, 'data:image') > 0
+		 where instr(board_content, 'data:image') > 0	<!-- data:image라는 문자가 포함되어 있으면 이미지가 첨부되어 있다고 간주 -->
 		 order by board_kinds
 	</select>
 	<!-- 각 게시판별 총 레코드 카운트 조회 -->
 	<select id="galleryBoardRecordCount" resultType="java.lang.Integer">
 		select count(board_no)
 		  from board_post
-		 where instr(board_content, 'data:image') > 0
+		 where instr(board_content, 'data:image') > 0	<!-- data:image라는 문자가 포함되어 있으면 이미지가 첨부되어 있다고 간주 -->
 		 		and board_kinds = #{board_kinds}
 	</select>
 	<!-- 갤러리. 게시판 별 글 제목, 대표 이미지 조회 -->
 	<select id="galleryBoardImage" resultType="com.board.vo.Board_PostVo">
 		select r, board_no, board_title, board_content
 		  from (select rownum r, board_no, board_title, board_content
-				  from (select board_no, board_title
-				            , substr(board_content, instr(board_content, 'data:image')
-				                , instr(substr(board_content, instr(board_content, 'data:image')), '"')) board_content 
+				  from (select board_no, board_title									
+				            , substr(board_content									<!-- board_content에서 'data:image ~ "까지의 문자열을 가져옴. 첫 번째 이미지 태그의 src에 있는 데이터를 가져오기 위한 구문. 두 번째 컬럼 : data:image의 시작 인덱 스번호. 세 번째 컬럼 : " 문자의 인덱스 번호-->
+				            	, instr(board_content, 'data:image')				<!-- board_content에서 data:image 문자열의 시작 인덱스를  가져옴-->
+				                , instr(substr(board_content, instr(board_content, 'data:image')), '"')) board_content 	<!-- data:image의 시작 인덱스 번호에서 "까지(html에서 "로 끝남) -->
 				          from board_post
 				         where board_kinds = #{board_kinds}
-				              and instr(board_content, 'data:image') > 0
+				              and instr(board_content, 'data:image') > 0		<!-- data:image라는 문자가 포함되어 있으면 이미지가 첨부되어 있다고 간주 -->
 				         order by board_no desc
 				       )
 				)

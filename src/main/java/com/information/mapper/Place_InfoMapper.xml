@@ -31,10 +31,10 @@
   			<if test="keyword != null and keyword != ''"> <!-- 장소명과 내용, 주소만 가지고 검색 설정 -->
   				and ${searchColumn} like '%' || #{keyword} || '%'
   			</if> 
-  			<if test="sortColumn != null and sortColumn != 'place_hit'">
+  			<if test="sortColumn != null and sortColumn != 'place_hit'">		<!-- 정렬 컬럼 값이 있고 정렬 기준이 조회수가 아니면 -->
   			  	order by ${sortColumn}
   			</if>
-  			<if	test="sortColumn != null and sortColumn == 'place_hit'">
+  			<if	test="sortColumn != null and sortColumn == 'place_hit'">		<!-- 정렬 컬럼 값이 있고 정렬 기준이 조회수이면 -->
   				order by place_hit desc
   			</if>
   				)) where r between #{start} and #{end}

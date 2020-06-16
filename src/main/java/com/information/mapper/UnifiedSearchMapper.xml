@@ -6,17 +6,17 @@
 
    <!-- 통합검색으로 조회된 테마 리스트 -->
   <select id="unifiedSearchTheme" resultType="com.information.vo.Place_ThemeVo">
-  	select *
+  	select *																	<!-- 조건별로 합친 결과에 해당하는 place_type으로 테마 테이블 조회. 아래 서브쿼리 절에 없는 결과는 나타나지 않음. 통합검색 화면에서 테마 목록을 출력하기 위한 용도. -->
 	  from place_theme
-	 where place_type in (select place_type
+	 where place_type in (select place_type										<!-- 장소명으로 조회 -->
 	                        from place_info
 	                       where place_name like '%' || #{keyword} || '%'
 	                       union
-	                      select place_type
+	                      select place_type										<!-- 주소명으로 조회 -->
 	                        from place_info
 	                       where place_addr like '%' || #{keyword} || '%'
 	                       union
-	                      select place_type
+	                      select place_type										<!-- 설명으로 조회 -->
 	                        from place_info
 	                       where place_detail like '%' || #{keyword} || '%'
 	                      )
@@ -25,18 +25,18 @@
   <!-- 검색할 키워드가 포함된 테마의 검색조건(장소명, 주소, 설명) 가져오기 -->
 <!--   <select id="unifiedSearchCondition" resultType="java.lang.String"> -->
   <select id="unifiedSearchCondition" resultType="com.information.vo.SearchConditionVo">
-  	select condition_kor, condition_col, search_cnt
-	  from (select '장소명' condition_kor, 0 condition_col, count(place_no) search_cnt, 1 as sel_ord
+  	select condition_kor, condition_col, search_cnt														<!-- 통합검색화면에서 테마 클릭 시 클릭한 테마에 해당하는 여행장소정보 테이블 조회. 아래 서브쿼리 절 조건에 해당하지 않으면 나타나지 않음. 통합검색 화면에서 테마 클릭 후 바로 하단에 조건(장소명, 주소, 설명)탭을 출력하기 위한 용도 -->
+	  from (select '장소명' condition_kor, 0 condition_col, count(place_no) search_cnt, 1 as sel_ord		<!-- 장소명으로 조회. '장소명', 검색조건 컬럼 인덱스(아래 searchPlace에서 사용), 총 카운트, 정렬 기준 -->
 	          from place_info
 	         where place_name like '%' || #{keyword} || '%'
 	               and place_type = #{place_type}
 	         union
-	        select '주소' condition_kor, 1 condition_col, count(place_no) search_cnt, 2 as sel_ord
+	        select '주소' condition_kor, 1 condition_col, count(place_no) search_cnt, 2 as sel_ord		<!-- 주소명으로 조회 -->
 	          from place_info
 	         where place_addr like '%' || #{keyword} || '%'
 	              and place_type = #{place_type}
 	         union
-	        select '설명' condition_kor, 2 condition_col, count(place_no) search_cnt, 3 as sel_ord
+	        select '설명' condition_kor, 2 condition_col, count(place_no) search_cnt, 3 as sel_ord		<!-- 설명으로 조회 -->
 	          from place_info
 	         where place_detail like '%' || #{keyword} || '%'
 	              and place_type = #{place_type}
@@ -47,40 +47,40 @@
   <select id="searchPlace" resultType="com.information.vo.Place_InfoVo">
   	select r, place_no, place_name, place_img, place_detail
 	  from (select rownum r, place_no, place_name, place_img, place_detail
-	          from (select place_no, place_type, place_name, place_img, DBMS_LOB.substr(place_detail, 10, 1) place_detail
+	          from (select place_no, place_type, place_name, place_img, DBMS_LOB.substr(place_detail, 10, 1) place_detail			<!-- 여행장소번호, 테마번호, 장소명, 장소이미지, 설명(clob타입을 substr으로 자를 때 DBMS_LOB라는 내장 함수를 사용해야한다고함) -->
 	                  from place_info
 	                 where 
 	                 <choose>
-	                  	<when test="column != null and column == 0">
+	                  	<when test="column != null and column == 0">				<!-- 위 검색 조건 목록을 가져오는 쿼리에서 선택한 컬럼 값이 0이면 장소명 -->
 	                 		place_name
 	                 	</when>
-		                 <when test="column != null and column == 1">
+		                 <when test="column != null and column == 1">				<!-- 위 검색 조건 목록을 가져오는 쿼리에서 선택한 컬럼 값이 1이면 주소 -->
 		                 	place_addr
 		                 </when>
-		                 <when test="column != null and column == 2">
+		                 <when test="column != null and column == 2">				<!-- 위 검색 조건 목록을 가져오는 쿼리에서 선택한 컬럼 값이 2이면 설명 -->
 		                 	place_detail
 		                 </when>
 		                 <otherwise>
 		                 	place_name
 		                 </otherwise>
 	                 </choose>
-	                 		like '%' || #{keyword} || '%'
-	                	   and place_type = #{place_type}
+	                 		like '%' || #{keyword} || '%'							<!-- 검색 키워드 -->
+	                	   and place_type = #{place_type}							<!-- 클릭한 테마 -->
 	                 order by place_no
 	               )
 	       )
 	 where r between #{start} and #{end}
 	  	
   </select>
-  <select id="unifiedBoardSearch" resultType="java.util.Map">
-  	select board_kinds "board_kinds", board_kinds_str "board_kinds_str"
+  <select id="unifiedBoardSearch" resultType="java.util.Map">							<!-- select문의 필드가 많이 없어서 vo를 별도로 만들지 않고 맵으로 담을 수 있나 해봄 -->
+  	select board_kinds "board_kinds", board_kinds_str "board_kinds_str"					<!-- 1, '자유', 2, '후기', 3, '동행' 과 같이  결과 출력 -->
 	  from (select board_kinds, case board_kinds
 	                    when 1 then '자유'
 	                    when 2 then '후기'
 	                    when 3 then '동행'
 	                  end board_kinds_str
 	          from board_post
-	         where board_title like '%' || #{keyword} || '%'
+	         where board_title like '%' || #{keyword} || '%'							<!-- 게시판 제목으로 조회 -->
 	         union
 	        select board_kinds, case board_kinds
 	                    when 1 then '자유'
@@ -88,7 +88,7 @@
 	                    when 3 then '동행'
 	                  end board_kinds_str
 	          from board_post
-	         where board_plain_content like '%' || #{keyword} || '%'
+	         where board_plain_content like '%' || #{keyword} || '%'					<!--  게시판 내용으로 조회(board_content는 태그들이 들어 있어서 board_plain_content를 추가해서 해당 컬럼으로 조회하도록 변경 -->
 	         union
 	        select board_kinds, case board_kinds
 	                    when 1 then '자유'
@@ -96,9 +96,9 @@
 	                    when 3 then '동행'
 	                  end board_kinds_str
 	          from board_post
-	         where board_no in (select board_no
+	         where board_no in (select board_no	
 	                              from board_comment
-	                             where comment_content like '%' || #{keyword} || '%')
+	                             where comment_content like '%' || #{keyword} || '%')	<!-- 댓글 내용에 검색 키워드가 포함된 글 조회. 댓글 내용에 검색 키워드가 포함되면 해당 board_no를 반환하는데, 이 board_no에 해당하는 게시글을 조회 -->
 	         union
 	        select board_kinds, case board_kinds
 	                    when 1 then '자유'
@@ -108,22 +108,22 @@
 	          from board_post
 	         where head_tag_no in (select head_tag_no
 	                                 from head_tag
-	                                where head_tag_name like '%' || #{keyword} || '%')
+	                                where head_tag_name like '%' || #{keyword} || '%')	<!-- 말머리명으로 조회. 키워드에 해당하는 말머리 번호로 게시글 조회 -->
 	       )
-	 where board_kinds != 0
+	 where board_kinds != 0																<!-- 게시판 종류가 0이 아닌것만 -->
   </select>
 <!-- 검색할 키워드가 포함된 게시판의 검색조건(제목, 본문, 댓글, 말머리) 가져오기 -->
   <select id="unifiedBoardCondition" resultType="com.information.vo.SearchConditionVo">
 	select *
 	  from (select '제목' condition_kor, 0 condition_col, count(board_no) search_cnt
 	          from board_post
-	         where board_title like '%' || #{keyword} || '%'
+	         where board_title like '%' || #{keyword} || '%'								<!-- 글 제목으로 조회 -->
 	         	   and board_kinds = #{board_kinds}
 	         group by board_kinds
 	         union
 	        select '본문' condition_kor, 1 condition_col, count(board_no) search_cnt
 	          from board_post
-	         where board_plain_content like '%' || #{keyword} || '%'
+	         where board_plain_content like '%' || #{keyword} || '%'						<!-- 글 본문으로 조회 -->
 	         	   and board_kinds = #{board_kinds}
 	         group by board_kinds
 	         union
@@ -131,7 +131,7 @@
 	          from board_post
 	         where board_no in (select board_no
 	                              from board_comment
-	                             where comment_content like '%' || #{keyword} || '%')
+	                             where comment_content like '%' || #{keyword} || '%')		<!-- 댓글 내용으로 조회 -->
 	               and board_kinds = #{board_kinds}
 	         group by board_kinds
 	         union
@@ -139,7 +139,7 @@
 	          from board_post
 	         where head_tag_no in (select head_tag_no
 	                                 from head_tag
-	                                where head_tag_name like '%' || #{keyword} || '%')
+	                                where head_tag_name like '%' || #{keyword} || '%')		<!-- 말머리명으로 조회 -->
 	               and board_kinds = #{board_kinds}
 	         group by board_kinds
 	       )
@@ -155,7 +155,7 @@
 	                          when 2 then '후기'
 	                          when 3 then '동행'
 	                        end board_kinds_str
-	                      , b.board_no, h.head_tag_name, b.board_title, DBMS_LOB.substr(b.board_plain_content, 10, 1) board_plain_content
+	                      , b.board_no, h.head_tag_name, b.board_title, DBMS_LOB.substr(b.board_plain_content, 10, 1) board_plain_content		<!--  board_plain_content 컬럼은 clob으로, clob을 substr하기 위해서는 DBMS_LOB.substr이라는 내장 함수를 사용해야 한다고 함. -->
 	                      , m.mem_nickname, b.board_hit, to_char(b.board_date, 'yyyy-mm-dd') board_date
 	                  from board_post b
 	                  inner join member_info m

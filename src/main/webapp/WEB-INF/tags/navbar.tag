@@ -18,16 +18,8 @@ $(document).ready(function(){
 		}
 		location.href = "/unifiedSearch.do/" + $("#keyword").val();
 	});
-// 	var a = $("#logout");
-// 	a.onclick = function logout(){
-// 		$.ajax({
-// 			url:"/member/logout.do"
-// 			, type:'post'
-// 			, beforeSend : function(xhr){
-// 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-// 			}
-// 		});
-// 	}
+
+	//시큐리티에 설정된 logoutUrl로 post 요청
 	var logoutFunction = function (){
 		$.ajax({
 			url:"/member/logout.do"

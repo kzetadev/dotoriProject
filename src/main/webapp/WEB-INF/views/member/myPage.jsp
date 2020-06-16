@@ -65,9 +65,11 @@
 						</h3>
 					</div>
 					<ul class="list-group">
+						<%-- 로그인한 회원의 마이페이지이면 mem_no를 전달하지 않아도 되므로 구분시킴 --%>
 						<c:if test="${other_mem_no eq null }">
 							<li class="list-group-item"><a href="/member/myPage_Contents.do" id="updateAccount">내가 쓴 글 & 댓글</a></li>
 						</c:if>
+						<%-- 다른 회원의 마이페이지이면 mem_no를 전달헤야 하므로 구분시킴 --%>
 						<c:if test="${other_mem_no ne null }">
 							<li class="list-group-item"><a href="/member/myPage_Contents.do?mem_no=${other_mem_no }" id="updateAccount">내가 쓴 글 & 댓글</a></li>
 						</c:if>

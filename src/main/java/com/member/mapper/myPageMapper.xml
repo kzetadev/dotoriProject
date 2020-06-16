@@ -165,10 +165,10 @@
 		        inner join member_info msgto
 		                on msg.post_to = msgto.mem_no
 		       where msg.post_no = #{post_no}
-		       <if test="msg_type != null and msg_type == 'send'">
+		       <if test="msg_type != null and msg_type == 'send'">			<!-- 발신쪽지 탭을 클릭했을 때 -->
 		       		 and msgfrom.mem_no = #{mem_no}
 		       </if>
-		       <if test="msg_type != null and msg_type == 'receive'">
+		       <if test="msg_type != null and msg_type == 'receive'">		<!-- 수신쪽지 탭을 클릭했을 때 -->
 		       		 and msgto.mem_no = #{mem_no}
 		       </if>
 		      )

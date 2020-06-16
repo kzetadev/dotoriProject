@@ -70,6 +70,7 @@
 		$(btnMsg).click(function(){
 // 			window.open("/member/sendMessage.do", "_blank", "width=400, height=300, menubar=no, toolbar=no, status=no").focus();
 			jQuery.noConflict();
+			//쪽지보내기 버튼 클릭시 모달창을 띄우는데, /member/sendMessage.do url을 통해서 sendMessage.jsp의 내용을 로드시킴
 			$("#modalMessage .modal-content")
 				.load("/member/sendMessage.do?mem_no=" + $(this).parent().attr('mem_no') 
 					+ "&mem_nickname=" + $(this).parent().attr('mem_nickname'), function(){
@@ -211,16 +212,25 @@
 						console.log(comment);
 						var li = $("<li/>");
 						//댓글 노드 만들기
+						//댓글삭제 여부, 글 번호, 댓글번호, 참조 댓글 번호(대댓글인경우 상위 댓글이 댓글번호), 댓글 단계(대댓글이면 2)
 						var div = $("<div class='comment' comment_del='" + comment['comment_del'] + "' board_no='" + $("#board_no").val() + "' comment_no='" + comment['comment_no'] + "' board_ref='" + comment['board_ref'] + "' board_level='" + comment['board_level'] + "'/>");
+						//닉네임란
 						var divNickname = $("<span class='commentDetail' width='50'/>");
+						//프로필 이미지
 						var imgMember = $("<img src='" + comment['mem_img'] + "' style='width:30px; height:30px;'/>");
+						//닉네임
 						var aNickname = $("<a class='nickname' mem_no='" + comment['mem_no'] + "'/>").text(comment['mem_nickname']);
+						//댓글수정, 삭제 버튼 란
 						var divBtn = $("<div class='text-right'/>");
+						//닉네임란에 프로필이미지, 닉네임 추가
 						$(divNickname).append(imgMember, aNickname);
+						//닉네임 클릭 시 쪽지 보내기, 마이페이지 레이어 표시
 						$(aNickname).click(function(e){
+							//로그인한 회원이 해당 댓글의 작성자 이면 레이어 표시하지 않음
 							if (login_mem_no == $(this).attr('mem_no')){
 								return;
 							}
+							//레이어에 mem_no, mem_nickname 추가 
 							$("#btnGroup").attr('mem_no', $(this).attr('mem_no'));
 							$("#btnGroup").attr('mem_nickname', $(this).text());
 							var oWidth = $("#popup_layer").width();
@@ -236,18 +246,29 @@
 								, 'visibility':'visible'
 							});
 						});
+						//댓글 수정 버튼
 						var btnEdit = $("<button type='button' class='btn btn-default reply-edit' edit-state='0'/>").text("수정");
+						//댓글 삭제 버튼
 						var btnDel = $("<button type='button' class='btn btn-default reply-del'/>").text("삭제");
+						//댓글 내용
 						var divContent = $("<textarea readonly='readonly' class='form-control reply-content' rows='3' width='400'/>").text(comment['comment_content']);
+						//삭제된 댓글일 떄만 사용되는 span
 						var spanDelComment = $("<span width='100'/>").text("삭제된 댓글입니다.");
+						//댓글 작성일
 						var divDate = $("<span class='commentDetail' width='100'/>").text(comment['comment_date']);
 						//edit-state - 0 : 수정	1 : 수정완료		전환용도
+						//댓글 수정
 						$(btnEdit).click(function(){
+							//수정버튼일 때. textarea readonly 삭제 후 수정완료로 변경
 							if($(this).attr('edit-state') == 0){	//수정할 떄. textarea readonly를 해제하여 입력 가능하게 변경
 								$(this).parent().parent().find(".reply-content").removeAttr('readonly');
 								$(this).attr('edit-state', '1');
 								$(this).text("수정완료");
 							}else{									//수정완료 할 때. 댓글 테이블에 해당 내용으로 수정.
+								//댓글 객체 만들기
+								//$(this).parent() : divBtn
+								//$(this).parent().parent() : div
+								//div의 comment_no로 수정
 								var comment = {
 									comment_no:$(this).parent().parent().attr('comment_no')
 									, board_no:$("#board_no").val()
@@ -271,7 +292,12 @@
 							}
 							console.log($(this).parent().parent().attr('board_no'));
 						});
+						//댓글 삭제
 						$(btnDel).click(function(){
+							//댓글 객체 만들기
+							//$(this).parent() : divBtn
+							//$(this).parent().parent() : div
+							//div의 comment_no로 삭제
 							var comment = {
 								comment_no:$(this).parent().parent().attr('comment_no')
 								, board_no:$("#board_no").val()
@@ -295,7 +321,7 @@
 						//클릭 시 댓글 작성란을 하단에 표시 
 						if(parseInt($(div).attr('board_level')) == 1){
 							$(div).click(function(e){
-								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') 
+								if(!$(e.target).hasClass('reply-edit') && !$(e.target).hasClass('reply-del') 		//클릭한 영역이 댓글수정, 댓글삭제, 삭제된 댓글, 닉네임 영역이 아니면 댓글 작성란을 아래에 형제 노드로 붙임
 										&& $(this).attr('comment_del') == 0
 										&& !$(e.target).hasClass('nickname')){
 

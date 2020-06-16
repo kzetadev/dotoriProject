@@ -65,12 +65,13 @@ public class Board_PostController {
 //		return mav;
 //	}
 
-	// 게시판 구분에 따른 말머리 목록
+	// 게시판 구분에 따른 말머리 목록. 글 등록화면에서 게시판 종류 선택 시 마다 호출하여 선택한 게시판에 해당하는 말머리 종류를 가져옴
 	@RequestMapping(value = "/board/listHead_Tag.do/{board_kinds}", method = RequestMethod.GET)
 	@ResponseBody
 	public String listHead_Tag(@PathVariable("board_kinds") int board_kinds) {
 		String headTagList = "";
 		System.out.println(board_kinds);
+		//선택한 게시판에 해당하는 말머리 목록을 Json 문자열로 변환
 		headTagList = (new Gson()).toJson(head_tagService.listHead_TagByBoard_Kinds(board_kinds));
 		System.out.println(headTagList);
 		return headTagList;
@@ -107,16 +108,16 @@ public class Board_PostController {
 			if (str != null) {
 				String getStr[] = keyWord.split("@");
 				for (int i = 0; i < getStr.length; i++) {
-					if (i == 0) {
+					if (i == 0) {									//게시판 종류 
 						boardKinds = Integer.parseInt(getStr[0]);
 					}
-					if (i == 1) {
-						sel1 = getStr[1]; // 말머리
+					if (i == 1) {									//검색조건
+						sel1 = getStr[1];
 					}
-					if (i == 2) {
-						sel2 = getStr[2]; // 검색 키워드
+					if (i == 2) {									// 검색 키워드
+						sel2 = getStr[2]; 
 					}
-					if (i == 3) { // 페이지
+					if (i == 3) { 									// 페이지 번호
 						curPage = Integer.parseInt(getStr[3]);
 					}
 				}
@@ -129,17 +130,17 @@ public class Board_PostController {
 		mav.addObject("list", list);
 		if (list.size() > 0) {
 			sNum = list.get(0).getRnum();
-			sNum = sNum.substring(0, 1);
+			sNum = sNum.substring(0, 1);							
 			startNum = Integer.parseInt(sNum);
 			listCount = list.size();
 			stotalRecord = list.get(0).getTotcnt();
-			totalRecord = Integer.parseInt(stotalRecord);
-			boardKinds = list.get(0).getBoard_kinds();
+			totalRecord = Integer.parseInt(stotalRecord);					//총 레코드 카운트
+			boardKinds = list.get(0).getBoard_kinds();						//게시판 종류
 
 			int devide = 0;
 
 			if (curPage % 10 == 0) {
-				devide = (int) Math.ceil(((float) (curPage) / (float) pageGroup));
+				devide = (int) Math.ceil(((float) (curPage) / (float) pageGroup));	
 			} else {
 				devide = (int) Math.ceil(((float) (curPage + 1) / (float) pageGroup));
 			}

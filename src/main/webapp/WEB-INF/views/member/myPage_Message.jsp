@@ -111,7 +111,7 @@ a {
 			$(this).addClass('current');
 			$('#' + activeTab).addClass('current');
 		})
-
+		//쪽지 클릭 시 모달창을 띄우며, myPage_MessageDetail.do url을 통해 쪽지 상세 내용을 전달해서 myPage_MessageDetai.jsp 페이지를 로드시킴
 		$(".message").click(function(){
 			jQuery.noConflict();
 			$("#modalMessage .modal-content")
@@ -165,123 +165,57 @@ a {
 					  </li>
 					</ul>
 					
-					
-<!-- 					<div class="panel panel-primary"> -->
-						<div class="container">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr style="border-bottom: 2px double #dddddd;">
-											<th>제목</th>
-											<th>내용</th>
-											<th>닉네임</th>
-											<th>읽음</th>
-											<th>발신일</th>
-										</tr>
-									</thead>
-									<c:forEach var="msg" items="${msgList}">
-										<tr mem_no="${msg.mem_no }"
-											mem_nickname="${msg.mem_nickname }" 
-											post_ref_no="${msg.post_no }" class="message"
-											msg_type="${msg_type }"
-											style="border-bottom: 1px double #dddddd;">
-											<td><c:out value="${msg.post_title}" /></td>
-											<td><c:out value="${msg.post_content}" /></td>
-											<td><c:out value="${msg.mem_nickname}" /></td>
-											<td><c:out value="${msg.post_read }" /></td>
-											<td><fmt:formatDate value="${msg.post_regidate}" pattern="yyyy-MM-dd" /></td>
-										</tr>
-									</c:forEach>
-								</table>
-							</div>
+					<div class="container">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr style="border-bottom: 2px double #dddddd;">
+										<th>제목</th>
+										<th>내용</th>
+										<th>닉네임</th>
+										<th>읽음</th>
+										<th>발신일</th>
+									</tr>
+								</thead>
+								<c:forEach var="msg" items="${msgList}">
+									<tr mem_no="${msg.mem_no }"
+										mem_nickname="${msg.mem_nickname }" 
+										post_ref_no="${msg.post_no }" class="message"
+										msg_type="${msg_type }"
+										style="border-bottom: 1px double #dddddd;">
+										<td><c:out value="${msg.post_title}" /></td>
+										<td><c:out value="${msg.post_content}" /></td>
+										<td><c:out value="${msg.mem_nickname}" /></td>
+										<td><c:out value="${msg.post_read }" /></td>
+										<td><fmt:formatDate value="${msg.post_regidate}" pattern="yyyy-MM-dd" /></td>
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
+					</div>
+					
+					<!-- 페이징 처리 -->
+					<ul class="pagination pagination-lg">
+						<c:if test="${start_page > 1}">
+							<li>
+								<a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${start_page - 1}" aria-label="이전">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+						</c:if>
 						
-						<!-- 페이징 처리 -->
-						<ul class="pagination pagination-lg">
-							<c:if test="${start_page > 1}">
-								<li>
-									<a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${start_page - 1}" aria-label="이전">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-							</c:if>
-							
-							<c:forEach var="i" begin="${start_page }" end="${end_page }">
-								<li><a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${i}">${i }</a></li>
-							</c:forEach>
-							
-							<c:if test="${end_page < total_page }">
-								<li>
-									<a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${end_page + 1}" aria-label="다음">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</c:if>
-						</ul>
-<!-- 					</div> -->
-
-<!-- 					<div id="tab2" class="tabcontent"> -->
-<!-- 						<div class="container"> -->
-<!-- 							<div class="table-responsive"> -->
-<!-- 								<table class="table"> -->
-<!-- 									<thead> -->
-<!-- 										<tr style="border-bottom: 2px double #dddddd;"> -->
-<!-- 											<th>제목</th> -->
-<!-- 											<th>내용</th> -->
-<!-- 											<th>닉네임</th> -->
-<!-- 											<th>읽음</th> -->
-<!-- 											<th>발신일</th> -->
-<!-- 										</tr> -->
-
-<!-- 									</thead> -->
-
-<%-- 									<c:forEach var="send" items="${sendMsg}"> --%>
-<!-- 										<tr style="border-bottom: 1px double #dddddd;"> -->
-<%-- 											<td><c:out value="${send.post_title}" /></td> --%>
-<%-- 											<td><c:out value="${send.post_content}" /></td> --%>
-<%-- 											<td><c:out value="${send.mem_nickname}" /></td> --%>
-<%-- 											<td><c:out value="${send.post_read }" /></td> --%>
-<%-- 											<td><c:out value="${send.post_regidate}" /></td> --%>
-
-<!-- 										</tr> -->
-<%-- 									</c:forEach> --%>
-
-<!-- 								</table> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div id="tab3" class="tabcontent"> -->
-<!-- 						<div class="container"> -->
-<!-- 							<div class="table-responsive"> -->
-<!-- 								<table class="table"> -->
-<!-- 									<thead> -->
-<!-- 										<tr style="border-bottom: 2px double #dddddd;"> -->
-<!-- 											<th>제목</th> -->
-<!-- 											<th>내용</th> -->
-<!-- 											<th>닉네임</th> -->
-<!-- 											<th>읽음</th> -->
-<!-- 											<th>발신일</th> -->
-<!-- 										</tr> -->
-
-<!-- 									</thead> -->
-
-<%-- 									<c:forEach var="receive" items="${receiveMsg}"> --%>
-<%-- 										<tr mem_no="${receive.mem_no }" --%>
-<%-- 											mem_nickname="${receive.mem_nickname }"  --%>
-<%-- 											post_ref_no="${receive.post_no }" class='receiveMsg' --%>
-<!-- 											style="border-bottom: 1px double #dddddd;"> -->
-<%-- 											<td><c:out value="${receive.post_title}" /></td> --%>
-<%-- 											<td><c:out value="${receive.post_content}" /></td> --%>
-<%-- 											<td><c:out value="${receive.mem_nickname}" /></td> --%>
-<%-- 											<td><c:out value="${receive.post_read }" /></td> --%>
-<%-- 											<td><c:out value="${receive.post_regidate}" /></td> --%>
-
-<!-- 										</tr> -->
-<%-- 									</c:forEach> --%>
-<!-- 								</table> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+						<c:forEach var="i" begin="${start_page }" end="${end_page }">
+							<li><a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${i}">${i }</a></li>
+						</c:forEach>
+						
+						<c:if test="${end_page < total_page }">
+							<li>
+								<a href="/member/myPage_Message.do?${msg_type_str}${other_mem_no_str}&pageNum=${end_page + 1}" aria-label="다음">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</c:if>
+					</ul>
 				</div>
 			</div>
 			

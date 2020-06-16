@@ -52,28 +52,7 @@ $(document).ready(function(){
 					<label for=post_content>내용</label>
 					<textarea class='form-control' rows="3" cols="30" id="post_content" name="post_content"></textarea>
 	        	</div>
-<!-- 				<input id="submit" type="submit" value="Submit"> -->
 			</form>
-<!-- 	        <table class="table table-hover"> -->
-<!-- 	            <thead class="text-center"> -->
-<!-- 	            <tr class="content"> -->
-<!-- 	                <th class="text-center"> -->
-<!-- 	                    ID -->
-<!-- 	                </th> -->
-<!-- 	                <th class="text-center"> -->
-<!-- 	                    PassWord -->
-<!-- 	                </th> -->
-<!-- 	            </tr> -->
-<!-- 	            </thead> -->
-<!-- 	            <tbody class="text-center"> -->
-<%--  	            <c:forEach items="${Moa}" var="Moa"> --%> 
-<!--  	                <tr class="content" style="font-size: 12px;"> --> 
-<%--  	                    <td class="text-center">${Moa.id }</td> --%> 
-<%--  	                    <td class="text-center">${Moa.password}</td> --%> 
-<!--  	                </tr> --> 
-<!--  	            </c:forEach> --> 
-<!-- 	            </tbody> -->
-<!-- 	        </table> -->
 	    </div>
 	
 	</div>

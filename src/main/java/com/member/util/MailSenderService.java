@@ -1,7 +1,6 @@
 package com.member.util;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -11,7 +10,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -25,6 +23,7 @@ public class MailSenderService {
 		this.mailSender = mailSender;
 	}
 	//회원가입 후 인증메일 발송
+	//								아이디			이메일				컨텍스트				암호화 객체
 	public void sendAuthMail(String mem_id, String mem_email, ServletContext context, AES256Util aes256) {
 		
 		mailSender.send(new MimeMessagePreparator() {
@@ -33,13 +32,13 @@ public class MailSenderService {
 				String contents = "<h2>" + mem_id + "님 회원가입 인증메일 입니다.</h2>";
 				contents += "<h2>아래의 링크를 클릭하여 인증을 완료합니다.</h2>";
 				String uuidStr = UUID.randomUUID().toString();
-				String encMem_id = "";
-				String encUUIDStr = "";
+				String encMem_id = "";					//암호화된 아이디 변수
+				String encUUIDStr = "";					//암호화된 고유키 값 변수
 				Map<String, String> map = new HashMap<String, String>();
 				try {
-					encMem_id = aes256.aesEncode(mem_id);
+					encMem_id = aes256.aesEncode(mem_id);		//아이디 암호화
 					System.out.println("mem_id : " + mem_id + "\tdecoded mem_id : " + aes256.aesDecode(encMem_id) + "\tencMem_id : " + encMem_id);
-					encUUIDStr = aes256.aesEncode(uuidStr);
+					encUUIDStr = aes256.aesEncode(uuidStr);		//고유키 암호화
 					map.put("mem_id", mem_id);			//평문 아이디
 					map.put("encMem_id", encMem_id);	//암호화된 아이디
 					map.put("uuid", uuidStr);			//평문 고유키
@@ -54,7 +53,7 @@ public class MailSenderService {
 				}catch(Exception e) {
 					System.out.println(e);
 				}
-				//서버주소 가져오기
+				//서버 아이피 주소 가져오기
 				String server_ip = "";
 				InetAddress local = null;
 				try {
@@ -63,7 +62,7 @@ public class MailSenderService {
 					// TODO Auto-generated catch block
 					System.out.println(e);
 				}
-				server_ip = local.getHostAddress();
+				server_ip = local.getHostAddress();			//서버 아이피 가져오기
 				System.out.println("ip : " + server_ip);
 				String authLink = "http://" + server_ip + ":8088/mailAuth.do?mem_id=" + encMem_id + "&key=" + encUUIDStr;
 				System.out.println(authLink);

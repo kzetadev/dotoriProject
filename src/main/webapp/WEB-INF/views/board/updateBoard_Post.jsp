@@ -44,34 +44,6 @@
 // 			, airMode:true
 		});
 
-// 		// 써머노트
-// 		$("#content").summernote({
-// 			disableDragAndDrop : true,
-// 			height: 700,
-// 			minHeight: null,
-// 			maxHeight: null,
-// 			focus: true,
-// 			lang: "ko-KR",
-// 			placeholder: "본문 내용을 입력해주세요.",
-// 			toolbar: [
-// 			    ['style', ['style']],
-// 			    ['font', ['fontsize','bold', 'italic', 'underline', 'clear']],
-// 			    ['color', ['color']],
-// 			    ['insert', ['picture','video']],
-// 			    ['para', ['ul', 'ol', 'paragraph']],
-// 			    ['table', ['table']]
-			    
-// 			 ],
-// 			callbacks: {
-// 				onImageUpload : function(files){
-// 					console.log(files);
-// 					$.each(files, function(idx, file){
-// 						uploadSummernoteImageFile(file, $("#content"));
-// 						console.log(file);
-// 					});
-// 				}	
-// 			}
-// 		})
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR){
 			var token = "${_csrf.token}";
 			jqXHR.setRequestHeader('X-CSRF-Token', token);

@@ -30,15 +30,7 @@ public class MainController {
 	public static int pageSIZE = 8; // 한 화면에 보여줄 레코드 수를 제한하기 위한 변수
 	public static int totalPage = 1; // 전체 페이지 수를 저장하기 위한 변수
 	public static int pageGroup = 5; // 한 화면에 보여줄 페이지의 수를 제한하기 위한 변수
-	
-//	@RequestMapping("/pageNotFound")
-//	public void pageNotFound() {
-//		
-//	}
-//	@RequestMapping("/errorPage")
-//	public void errorPage() {
-//		
-//	}
+
 	@RequestMapping("/access_denied")
 	public String access_denied() throws Exception{
 		return "/access_denied";
@@ -48,20 +40,9 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("main");
 		int pageNUM = 1;
 		int place_type = 0;
-//		Place_ThemeVo pt = place_themeService.getPlace_Theme(place_type);
-//		if(keyword == null) {
-//			keyword = (String)session.getAttribute("keyword");
-//			searchColumn = (String)session.getAttribute("searchColumn");
-//		}
-		
-//		if(all != null) {
-//			keyword = null;
-//			searchColumn = null;
-//		}
+
 		Map map = new HashMap();
-		
-//		map.put("keyword", keyword);
-//		map.put("searchColumn", searchColumn);
+
 		map.put("place_type", place_type);
 		
 		totalRecord = place_infoService.getTotalRecord(map);
@@ -79,28 +60,13 @@ public class MainController {
 		map.put("start", start);
 		map.put("end", end);
 		System.out.println(map);
-//		session.setAttribute("keyword", keyword);
-//		session.setAttribute("searchColumn", searchColumn);
+
 
 		mav.addObject("list", place_infoService.listPlace_InfoPage(map));
 
 		System.out.println(map);
 		System.out.println("전체 페이지 수 : " + totalPage);
 		mav.addObject("totalPage", totalPage);
-		
-//		int startPage = (pageNUM - 1) / pageGroup * pageGroup + 1;
-//		int endPage = startPage + pageGroup - 1;
-//		if(endPage > totalPage) {
-//			endPage = totalPage;
-//		}
-//		m.addObject("startPage", startPage);
-//		m.addObject("endPage", endPage);
-//		m.addObject("place_type", place_type);
-//		if(keyword != null && !keyword.equals("")) {
-//			m.addObject("searchColumn", "&searchColumn=" + searchColumn);
-//			m.addObject("keyword", "&keyword=" + keyword);
-//		}
-//		m.addObject("pt", pt);
 		
 		// 메인 페이지 인기 서울 명소 TOP 6
 		mav.addObject("top", place_infoService.mainTop());
