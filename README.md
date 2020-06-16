@@ -22,12 +22,7 @@
 * Bootstrap
 * Jquery, Ajax
 * Summernote
-* Jsoup<br/>
-
-# 개발 과정
-
-
-<br/>
+* Jsoup <br/>
 
 # 시연
 Youtube : <https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/> <br/>
