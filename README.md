@@ -30,7 +30,8 @@
 <br/>
 
 # 시연
-Youtube : <https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/>
+Youtube : <https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/> <br/>
+Youtube : [쉼표, Seoul Travel Helper](https://www.youtube.com/channel/UC7x4kHikdrv-UWoIeUzXDNw/)
 
 
 
