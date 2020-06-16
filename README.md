@@ -2,7 +2,7 @@
 
 서울 여행을 떠나는 그 누구든 즐겁고 행복하게 여행 준비를 도와주는 사이트<br/>
 
-<img src="/img/N 서울타워_2.jpg" width="40%" height="30%" alt="쉼표, Seoul Travel Helper"></img><br/>
+![TeamProject](https://user-images.githubusercontent.com/61721851/84764979-7e658c80-b009-11ea-845e-766a79fea1db.png)
 
 
 
